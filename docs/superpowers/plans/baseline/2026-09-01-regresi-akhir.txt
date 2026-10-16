@@ -1,0 +1,12 @@
+SopDetailVersiPayloadTest.php                          Tests:    5 passed (14 assertions)
+SopBuilderItemDokumenTest.php                          Tests:    1 skipped, 7 passed (28 assertions)
+SopBuilderRiwayatTest.php                              Tests:    1 skipped, 4 passed (10 assertions)
+SopDokumenBerbagiTest.php                              Tests:    2 failed, 10 passed (27 assertions)
+  ⨯ opsi dokumen melaporkan jumlah paket pemakai                                                                 2.60s  
+  ⨯ fanout melaporkan berapa karyawan diberitahu                                                                 0.81s  
+SopApqcTest.php                                        Tests:    11 passed (38 assertions)
+SopBuilderCopyItemToPaketTest.php                      Tests:    3 skipped, 4 passed (20 assertions)
+SopNomorLengkapTest.php                                Tests:    1 failed, 14 passed (28 assertions)
+  ⨯ tujuh kode jenis terisi                                                                                      0.31s  
+SopBatalVersiTerbitTest.php                            Tests:    13 passed (28 assertions)
+SELESAI

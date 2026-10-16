@@ -1,0 +1,29 @@
+{
+    "success": true,
+    "status": 200,
+    "message": "Berhasil",
+    "result": {
+        "periode": [
+            {
+                "Id_PA_Cycle": "657",
+                "Kode_Cycle": "PA-DEMO-FE",
+                "Nama_Cycle": "Siklus Contoh Pengembangan Frontend",
+                "Tahun": "2026",
+                "Nama_Jabatan_Saat_Cycle": "SHIFT MAINTENANCE ELECTRICAL",
+                "Nama_Level_Saat_Cycle": "STAFF",
+                "Nilai_KPI": "85.00",
+                "Nilai_Kompetensi": "72.50",
+                "Final_Score": "82.50",
+                "Kode_Grade_Final": "B_PLUS",
+                "Published_At": "2026-09-01 15:08:57",
+                "Bobot_KPI_Terpakai": "75.00",
+                "Bobot_Kompetensi_Terpakai": "25.00",
+                "Nama_Grade_Final": "Baik"
+            }
+        ],
+        "jumlah_periode": 1,
+        "rata_rata": 82.5,
+        "terbaik": "82.50",
+        "perubahan_terakhir": null
+    }
+}

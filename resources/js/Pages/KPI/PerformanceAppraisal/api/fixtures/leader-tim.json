@@ -1,0 +1,190 @@
+{
+    "success": true,
+    "status": 200,
+    "message": "Berhasil",
+    "result": {
+        "leader": {
+            "kode_karyawan": "A4",
+            "nama": "Aji"
+        },
+        "cycle": {
+            "cycle_id": 657,
+            "kode_cycle": "PA-DEMO-FE",
+            "nama_cycle": "Siklus Contoh Pengembangan Frontend",
+            "status_cycle": "CLOSED",
+            "periode_dinilai_dari": "2026-01-01",
+            "periode_dinilai_sampai": "2026-06-30",
+            "tahun": 2026
+        },
+        "daftar_cycle": [
+            {
+                "cycle_id": 657,
+                "kode_cycle": "PA-DEMO-FE",
+                "nama_cycle": "Siklus Contoh Pengembangan Frontend",
+                "status_cycle": "CLOSED",
+                "periode_dinilai_dari": "2026-01-01",
+                "periode_dinilai_sampai": "2026-06-30",
+                "tahun": 2026
+            }
+        ],
+        "anggota": [
+            {
+                "participant_id": 59657,
+                "kode_karyawan": "A5",
+                "nama": "Amelia",
+                "nama_jabatan": "SHIFT MAINTENANCE ELECTRICAL",
+                "status_peserta": "DIIKUTKAN",
+                "status_hasil": "TERBIT",
+                "penugasan_total": 1,
+                "penugasan_selesai": 1,
+                "penugasan_terlambat": 0,
+                "progres_persen": 100,
+                "nilai_akhir": 82.5,
+                "nilai_kpi": 85.0,
+                "nilai_kompetensi": 78.5,
+                "kode_grade": "B_PLUS",
+                "kode_kuadran": "FUTURE_STAR_A",
+                "terbit": true,
+                "dirilis_ke_leader": true,
+                "nilai_sebelum": 80.25,
+                "grade_sebelum": "B",
+                "alasan_tertahan": null
+            },
+            {
+                "participant_id": 59679,
+                "kode_karyawan": "H45",
+                "nama": "Ridho",
+                "nama_jabatan": "SECTION HEAD UTILITY",
+                "status_peserta": "DIIKUTKAN",
+                "status_hasil": "BELUM_DIHITUNG",
+                "penugasan_total": 0,
+                "penugasan_selesai": 0,
+                "penugasan_terlambat": 0,
+                "progres_persen": 0,
+                "nilai_akhir": null,
+                "nilai_kpi": null,
+                "nilai_kompetensi": null,
+                "kode_grade": null,
+                "kode_kuadran": null,
+                "terbit": false,
+                "dirilis_ke_leader": false,
+                "nilai_sebelum": null,
+                "grade_sebelum": null,
+                "alasan_tertahan": null
+            },
+            {
+                "participant_id": 60606,
+                "kode_karyawan": "Y62",
+                "nama": "Tari",
+                "nama_jabatan": "SHIFT MAINTENANCE ELECTRICAL",
+                "status_peserta": "DIIKUTKAN",
+                "status_hasil": "TERTAHAN",
+                "penugasan_total": 1,
+                "penugasan_selesai": 1,
+                "penugasan_terlambat": 0,
+                "progres_persen": 100,
+                "nilai_akhir": null,
+                "nilai_kpi": null,
+                "nilai_kompetensi": null,
+                "kode_grade": null,
+                "kode_kuadran": null,
+                "terbit": false,
+                "dirilis_ke_leader": false,
+                "nilai_sebelum": 80.25,
+                "grade_sebelum": "B",
+                "alasan_tertahan": "Total bobot KPI pada rentang siklus berjumlah 50, bukan 100. Nilainya tetap bisa dihitung, tetapi datanya menyimpang dari ketetapan dan harus diperiksa dulu."
+            },
+            {
+                "participant_id": 60609,
+                "kode_karyawan": "Z65",
+                "nama": "Zaki",
+                "nama_jabatan": "OPERATOR PRODUKSI",
+                "status_peserta": "DIIKUTKAN",
+                "status_hasil": "BELUM_DIHITUNG",
+                "penugasan_total": 0,
+                "penugasan_selesai": 0,
+                "penugasan_terlambat": 0,
+                "progres_persen": 0,
+                "nilai_akhir": null,
+                "nilai_kpi": null,
+                "nilai_kompetensi": null,
+                "kode_grade": null,
+                "kode_kuadran": null,
+                "terbit": false,
+                "dirilis_ke_leader": false,
+                "nilai_sebelum": null,
+                "grade_sebelum": null,
+                "alasan_tertahan": null
+            }
+        ],
+        "ringkasan": {
+            "total_anggota": 4,
+            "hasil_terbit": 1,
+            "hasil_tertahan": 1,
+            "anggota_punya_keterlambatan": 0,
+            "anggota_penilaian_lengkap": 2
+        },
+        "tren": {
+            "cycle": {
+                "cycle_id": 656,
+                "kode_cycle": "PA-DEMO-FE-0",
+                "nama_cycle": "Siklus Sebelumnya"
+            },
+            "rata_rata_sebelum": 80.25
+        },
+        "kompetensi_tim": [
+            {
+                "kode_kompetensi": "K01",
+                "nama_kompetensi": "Analytical Thinking",
+                "nama_type": "Manajerial",
+                "deskripsi": "Kemampuan mengurai masalah.",
+                "expected_behaviour": "Memeriksa data dulu\nMencari akar masalah",
+                "perilaku_per_level": [
+                    {
+                        "nama_level": "OFFICER",
+                        "jumlah_orang": 1,
+                        "tingkat": 2,
+                        "nama_tingkat": "Intermediate",
+                        "expected_behaviour": "Contoh perilaku tingkat 2"
+                    }
+                ],
+                "rata_rata": 82.5,
+                "jumlah_orang": 3,
+                "nilai_ambang": 80.0,
+                "anggota": [
+                    {
+                        "participant_id": 59657,
+                        "nama": "Amelia",
+                        "nama_level": "OFFICER",
+                        "nilai": 85.0
+                    },
+                    {
+                        "participant_id": 59658,
+                        "nama": "Budi",
+                        "nama_level": "OFFICER",
+                        "nilai": 80.0
+                    }
+                ]
+            }
+        ],
+        "kamus_kuadran": [
+            {
+                "kode": "STRIVING_STAR",
+                "nama": "Striving Star",
+                "nomor_box": 1
+            },
+            {
+                "kode": "FUTURE_STAR_A",
+                "nama": "Future Star",
+                "nomor_box": 2
+            }
+        ],
+        "batas": {
+            "sumber_tim": "N_HRIS_Organization_Relationship",
+            "min_penilai_untuk_tampil": 3,
+            "nilai_hanya_setelah_terbit": true,
+            "tanpa_nilai_per_penilai": true
+        },
+        "tanpa_tim": false
+    }
+}

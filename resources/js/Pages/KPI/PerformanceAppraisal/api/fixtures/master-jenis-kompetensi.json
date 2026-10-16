@@ -1,0 +1,51 @@
+{
+    "success": true,
+    "status": 200,
+    "message": "Berhasil",
+    "result": {
+        "master": "jenis-kompetensi",
+        "nama": "Jenis Kompetensi",
+        "lingkup": "master",
+        "dapat_ditambah": true,
+        "dapat_dinonaktifkan": true,
+        "baris": [
+            {
+                "Id_PA_Competency_Type": "1",
+                "Kode_Type": "MANAJERIAL",
+                "Nama_Type": "Kompetensi Manajerial",
+                "Deskripsi": "Kompetensi manajerial berskor, sumber utama nilai kompetensi.",
+                "Urutan_Tampil": "1",
+                "Flag_Aktif": "Y"
+            },
+            {
+                "Id_PA_Competency_Type": "2",
+                "Kode_Type": "CORE_VALUE",
+                "Nama_Type": "Core Value",
+                "Deskripsi": "Nilai inti perusahaan, dinilai berangka.",
+                "Urutan_Tampil": "2",
+                "Flag_Aktif": "Y"
+            },
+            {
+                "Id_PA_Competency_Type": "3",
+                "Kode_Type": "BEHAVIOR",
+                "Nama_Type": "Behavior (Core Value)",
+                "Deskripsi": "Perilaku turunan core value untuk band Pramukarya.",
+                "Urutan_Tampil": "3",
+                "Flag_Aktif": "Y"
+            },
+            {
+                "Id_PA_Competency_Type": "4",
+                "Kode_Type": "KUALITATIF",
+                "Nama_Type": "Qualitative Question",
+                "Deskripsi": "Butir bertekstual tanpa angka; tidak ikut perhitungan.",
+                "Urutan_Tampil": "4",
+                "Flag_Aktif": "Y"
+            }
+        ],
+        "halaman": 1,
+        "per_halaman": 25,
+        "total": 4,
+        "total_halaman": 1,
+        "dipangkas": false
+    }
+}

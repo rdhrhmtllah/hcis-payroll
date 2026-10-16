@@ -1,0 +1,41 @@
+
+   WARN  Tests\Feature\ESS\Attendance\CutiBalanceEngineCharacterizationTest
+  - credit debit close menjaga saldo dan rantai ledger → Set RUN_REAL_CUTI_ENGINE_TEST=true untuk menjalankan characterization test engine (menulis DB dev).
+  - credit kedua dengan parameter sama menambah dompet yang sama → Set RUN_REAL_CUTI_ENGINE_TEST=true untuk menjalankan characterization test engine (menulis DB dev).
+  - maturity change mencatat baris jumlah nol tanpa ubah saldo → Set RUN_REAL_CUTI_ENGINE_TEST=true untuk menjalankan characterization test engine (menulis DB dev).
+  - debit melebihi saldo membuat hutang lalu repay menutupnya → Set RUN_REAL_CUTI_ENGINE_TEST=true untuk menjalankan characterization test engine (menulis DB dev).
+  - manual adjustment add dan sub mengubah net saldo → Set RUN_REAL_CUTI_ENGINE_TEST=true untuk menjalankan characterization test engine (menulis DB dev).
+  - backfill provenance tidak pernah mengubah saldo atau status wallet → Set RUN_REAL_CUTI_ENGINE_TEST=true untuk menjalankan characterization test engine (menulis DB dev).
+
+   WARN  Tests\Feature\ESS\Attendance\CutiBersamaAdvancedTest
+  - it runs full real flow execute then rollback and restores balance → Set RUN_REAL_CUTI_BERSAMA_E2E=true untuk menjalankan skenario real DB + GCP.
+  - it runs real scheduled flow and can cancel before execution → Set RUN_REAL_CUTI_BERSAMA_E2E=true untuk menjalankan skenario real DB + GCP.
+  - it blocks real overlap execution against existing executed transaction → Set RUN_REAL_CUTI_BERSAMA_E2E=true untuk menjalankan skenario real DB + GCP.
+  - it runs real partial rollback by division through gcp → Set RUN_REAL_CUTI_BERSAMA_E2E=true untuk menjalankan skenario real DB + GCP.
+
+   WARN  Tests\Feature\ESS\Attendance\CutiSubmitSelectedDatesTest
+  - server hanya memilih tanggal yang disubmit bukan seluruh rentang → Set RUN_REAL_CUTI_ENGINE_TEST=true untuk menjalankan (butuh DB dev).
+
+   WARN  Tests\Feature\ESS\Attendance\CutiTutupBukuGraceTest
+  - karyawan tahun pertama masuk set grace → Set RUN_REAL_CUTI_ENGINE_TEST=true untuk menjalankan test grace (menulis DB dev).
+  - wallet migrasi tereksklusi dari grace → Set RUN_REAL_CUTI_ENGINE_TEST=true untuk menjalankan test grace (menulis DB dev).
+  - masa kerja lebih dari 18 bulan tidak grace → Set RUN_REAL_CUTI_ENGINE_TEST=true untuk menjalankan test grace (menulis DB dev).
+  - grace membawa 100 persen tanpa cap → Set RUN_REAL_CUTI_ENGINE_TEST=true untuk menjalankan test grace (menulis DB dev).
+  - tanpa grace dipotong cap 6 → Set RUN_REAL_CUTI_ENGINE_TEST=true untuk menjalankan test grace (menulis DB dev).
+
+   WARN  Tests\Feature\ESS\Attendance\IzinCancellationTest
+  - izin pending dibatalkan tercatat pelaku dan alasannya → Set RUN_REAL_IZIN_CANCEL_TEST=true untuk menjalankan test pembatalan izin (menulis DB dev).
+  - transaksi dibatalkan tetap terlihat di view admin tapi hilang dari view biasa → Set RUN_REAL_IZIN_CANCEL_TEST=true untuk menjalankan test pembatalan izin (menulis DB dev).
+  - cuti sudah disetujui bisa dibatalkan dan saldo dikembalikan persis → Set RUN_REAL_IZIN_CANCEL_TEST=true untuk menjalankan test pembatalan izin (menulis DB dev).
+  - pengembalian saldo menulis jurnal berpasangan dan rantai ledger tetap utuh → Set RUN_REAL_IZIN_CANCEL_TEST=true untuk menjalankan test pembatalan izin (menulis DB dev).
+  - pengembalian saldo memulihkan jumlah terpakai tanpa menggelembungkan jumlah awal → Set RUN_REAL_IZIN_CANCEL_TEST=true untuk menjalankan test pembatalan izin (menulis DB dev).
+  - cuti yang belum disetujui dibatalkan tanpa pengembalian saldo → Set RUN_REAL_IZIN_CANCEL_TEST=true untuk menjalankan test pembatalan izin (menulis DB dev).
+  - membatalkan dua kali ditolak dan saldo tidak dikembalikan dobel → Set RUN_REAL_IZIN_CANCEL_TEST=true untuk menjalankan test pembatalan izin (menulis DB dev).
+  - fingerprint basi ditolak dan tidak mengubah apa pun → Set RUN_REAL_IZIN_CANCEL_TEST=true untuk menjalankan test pembatalan izin (menulis DB dev).
+  - fingerprint berubah saat approver bertindak setelah preview → Set RUN_REAL_IZIN_CANCEL_TEST=true untuk menjalankan test pembatalan izin (menulis DB dev).
+  - alasan terlalu pendek ditolak → Set RUN_REAL_IZIN_CANCEL_TEST=true untuk menjalankan test pembatalan izin (menulis DB dev).
+  - terlambat yang sudah disetujui bisa dibatalkan tanpa menyentuh saldo cuti → Set RUN_REAL_IZIN_CANCEL_TEST=true untuk menjalankan test pembatalan izin (menulis DB dev).
+  - jenis cuti yang tidak memotong saldo tidak dikembalikan → Set RUN_REAL_IZIN_CANCEL_TEST=true untuk menjalankan test pembatalan izin (menulis DB dev).
+  - preview menandai dompet kedaluwarsa dan saldo tidak bisa dipakai lagi → Set RUN_REAL_IZIN_CANCEL_TEST=true untuk menjalankan test pembatalan izin (menulis DB dev).
+  - preview transaksi yang sudah dibatalkan ditandai → Set RUN_REAL_IZIN_CANCEL_TEST=true untuk menjalankan test pembatalan izin (menulis DB dev).
+  - nomor transaksi tak dikenal ditolak → Set RUN_REAL_IZIN_CANCEL_TEST=true untuk menjalankan test pembatalan izin (menulis DB dev).

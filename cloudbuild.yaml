@@ -1,0 +1,95 @@
+# Build dan deploy STAGING. Berkas ini hanya untuk trigger `stagging-dev-hcis`
+# yang memantau branch `staging`.
+#
+# Produksi TIDAK memakai berkas ini. Trigger produksi
+# (`rmgpgab-hcisxkpi-…`, branch `^master$`) menyimpan langkah buildnya sendiri di
+# dalam trigger, tanpa berkas apa pun di repo.
+#
+# Namanya `cloudbuild.yaml` — nama bawaan yang akan dipungut trigger mana pun
+# yang dibuat tanpa mengisi kolom filename. Karena itu langkah pertama di bawah
+# memeriksa branch dan menolak jalan di luar `staging`: kalau suatu saat ada
+# trigger lain memungut berkas ini, ia berhenti dengan pesan yang jelas alih-alih
+# men-deploy service staging memakai commit branch lain.
+#
+# ATURAN YANG TIDAK BOLEH DILANGGAR DI BERKAS INI
+#
+# 1. JANGAN menambahkan --set-env-vars, --update-env-vars, atau --clear-env-vars
+#    pada langkah deploy. Konfigurasi lingkungan staging dipasang SEKALI saat
+#    service dibuat (lihat docs/architecture/staging-cloud-run.md) dan `gcloud run
+#    deploy --image` mempertahankannya apa adanya. Begitu daftar env ditulis di
+#    sini, satu deploy akan menghapus env yang tidak disebut — termasuk kredensial
+#    basis data — dan service naik dengan konfigurasi setengah tanpa satu pun
+#    galat build.
+#
+# 2. Image staging memakai repositori terpisah dari produksi. Kalau path-nya sama,
+#    tag `latest` staging bisa terpasang di produksi.
+#
+# 3. Tag image = COMMIT_SHA, bukan `latest` saja. Tanpa itu tidak ada cara
+#    mengetahui revisi mana yang sedang jalan, dan rollback jadi tebakan.
+
+steps:
+  - id: pastikan-branch
+    name: gcr.io/cloud-builders/gcloud
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        if [ "$BRANCH_NAME" != "staging" ]; then
+          echo "DITOLAK: cloudbuild.yaml ini khusus branch 'staging',"
+          echo "sedang dijalankan pada branch '$BRANCH_NAME'."
+          echo
+          echo "Berkas ini men-deploy service staging. Menjalankannya dari branch"
+          echo "lain akan memasang commit branch itu ke staging, dan bagi yang"
+          echo "melihat hasilnya, staging terlihat menguji sesuatu yang tak pernah"
+          echo "ada di sana."
+          exit 1
+        fi
+        echo "Branch '$BRANCH_NAME' sesuai. Lanjut."
+
+  - id: build
+    name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - --tag=$_IMAGE:$COMMIT_SHA
+      - --tag=$_IMAGE:latest
+      - .
+
+  - id: push
+    name: gcr.io/cloud-builders/docker
+    args: [push, --all-tags, $_IMAGE]
+
+  # Bentuknya sengaja disamakan dengan trigger produksi: `services update`, bukan
+  # `run deploy`. Perbedaannya kecil tapi nyata — `run deploy` sanggup MEMBUAT
+  # service kalau namanya salah ketik, dan service baru itu lahir tanpa satu pun
+  # env, lalu naik dan melayani permintaan dengan konfigurasi kosong. `services
+  # update` gagal terang-terangan pada nama yang tidak ada.
+  - id: deploy
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    entrypoint: gcloud
+    args:
+      - run
+      - services
+      - update
+      - $_SERVICE
+      - --image=$_IMAGE:$COMMIT_SHA
+      - --region=$_REGION
+      - --platform=managed
+      - --quiet
+
+# Tidak memakai kunci `images:`. Cloud Build mendorong daftar itu SESUDAH seluruh
+# langkah selesai, padahal deploy harus melihat image-nya lebih dulu — jadi push
+# dikerjakan sebagai langkah tersendiri di atas. Menulis dua-duanya berarti image
+# yang sama didorong dua kali.
+
+substitutions:
+  _SERVICE: hcis-dev
+  _REGION: asia-southeast1
+  _IMAGE: asia-southeast1-docker.pkg.dev/project-6a30e7a0-bed0-4614-a28/cloud-run-source-deploy/kpi-unreal/hcis-dev
+
+options:
+  # Dockerfile menjalankan `npm run build` dengan NODE_OPTIONS 3 GB; mesin kecil
+  # gagal di tengah bundling dan gagalnya terbaca seperti kesalahan kode.
+  machineType: E2_HIGHCPU_8
+  logging: CLOUD_LOGGING_ONLY
+
+timeout: 1800s

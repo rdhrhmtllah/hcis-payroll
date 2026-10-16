@@ -1,0 +1,8 @@
+-- DDL-2026-100-visitor-daftar-anggota-tamu
+-- Target: Web_HRIS.
+--
+-- Tidak ada perubahan data untuk change ini.
+-- Baris lama sengaja dibiarkan Daftar_Anggota_Json = NULL karena sistem hanya
+-- pernah menyimpan satu nama sementara Jumlah_Tamu bisa lebih dari satu.
+-- NULL berarti "daftar tidak pernah dikumpulkan"; backfill satu nama akan
+-- mengarang manifes yang bertentangan dengan Jumlah_Tamu.

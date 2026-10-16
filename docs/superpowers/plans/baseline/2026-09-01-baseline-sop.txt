@@ -1,0 +1,476 @@
+
+   FAIL  Tests\Feature\LMS\SOP\Export\RegresiRinciTest
+  ✓ jumlah baris identik with data set "satu divisi"                                                             1.57s  
+  ✓ jumlah baris identik with data set "divisi bertunggakan publik"                                              1.17s  
+  ✓ jumlah baris identik with data set "nol baris"                                                               0.31s  
+  ⨯ baris identik with data set "satu divisi"                                                                    2.10s  
+  ⨯ baris identik with data set "divisi bertunggakan publik"                                                     4.89s  
+  ✓ baris identik with data set "nol baris"                                                                      0.71s  
+  ✓ label kolom identik with data set "satu divisi"                                                              0.79s  
+  ✓ label kolom identik with data set "divisi bertunggakan publik"                                               1.06s  
+  ✓ label kolom identik with data set "nol baris"                                                                0.39s  
+
+   FAIL  Tests\Feature\LMS\SOP\Export\ReportExportServiceTest
+  ✓ job menghasilkan berkas dan status ready                                                                     1.74s  
+  ⨯ format xlsx dan pdf juga terbentuk                                                                           3.17s  
+  ✓ proses ulang tidak menimpa job yang sudah ready                                                              1.67s  
+  ✓ job dibatalkan tidak menjadi ready                                                                           0.86s  
+  ✓ kolom ukuran ditulis sebagai angka di xlsx                                                                   1.72s  
+  ✓ nama kustom kosong mundur ke judul                                                                           1.47s  
+  ✓ nama kustom terisi dipakai apa adanya                                                                        1.49s  
+
+   PASS  Tests\Feature\LMS\SOP\Export\ReportTemplateServiceTest
+  ✓ simpan menghasilkan kode unik berprefix modul                                                                0.64s  
+  ✓ definisi tak sah ditolak saat simpan                                                                         0.23s  
+  ✓ template modul lain tidak bisa diambil                                                                       0.54s  
+  ✓ galeri saya hanya memuat milik sendiri                                                                       1.16s  
+  ✓ galeri resmi berasal dari kode bukan baris                                                                   0.94s  
+  ✓ duplikat template sistem mencatat asalnya                                                                    0.67s  
+  ✓ nonaktifkan tidak menghapus baris                                                                            0.83s  
+  ✓ orang lain tidak bisa menonaktifkan                                                                          0.71s  
+  ✓ template pribadi orang lain tidak bisa diambil                                                               0.69s  
+  ✓ template dibagikan tetap bisa diambil orang lain                                                             0.63s  
+  ✓ duplikat template pribadi orang lain ditolak                                                                 0.63s  
+  ✓ template sistem tetap terbuka untuk semua                                                                    0.23s  
+  ✓ nonaktifkan dua kali ditolak                                                                                 0.72s  
+  ✓ versi definisi ikut tersimpan                                                                                0.63s  
+
+   FAIL  Tests\Feature\LMS\SOP\Export\SopDokumenKelompokTest
+  ✓ dataset mengelompokkan ketiga keadaan dengan benar                                                           6.27s  
+  ⨯ dataset dan dashboard sepakat pada ketiga kelompok                                                           5.71s  
+  ⨯ wajib menang atas terbuka                                                                                    3.13s  
+  ✓ penugasan dicabut tidak membuat wajib                                                                        2.90s  
+  ✓ dokumen di banyak paket tetap satu baris                                                                     3.38s  
+  ✓ dokumen tanpa paket tetap terlihat                                                                           1.57s  
+  ✓ lingkup non admin hanya dokumen timnya                                                                       3.55s  
+  ✓ lingkup tanpa anggota tim menghasilkan nol baris                                                             5.65s  
+  ⨯ kelompok menjumlah tepat ke jumlah dokumen aktif                                                             5.39s  
+
+   PASS  Tests\Feature\LMS\SOP\Export\SopExportStudioApiTest
+  ✓ tanpa login ditolak                                                                                          0.50s  
+  ✓ halaman studio bisa dibuka                                                                                   4.75s  
+  ✓ katalog mengembalikan dimensi ukuran dan saringan                                                            3.25s  
+  ✓ dataset tak dikenal membalas kode stabil                                                                     0.53s  
+  ✓ galeri memuat template resmi                                                                                 1.19s  
+  ✓ definisi tak sah membalas 422 dengan errors per field                                                        1.54s  
+  ✓ simpan template sah                                                                                          1.88s  
+  ✓ pratinjau memakai compiler yang sama dengan export                                                           2.29s  
+  ✓ jalankan mengembalikan task id                                                                               0.97s  
+  ✓ template tak dikenal membalas 403                                                                            0.98s  
+  ✓ katalog kepatuhan membawa lapis dokumen dan versi                                                            0.88s  
+  ✓ opsi saringan kepatuhan terisi untuk lapis baru                                                              0.71s  
+  ✓ pratinjau kepatuhan mengelompokkan lapis versi                                                               2.18s  
+  ✓ katalog dokumen tersedia                                                                                     1.74s  
+  ✓ pratinjau dokumen membaca register                                                                           2.15s  
+  ✓ kelompok dokumen menjumlah tepat ke total                                                                    2.07s  
+  ✓ galeri dokumen hanya memuat template dokumen                                                                 0.99s  
+  ✓ galeri kepatuhan tidak memuat template dokumen                                                               1.15s  
+  ✓ definisi dataset lain ditolak saat pratinjau                                                                 1.42s  
+  ✓ definisi dataset lain ditolak saat simpan                                                                    1.22s  
+  ✓ template dataset lain tak bisa dijalankan                                                                    0.89s  
+  ✓ template dokumen bisa dijalankan dari studio dokumen                                                         1.00s  
+  ✓ studio dataset karangan tak punya route                                                                      0.42s  
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+[33mIn Connection.php line 587:[39m
+[37;41m                                                  [39;49m
+[37;41m  Maximum execution time of 300 seconds exceeded  [39;49m
+[37;41m                                                  [39;49m
+
+
+Fatal error: Maximum execution time of 300 seconds exceeded in C:\laragon\www\HCIS-W-3\vendor\laravel\framework\src\Illuminate\Database\Connection.php on line 587

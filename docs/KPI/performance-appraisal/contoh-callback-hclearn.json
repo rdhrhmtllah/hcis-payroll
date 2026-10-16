@@ -1,0 +1,263 @@
+{
+  "_sumber": "Dokumentasi HC Learn, section 'Callback ke HCIS', endpoint pa-callback-hasil. Disalin apa adanya pada 10 September 2026 dari https://cat-evo-stagging-595840247695.asia-southeast1.run.app/docs/api",
+  "_catatan": "BUKAN karangan HCIS. Berkas ini adalah bukti bentuk kiriman yang dijanjikan HC Learn, dan dipakai fixture uji supaya yang teruji adalah bentuk yang benar-benar akan datang. Setiap kali kontraknya berubah, berkas ini yang diperbarui lebih dulu — lalu ujinya merah, lalu kodenya menyusul.",
+  "_arti_id_integrasi": "Id_Integrasi adalah Id_PA_Assignment_Integration milik HCIS — BARIS INTEGRASI, bukan penugasan. Dokumentasi HC Learn menyebutnya 'angka milik HCIS sendiri, dikembalikan apa adanya', jadi maknanya memang ditentukan sisi kita. Satu penugasan boleh punya beberapa baris integrasi (paket soalnya diganti, pintunya dicetak ulang), sehingga id penugasan tidak pernah bisa menunjuk token yang mana. PaApiGuard menolak 403 bila angka yang dikembalikan bukan id baris integrasi. Nilai di contoh ini (9001) hanya ilustrasi; uji menggantinya dengan id baris yang sungguhan.",
+
+  "final_tanpa_esai": {
+    "_kapan": "Paket tanpa esai. Dikirim SEKALI, langsung FINAL, tepat sesudah skoring selesai.",
+    "Kode_Karyawan": "B7",
+    "Id_Integrasi": 9001,
+    "Api_Reference": "0586e3606786d74a862e4b2e307428e1",
+    "Id_Ujian_Nilai_Akhir": "0586e3606786d74a862e4b2e307428e1-PA360-FINAL",
+    "Status_Skor": "FINAL",
+    "Total_Nilai": 74.2,
+    "is_multi": false,
+    "kode_akses": "PA360",
+    "penilaian": {
+      "Nama_Tes": "Employee Assessment 360 - STAFF",
+      "Waktu_Mulai": "2026-09-01 08:00:00",
+      "Waktu_Akhir": "2026-09-30 17:00:00",
+      "Waktu_Mulai_Akses": "2026-09-10 09:12:44",
+      "Waktu_Selesai_Akses": "2026-09-10 09:41:03",
+      "Ambang_Batas_Nilai": 75,
+      "Status_Kelulusan": "Tidak Lulus",
+      "Warna": "#d01616"
+    },
+    "Detail": [
+      {
+        "Kode_Soal": "BE",
+        "Kode_Alat_Tes": "PA360",
+        "Nama_Alat_Tes": "Employee Assessment 360 - STAFF",
+        "Jenis_Soal": "Business Ethic",
+        "Skor": 21,
+        "Skor_Maksimal": 100,
+        "Bobot_Penilaian": 40,
+        "Jawaban_Teks": null,
+        "Status_Interpretation": "Low",
+        "Warna": "#d01616",
+        "Keterangan": "Sikap terhadap etika bisnis",
+        "Jumlah_Soal": 20,
+        "Jumlah_Terjawab": 20
+      },
+      {
+        "Kode_Soal": "KWN",
+        "Kode_Alat_Tes": "PA360",
+        "Nama_Alat_Tes": "Employee Assessment 360 - STAFF",
+        "Jenis_Soal": "Kewarganegaraan",
+        "Skor": 100,
+        "Skor_Maksimal": 100,
+        "Bobot_Penilaian": 60,
+        "Jawaban_Teks": null,
+        "Status_Interpretation": "High",
+        "Warna": "#21b080",
+        "Keterangan": "Kewarganegaraan",
+        "Jumlah_Soal": 25,
+        "Jumlah_Terjawab": 25
+      }
+    ]
+  },
+
+  "final_beresai_per_soal": {
+    "_kapan": "Paket BERESAI — dikirim SEKALI SAJA, sama seperti paket tanpa esai. Esai pada kanal PA dinilai otomatis oleh mesin saat peserta submit (EssayScorer, berbasis kemiripan teks terhadap kunci), sehingga tidak ada tahap menunggu koreksi admin. Status_Skor langsung FINAL, Total_Nilai sudah sah, dan Detail[] lengkap — termasuk sub-tes esai berikut pertanyaan dan jawaban tiap butirnya di dalam Esai[]. Kuncinya berakhiran -FINAL.",
+    "_sumber": "Dokumentasi HC Learn staging (/docs/api), endpoint pa-callback-hasil, contoh 'ADA esai'. Disalin apa adanya pada 26 September 2026.",
+    "Kode_Karyawan": "B7",
+    "Id_Integrasi": 9001,
+    "Id_Ujian_Token": "0586e3606786d74a862e4b2e307428e1",
+    "Id_Ujian_Nilai_Akhir": "0586e3606786d74a862e4b2e307428e1-PA360-FINAL",
+    "Status_Skor": "FINAL",
+    "is_multi": false,
+    "kode_akses": "PA360",
+    "Total_Nilai": 68.5,
+    "penilaian": {
+      "Nama_Tes": "Employee Assessment 360 - STAFF",
+      "Waktu_Mulai": "2026-09-01 08:00:00",
+      "Waktu_Akhir": "2026-09-30 17:00:00",
+      "Waktu_Mulai_Akses": "2026-09-10 09:12:44",
+      "Waktu_Selesai_Akses": "2026-09-10 09:41:03",
+      "Ambang_Batas_Nilai": 75,
+      "Status_Kelulusan": "Tidak Lulus",
+      "Warna": "#c93131"
+    },
+    "Detail": [
+      {
+        "Kode_Soal": "BE",
+        "Kode_Alat_Tes": "PA360",
+        "Nama_Alat_Tes": "Employee Assessment 360 - STAFF",
+        "Jenis_Soal": "Business Ethic",
+        "Skor": 21,
+        "Skor_Maksimal": 100,
+        "Bobot_Penilaian": 30,
+        "Jawaban_Teks": null,
+        "Flag_Essai": false,
+        "Jumlah_Esai": 0,
+        "Status_Interpretation": "Low",
+        "Warna": "#d01616",
+        "Keterangan": "Sikap terhadap etika bisnis",
+        "Jumlah_Soal": 20,
+        "Jumlah_Terjawab": 20
+      },
+      {
+        "Kode_Soal": "KWN",
+        "Kode_Alat_Tes": "PA360",
+        "Nama_Alat_Tes": "Employee Assessment 360 - STAFF",
+        "Jenis_Soal": "Kewarganegaraan",
+        "Skor": 100,
+        "Skor_Maksimal": 100,
+        "Bobot_Penilaian": 30,
+        "Jawaban_Teks": null,
+        "Flag_Essai": false,
+        "Jumlah_Esai": 0,
+        "Status_Interpretation": "High",
+        "Warna": "#21b080",
+        "Keterangan": "Kewarganegaraan",
+        "Jumlah_Soal": 25,
+        "Jumlah_Terjawab": 25
+      },
+      {
+        "Kode_Soal": "URA",
+        "Kode_Alat_Tes": "PA360",
+        "Nama_Alat_Tes": "Employee Assessment 360 - STAFF",
+        "Jenis_Soal": "Uraian Situasional",
+        "Skor": 85,
+        "Skor_Maksimal": 100,
+        "Bobot_Penilaian": 40,
+        "Jawaban_Teks": null,
+        "Flag_Essai": true,
+        "Jumlah_Esai": 4,
+        "Esai": [
+          {
+            "Id_Master_Soal": 102633,
+            "Pertanyaan": "Ceritakan bagaimana Anda menyelesaikan pekerjaan yang menumpuk.",
+            "Jawaban_Peserta": "Saya urutkan menurut tenggat, lalu kerjakan yang paling mendesak dulu.",
+            "Nilai": 90,
+            "Rekomendasi_Nilai_Sistem": 78.4,
+            "Alasan_Sistem": "Tingkat kemiripan teks: 78.4% (Skor: 78.4 dari 100).",
+            "Sudah_Dikoreksi": true,
+            "Catatan_Koreksi": "Jawaban lengkap dan terstruktur.",
+            "Waktu_Dijawab": "2026-09-24 14:05:11"
+          },
+          {
+            "Id_Master_Soal": 102634,
+            "Pertanyaan": "Apa yang Anda lakukan bila rekan satu tim tidak kooperatif?",
+            "Jawaban_Peserta": "Saya ajak bicara empat mata dulu untuk tahu penyebabnya.",
+            "Nilai": 85,
+            "Rekomendasi_Nilai_Sistem": 71.2,
+            "Alasan_Sistem": "Tingkat kemiripan teks: 71.2% (Skor: 71.2 dari 100).",
+            "Sudah_Dikoreksi": true,
+            "Catatan_Koreksi": null,
+            "Waktu_Dijawab": "2026-09-24 14:07:48"
+          },
+          {
+            "Id_Master_Soal": 102635,
+            "Pertanyaan": "Sebutkan satu keputusan sulit yang pernah Anda ambil.",
+            "Jawaban_Peserta": "Menunda peluncuran karena data belum siap, walau jadwal sudah diumumkan.",
+            "Nilai": 88,
+            "Rekomendasi_Nilai_Sistem": 80.0,
+            "Alasan_Sistem": "Tingkat kemiripan teks: 80% (Skor: 80 dari 100).",
+            "Sudah_Dikoreksi": true,
+            "Catatan_Koreksi": null,
+            "Waktu_Dijawab": "2026-09-24 14:10:02"
+          },
+          {
+            "Id_Master_Soal": 102636,
+            "Pertanyaan": "Bagaimana Anda menjaga kualitas saat tenggat mepet?",
+            "Jawaban_Peserta": "Saya kurangi cakupan, bukan mengurangi pemeriksaan.",
+            "Nilai": 77,
+            "Rekomendasi_Nilai_Sistem": 77.0,
+            "Alasan_Sistem": "Tingkat kemiripan teks: 77% (Skor: 77 dari 100).",
+            "Sudah_Dikoreksi": false,
+            "Catatan_Koreksi": null,
+            "Waktu_Dijawab": "2026-09-24 14:12:39"
+          }
+        ],
+        "Status_Interpretation": "High",
+        "Warna": "#21b080",
+        "Keterangan": "Penilaian esai oleh admin",
+        "Jumlah_Soal": 4,
+        "Jumlah_Terjawab": 4
+      }
+    ]
+  },
+
+  "menunggu_verifikasi": {
+    "_kapan": "Paket beresai, TAHAP 1 dari 2. Dikirim saat peserta submit, sebelum admin HC Learn mengoreksi esainya. Detail SENGAJA kosong dan Total_Nilai SENGAJA tidak ada: angka sementara yang terlanjur dipakai lebih berbahaya daripada angka yang belum ada.",
+    "Kode_Karyawan": "B7",
+    "Id_Integrasi": 9001,
+    "Api_Reference": "0586e3606786d74a862e4b2e307428e1",
+    "Id_Ujian_Nilai_Akhir": "0586e3606786d74a862e4b2e307428e1-PA360-MV",
+    "Status_Skor": "MENUNGGU_VERIFIKASI",
+    "is_multi": false,
+    "kode_akses": "PA360",
+    "Detail": []
+  },
+
+  "_balasan_yang_diharapkan_hclearn": {
+    "final": {
+      "_arti": "Yang menentukan berhasil BUKAN kode 200-nya melainkan kontrak_lengkap=true: hanya itu yang berarti penilaian ditandai selesai di HCIS.",
+      "success": true,
+      "status": 200,
+      "message": "Hasil penilaian diterima dan dipetakan.",
+      "result": {
+        "payload_id": 5521,
+        "assignment_id": 9001,
+        "baru": true,
+        "butir": 2,
+        "berskor": 2,
+        "tak_terpetakan": [],
+        "butir_hilang": [],
+        "kontrak_lengkap": true
+      }
+    },
+    "menunggu_verifikasi": {
+      "_arti": "Sengaja minim. Yang diharapkan di sisi HCIS: penilai berhenti diingatkan, tetapi nilai BELUM dihitung dan penugasan BELUM ditandai selesai.",
+      "success": true,
+      "status": 200,
+      "message": "Status penilaian tercatat."
+    },
+    "kiriman_ulang_setelah_timeout": {
+      "_arti": "Kasus paling penting bagi penerima. Payload yang sama persis dikirim ulang (nonce baru, Id_Ujian_Nilai_Akhir SAMA); HCIS wajib mengenalinya lewat kunci itu, menjawab baru=false dengan payload_id YANG SAMA, tanpa membuat baris kedua.",
+      "success": true,
+      "status": 200,
+      "message": "Hasil penilaian diterima dan dipetakan.",
+      "result": {
+        "payload_id": 5521,
+        "assignment_id": 9001,
+        "baru": false
+      }
+    },
+    "tak_lengkap": {
+      "_arti": "JEBAKAN PALING BERBAHAYA menurut mereka: HTTP 200 dan success=true, TETAPI kontrak_lengkap=false. HC Learn TIDAK mengulanginya - yang salah datanya, bukan jaringannya - dan menandai barisnya TAK_LENGKAP untuk ditindaklanjuti manusia.",
+      "success": true,
+      "status": 200,
+      "message": "Hasil penilaian diterima dan dipetakan.",
+      "result": {
+        "payload_id": 5522,
+        "assignment_id": 9002,
+        "baru": true,
+        "butir": 3,
+        "berskor": 2,
+        "tak_terpetakan": ["BE"],
+        "butir_hilang": ["KWN"],
+        "kontrak_lengkap": false
+      }
+    },
+    "ditolak_422": {
+      "_arti": "FATAL, tidak diulang. Pemicunya: Detail kosong padahal FINAL, Kode_Soal ganda, Skor tanpa Skor_Maksimal, Skor melebihi Skor_Maksimal, atau Id_Ujian_Nilai_Akhir sama untuk isi berbeda. Pesannya ditampilkan APA ADANYA kepada admin mereka, jadi wajib menyebut butir dan angkanya.",
+      "success": false,
+      "status": 422,
+      "message": "Butir KWN pada payload 5523 berskor 120 melebihi Skor_Maksimal 100."
+    },
+    "tidak_dikenal_404": {
+      "_arti": "Api_Reference atau Id_Integrasi tidak dikenali HCIS. FATAL, tidak diulang.",
+      "success": false,
+      "status": 404,
+      "message": "Token atau penugasan tidak dikenal"
+    },
+    "gangguan_503": {
+      "_arti": "TIDAK fatal. HC Learn mengulang otomatis 3 kali (30 detik, 2 menit, 10 menit), lalu 5 ronde lagi hingga menutup 21 jam gangguan. Berlaku sama untuk 500, 502, 504, dan timeout tanpa jawaban.",
+      "success": false,
+      "status": 503,
+      "message": "Layanan sedang tidak tersedia"
+    }
+  }
+}

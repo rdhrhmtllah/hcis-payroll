@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+>
+    <testsuites>
+        <testsuite name="Unit">
+            <directory>tests/Unit</directory>
+        </testsuite>
+        <testsuite name="Feature">
+            <directory>tests/Feature</directory>
+        </testsuite>
+        <!-- Butuh basis data yang hidup; tidak dijalankan di CI. -->
+        <testsuite name="Integration">
+            <directory>tests/Integration</directory>
+        </testsuite>
+    </testsuites>
+    <source>
+        <include>
+            <directory>app</directory>
+        </include>
+    </source>
+    <php>
+        <env name="APP_ENV" value="testing"/>
+        <!-- Uji tidak boleh bergantung pada URL deployment. APP_URL di .env
+             pengembang bisa tanpa skema (mis. "n8n.ajt.my.id"), dan url()
+             lalu memperlakukan hostnya sebagai PATH: setiap panggilan HTTP
+             menembak "n8n.ajt.my.id/api/v1/..." dan menjawab 404, seolah-olah
+             rutenya tidak terdaftar padahal route:list menampilkannya. -->
+        <env name="APP_URL" value="http://localhost"/>
+        <!-- TrackUserActivity terpasang di grup 'web' DAN 'api', dan
+             activity-tracker.enabled baku true — jadi tanpa baris ini setiap
+             panggilan HTTP di suite ikut menulis baris nyata ke
+             N_HRIS_Activity_Event pada basis data yang sedang dituju.
+             Terukur 9 September 2026 di Web_HRIS: 27.115 dari 32.457 baris
+             (84%) datang dari 127.0.0.1, dengan prosesLogin 3.922 kali —
+             seluruhnya jejak suite ini, bukan pemakaian orang.
+             Akibatnya bukan sekadar tabel kotor: sys.dm_db_index_usage_stats
+             jadi tidak bisa dipercaya, sehingga keputusan "indeks ini tak
+             pernah di-seek, buang saja" diambil dari trafik uji. -->
+        <env name="ACTIVITY_TRACKER_ENABLED" value="false"/>
+        <env name="BCRYPT_ROUNDS" value="4"/>
+        <env name="CACHE_DRIVER" value="array"/>
+        <!-- <env name="DB_CONNECTION" value="sqlite"/> -->
+        <!-- <env name="DB_DATABASE" value=":memory:"/> -->
+        <env name="MAIL_MAILER" value="array"/>
+        <env name="PULSE_ENABLED" value="false"/>
+        <env name="QUEUE_CONNECTION" value="sync"/>
+        <env name="PA_KUNCI_TAHAN_KEKURANGAN" value="false"/>
+        <!-- Syarat kartu NFC permit dimatikan untuk uji lain yang memakai karyawan tanpa kartu;
+             KartuNfcPemohonTest menyalakannya sendiri. -->
+        <env name="VISITOR_PERMIT_WAJIB_KARTU_NFC" value="false"/>
+        <env name="SESSION_DRIVER" value="array"/>
+        <env name="TELESCOPE_ENABLED" value="false"/>
+    </php>
+</phpunit>

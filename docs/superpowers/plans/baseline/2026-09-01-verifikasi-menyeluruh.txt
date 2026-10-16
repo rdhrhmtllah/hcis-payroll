@@ -1,0 +1,179 @@
+berkas uji: 132
+LMS/SOP/Export/RegresiRinciTest.php                        Tests:    2 failed, 7 passed (90 assertions)
+  ⨯ baris identik with data set "satu divisi"                                                                    0.87s  
+  ⨯ baris identik with data set "divisi bertunggakan publik"                                                     2.73s  
+LMS/SOP/Export/ReportExportServiceTest.php                 Tests:    9 passed (24 assertions)
+LMS/SOP/Export/ReportTemplateServiceTest.php               Tests:    14 passed (18 assertions)
+LMS/SOP/Export/SopDokumenKelompokTest.php                  Tests:    3 failed, 6 passed (14 assertions)
+  ⨯ dataset dan dashboard sepakat pada ketiga kelompok                                                           2.56s  
+  ⨯ wajib menang atas terbuka                                                                                    1.37s  
+  ⨯ kelompok menjumlah tepat ke jumlah dokumen aktif                                                             2.47s  
+LMS/SOP/Export/SopExportStudioApiTest.php                  Tests:    23 passed (120 assertions)
+LMS/SOP/Otomasi/SopAturanPaketServiceTest.php              Tests:    8 passed (17 assertions)
+LMS/SOP/Otomasi/SopKebijakanEndpointTest.php               Tests:    5 passed (11 assertions)
+LMS/SOP/Otomasi/SopRiwayatOtomasiTest.php                  Tests:    6 passed (16 assertions)
+LMS/SOP/SopApqcTest.php                                    Tests:    11 passed (38 assertions)
+LMS/SOP/SopAssignSetBasedTest.php                          Tests:    3 passed (15 assertions)
+LMS/SOP/SopAwarenessUpdateTest.php                         Tests:    10 passed (52 assertions)
+LMS/SOP/SopBatalVersiTerbitTest.php                        Tests:    13 passed (28 assertions)
+LMS/SOP/SopBatchKaryawanSaringanTest.php                   Tests:    6 passed (120 assertions)
+LMS/SOP/SopBlokPengesahBuilderTest.php                     Tests:    4 skipped (0 assertions)
+LMS/SOP/SopBuilderCopyItemToPaketTest.php                  Tests:    3 skipped, 4 passed (20 assertions)
+LMS/SOP/SopBuilderItemDokumenTest.php                      Tests:    1 skipped, 7 passed (28 assertions)
+LMS/SOP/SopBuilderRiwayatTest.php                          Tests:    1 skipped, 4 passed (10 assertions)
+LMS/SOP/SopBuilderSaringanFiksturTest.php                  Tests:    14 passed (41 assertions)
+LMS/SOP/SopBuilderSaringanPaketTest.php                    Tests:    1 failed, 1 skipped, 11 passed (25 assertions)
+  ⨯ sumbu tak dikenal ditolak bukan dijawab rail kosong                                                          0.15s  
+LMS/SOP/SopBuilderVersiBacaSajaTest.php                    Tests:    3 passed (11 assertions)
+LMS/SOP/SopBuilderVersiSumbuDokumenTest.php                Tests:    5 passed (14 assertions)
+LMS/SOP/SopBulkCabutTersaringTest.php                      Tests:    2 failed, 2 skipped (4 assertions)
+  ⨯ select all without any filter revokes the whole batch                                                        0.95s  
+  ⨯ the reported count matches what actually changed in the database                                             0.66s  
+LMS/SOP/SopDetailVersiPayloadTest.php                      Tests:    5 passed (14 assertions)
+LMS/SOP/SopDiffJejakTest.php                               Tests:    6 passed (14 assertions)
+LMS/SOP/SopDisiplinTransaksiTest.php                       Tests:    1 passed (3 assertions)
+LMS/SOP/SopDokumenBackfillTest.php                         Tests:    10 skipped (0 assertions)
+LMS/SOP/SopDokumenBaselineTest.php                         Tests:    2 skipped, 6 passed (21 assertions)
+LMS/SOP/SopDokumenBerbagiTest.php                          Tests:    1 failed, 11 passed (32 assertions)
+  ⨯ opsi dokumen melaporkan jumlah paket pemakai                                                                 2.42s  
+LMS/SOP/SopDokumenDepartemenTest.php                       Tests:    2 failed, 10 passed (25 assertions)
+  ⨯ departemen ikut menentukan deret nomor dokumen                                                               1.77s  
+  ⨯ deret naik di departemen yang sama                                                                           1.60s  
+LMS/SOP/SopDokumenEntitasTest.php                          Tests:    6 passed (9 assertions)
+LMS/SOP/SopDokumenFanoutTest.php                           Tests:    2 skipped, 9 passed (27 assertions)
+LMS/SOP/SopDokumenFase2Test.php                            Tests:    3 failed (4 assertions)
+  ⨯ unique index dokumen versi terpasang dan terfilter                                                           0.86s  
+  ⨯ index lama per item sudah dibuang                                                                            0.27s  
+  ⨯ pasangan dokumen versi unik pada baris bertaut                                                               0.21s  
+LMS/SOP/SopDokumenJenisPemilikTest.php                     Tests:    11 passed (22 assertions)
+LMS/SOP/SopDokumenJoinVersiTest.php                        Tests:    5 skipped, 3 passed (4 assertions)
+LMS/SOP/SopDokumenKeberlakuanTest.php                      Tests:    9 passed (29 assertions)
+LMS/SOP/SopDokumenKembarDiPaketTest.php                    Tests:    4 skipped (0 assertions)
+LMS/SOP/SopDokumenKesehatanTest.php                        Tests:    1 failed, 25 passed (656 assertions)
+  ⨯ sumbu jenis menampilkan tingkat yang kosong                                                                  1.54s  
+LMS/SOP/SopDokumenPenulisVersiTest.php                     Tests:    3 skipped, 6 passed (14 assertions)
+LMS/SOP/SopDokumenSkemaTest.php                            Tests:    3 passed (16 assertions)
+LMS/SOP/SopDokumenVerifyTest.php                           Tests:    1 failed, 2 skipped, 2 passed (5 assertions)
+  ⨯ menangkap pointer versi aktif menggantung                                                                    0.43s  
+LMS/SOP/SopDraftItemDokumenTampakTest.php                  Tests:    1 passed (3 assertions)
+LMS/SOP/SopDraftItemGantiDokumenTest.php                   Tests:    3 passed (13 assertions)
+LMS/SOP/SopExportRinciDatasetTest.php                      Tests:    10 passed (61 assertions)
+LMS/SOP/SopExportRinciTest.php                             Tests:    1 failed, 13 passed (57 assertions)
+  ⨯ row count matches the assignment times item join                                                             0.55s  
+LMS/SOP/SopFormBerkasTest.php                              Tests:    1 failed, 4 skipped, 6 passed (15 assertions)
+  ⨯ form items may be downloaded whatever their access mode                                                      0.49s  
+LMS/SOP/SopGerbangUrutanRevisiTest.php                     Tests:    5 skipped (0 assertions)
+LMS/SOP/SopHeatmapSumbuTest.php                            Tests:    8 passed (247 assertions)
+LMS/SOP/SopItemDampakHapusTest.php                         Tests:    3 passed (11 assertions)
+LMS/SOP/SopItemTipeTerkunciTest.php                        Tests:    2 skipped, 1 passed (1 assertions)
+LMS/SOP/SopIzinPrioritasMandiriTest.php                    Tests:    4 passed (11 assertions)
+LMS/SOP/SopIzinUbahVersiTest.php                           Tests:    16 passed (70 assertions)
+LMS/SOP/SopJangkauanPublikTest.php                         Tests:    6 passed (20 assertions)
+LMS/SOP/SopJenisDokumenMasterTest.php                      Tests:    7 passed (16 assertions)
+LMS/SOP/SopJenisDokumenSkemaTest.php                       Tests:    5 passed (27 assertions)
+LMS/SOP/SopKategoriDicabutTest.php                         Tests:    4 passed (7 assertions)
+LMS/SOP/SopKodePemilikNomorTest.php                        Tests:    2 failed, 4 passed (5 assertions)
+  ⨯ tiga perakit menghasilkan nomor yang sama                                                                    0.66s  
+  ⨯ segmen lingkup tetap memakai kode entitas                                                                    0.60s  
+LMS/SOP/SopKolomAdaDiSkemaTest.php                         Tests:    1 passed (2 assertions)
+LMS/SOP/SopKontenPickerTanpaBunnyTest.php                  Tests:    1 passed (2 assertions)
+LMS/SOP/SopKosongkanPaketTest.php                          Tests:    3 skipped, 1 passed (3 assertions)
+LMS/SOP/SopKuisSumberAplikasiTest.php                      Tests:    4 skipped, 6 passed (9 assertions)
+LMS/SOP/SopMasterDokumenPageTest.php                       Tests:    4 skipped, 33 passed (266 assertions)
+LMS/SOP/SopMasterDokumenTest.php                           Tests:    6 passed (16 assertions)
+LMS/SOP/SopMasterPrioritasTerisiTest.php                   Tests:    4 passed (21 assertions)
+LMS/SOP/SopMasterPrioritasTest.php                         Tests:    11 passed (22 assertions)
+LMS/SOP/SopMonitoringKaryawanTokenTest.php                 Tests:    15 passed (235 assertions)
+LMS/SOP/SopNoDokumenTest.php                               Tests:    12 passed (55 assertions)
+LMS/SOP/SopNomorLengkapTest.php                            Tests:    1 failed, 14 passed (28 assertions)
+  ⨯ tujuh kode jenis terisi                                                                                      0.21s  
+LMS/SOP/SopNomorSopUnikTest.php                            Tests:    6 passed (7 assertions)
+LMS/SOP/SopPaketTanpaKategoriTest.php                      Tests:    4 passed (11 assertions)
+LMS/SOP/SopPaketTerbitPakaiDokumenAdaTest.php              Tests:    2 passed (10 assertions)
+LMS/SOP/SopPaketTersaringTest.php                          Tests:    5 passed (37 assertions)
+LMS/SOP/SopPanelAktivitasReconcileTest.php                 Tests:    5 passed (25 assertions)
+LMS/SOP/SopPenjadwalanServiceTest.php                      Tests:    1 failed, 6 passed (27 assertions)
+  ⨯ package options stop at the safety cap and report truncation                                                 0.35s  
+LMS/SOP/SopPenjadwalanTargetServiceTest.php                Tests:    7 passed (11 assertions)
+LMS/SOP/SopPerhatianDokumenTest.php                        Tests:    2 failed, 9 passed (24 assertions)
+  ⨯ penyaring menangkap yang menagih dan melewatkan yang jauh                                                    2.32s  
+  ⨯ dokumen tanpa versi berlaku bukan urusan tinjauan                                                            1.19s  
+LMS/SOP/SopPratinjauAdminPdfTest.php                       Tests:    3 skipped, 2 passed (4 assertions)
+LMS/SOP/SopPublishBatasTransaksiTest.php                   Tests:    3 passed (7 assertions)
+LMS/SOP/SopPublishPaketVsRevisiDokumenTest.php             HANG
+LMS/SOP/SopReconcilePotonganTest.php                       Tests:    3 passed (5 assertions)
+LMS/SOP/SopRekamBacaTest.php                               Tests:    11 passed (44 assertions)
+LMS/SOP/SopRepositoryDatarTest.php                         Tests:    5 passed (17 assertions)
+LMS/SOP/SopRepositoryDokumenTest.php                       Tests:    13 passed (28 assertions)
+LMS/SOP/SopRepositoryRekapSumbuTest.php                    Tests:    9 passed (53 assertions)
+LMS/SOP/SopRingkasanDokumenTest.php                        Tests:    2 skipped, 3 passed (19 assertions)
+LMS/SOP/SopRingkasanSaringanTest.php                       Tests:    1 failed, 1 skipped, 7 passed (30 assertions)
+  ⨯ unfiltered summary still matches the original queries                                                        1.07s  
+LMS/SOP/SopRiwayatDokumenTest.php                          Tests:    1 failed, 9 passed (21 assertions)
+  ⨯ penerbitan menyebut sifat revisinya                                                                          2.10s  
+LMS/SOP/SopSaringanCacheTest.php                           Tests:    4 passed (10 assertions)
+LMS/SOP/SopSayaIdentitasDokumenTest.php                    Tests:    15 passed (28 assertions)
+LMS/SOP/SopSettingMemoTest.php                             Tests:    2 passed (5 assertions)
+LMS/SOP/SopSimpanHalamanTest.php                           Tests:    1 skipped, 3 passed (10 assertions)
+LMS/SOP/SopSuntingDraftTest.php                            Tests:    1 failed, 4 passed (11 assertions)
+  ⨯ versi terbit tidak membocorkan tokennya                                                                      2.13s  
+LMS/SOP/SopTahapCacheSyaratTest.php                        Tests:    3 passed (4 assertions)
+LMS/SOP/SopTahapVersiTest.php                              Tests:    3 failed, 49 passed (129 assertions)
+  ⨯ tahap aktif membentuk alur lurus                                                                             0.22s  
+  ⨯ pemetaan empat langkah berasal dari master                                                                   0.20s  
+  ⨯ terbit bukan perpindahan tahap biasa                                                                         4.13s  
+LMS/SOP/SopTerbitPengesahPerTipeTest.php                   Tests:    2 failed, 2 passed (6 assertions)
+  ⨯ kuis tanpa pengesah boleh terbit                                                                             0.13s  
+  ⨯ video tanpa pengesah boleh terbit                                                                            0.10s  
+LMS/SOP/SopTipeItemSakelarTest.php                         Tests:    7 passed (20 assertions)
+LMS/SOP/SopTolakFieldTakBerlakuTest.php                    Tests:    7 passed (8 assertions)
+LMS/SOP/SopVersiBatalBekuTest.php                          Tests:    16 passed (56 assertions)
+LMS/SOP/SopVersiCabutanTest.php                            Tests:    1 skipped, 5 passed (12 assertions)
+LMS/SOP/SopVersiReviewTest.php                             Tests:    13 passed (31 assertions)
+LMS/SOP/SopWatermarkToggleTest.php                         Tests:    3 passed (6 assertions)
+LMS/SOP/SopWizardHalamanTest.php                           Tests:    7 passed (21 assertions)
+LMS/SOP/SopWizardVersiTest.php                             Tests:    29 passed (78 assertions)
+LMS/SOP/Uat/Alur005BerkasTerpusatTest.php                  Tests:    1 failed, 1 passed (1 assertions)
+  ⨯ satu berkas bisa dipakai banyak dokumen tanpa digandakan                                                     3.98s  
+LMS/SOP/Uat/Alur007SiklusVersiDokumenTest.php              Tests:    4 failed, 4 passed (10 assertions)
+  ⨯ blok pengesahan dilengkapi lalu versinya terbit                                                              3.31s  
+  ⨯ terbit versi kedua memensiunkan versi pertama                                                                4.79s  
+  ⨯ versi lama bisa dikembalikan dan penunjuk dokumen ikut mundur                                                3.78s  
+  ⨯ versi berlaku dan versi draft menolak dikembalikan                                                           5.50s  
+LMS/SOP/Uat/Alur015BuilderPaketTest.php                    Tests:    1 failed, 3 passed (8 assertions)
+  ⨯ item yang disalin tetap seiring saat dokumennya direvisi                                                    15.18s  
+LMS/SOP/Uat/Alur020PenjadwalanTest.php                     Tests:    3 passed (14 assertions)
+LMS/SOP/Uat/Alur024KebijakanOtomasiTest.php                Tests:    5 passed (11 assertions)
+LMS/SOP/Uat/Alur026SisiKaryawanTest.php                    Tests:    5 passed (9 assertions)
+LMS/SOP/Uat/Alur040MonitoringTest.php                      Tests:    4 passed (9 assertions)
+LMS/SOP/Uat/Alur044SiklusHidupLanjutTest.php               Tests:    3 failed (0 assertions)
+  ⨯ revisi menyusul ke semua paket pemakai termasuk yang dilihat karyawan                                       17.29s  
+  ⨯ revisi wajib membuka kembali kewajiban baca                                                                 15.95s  
+  ⨯ revisi minor tidak mengganggu yang sudah selesai                                                            14.01s  
+LMS/SOP/Uat/Alur047NotifikasiTest.php                      Tests:    3 passed (10 assertions)
+LMS/SOP/Uat/BebanDuniaTest.php                             Tests:    3 passed (5 assertions)
+LMS/SOP/Uat/CabutMassalTest.php                            Tests:    5 passed (10 assertions)
+LMS/SOP/Uat/HapusKontenAmanTest.php                        Tests:    4 passed (14 assertions)
+LMS/SOP/Uat/Kontrol002AksesHalamanAdminTest.php            Tests:    3 passed (20 assertions)
+LMS/SOP/Uat/Kontrol006BerkasTerpakaiTest.php               Tests:    1 passed (1 assertions)
+LMS/SOP/Uat/Kontrol013TerbitVersiTakLengkapTest.php        Tests:    3 failed, 2 passed (7 assertions)
+  ⨯ versi berberkas berhasil diterbitkan dan menggeser penunjuk aktif                                            2.57s  
+  ⨯ versi yang sudah terbit menolak diterbitkan ulang                                                            3.21s  
+  ⨯ pengesahan lewat kolom cermin saja sudah cukup                                                               3.41s  
+LMS/SOP/Uat/Kontrol022PratinjauSasaranTest.php             Tests:    4 passed (6 assertions)
+LMS/SOP/Uat/Kontrol027IntipTerbatasTest.php                Tests:    2 passed (9 assertions)
+LMS/SOP/Uat/Kontrol033UrutanItemWajibTest.php              Tests:    6 passed (6 assertions)
+LMS/SOP/Uat/Kontrol035KelulusanKuisTest.php                Tests:    4 passed (6 assertions)
+LMS/SOP/Uat/Kontrol039LingkupTimLeaderTest.php             Tests:    3 passed (6 assertions)
+LMS/SOP/Uat/Kontrol043RegisterKontrolDokumenTest.php       Tests:    1 passed (5 assertions)
+SYSTEM/Application/AllTransactionsReadParityTest.php       Tests:    5 passed (18 assertions)
+SYSTEM/Application/ExportModuleRegistryTest.php            Tests:    2 passed (20 assertions)
+SYSTEM/Application/RuntimeRecoveryApiTest.php              Tests:    6 passed (27 assertions)
+SYSTEM/CachePruneTest.php                                  Tests:    2 passed (5 assertions)
+SYSTEM/DatabaseChanges/SalinSqlChangesetTest.php           Tests:    14 passed (22 assertions)
+SYSTEM/DisiplinTransaksiManualTest.php                     Tests:    1 failed (1 assertions)
+  ⨯ tiap transaksi manual punya jaring throwable                                                                 1.55s  
+SYSTEM/Governance/ApprovalFlowServiceTest.php              Tests:    8 passed (27 assertions)
+SYSTEM/MasterData/DepartemenTest.php                       Tests:    14 passed (29 assertions)
+SYSTEM/MasterData/EntitasTest.php                          Tests:    22 passed (65 assertions)
+=== SELESAI ===

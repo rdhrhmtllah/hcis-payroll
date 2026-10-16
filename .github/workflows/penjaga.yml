@@ -1,0 +1,82 @@
+name: Penjaga
+
+# Berjalan pada setiap PR yang menuju branch beralur. Nama job di bawah dipakai
+# sebagai REQUIRED STATUS CHECK di ruleset GitHub, jadi jangan diubah: kalau
+# namanya berganti atau job-nya dihapus, check yang diwajibkan tidak pernah
+# melapor dan tombol merge terkunci — persis yang kita inginkan. Penjaga ini
+# karena itu tidak bisa dilepas dari dalam PR yang sedang dijaganya.
+on:
+  pull_request:
+    branches: [master, staging]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gerbang-rilis:
+    name: Gerbang rilis
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Riwayat penuh: penjaga membandingkan PR dengan merge-base branch tujuan.
+          # Dengan kedalaman dangkal, `base...head` gagal dan gagalnya terbaca
+          # seperti penjaga yang rusak, bukan checkout yang kurang dalam.
+          fetch-depth: 0
+
+      # Label dan nama branch masuk lewat env, bukan ditempel ke dalam `run`.
+      # Keduanya berisi teks yang ditulis orang lain; ditempel langsung, sebuah
+      # label bisa menjalankan perintah shell di runner ini.
+      - name: Evaluasi gerbang rilis
+        env:
+          BRANCH_TUJUAN: ${{ github.base_ref }}
+          LABEL_PR: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+        run: |
+          node .github/scripts/gerbang-rilis.mjs \
+            --target "$BRANCH_TUJUAN" \
+            --base "origin/$BRANCH_TUJUAN" \
+            --head HEAD
+
+  perubahan-database:
+    name: Perubahan database
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Periksa perubahan basis data
+        env:
+          BRANCH_TUJUAN: ${{ github.base_ref }}
+        run: |
+          node .github/scripts/penjaga-perubahan-db.mjs \
+            --base "origin/$BRANCH_TUJUAN" \
+            --head HEAD
+
+  uji-penjaga:
+    name: Uji penjaga
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      # Menjalankan HANYA uji milik penjaga. Suite frontend penuh sudah dijalankan
+      # workflow quality.yml; yang dijaga di sini adalah bahwa penjaganya sendiri
+      # masih berperilaku benar, termasuk uji-uji PENOLAKAN-nya.
+      - name: Jalankan uji penjaga
+        run: npx vitest run .github/scripts

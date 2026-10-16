@@ -1,0 +1,101 @@
+{
+    "success": true,
+    "status": 200,
+    "message": "Berhasil",
+    "result": {
+        "siklus": {
+            "Id_PA_Cycle": "657",
+            "Kode_Cycle": "PA-DEMO-FE",
+            "Nama_Cycle": "Siklus Contoh Pengembangan Frontend",
+            "Status_Cycle": "CLOSED"
+        },
+        "boleh_sunting": true,
+        "bobot": [
+            {
+                "Id_PA_Cycle_Pillar_Weight_Snapshot": "468",
+                "ID_Level": "2",
+                "Nama_Level": "STAFF",
+                "Bobot_KPI": "80.00",
+                "Bobot_Kompetensi": "20.00",
+                "Alasan_Perubahan": null,
+                "Updated_At": null,
+                "Updated_By": null,
+                "hasil_terbit": 2,
+                "hasil_dihitung": 0,
+                "dapat_disunting": false,
+                "alasan_terkunci": "Ada 2 hasil yang sudah terbit pada level ini; bobotnya tidak bisa diubah lagi karena angka yang sudah dilihat orang tidak dihitung ulang."
+            },
+            {
+                "Id_PA_Cycle_Pillar_Weight_Snapshot": "469",
+                "ID_Level": "3",
+                "Nama_Level": "SENIOR STAFF",
+                "Bobot_KPI": "80.00",
+                "Bobot_Kompetensi": "20.00",
+                "Alasan_Perubahan": null,
+                "Updated_At": null,
+                "Updated_By": null,
+                "hasil_terbit": 0,
+                "hasil_dihitung": 0,
+                "dapat_disunting": true,
+                "alasan_terkunci": null
+            },
+            {
+                "Id_PA_Cycle_Pillar_Weight_Snapshot": "470",
+                "ID_Level": "4",
+                "Nama_Level": "OFFICER",
+                "Bobot_KPI": "75.00",
+                "Bobot_Kompetensi": "25.00",
+                "Alasan_Perubahan": null,
+                "Updated_At": null,
+                "Updated_By": null,
+                "hasil_terbit": 0,
+                "hasil_dihitung": 0,
+                "dapat_disunting": true,
+                "alasan_terkunci": null
+            },
+            {
+                "Id_PA_Cycle_Pillar_Weight_Snapshot": "471",
+                "ID_Level": "5",
+                "Nama_Level": "SENIOR OFFICER",
+                "Bobot_KPI": "75.00",
+                "Bobot_Kompetensi": "25.00",
+                "Alasan_Perubahan": null,
+                "Updated_At": null,
+                "Updated_By": null,
+                "hasil_terbit": 0,
+                "hasil_dihitung": 0,
+                "dapat_disunting": true,
+                "alasan_terkunci": null
+            },
+            {
+                "Id_PA_Cycle_Pillar_Weight_Snapshot": "472",
+                "ID_Level": "8",
+                "Nama_Level": "MANAGER",
+                "Bobot_KPI": "65.00",
+                "Bobot_Kompetensi": "35.00",
+                "Alasan_Perubahan": null,
+                "Updated_At": null,
+                "Updated_By": null,
+                "hasil_terbit": 0,
+                "hasil_dihitung": 0,
+                "dapat_disunting": true,
+                "alasan_terkunci": null
+            },
+            {
+                "Id_PA_Cycle_Pillar_Weight_Snapshot": "473",
+                "ID_Level": "10",
+                "Nama_Level": "GENERAL MANAGER",
+                "Bobot_KPI": "55.00",
+                "Bobot_Kompetensi": "45.00",
+                "Alasan_Perubahan": null,
+                "Updated_At": null,
+                "Updated_By": null,
+                "hasil_terbit": 0,
+                "hasil_dihitung": 0,
+                "dapat_disunting": true,
+                "alasan_terkunci": null
+            }
+        ],
+        "alasan_terkunci": null
+    }
+}

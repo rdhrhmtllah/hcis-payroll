@@ -1,0 +1,24 @@
+/*
+ * Masukan Tailwind untuk halaman viewer kontrak integrasi outbound.
+ *
+ * Hasil bangunannya di-commit di public/vendor/tailwind/outbound-contracts.css
+ * dan dimuat lewat <link>, MENGGANTIKAN <script src="cdn.tailwindcss.com">.
+ * CDN itu bukan berkas CSS melainkan kompiler JIT yang berjalan di peramban
+ * pengunjung setiap kali halaman dibuka — dokumentasi Tailwind sendiri
+ * menyatakan ia tidak untuk production.
+ *
+ * Repo ini sengaja tidak memasang Tailwind sebagai dependensi: hanya satu
+ * halaman ini yang memakainya — portal manajemennya sudah jadi halaman Inertia
+ * di dalam shell dan memakai kit HCIS. Polanya mengikuti public/vendor/swagger-ui/ —
+ * artefak dibangun sekali lalu di-commit. Perintah pembangunnya ada di kepala
+ * berkas hasil.
+ */
+
+/*! BERKAS HASIL BANGUNAN — JANGAN SUNTING LANGSUNG.
+ * Sumber: resources/css/outbound-contracts.css + tailwind.outbound-contracts.config.js
+ * Bangun ulang: npx --yes tailwindcss@3.4.17 -c tailwind.outbound-contracts.config.js -i resources/css/outbound-contracts.css -o public/vendor/tailwind/outbound-contracts.css --minify
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

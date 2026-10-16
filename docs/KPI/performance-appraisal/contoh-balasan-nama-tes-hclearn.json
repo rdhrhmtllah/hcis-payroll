@@ -1,0 +1,471 @@
+{
+    "success": true,
+    "status": 200,
+    "message": "Daftar nama tes ditemukan.",
+    "result": [
+        {
+            "id_master_ujian": 200001,
+            "nama": "Employee Assessment 360 - STAFF",
+            "kode": "EVO-PA360-STAFF",
+            "kategori": "ujian",
+            "jumlah_soal": 73,
+            "jumlah_sesi_foto": 0,
+            "live_scoring": false,
+            "petunjuk_custom": false,
+            "dibuat_pada": "2026-09-10 00:00:00.000",
+            "dibuat_oleh": "Superadmin",
+            "paket": {
+                "id_master_paket_ujian": 200501,
+                "nama": "Employee Assessment 360 - STAFF",
+                "kode": "PKT-PA360-STAFF",
+                "deskripsi": "Employee Assessment 360 - STAFF",
+                "total_soal": 73,
+                "dibuat_oleh": "Superadmin",
+                "jumlah_alat_tes": 2,
+                "alat_tes": [
+                    {
+                        "id_jenis_indikator": 200201,
+                        "nama": "Kompetensi Manajerial",
+                        "nilai_ambang_batas": 0,
+                        "jumlah_soal": 55,
+                        "tes_khusus": false,
+                        "pengacakan": {
+                            "soal": false,
+                            "jawaban": false
+                        },
+                        "jumlah_bagian": 11,
+                        "bagian": [
+                            {
+                                "id_jenis_soal": 200100,
+                                "kode_soal": "K01",
+                                "nama": "Analytical Thinking",
+                                "keterangan": "Analytical Thinking",
+                                "jumlah_soal": 5,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200101,
+                                "kode_soal": "K02",
+                                "nama": "Problem Solving",
+                                "keterangan": "Problem Solving",
+                                "jumlah_soal": 5,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200102,
+                                "kode_soal": "K03",
+                                "nama": "Decision Making",
+                                "keterangan": "Decision Making",
+                                "jumlah_soal": 5,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200103,
+                                "kode_soal": "K04",
+                                "nama": "Planning and Organizing",
+                                "keterangan": "Planning and Organizing",
+                                "jumlah_soal": 5,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200104,
+                                "kode_soal": "K05",
+                                "nama": "Achievement Orientation",
+                                "keterangan": "Achievement Orientation",
+                                "jumlah_soal": 5,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200105,
+                                "kode_soal": "K06",
+                                "nama": "Customer Focus",
+                                "keterangan": "Customer Focus",
+                                "jumlah_soal": 5,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200106,
+                                "kode_soal": "K07",
+                                "nama": "Impactful Communication",
+                                "keterangan": "Impactful Communication",
+                                "jumlah_soal": 5,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200107,
+                                "kode_soal": "K08",
+                                "nama": "Change & Adaptability",
+                                "keterangan": "Change & Adaptability",
+                                "jumlah_soal": 5,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200108,
+                                "kode_soal": "K09",
+                                "nama": "Teamwork & Collaboration",
+                                "keterangan": "Teamwork & Collaboration",
+                                "jumlah_soal": 5,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200109,
+                                "kode_soal": "K10",
+                                "nama": "Business Sense",
+                                "keterangan": "Business Sense",
+                                "jumlah_soal": 5,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200110,
+                                "kode_soal": "K11",
+                                "nama": "Team Leadership",
+                                "keterangan": "Team Leadership",
+                                "jumlah_soal": 5,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            }
+                        ]
+                    },
+                    {
+                        "id_jenis_indikator": 200202,
+                        "nama": "Core Value",
+                        "nilai_ambang_batas": 0,
+                        "jumlah_soal": 18,
+                        "tes_khusus": false,
+                        "pengacakan": {
+                            "soal": false,
+                            "jawaban": false
+                        },
+                        "jumlah_bagian": 6,
+                        "bagian": [
+                            {
+                                "id_jenis_soal": 200111,
+                                "kode_soal": "CV01",
+                                "nama": "Focus on Customer",
+                                "keterangan": "Focus on Customer",
+                                "jumlah_soal": 3,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200112,
+                                "kode_soal": "CV02",
+                                "nama": "Agility & Improvement",
+                                "keterangan": "Agility & Improvement",
+                                "jumlah_soal": 3,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200113,
+                                "kode_soal": "CV03",
+                                "nama": "Mutual Growth",
+                                "keterangan": "Mutual Growth",
+                                "jumlah_soal": 3,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200114,
+                                "kode_soal": "CV04",
+                                "nama": "Integrity",
+                                "keterangan": "Integrity",
+                                "jumlah_soal": 3,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200115,
+                                "kode_soal": "CV05",
+                                "nama": "Leadership",
+                                "keterangan": "Leadership",
+                                "jumlah_soal": 3,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200116,
+                                "kode_soal": "CV06",
+                                "nama": "Yes, We Can Spirit",
+                                "keterangan": "Yes, We Can Spirit",
+                                "jumlah_soal": 3,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id_master_ujian": 200002,
+            "nama": "Employee Assessment 360 - ASSISTEN MANAGER",
+            "kode": "EVO-PA360-ASMEN",
+            "kategori": "ujian",
+            "jumlah_soal": 77,
+            "jumlah_sesi_foto": 0,
+            "live_scoring": false,
+            "petunjuk_custom": false,
+            "dibuat_pada": "2026-09-10 00:00:00.000",
+            "dibuat_oleh": "Superadmin",
+            "paket": {
+                "id_master_paket_ujian": 200502,
+                "nama": "Employee Assessment 360 - ASSISTEN MANAGER",
+                "kode": "PKT-PA360-ASMEN",
+                "deskripsi": "Employee Assessment 360 - ASSISTEN MANAGER",
+                "total_soal": 77,
+                "dibuat_oleh": "Superadmin",
+                "jumlah_alat_tes": 3,
+                "alat_tes": [
+                    {
+                        "id_jenis_indikator": 200211,
+                        "nama": "Kompetensi Manajerial",
+                        "nilai_ambang_batas": 0,
+                        "jumlah_soal": 55,
+                        "tes_khusus": false,
+                        "pengacakan": {
+                            "soal": false,
+                            "jawaban": false
+                        },
+                        "jumlah_bagian": 11,
+                        "bagian": [
+                            {
+                                "id_jenis_soal": 200117,
+                                "kode_soal": "K01",
+                                "nama": "Analytical Thinking",
+                                "keterangan": "Analytical Thinking",
+                                "jumlah_soal": 5,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200118,
+                                "kode_soal": "K02",
+                                "nama": "Problem Solving",
+                                "keterangan": "Problem Solving",
+                                "jumlah_soal": 5,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200119,
+                                "kode_soal": "K03",
+                                "nama": "Decision Making",
+                                "keterangan": "Decision Making",
+                                "jumlah_soal": 5,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200120,
+                                "kode_soal": "K04",
+                                "nama": "Planning and Organizing",
+                                "keterangan": "Planning and Organizing",
+                                "jumlah_soal": 5,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200121,
+                                "kode_soal": "K05",
+                                "nama": "Achievement Orientation",
+                                "keterangan": "Achievement Orientation",
+                                "jumlah_soal": 5,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200122,
+                                "kode_soal": "K06",
+                                "nama": "Customer Focus",
+                                "keterangan": "Customer Focus",
+                                "jumlah_soal": 5,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200123,
+                                "kode_soal": "K07",
+                                "nama": "Impactful Communication",
+                                "keterangan": "Impactful Communication",
+                                "jumlah_soal": 5,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200124,
+                                "kode_soal": "K08",
+                                "nama": "Change & Adaptability",
+                                "keterangan": "Change & Adaptability",
+                                "jumlah_soal": 5,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200125,
+                                "kode_soal": "K09",
+                                "nama": "Teamwork & Collaboration",
+                                "keterangan": "Teamwork & Collaboration",
+                                "jumlah_soal": 5,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200126,
+                                "kode_soal": "K10",
+                                "nama": "Business Sense",
+                                "keterangan": "Business Sense",
+                                "jumlah_soal": 5,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200127,
+                                "kode_soal": "K11",
+                                "nama": "Team Leadership",
+                                "keterangan": "Team Leadership",
+                                "jumlah_soal": 5,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            }
+                        ]
+                    },
+                    {
+                        "id_jenis_indikator": 200212,
+                        "nama": "Core Value",
+                        "nilai_ambang_batas": 0,
+                        "jumlah_soal": 18,
+                        "tes_khusus": false,
+                        "pengacakan": {
+                            "soal": false,
+                            "jawaban": false
+                        },
+                        "jumlah_bagian": 6,
+                        "bagian": [
+                            {
+                                "id_jenis_soal": 200128,
+                                "kode_soal": "CV01",
+                                "nama": "Focus on Customer",
+                                "keterangan": "Focus on Customer",
+                                "jumlah_soal": 3,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200129,
+                                "kode_soal": "CV02",
+                                "nama": "Agility & Improvement",
+                                "keterangan": "Agility & Improvement",
+                                "jumlah_soal": 3,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200130,
+                                "kode_soal": "CV03",
+                                "nama": "Mutual Growth",
+                                "keterangan": "Mutual Growth",
+                                "jumlah_soal": 3,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200131,
+                                "kode_soal": "CV04",
+                                "nama": "Integrity",
+                                "keterangan": "Integrity",
+                                "jumlah_soal": 3,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200132,
+                                "kode_soal": "CV05",
+                                "nama": "Leadership",
+                                "keterangan": "Leadership",
+                                "jumlah_soal": 3,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200133,
+                                "kode_soal": "CV06",
+                                "nama": "Yes, We Can Spirit",
+                                "keterangan": "Yes, We Can Spirit",
+                                "jumlah_soal": 3,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            }
+                        ]
+                    },
+                    {
+                        "id_jenis_indikator": 200213,
+                        "nama": "Penilaian Kualitatif",
+                        "nilai_ambang_batas": 0,
+                        "jumlah_soal": 4,
+                        "tes_khusus": false,
+                        "pengacakan": {
+                            "soal": false,
+                            "jawaban": false
+                        },
+                        "jumlah_bagian": 4,
+                        "bagian": [
+                            {
+                                "id_jenis_soal": 200134,
+                                "kode_soal": "QL01",
+                                "nama": "Strength",
+                                "keterangan": "Strength",
+                                "jumlah_soal": 1,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200135,
+                                "kode_soal": "QL02",
+                                "nama": "Development Area",
+                                "keterangan": "Development Area",
+                                "jumlah_soal": 1,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200136,
+                                "kode_soal": "QL03",
+                                "nama": "Initiative",
+                                "keterangan": "Initiative",
+                                "jumlah_soal": 1,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            },
+                            {
+                                "id_jenis_soal": 200137,
+                                "kode_soal": "QL04",
+                                "nama": "Recommendation",
+                                "keterangan": "Recommendation",
+                                "jumlah_soal": 1,
+                                "boleh_kembali": true,
+                                "tampil_semua_soal": true
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ],
+    "pagination": {
+        "current_page": 1,
+        "per_page": 100,
+        "total": 2,
+        "last_page": 1
+    }
+}

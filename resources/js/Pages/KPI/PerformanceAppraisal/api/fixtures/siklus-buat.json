@@ -1,0 +1,20 @@
+{
+    "success": true,
+    "status": 200,
+    "message": "Berhasil",
+    "result": {
+        "cycle_id": 1393,
+        "kode_cycle": "PA-CONTOH-2026",
+        "status": "DRAFT",
+        "disalin": null,
+        "cetak_biru": {
+            "policy": 6,
+            "detail": 20,
+            "pilar": 6,
+            "kompetensi": 14,
+            "pita": 12,
+            "berhasil": true,
+            "galat": null
+        }
+    }
+}

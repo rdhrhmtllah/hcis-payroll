@@ -1,0 +1,156 @@
+{
+    "success": true,
+    "status": 200,
+    "message": "Berhasil",
+    "result": {
+        "tersedia": true,
+        "pesan": null,
+        "hasil": {
+            "Id_PA_Result": "59439",
+            "Id_PA_Participant": "59657",
+            "Nama_Karyawan_Saat_Cycle": "Amelia",
+            "Nama_Level_Saat_Cycle": "STAFF",
+            "Nama_Jabatan_Saat_Cycle": "SHIFT MAINTENANCE ELECTRICAL",
+            "Nama_Divisi_Saat_Cycle": "PRODUCTION SUPPORT",
+            "Kode_Cycle": "PA-DEMO-FE",
+            "Nama_Cycle": "Siklus Contoh Pengembangan Frontend",
+            "Tahun": "2026",
+            "Nilai_KPI": "85.00",
+            "Nilai_Kompetensi": "72.50",
+            "Final_Score": "82.50",
+            "Kode_Grade_Final": "B_PLUS",
+            "Published_At": "2026-09-01 15:08:57",
+            "Bobot_KPI_Terpakai": "75.00",
+            "Bobot_Kompetensi_Terpakai": "25.00",
+            "Flag_Dikalibrasi": "T",
+            "dikalibrasi": false,
+            "Nama_Grade_Final": "Baik"
+        },
+        "kompetensi": [
+            {
+                "Kode_Competency": "K01",
+                "Nama_Competency": "Analytical Thinking",
+                "Deskripsi": "Kemampuan menguraikan masalah menjadi bagian-bagian yang bisa ditangani.",
+                "Expected_Behaviour": "Memeriksa data sebelum mengambil keputusan\nMencari akar masalah, bukan gejalanya",
+                "Kode_Type": "MANAJERIAL",
+                "Nama_Type": "Kompetensi Manajerial",
+                "Nilai": "60.00",
+                "Nilai_Ambang": "75.00",
+                "Flag_Radar": "Y",
+                "tingkat_dituntut": null,
+                "nama_tingkat_dituntut": null
+            },
+            {
+                "Kode_Competency": "K02",
+                "Nama_Competency": "Problem Solving",
+                "Deskripsi": "Kemampuan menguraikan masalah menjadi bagian-bagian yang bisa ditangani.",
+                "Expected_Behaviour": "Memeriksa data sebelum mengambil keputusan\nMencari akar masalah, bukan gejalanya",
+                "Kode_Type": "MANAJERIAL",
+                "Nama_Type": "Kompetensi Manajerial",
+                "Nilai": "60.00",
+                "Nilai_Ambang": "75.00",
+                "Flag_Radar": "Y",
+                "tingkat_dituntut": null,
+                "nama_tingkat_dituntut": null
+            },
+            {
+                "Kode_Competency": "K03",
+                "Nama_Competency": "Decision Making",
+                "Deskripsi": "Kemampuan menguraikan masalah menjadi bagian-bagian yang bisa ditangani.",
+                "Expected_Behaviour": "Memeriksa data sebelum mengambil keputusan\nMencari akar masalah, bukan gejalanya",
+                "Kode_Type": "MANAJERIAL",
+                "Nama_Type": "Kompetensi Manajerial",
+                "Nilai": "80.00",
+                "Nilai_Ambang": "75.00",
+                "Flag_Radar": "Y",
+                "tingkat_dituntut": null,
+                "nama_tingkat_dituntut": null
+            },
+            {
+                "Kode_Competency": "CV01",
+                "Nama_Competency": "Focus on Customer",
+                "Deskripsi": "Kemampuan menguraikan masalah menjadi bagian-bagian yang bisa ditangani.",
+                "Expected_Behaviour": "Memeriksa data sebelum mengambil keputusan\nMencari akar masalah, bukan gejalanya",
+                "Kode_Type": "CORE_VALUE",
+                "Nama_Type": "Core Value",
+                "Nilai": "100.00",
+                "Nilai_Ambang": "75.00",
+                "Flag_Radar": "Y",
+                "tingkat_dituntut": null,
+                "nama_tingkat_dituntut": null
+            },
+            {
+                "Kode_Competency": "CV02",
+                "Nama_Competency": "Agility & Improvement",
+                "Deskripsi": "Kemampuan menguraikan masalah menjadi bagian-bagian yang bisa ditangani.",
+                "Expected_Behaviour": "Memeriksa data sebelum mengambil keputusan\nMencari akar masalah, bukan gejalanya",
+                "Kode_Type": "CORE_VALUE",
+                "Nama_Type": "Core Value",
+                "Nilai": "60.00",
+                "Nilai_Ambang": "75.00",
+                "Flag_Radar": "Y",
+                "tingkat_dituntut": null,
+                "nama_tingkat_dituntut": null
+            },
+            {
+                "Kode_Competency": "CV03",
+                "Nama_Competency": "Mutual Growth",
+                "Deskripsi": "Kemampuan menguraikan masalah menjadi bagian-bagian yang bisa ditangani.",
+                "Expected_Behaviour": "Memeriksa data sebelum mengambil keputusan\nMencari akar masalah, bukan gejalanya",
+                "Kode_Type": "CORE_VALUE",
+                "Nama_Type": "Core Value",
+                "Nilai": "80.00",
+                "Nilai_Ambang": "75.00",
+                "Flag_Radar": "Y",
+                "tingkat_dituntut": null,
+                "nama_tingkat_dituntut": null
+            },
+            {
+                "Kode_Competency": "BH01",
+                "Nama_Competency": "Discipline/Integrity",
+                "Deskripsi": "Kemampuan menguraikan masalah menjadi bagian-bagian yang bisa ditangani.",
+                "Expected_Behaviour": "Memeriksa data sebelum mengambil keputusan\nMencari akar masalah, bukan gejalanya",
+                "Kode_Type": "BEHAVIOR",
+                "Nama_Type": "Behavior (Core Value)",
+                "Nilai": "80.00",
+                "Nilai_Ambang": "75.00",
+                "Flag_Radar": "Y",
+                "tingkat_dituntut": null,
+                "nama_tingkat_dituntut": null
+            },
+            {
+                "Kode_Competency": "BH02",
+                "Nama_Competency": "Diligent/YWC",
+                "Deskripsi": "Kemampuan menguraikan masalah menjadi bagian-bagian yang bisa ditangani.",
+                "Expected_Behaviour": "Memeriksa data sebelum mengambil keputusan\nMencari akar masalah, bukan gejalanya",
+                "Kode_Type": "BEHAVIOR",
+                "Nama_Type": "Behavior (Core Value)",
+                "Nilai": "60.00",
+                "Nilai_Ambang": "75.00",
+                "Flag_Radar": "Y",
+                "tingkat_dituntut": null,
+                "nama_tingkat_dituntut": null
+            }
+        ],
+        "catatan": [
+            {
+                "Kode_Type": "QL01",
+                "Nama_Type": "Strength",
+                "Isi": "Konsisten menutup pekerjaan tepat waktu dan terbuka menerima masukan.",
+                "dari_penilai": false
+            },
+            {
+                "Kode_Type": "QL01",
+                "Nama_Type": "Strength",
+                "Isi": "Jawaban contoh untuk QL01.",
+                "dari_penilai": true
+            },
+            {
+                "Kode_Type": "QL02",
+                "Nama_Type": "Development Area",
+                "Isi": "Jawaban contoh untuk QL02.",
+                "dari_penilai": true
+            }
+        ]
+    }
+}

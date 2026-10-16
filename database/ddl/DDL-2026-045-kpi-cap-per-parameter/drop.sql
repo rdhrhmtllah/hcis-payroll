@@ -1,0 +1,11 @@
+-- Pembersihan manual. JANGAN dijalankan agen.
+
+ALTER TABLE KPI_Update_Performance_Detail DROP CONSTRAINT DF_KPI_Update_Performance_Detail_Flag_Capped;
+ALTER TABLE KPI_Update_Performance_Detail DROP COLUMN Flag_Capped;
+ALTER TABLE KPI_Update_Performance_Detail DROP COLUMN Achievement_Raw;
+ALTER TABLE KPI_Update_Performance_Detail DROP COLUMN Score_Raw;
+
+ALTER TABLE KPI_Update_Performance_Detail_Sementara DROP CONSTRAINT DF_KPI_Update_Performance_Detail_Sementara_Flag_Capped;
+ALTER TABLE KPI_Update_Performance_Detail_Sementara DROP COLUMN Flag_Capped;
+ALTER TABLE KPI_Update_Performance_Detail_Sementara DROP COLUMN Achievement_Raw;
+ALTER TABLE KPI_Update_Performance_Detail_Sementara DROP COLUMN Score_Raw;

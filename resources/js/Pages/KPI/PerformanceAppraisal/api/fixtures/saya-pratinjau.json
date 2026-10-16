@@ -1,0 +1,90 @@
+{
+    "success": true,
+    "status": 200,
+    "message": "Berhasil",
+    "result": {
+        "siklus": {
+            "cycle_id": 7233,
+            "kode_cycle": "PA-2026-11",
+            "nama_cycle": "Penilaian Kinerja Triwulan III 2026",
+            "tahun": 2026
+        },
+        "kategori": {
+            "kode": "ATASAN",
+            "nama": "Atasan",
+            "boleh_kalibrasi": true,
+            "status": "TUNTAS"
+        },
+        "kompetensi": [
+            {
+                "competency_id": 11,
+                "kode": "CV01",
+                "nama": "Integritas",
+                "jenis_kode": "CORE_VALUE",
+                "jenis_nama": "Core Value",
+                "deskripsi": "Kemampuan mengurai masalah dan menarik kesimpulan berbasis data.",
+                "expected_behaviour": "Memeriksa data sebelum mengambil keputusan\nMencari akar masalah, bukan gejalanya",
+                "rata_rata": 78.5,
+                "jumlah_dinilai": 2
+            }
+        ],
+        "level": [
+            {
+                "id_level": 4,
+                "nama_level": "OFFICER",
+                "jumlah": 1,
+                "rata_rata": [
+                    {
+                        "competency_id": 11,
+                        "nilai": 78.5
+                    }
+                ],
+                "perilaku": []
+            }
+        ],
+        "orang": [
+            {
+                "assignment_id": 34740,
+                "peserta": {
+                    "kode_karyawan": "B6",
+                    "nama": "Andre",
+                    "jabatan": "Staff Operasional",
+                    "divisi": "Operasional",
+                    "id_level": 4,
+                    "nama_level": "OFFICER"
+                },
+                "diri_sendiri": false,
+                "status_penugasan": "TERKUMPUL",
+                "boleh_diubah": true,
+                "kalibrasi_terakhir": {
+                    "alasan": "Diselaraskan dengan rekan setim",
+                    "pada": "2026-09-18 10:15:00"
+                },
+                "sel": [
+                    {
+                        "competency_id": 11,
+                        "skor_asli": 90,
+                        "skor_efektif": 82,
+                        "skor_maksimal": 100,
+                        "terkalibrasi": true
+                    }
+                ],
+                "naratif": [
+                    {
+                        "kode_soal": "PA-STAFF-Q07",
+                        "id_master_soal": null,
+                        "pertanyaan": null,
+                        "per_soal": false,
+                        "competency_id": 21,
+                        "nama": "Strength",
+                        "jawaban": "Konsisten menutup pekerjaan tepat waktu dan membantu rekan yang tertinggal.",
+                        "jawaban_html": "<p>Konsisten menutup pekerjaan tepat waktu dan <strong>membantu rekan</strong> yang tertinggal.</p>",
+                        "jawaban_asli": "Konsisten menutup pekerjaan tepat waktu.",
+                        "terkalibrasi": true
+                    }
+                ]
+            }
+        ],
+        "dipangkas": false
+    }
+}

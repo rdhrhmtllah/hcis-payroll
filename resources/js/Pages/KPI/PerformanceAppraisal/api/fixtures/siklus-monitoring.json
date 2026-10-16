@@ -1,0 +1,386 @@
+{
+    "success": true,
+    "status": 200,
+    "message": "Berhasil",
+    "result": {
+        "peta_panas": {
+            "status": [
+                "BELUM_MULAI"
+            ],
+            "baris": [
+                {
+                    "id_divisi": 13,
+                    "divisi": "FOOD TECHNOLOGY & NUTRITION",
+                    "sel": [
+                        1
+                    ],
+                    "total": 1,
+                    "terlambat": 0
+                },
+                {
+                    "id_divisi": 20,
+                    "divisi": "PRODUCTION",
+                    "sel": [
+                        1
+                    ],
+                    "total": 1,
+                    "terlambat": 0
+                },
+                {
+                    "id_divisi": 22,
+                    "divisi": "PRODUCTION SUPPORT",
+                    "sel": [
+                        6
+                    ],
+                    "total": 6,
+                    "terlambat": 0
+                }
+            ]
+        },
+        "terlambat": {
+            "baris": [
+                {
+                    "Id_PA_Assignment": "146",
+                    "Due_At": "2026-08-28",
+                    "Status_Penugasan": "BELUM_MULAI",
+                    "Nama_Penilai_Saat_Cycle": "Peserta Contoh Satu",
+                    "Kode_Karyawan_Penilai": "DEMO-001",
+                    "Kode_Kategori": "SELF",
+                    "Nama_Kategori": "Diri Sendiri",
+                    "Id_PA_Participant": "59655",
+                    "Nama_Karyawan_Saat_Cycle": "Peserta Contoh Satu",
+                    "Nama_Divisi_Saat_Cycle": "PRODUCTION SUPPORT",
+                    "Nama_Level_Saat_Cycle": "STAFF",
+                    "hari_terlambat": 4
+                },
+                {
+                    "Id_PA_Assignment": "147",
+                    "Due_At": "2026-08-28",
+                    "Status_Penugasan": "BELUM_MULAI",
+                    "Nama_Penilai_Saat_Cycle": "Peserta Contoh Dua",
+                    "Kode_Karyawan_Penilai": "DEMO-002",
+                    "Kode_Kategori": "SELF",
+                    "Nama_Kategori": "Diri Sendiri",
+                    "Id_PA_Participant": "59656",
+                    "Nama_Karyawan_Saat_Cycle": "Peserta Contoh Dua",
+                    "Nama_Divisi_Saat_Cycle": "PRODUCTION",
+                    "Nama_Level_Saat_Cycle": "SENIOR STAFF",
+                    "hari_terlambat": 4
+                },
+                {
+                    "Id_PA_Assignment": "148",
+                    "Due_At": "2026-08-28",
+                    "Status_Penugasan": "BELUM_MULAI",
+                    "Nama_Penilai_Saat_Cycle": "Peserta Contoh Satu",
+                    "Kode_Karyawan_Penilai": "DEMO-001",
+                    "Kode_Kategori": "SELF",
+                    "Nama_Kategori": "Diri Sendiri",
+                    "Id_PA_Participant": "59657",
+                    "Nama_Karyawan_Saat_Cycle": "Peserta Contoh Satu",
+                    "Nama_Divisi_Saat_Cycle": "PRODUCTION SUPPORT",
+                    "Nama_Level_Saat_Cycle": "STAFF",
+                    "hari_terlambat": 4
+                },
+                {
+                    "Id_PA_Assignment": "149",
+                    "Due_At": "2026-08-28",
+                    "Status_Penugasan": "BELUM_MULAI",
+                    "Nama_Penilai_Saat_Cycle": "Peserta Contoh Dua",
+                    "Kode_Karyawan_Penilai": "DEMO-002",
+                    "Kode_Kategori": "SELF",
+                    "Nama_Kategori": "Diri Sendiri",
+                    "Id_PA_Participant": "59658",
+                    "Nama_Karyawan_Saat_Cycle": "Peserta Contoh Dua",
+                    "Nama_Divisi_Saat_Cycle": "PRODUCTION",
+                    "Nama_Level_Saat_Cycle": "SENIOR STAFF",
+                    "hari_terlambat": 4
+                },
+                {
+                    "Id_PA_Assignment": "150",
+                    "Due_At": "2026-08-28",
+                    "Status_Penugasan": "BELUM_MULAI",
+                    "Nama_Penilai_Saat_Cycle": "Peserta Contoh Satu",
+                    "Kode_Karyawan_Penilai": "DEMO-001",
+                    "Kode_Kategori": "SELF",
+                    "Nama_Kategori": "Diri Sendiri",
+                    "Id_PA_Participant": "59659",
+                    "Nama_Karyawan_Saat_Cycle": "Peserta Contoh Satu",
+                    "Nama_Divisi_Saat_Cycle": "PRODUCTION SUPPORT",
+                    "Nama_Level_Saat_Cycle": "STAFF",
+                    "hari_terlambat": 4
+                },
+                {
+                    "Id_PA_Assignment": "151",
+                    "Due_At": "2026-08-28",
+                    "Status_Penugasan": "BELUM_MULAI",
+                    "Nama_Penilai_Saat_Cycle": "Peserta Contoh Dua",
+                    "Kode_Karyawan_Penilai": "DEMO-002",
+                    "Kode_Kategori": "SELF",
+                    "Nama_Kategori": "Diri Sendiri",
+                    "Id_PA_Participant": "59669",
+                    "Nama_Karyawan_Saat_Cycle": "Peserta Contoh Dua",
+                    "Nama_Divisi_Saat_Cycle": "PRODUCTION",
+                    "Nama_Level_Saat_Cycle": "SENIOR STAFF",
+                    "hari_terlambat": 4
+                },
+                {
+                    "Id_PA_Assignment": "152",
+                    "Due_At": "2026-08-28",
+                    "Status_Penugasan": "BELUM_MULAI",
+                    "Nama_Penilai_Saat_Cycle": "Peserta Contoh Satu",
+                    "Kode_Karyawan_Penilai": "DEMO-001",
+                    "Kode_Kategori": "SELF",
+                    "Nama_Kategori": "Diri Sendiri",
+                    "Id_PA_Participant": "60606",
+                    "Nama_Karyawan_Saat_Cycle": "Peserta Contoh Satu",
+                    "Nama_Divisi_Saat_Cycle": "PRODUCTION SUPPORT",
+                    "Nama_Level_Saat_Cycle": "STAFF",
+                    "hari_terlambat": 4
+                },
+                {
+                    "Id_PA_Assignment": "153",
+                    "Due_At": "2026-08-28",
+                    "Status_Penugasan": "BELUM_MULAI",
+                    "Nama_Penilai_Saat_Cycle": "Peserta Contoh Dua",
+                    "Kode_Karyawan_Penilai": "DEMO-002",
+                    "Kode_Kategori": "SELF",
+                    "Nama_Kategori": "Diri Sendiri",
+                    "Id_PA_Participant": "59653",
+                    "Nama_Karyawan_Saat_Cycle": "Peserta Contoh Dua",
+                    "Nama_Divisi_Saat_Cycle": "PRODUCTION",
+                    "Nama_Level_Saat_Cycle": "SENIOR STAFF",
+                    "hari_terlambat": 4
+                }
+            ],
+            "halaman": 1,
+            "per_halaman": 10,
+            "total": 8,
+            "total_halaman": 1,
+            "dipangkas": false
+        },
+        "pilihan_saringan": {
+            "divisi": [
+                {
+                    "id": 9,
+                    "nama": "BUSINESS STRATEGY & MARKETING"
+                },
+                {
+                    "id": 13,
+                    "nama": "FOOD TECHNOLOGY & NUTRITION"
+                },
+                {
+                    "id": 16,
+                    "nama": "IT"
+                },
+                {
+                    "id": 20,
+                    "nama": "PRODUCTION"
+                },
+                {
+                    "id": 22,
+                    "nama": "PRODUCTION SUPPORT"
+                }
+            ],
+            "level": [
+                {
+                    "id": 21,
+                    "nama": "FREELANCE"
+                },
+                {
+                    "id": 10,
+                    "nama": "GENERAL MANAGER"
+                },
+                {
+                    "id": 8,
+                    "nama": "MANAGER"
+                },
+                {
+                    "id": 4,
+                    "nama": "OFFICER"
+                },
+                {
+                    "id": 5,
+                    "nama": "SENIOR OFFICER"
+                },
+                {
+                    "id": 3,
+                    "nama": "SENIOR STAFF"
+                },
+                {
+                    "id": 2,
+                    "nama": "STAFF"
+                }
+            ],
+            "kategori_penilai": [
+                {
+                    "id": 4,
+                    "kode": "SELF",
+                    "nama": "Diri Sendiri"
+                }
+            ],
+            "status_penugasan": [
+                {
+                    "kode": "BELUM_MULAI",
+                    "nama": "BELUM_MULAI"
+                },
+                {
+                    "kode": "BERJALAN",
+                    "nama": "BERJALAN"
+                }
+            ]
+        },
+        "ringkasan": {
+            "total": 3582,
+            "selesai": 1159,
+            "berjalan": 0,
+            "belum_mulai": 2423,
+            "terlambat": 8,
+            "persen": 32,
+            "terkumpul": 0,
+            "menunggu_verifikasi": 0,
+            "karyawan_dinilai": 958
+        },
+        "kategori": {
+            "SELF": {
+                "kode": "SELF",
+                "nama": "Diri Sendiri",
+                "total": 859,
+                "selesai": 300,
+                "persen": 34.9
+            }
+        },
+        "peserta": {
+            "baris": [
+                {
+                    "Id_PA_Participant": 5001,
+                    "Id_PA_Result": null,
+                    "Kode_Karyawan": "DEMO-001",
+                    "Nama_Karyawan_Saat_Cycle": "Peserta Contoh Satu",
+                    "Nama_Divisi_Saat_Cycle": "PRODUCTION SUPPORT",
+                    "Nama_Level_Saat_Cycle": "STAFF",
+                    "ID_Level_Saat_Cycle": 4,
+                    "progres": {
+                        "total": 1,
+                        "selesai": 1,
+                        "terkumpul": 0,
+                        "berjalan": 0,
+                        "belum_mulai": 0,
+                        "menunggu_verifikasi": 0,
+                        "terlambat": 0
+                    },
+                    "penilai": [
+                        {
+                            "Id_PA_Assignment": 9001,
+                            "Due_At": "2026-09-30",
+                            "Status_Penugasan": "SELESAI",
+                            "Started_At": "2026-09-05 09:15:00",
+                            "Finished_At": "2026-09-05 09:41:00",
+                            "Nama_Penilai_Saat_Cycle": "Peserta Contoh Satu",
+                            "Kode_Karyawan_Penilai": "DEMO-001",
+                            "Kode_Kategori": "SELF",
+                            "Nama_Kategori": "Diri Sendiri",
+                            "hari_terlambat": 0,
+                            "PA_Participant_Id": 5001,
+                            "Kode_Perusahaan_Penilai": "001"
+                        }
+                    ]
+                },
+                {
+                    "Id_PA_Participant": 5002,
+                    "Id_PA_Result": null,
+                    "Kode_Karyawan": "DEMO-002",
+                    "Nama_Karyawan_Saat_Cycle": "Peserta Contoh Dua",
+                    "Nama_Divisi_Saat_Cycle": "PRODUCTION",
+                    "Nama_Level_Saat_Cycle": "SENIOR STAFF",
+                    "ID_Level_Saat_Cycle": 4,
+                    "progres": {
+                        "total": 1,
+                        "selesai": 0,
+                        "terkumpul": 0,
+                        "berjalan": 0,
+                        "belum_mulai": 1,
+                        "menunggu_verifikasi": 0,
+                        "terlambat": 0
+                    },
+                    "penilai": [
+                        {
+                            "Id_PA_Assignment": 9002,
+                            "Due_At": "2026-09-30",
+                            "Status_Penugasan": "BELUM_MULAI",
+                            "Started_At": null,
+                            "Finished_At": null,
+                            "Nama_Penilai_Saat_Cycle": "Peserta Contoh Dua",
+                            "Kode_Karyawan_Penilai": "DEMO-002",
+                            "Kode_Kategori": "SELF",
+                            "Nama_Kategori": "Diri Sendiri",
+                            "hari_terlambat": 0,
+                            "PA_Participant_Id": 5002,
+                            "Kode_Perusahaan_Penilai": "001"
+                        }
+                    ]
+                }
+            ],
+            "halaman": 1,
+            "per_halaman": 25,
+            "total": 2,
+            "total_halaman": 1
+        },
+        "keranjang": {
+            "siap_dihitung": 12,
+            "perlu_verifikasi": 3,
+            "tertahan": 297,
+            "terbit": 1,
+            "kiriman_susulan": 0,
+            "needs_kpi": 0,
+            "needs_rater": 0,
+            "tertahan_lain": 0,
+            "kpi_belum_lengkap": 0,
+            "kategori_tidak_dihitung": 0,
+            "needs_review_qualitative": 0,
+            "reviewing_calibration": 0
+        },
+        "penugasan": {
+            "baris": [
+                {
+                    "Id_PA_Assignment": 9001,
+                    "Id_PA_Participant": 5001,
+                    "Kode_Karyawan": "DEMO-001",
+                    "Nama_Karyawan_Saat_Cycle": "Peserta Contoh Satu",
+                    "Nama_Divisi_Saat_Cycle": "PRODUCTION SUPPORT",
+                    "Nama_Level_Saat_Cycle": "STAFF",
+                    "Kode_Karyawan_Penilai": "DEMO-001",
+                    "Nama_Penilai_Saat_Cycle": "Peserta Contoh Satu",
+                    "Kode_Kategori": "SELF",
+                    "Nama_Kategori": "Diri Sendiri",
+                    "Status_Penugasan": "SELESAI",
+                    "Due_At": "2026-09-30",
+                    "Started_At": "2026-09-05 09:15:00",
+                    "Finished_At": "2026-09-05 09:41:00",
+                    "hari_terlambat": 0
+                },
+                {
+                    "Id_PA_Assignment": 9002,
+                    "Id_PA_Participant": 5002,
+                    "Kode_Karyawan": "DEMO-002",
+                    "Nama_Karyawan_Saat_Cycle": "Peserta Contoh Dua",
+                    "Nama_Divisi_Saat_Cycle": "PRODUCTION",
+                    "Nama_Level_Saat_Cycle": "SENIOR STAFF",
+                    "Kode_Karyawan_Penilai": "DEMO-002",
+                    "Nama_Penilai_Saat_Cycle": "Peserta Contoh Dua",
+                    "Kode_Kategori": "SELF",
+                    "Nama_Kategori": "Diri Sendiri",
+                    "Status_Penugasan": "BELUM_MULAI",
+                    "Due_At": "2026-09-30",
+                    "Started_At": null,
+                    "Finished_At": null,
+                    "hari_terlambat": 0
+                }
+            ],
+            "halaman": 1,
+            "per_halaman": 25,
+            "total": 2,
+            "total_halaman": 1,
+            "dipangkas": false
+        }
+    }
+}

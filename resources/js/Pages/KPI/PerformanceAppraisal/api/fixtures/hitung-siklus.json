@@ -1,0 +1,19 @@
+{
+    "success": true,
+    "status": 200,
+    "message": "Berhasil",
+    "result": {
+        "dihitung": 871,
+        "tertahan": 23,
+        "gagal": [
+            {
+                "participant_id": 512,
+                "pesan": "Bobot pilar peserta 512 tidak dapat diresolusi: salinan siklus untuk levelnya tidak ada."
+            }
+        ],
+        "diproses": 40,
+        "terakhir_id": 44321,
+        "selesai": true,
+        "lingkup": "SEMUA"
+    }
+}

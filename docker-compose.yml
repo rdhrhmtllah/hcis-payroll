@@ -1,0 +1,31 @@
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - "8000:80"
+        environment:
+            - APP_KEY=base64:yEJSiS363EGcX16u1HTBudW+hyxf1AeFr8kn02RKqnw=
+            - APP_ENV=local
+            - APP_DEBUG=true
+            - DB_CONNECTION=sqlsrv
+            - DB_HOST=team311.dyndns.info
+            - DB_PORT=1433
+            - DB_DATABASE=grahaweb_tm
+            - DB_USERNAME=sqlserver
+            - DB_PASSWORD=MakanEnak301%
+            - CLOUDFLARE_TURNSTILE_SITEKEY=0x4AAAAAABg0L1m9CQs4R5it
+            - CLOUDFLARE_TURNSTILE_SECRET=0x4AAAAAABg0L_jxlUd6Y_ivE-F1aczuxyg
+            - DB_OPTIONS=TrustServerCertificate=yes;
+        volumes:
+            - ./storage/app:/var/www/html/storage/app
+            - ./storage/logs:/var/www/html/storage/logs
+        networks:
+            - laravel-network
+        extra_hosts:
+            - "test.ajt.my.id:127.0.0.1" 
+
+networks:
+    laravel-network:
+        driver: bridge

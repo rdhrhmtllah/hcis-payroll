@@ -1,0 +1,61 @@
+/*
+ * Huruf HCIS untuk halaman Blade mandiri (di luar shell Inertia).
+ *
+ * Halaman dokumentasi & kontrak integrasi TIDAK memuat app.css, sehingga ia
+ * tidak ikut mewarisi @font-face milik shell. Berkas kecil ini menyediakannya
+ * tanpa menarik apa pun dari luar.
+ *
+ * Alasannya bukan sekadar kinerja: halaman-halaman ini justru dibuka oleh
+ * developer vendor di jaringan kantor mereka. CDN huruf pihak ketiga yang
+ * terblokir di sana membuat halaman tampil tanpa gaya — dan kita tidak pernah
+ * tahu jaringan mereka. Aset Swagger UI sudah lebih dulu di-vendor lokal
+ * dengan alasan yang sama; ini menyusul.
+ *
+ * Berkas .woff2/.woff-nya sudah ada di repo sejak lama (dipakai shell utama),
+ * jadi tidak ada berkas biner baru yang ditambahkan di sini.
+ */
+
+@font-face {
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url('/assets/compiled/css/fonts/nunito-latin-300-normal.woff2') format('woff2'),
+         url('/assets/compiled/css/fonts/nunito-latin-300-normal.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/assets/compiled/css/fonts/nunito-latin-400-normal.woff2') format('woff2'),
+         url('/assets/compiled/css/fonts/nunito-latin-400-normal.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('/assets/compiled/css/fonts/nunito-latin-600-normal.woff2') format('woff2'),
+         url('/assets/compiled/css/fonts/nunito-latin-600-normal.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/assets/compiled/css/fonts/nunito-latin-700-normal.woff2') format('woff2'),
+         url('/assets/compiled/css/fonts/nunito-latin-700-normal.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+    src: url('/assets/compiled/css/fonts/nunito-latin-800-normal.woff2') format('woff2'),
+         url('/assets/compiled/css/fonts/nunito-latin-800-normal.woff') format('woff');
+}

@@ -1,0 +1,2 @@
+-- Tidak ada DML untuk perubahan ini.
+-- Existing rows receive Flag_Aktif = 'Y' through each column's DEFAULT ... WITH VALUES clause.

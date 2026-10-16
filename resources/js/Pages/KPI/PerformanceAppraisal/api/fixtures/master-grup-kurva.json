@@ -1,0 +1,41 @@
+{
+    "success": true,
+    "status": 200,
+    "message": "Berhasil",
+    "result": {
+        "grup": [
+            {
+                "id": 1,
+                "kode": "STAF",
+                "nama": "Staff & Senior Staff",
+                "urutan": 1,
+                "level": [
+                    {
+                        "id": 2,
+                        "nama": "STAFF"
+                    },
+                    {
+                        "id": 3,
+                        "nama": "SENIOR STAFF"
+                    }
+                ]
+            }
+        ],
+        "level_tanpa_grup": [
+            {
+                "id": 6,
+                "nama": "ASSISTEN MANAGER"
+            }
+        ],
+        "cacah_level": [
+            {
+                "level_id": 2,
+                "jumlah": 391
+            },
+            {
+                "level_id": 3,
+                "jumlah": 4
+            }
+        ]
+    }
+}

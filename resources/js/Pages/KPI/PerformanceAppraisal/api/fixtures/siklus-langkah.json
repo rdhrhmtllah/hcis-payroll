@@ -1,0 +1,89 @@
+{
+    "success": true,
+    "status": 200,
+    "message": "Berhasil",
+    "result": {
+        "siklus": {
+            "cycle_id": 2585,
+            "kode_cycle": "CONTOHSAJA",
+            "nama_cycle": "contoh",
+            "tahun": 2026,
+            "status_cycle": "PREPARED"
+        },
+        "langkah_aktif": 3,
+        "total_langkah": 5,
+        "langkah": [
+            {
+                "nomor": 1,
+                "kode": "JADWAL",
+                "nama": "Jadwal Siklus",
+                "keadaan": "SELESAI",
+                "keterangan": "Periode dinilai 2026-09-03 s.d. 2026-09-03; pengisian 2026-09-03 00:00:00 s.d. 2026-09-03 00:00:00.",
+                "aksi_utama": null,
+                "penghalang": []
+            },
+            {
+                "nomor": 2,
+                "kode": "PESERTA",
+                "nama": "Siapkan Peserta",
+                "keadaan": "SELESAI",
+                "keterangan": "859 diikutkan, 99 dikecualikan, 0 tertunda.",
+                "aksi_utama": null,
+                "penghalang": []
+            },
+            {
+                "nomor": 3,
+                "kode": "PENILAI",
+                "nama": "Tugaskan Penilai",
+                "keadaan": "BERJALAN",
+                "keterangan": "0 dari 859 peserta sudah punya penilai.",
+                "aksi_utama": {
+                    "label": "Tugaskan Penilai",
+                    "operasi": "BUAT_PENUGASAN",
+                    "alamat": "penugasan"
+                },
+                "penghalang": [
+                    "859 peserta belum punya satu penilai pun. Hasil mereka pasti tertahan."
+                ]
+            },
+            {
+                "nomor": 4,
+                "kode": "PENGISIAN",
+                "nama": "Pengisian",
+                "keadaan": "TERKUNCI",
+                "keterangan": "Aturan penilaian belum dibekukan.",
+                "aksi_utama": null,
+                "penghalang": []
+            },
+            {
+                "nomor": 5,
+                "kode": "HASIL",
+                "nama": "Hasil & Penerbitan",
+                "keadaan": "TERKUNCI",
+                "keterangan": "0 terbit, 0 dihitung, 0 tertahan, 859 belum dihitung.",
+                "aksi_utama": null,
+                "penghalang": []
+            }
+        ],
+        "cacah": {
+            "peserta_diikutkan": 859,
+            "peserta_dikecualikan": 99,
+            "peserta_tertunda": 0,
+            "peserta_berpenilai": 0,
+            "peserta_tanpa_penilai": 859,
+            "hasil_dihitung": 0,
+            "hasil_tertahan": 0,
+            "hasil_terbit": 0,
+            "hasil_belum": 859
+        },
+        "operasi_boleh": [
+            "SUNTING_SALINAN",
+            "PILIH_PAKET_SOAL",
+            "SUNTING_PESERTA",
+            "TULIS_OVERRIDE",
+            "BUAT_PENUGASAN",
+            "SUNTING_BOBOT_PILAR",
+            "KUNCI_SIKLUS"
+        ]
+    }
+}

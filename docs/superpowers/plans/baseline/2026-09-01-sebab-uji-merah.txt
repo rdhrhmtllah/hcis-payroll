@@ -1,0 +1,192 @@
+########## LMS/SOP/Export/RegresiRinciTest.php
+   FAILED  Tests\Feature\LMS\SOP\Export\RegresiRinciTest > baris identik with data set "satu divisi"                    
+  Baris mesin baru berbeda dengan jalur lama.
+Failed asserting that two arrays are identical.
+--- Expected
++++ Actual
+   FAILED  Tests\Feature\LMS\SOP\Export\RegresiRinciTest > baris identik with data set "divisi bertunggakan publik"     
+  Baris mesin baru berbeda dengan jalur lama.
+Failed asserting that two arrays are identical.
+--- Expected
++++ Actual
+
+########## LMS/SOP/Export/SopDokumenKelompokTest.php
+   FAILED  Tests\Feature\LMS\SOP\Export\SopDokumenKelompokTest > dataset dan dashboard sepakat pada ketiga kelompok     
+  Dokumen 'wajib' dikelompokkan berbeda oleh dashboard dan Export Studio.
+Failed asserting that two strings are identical.
+--- Expected
++++ Actual
+   FAILED  Tests\Feature\LMS\SOP\Export\SopDokumenKelompokTest > wajib menang atas terbuka                              
+  Failed asserting that two strings are identical.
+--- Expected
++++ Actual
+@@ @@
+   FAILED  Tests\Feature\LMS\SOP\Export\SopDokumenKelompokTest > kelompok menjumlah tepat ke jumlah dokumen aktif       
+  Kelompok 'FUNGSIONAL' tidak muncul sama sekali.
+Failed asserting that an array contains 'FUNGSIONAL'.
+
+########## LMS/SOP/SopBuilderSaringanPaketTest.php
+   FAILED  Tests\Feature\LMS\SOP\SopBuilderSaringanPaketTest > sumbu tak dikenal ditolak bukan dijawab rail kosong      
+  Failed asserting that true is false.
+
+########## LMS/SOP/SopBulkCabutTersaringTest.php
+   FAILED  Tests\Feature\LMS\SOP\SopBulkCabutTersaringTest > select all without any filter revo…  ValidationException   
+  The sebab field is required.
+  at vendor\laravel\framework\src\Illuminate\Support\helpers.php:343
+   FAILED  Tests\Feature\LMS\SOP\SopBulkCabutTersaringTest > the reported count matches what ac…  ValidationException   
+  The sebab field is required.
+  at vendor\laravel\framework\src\Illuminate\Support\helpers.php:343
+
+########## LMS/SOP/SopDokumenBerbagiTest.php
+   FAILED  Tests\Feature\LMS\SOP\SopDokumenBerbagiTest > opsi dokumen melaporkan jumlah paket pemakai                   
+  Failed asserting that an array has the key 'dipotong'.
+
+########## LMS/SOP/SopDokumenDepartemenTest.php
+   FAILED  Tests\Feature\LMS\SOP\SopDokumenDepartemenTest > departemen ikut menentukan deret nomor dokumen              
+  Departemen berbeda berarti kombinasi berbeda, jadi deretnya mulai dari nol lagi.
+Failed asserting that 1 is identical to 0.
+   FAILED  Tests\Feature\LMS\SOP\SopDokumenDepartemenTest > deret naik di departemen yang sama                          
+  Failed asserting that 2 is identical to 1.
+
+########## LMS/SOP/SopDokumenFase2Test.php
+   FAILED  Tests\Feature\LMS\SOP\SopDokumenFase2Test > unique index dokumen versi terpasang dan terfilter               
+  Jalankan plans/sop/sql/26B_sop_versi_dokumen_unique.sql di SSMS lebih dulu.
+Failed asserting that null is not null.
+   FAILED  Tests\Feature\LMS\SOP\SopDokumenFase2Test > index lama per item sudah dibuang                                
+  Penggantinya wajib ada: keunikan versi kini bersumbu dokumen.
+Failed asserting that null is not null.
+   FAILED  Tests\Feature\LMS\SOP\SopDokumenFase2Test > pasangan dokumen versi unik pada baris bertaut                   
+  Fase 2 masih 1 dokumen = 1 item — tak boleh ada pasangan (dokumen, versi) ganda.
+Failed asserting that actual size 2 matches expected size 0.
+
+########## LMS/SOP/SopDokumenKesehatanTest.php
+   FAILED  Tests\Feature\LMS\SOP\SopDokumenKesehatanTest > sumbu jenis menampilkan tingkat yang kosong                  
+  Master punya jenis yang belum dipakai dokumen mana pun — barisnya harus tetap ada.
+Failed asserting that an array contains 0.
+
+########## LMS/SOP/SopDokumenVerifyTest.php
+   FAILED  Tests\Feature\LMS\SOP\SopDokumenVerifyTest > menangkap pointer versi aktif menggantung      QueryException   
+  SQLSTATE[23000]: [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]The UPDATE statement conflicted with the FOREIGN KEY constraint "FK_N_SOP_Dokumen_Versi_Aktif". The conflict occurred in database "Web_HRIS", table "dbo.N_SOP_Item_Versi", column 'Id_SOP_Item_Versi'. (Connection: sqlsrv, SQL: update [N_SOP_Dokumen] set [Id_Versi_Aktif] = 14140 where [Id_SOP_Dokumen] = 14635)
+  at vendor\laravel\framework\src\Illuminate\Database\Connection.php:829
+
+########## LMS/SOP/SopExportRinciTest.php
+   FAILED  Tests\Feature\LMS\SOP\SopExportRinciTest > row count matches the assignment times item join                  
+  Failed asserting that 1380 is identical to 1420.
+
+########## LMS/SOP/SopFormBerkasTest.php
+   FAILED  Tests\Feature\LMS\SOP\SopFormBerkasTest > form items may be downloaded whatever their access mode            
+  Butuh minimal satu item FORM untuk diuji.
+Failed asserting that an object is not empty.
+
+########## LMS/SOP/SopKodePemilikNomorTest.php
+   FAILED  Tests\Feature\LMS\SOP\SopKodePemilikNomorTest > tiga perakit menghasilkan nomor yang sam…  DomainException   
+  Jenis dokumen yang dipilih tidak ada atau sudah dinonaktifkan.
+  at app\Services\LMS\SOP\SopDokumenService.php:853
+   FAILED  Tests\Feature\LMS\SOP\SopKodePemilikNomorTest > segmen lingkup tetap memakai kode entita…  DomainException   
+  Jenis dokumen yang dipilih tidak ada atau sudah dinonaktifkan.
+  at app\Services\LMS\SOP\SopDokumenService.php:853
+
+########## LMS/SOP/SopNomorLengkapTest.php
+   FAILED  Tests\Feature\LMS\SOP\SopNomorLengkapTest > tujuh kode jenis terisi                                          
+  Failed asserting that two arrays are identical.
+--- Expected
++++ Actual
+@@ @@
+
+########## LMS/SOP/SopPenjadwalanServiceTest.php
+   FAILED  Tests\Feature\LMS\SOP\SopPenjadwalanServiceTest > package options stop at the safety cap and report trunc…   
+  Deteksi pemotongan tidak boleh menambah query.
+Failed asserting that 2 is equal to 1 or is less than 1.
+
+########## LMS/SOP/SopPerhatianDokumenTest.php
+   FAILED  Tests\Feature\LMS\SOP\SopPerhatianDokumenTest > penyaring menangkap yang menagih dan melewatkan yang jauh    
+  Failed asserting that an array contains 18715.
+   FAILED  Tests\Feature\LMS\SOP\SopPerhatianDokumenTest > dokumen tanpa versi berlaku bukan urusan tinjauan            
+  Failed asserting that an array contains 18717.
+
+########## LMS/SOP/SopRingkasanSaringanTest.php
+   FAILED  Tests\Feature\LMS\SOP\SopRingkasanSaringanTest > unfiltered summary still matches the original queries       
+  Failed asserting that 181 is identical to 182.
+
+########## LMS/SOP/SopRiwayatDokumenTest.php
+   FAILED  Tests\Feature\LMS\SOP\SopRiwayatDokumenTest > penerbitan menyebut sifat revisinya          DomainException   
+  Versi ini belum boleh diterbitkan dari tahap "Drafting". Selesaikan pengesahannya lebih dulu, lalu terbitkan dari langkah Pemberkasan.
+  at app\Services\LMS\SOP\SopDokumenService.php:2251
+
+########## LMS/SOP/SopSuntingDraftTest.php
+   FAILED  Tests\Feature\LMS\SOP\SopSuntingDraftTest > versi terbit tidak membocorkan tokennya        DomainException   
+  Versi ini belum boleh diterbitkan dari tahap "Drafting". Selesaikan pengesahannya lebih dulu, lalu terbitkan dari langkah Pemberkasan.
+  at app\Services\LMS\SOP\SopDokumenService.php:2251
+
+########## LMS/SOP/SopTahapVersiTest.php
+   FAILED  Tests\Feature\LMS\SOP\SopTahapVersiTest > tahap aktif membentuk alur lurus                                   
+  Failed asserting that two arrays are identical.
+--- Expected
++++ Actual
+@@ @@
+   FAILED  Tests\Feature\LMS\SOP\SopTahapVersiTest > pemetaan empat langkah berasal dari master                         
+  Failed asserting that two arrays are identical.
+--- Expected
++++ Actual
+@@ @@
+   FAILED  Tests\Feature\LMS\SOP\SopTahapVersiTest > terbit bukan perpindahan tahap biasa              ErrorException   
+  Undefined array key "FILING_REGISTERED"
+  at vendor\laravel\framework\src\Illuminate\Collections\Collection.php:1792
+
+########## LMS/SOP/SopTerbitPengesahPerTipeTest.php
+   FAILED  Tests\Feature\LMS\SOP\SopTerbitPengesahPerTipeTest > kuis tanpa pengesah boleh terbit                        
+  Tidak ada versi KUIS tanpa pengesah untuk diuji.
+Failed asserting that null is not null.
+   FAILED  Tests\Feature\LMS\SOP\SopTerbitPengesahPerTipeTest > video tanpa pengesah boleh terbit                       
+  Tidak ada versi VIDEO tanpa pengesah untuk diuji.
+Failed asserting that null is not null.
+
+########## LMS/SOP/Uat/Alur005BerkasTerpusatTest.php
+   FAILED  Tests\Feature\LMS\SOP\Uat\Alur005BerkasTerpusatTest > satu berkas bisa dipakai banyak do…  DomainException   
+  Versi ini belum boleh diterbitkan dari tahap "Drafting". Selesaikan pengesahannya lebih dulu, lalu terbitkan dari langkah Pemberkasan.
+  at app\Services\LMS\SOP\SopDokumenService.php:2251
+
+########## LMS/SOP/Uat/Alur007SiklusVersiDokumenTest.php
+   FAILED  Tests\Feature\LMS\SOP\Uat\Alur007SiklusVersiDokumenTest > blok pengesahan dilengkapi lal…  DomainException   
+  Versi ini belum boleh diterbitkan dari tahap "Drafting". Selesaikan pengesahannya lebih dulu, lalu terbitkan dari langkah Pemberkasan.
+  at app\Services\LMS\SOP\SopDokumenService.php:2251
+   FAILED  Tests\Feature\LMS\SOP\Uat\Alur007SiklusVersiDokumenTest > terbit versi kedua memensiunka…  DomainException   
+  Versi ini belum boleh diterbitkan dari tahap "Drafting". Selesaikan pengesahannya lebih dulu, lalu terbitkan dari langkah Pemberkasan.
+  at app\Services\LMS\SOP\SopDokumenService.php:2251
+   FAILED  Tests\Feature\LMS\SOP\Uat\Alur007SiklusVersiDokumenTest > versi lama bisa dikembalikan d…  DomainException   
+  Versi ini belum boleh diterbitkan dari tahap "Drafting". Selesaikan pengesahannya lebih dulu, lalu terbitkan dari langkah Pemberkasan.
+  at app\Services\LMS\SOP\SopDokumenService.php:2251
+   FAILED  Tests\Feature\LMS\SOP\Uat\Alur007SiklusVersiDokumenTest > versi berlaku dan versi draft…   DomainException   
+  Versi ini belum boleh diterbitkan dari tahap "Drafting". Selesaikan pengesahannya lebih dulu, lalu terbitkan dari langkah Pemberkasan.
+  at app\Services\LMS\SOP\SopDokumenService.php:2251
+
+########## LMS/SOP/Uat/Alur015BuilderPaketTest.php
+   FAILED  Tests\Feature\LMS\SOP\Uat\Alur015BuilderPaketTest > item yang disalin tetap seiring saat…  DomainException   
+  Versi ini belum boleh diterbitkan dari tahap "Drafting". Selesaikan pengesahannya lebih dulu, lalu terbitkan dari langkah Pemberkasan.
+  at app\Services\LMS\SOP\SopDokumenService.php:2251
+
+########## LMS/SOP/Uat/Alur044SiklusHidupLanjutTest.php
+   FAILED  Tests\Feature\LMS\SOP\Uat\Alur044SiklusHidupLanjutTest > revisi menyusul ke semua paket…   DomainException   
+  Versi ini belum boleh diterbitkan dari tahap "Drafting". Selesaikan pengesahannya lebih dulu, lalu terbitkan dari langkah Pemberkasan.
+  at app\Services\LMS\SOP\SopDokumenService.php:2251
+   FAILED  Tests\Feature\LMS\SOP\Uat\Alur044SiklusHidupLanjutTest > revisi wajib membuka kembali ke…  DomainException   
+  Versi ini belum boleh diterbitkan dari tahap "Drafting". Selesaikan pengesahannya lebih dulu, lalu terbitkan dari langkah Pemberkasan.
+  at app\Services\LMS\SOP\SopDokumenService.php:2251
+   FAILED  Tests\Feature\LMS\SOP\Uat\Alur044SiklusHidupLanjutTest > revisi minor tidak mengganggu y…  DomainException   
+  Versi ini belum boleh diterbitkan dari tahap "Drafting". Selesaikan pengesahannya lebih dulu, lalu terbitkan dari langkah Pemberkasan.
+  at app\Services\LMS\SOP\SopDokumenService.php:2251
+
+########## LMS/SOP/Uat/Kontrol013TerbitVersiTakLengkapTest.php
+   FAILED  Tests\Feature\LMS\SOP\Uat\Kontrol013TerbitVersiTakLengkapTest > versi berberkas berhasil…  DomainException   
+  Versi ini belum boleh diterbitkan dari tahap "Drafting". Selesaikan pengesahannya lebih dulu, lalu terbitkan dari langkah Pemberkasan.
+  at app\Services\LMS\SOP\SopDokumenService.php:2251
+   FAILED  Tests\Feature\LMS\SOP\Uat\Kontrol013TerbitVersiTakLengkapTest > versi yang sudah terbit…   DomainException   
+  Versi ini belum boleh diterbitkan dari tahap "Drafting". Selesaikan pengesahannya lebih dulu, lalu terbitkan dari langkah Pemberkasan.
+  at app\Services\LMS\SOP\SopDokumenService.php:2251
+   FAILED  Tests\Feature\LMS\SOP\Uat\Kontrol013TerbitVersiTakLengkapTest > pengesahan lewat kolom c…  DomainException   
+  Versi ini belum boleh diterbitkan dari tahap "Drafting". Selesaikan pengesahannya lebih dulu, lalu terbitkan dari langkah Pemberkasan.
+  at app\Services\LMS\SOP\SopDokumenService.php:2251
+
+########## SYSTEM/DisiplinTransaksiManualTest.php
+
+SELESAI

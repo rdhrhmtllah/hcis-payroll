@@ -1,0 +1,7 @@
+-- Change ID: DDL-2026-121-visitor-pisah-tamu-regular-b2b
+-- ALAT BANTU RESET MANUAL. TIDAK PERNAH DIJALANKAN AGENT.
+
+ALTER TABLE N_EMI_VISITOR_Transaksi_Tamu_Detail DROP COLUMN IF EXISTS Path_Foto_Kendaraan;
+GO
+ALTER TABLE N_EMI_VISITOR_Transaksi_Tamu_Detail DROP COLUMN IF EXISTS Tamu_Kategori;
+GO

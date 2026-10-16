@@ -1,0 +1,59 @@
+{
+  "_catatan": [
+    "Manifes gerbang rilis. Satu-satunya tempat nama fitur ditulis; skrip penjaganya",
+    "tidak pernah menyebut fitur apa pun, sehingga menahan fitur berikutnya cukup",
+    "menambah satu blok di sini tanpa menyentuh workflow.",
+    "",
+    "Berbentuk JSON, bukan YAML, supaya penjaganya jalan dengan Node polos tanpa",
+    "satu pun dependensi. Penjaga yang butuh `npm ci` bisa mati gara-gara paket",
+    "yang tak terpasang, dan penjaga yang mati diam-diam lebih buruk daripada",
+    "tidak ada penjaga sama sekali.",
+    "",
+    "boleh_di  : daftar branch tempat kode fitur ini BOLEH muncul. Branch di luar",
+    "            daftar akan menolak PR yang menyentuh path atau menambah baris",
+    "            berpenanda milik fitur ini. Yang diatur hanya dua: staging dan",
+    "            master. Branch kerja (feat/*, fix/*) tidak pernah ditahan.",
+    "paths     : berkas milik fitur. Glob: ** lintas segmen, * dalam satu segmen.",
+    "penanda   : potongan teks yang menandai fitur ini menyusup ke berkas BERSAMA",
+    "            (mis. satu provider di config/app.php, satu require di routes/web.php).",
+    "            Diperiksa hanya pada baris yang DITAMBAH; menghapus jejak fitur",
+    "            tidak pernah tertahan.",
+    "penanda_kecuali : berkas yang boleh menyebut penanda tanpa tertahan. WAJIB",
+    "            memuat manifes ini sendiri — tanpa itu, PR yang mempromosikan",
+    "            fitur akan ditolak oleh penandanya sendiri dan gerbangnya",
+    "            terkunci selamanya dari dalam.",
+    "",
+    "Mempromosikan fitur = tambahkan branch tujuannya ke boleh_di lewat PR. Berkas",
+    "ini dilindungi CODEOWNERS, jadi PR itu wajib disetujui pemilik repo — di situlah",
+    "keputusan rilis mengambil bentuk yang tercatat, bukan kesepakatan lisan.",
+    "",
+    "Cabut entri fitur yang sudah rilis penuh. Manifes basi menahan PR yang sah,",
+    "dan yang frustrasi akan mencabut penjaganya, bukan entrinya."
+  ],
+
+  "fitur": [
+    {
+      "kode": "PA",
+      "nama": "Performance Appraisal",
+      "alasan": "Masih dikembangkan. Belum boleh ikut artefak produksi sampai dinyatakan siap.",
+      "boleh_di": ["staging"],
+      "paths": [
+        "app/**/PerformanceAppraisal/**",
+        "routes/KPI/PerformanceAppraisal/**",
+        "resources/js/Pages/KPI/PerformanceAppraisal/**",
+        "tests/**/PerformanceAppraisal/**"
+      ],
+      "penanda": [
+        "PerformanceAppraisal",
+        "N_PA_"
+      ],
+      "penanda_kecuali": [
+        ".github/gerbang-rilis.json",
+        "database/ddl/**",
+        "database/dml/**",
+        "docs/**",
+        "plans/**"
+      ]
+    }
+  ]
+}

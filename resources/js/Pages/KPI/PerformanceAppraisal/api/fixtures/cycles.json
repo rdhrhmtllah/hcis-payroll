@@ -1,0 +1,113 @@
+{
+    "success": true,
+    "status": 200,
+    "message": "Berhasil",
+    "result": {
+        "siklus": [
+            {
+                "Id_PA_Cycle": 3,
+                "Kode_Cycle": "PA-2026-H1",
+                "Nama_Cycle": "Penilaian Kinerja Semester 1 2026",
+                "Tahun": 2026,
+                "Status_Cycle": "CLOSED",
+                "Periode_Dinilai_Dari": "2026-01-01",
+                "Periode_Dinilai_Sampai": "2026-06-30",
+                "Pengisian_Dari": "2026-07-01",
+                "Pengisian_Sampai": "2026-07-14",
+                "Locked_At": "2026-06-30 17:00:00",
+                "Published_At": null,
+                "peserta": {
+                    "diikutkan": 894,
+                    "dikecualikan": 57,
+                    "dikecualikan_otomatis": 0,
+                    "tertunda": 0
+                },
+                "operasi_boleh": [
+                    "SUNTING_BOBOT_PILAR",
+                    "TERIMA_PAYLOAD",
+                    "HITUNG_HASIL",
+                    "KALIBRASI",
+                    "TERBITKAN"
+                ],
+                "Langkah_Setup_Aktif": 3,
+                "setup": {
+                    "langkah_aktif": 3,
+                    "selesai": 2,
+                    "total": 4,
+                    "total_langkah": 4,
+                    "lengkap": false
+                }
+            },
+            {
+                "Id_PA_Cycle": 2,
+                "Kode_Cycle": "PA-2026-PROBATION",
+                "Nama_Cycle": "Penilaian Masa Percobaan 2026",
+                "Tahun": 2026,
+                "Status_Cycle": "PREPARED",
+                "Periode_Dinilai_Dari": "2026-03-01",
+                "Periode_Dinilai_Sampai": "2026-08-31",
+                "Pengisian_Dari": null,
+                "Pengisian_Sampai": null,
+                "Locked_At": null,
+                "Published_At": null,
+                "peserta": {
+                    "diikutkan": 902,
+                    "dikecualikan": 49,
+                    "dikecualikan_otomatis": 0,
+                    "tertunda": 7
+                },
+                "operasi_boleh": [
+                    "SUNTING_SALINAN",
+                    "SUNTING_BOBOT_PILAR",
+                    "PILIH_PAKET_SOAL",
+                    "SUNTING_PESERTA",
+                    "TULIS_OVERRIDE",
+                    "BUAT_PENUGASAN"
+                ],
+                "Langkah_Setup_Aktif": 3,
+                "setup": {
+                    "langkah_aktif": 3,
+                    "selesai": 2,
+                    "total": 4,
+                    "total_langkah": 4,
+                    "lengkap": false
+                }
+            },
+            {
+                "Id_PA_Cycle": 1,
+                "Kode_Cycle": "PA-2025",
+                "Nama_Cycle": "Penilaian Kinerja 2025",
+                "Tahun": 2025,
+                "Status_Cycle": "DRAFT",
+                "Periode_Dinilai_Dari": null,
+                "Periode_Dinilai_Sampai": null,
+                "Pengisian_Dari": null,
+                "Pengisian_Sampai": null,
+                "Locked_At": null,
+                "Published_At": null,
+                "peserta": {
+                    "diikutkan": 0,
+                    "dikecualikan": 0,
+                    "dikecualikan_otomatis": 0,
+                    "tertunda": 0
+                },
+                "operasi_boleh": [
+                    "SUNTING_SALINAN",
+                    "SUNTING_BOBOT_PILAR",
+                    "PILIH_PAKET_SOAL",
+                    "SUNTING_PESERTA",
+                    "TULIS_OVERRIDE",
+                    "BUAT_PENUGASAN"
+                ],
+                "Langkah_Setup_Aktif": 3,
+                "setup": {
+                    "langkah_aktif": 3,
+                    "selesai": 2,
+                    "total": 4,
+                    "total_langkah": 4,
+                    "lengkap": false
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,33 @@
+{
+  "success": true,
+  "status": 200,
+  "message": "Berhasil",
+  "result": {
+    "tertunda": [
+      {
+        "Id_PA_Participant": 118,
+        "Kode_Perusahaan": "001",
+        "Kode_Karyawan": "A0118",
+        "Nama_Karyawan_Saat_Cycle": "Ahmad Fauzan",
+        "ID_Level_Saat_Cycle": 2,
+        "Nama_Level_Saat_Cycle": "STAFF"
+      },
+      {
+        "Id_PA_Participant": 204,
+        "Kode_Perusahaan": "001",
+        "Kode_Karyawan": "A0204",
+        "Nama_Karyawan_Saat_Cycle": "Rina Kusumawati",
+        "ID_Level_Saat_Cycle": 2,
+        "Nama_Level_Saat_Cycle": "STAFF"
+      },
+      {
+        "Id_PA_Participant": 377,
+        "Kode_Perusahaan": "001",
+        "Kode_Karyawan": "A0377",
+        "Nama_Karyawan_Saat_Cycle": "Budi Santoso",
+        "ID_Level_Saat_Cycle": 7,
+        "Nama_Level_Saat_Cycle": "SUPERVISOR"
+      }
+    ]
+  }
+}

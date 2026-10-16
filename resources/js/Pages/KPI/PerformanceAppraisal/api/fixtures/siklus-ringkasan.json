@@ -1,0 +1,80 @@
+{
+    "success": true,
+    "status": 200,
+    "message": "Berhasil",
+    "result": {
+        "siklus": {
+            "Id_PA_Cycle": "657",
+            "Kode_Cycle": "PA-DEMO-FE",
+            "Nama_Cycle": "Siklus Contoh Pengembangan Frontend",
+            "Tahun": "2026",
+            "Status_Cycle": "CLOSED",
+            "Periode_Dinilai_Dari": "2026-01-01",
+            "Periode_Dinilai_Sampai": "2026-06-30",
+            "Pengisian_Dari": null,
+            "Pengisian_Sampai": null
+        },
+        "operasi_boleh": [
+            "SUNTING_BOBOT_PILAR",
+            "TERIMA_PAYLOAD",
+            "HITUNG_HASIL",
+            "KALIBRASI",
+            "TERBITKAN"
+        ],
+        "peserta": {
+            "total": 958,
+            "per_status": {
+                "DIIKUTKAN": 859,
+                "DIKECUALIKAN": 99
+            },
+            "diikutkan": 859,
+            "tertunda": 0,
+            "dikecualikan": 99
+        },
+        "penugasan": {
+            "total": 8,
+            "per_status": {
+                "SELESAI": 8
+            },
+            "selesai": 8,
+            "terlambat": 0,
+            "penyelesaian_persen": 100
+        },
+        "hasil": {
+            "total": 958,
+            "per_status": {
+                "TERBIT": 2,
+                "BELUM_DIHITUNG": 950,
+                "TERTAHAN": 6
+            },
+            "terbit": 2,
+            "tertahan": 6
+        },
+        "per_divisi": [
+            {
+                "id_divisi": 13,
+                "nama_divisi": "FOOD TECHNOLOGY & NUTRITION",
+                "total": 1,
+                "selesai": 1,
+                "terlambat": 0,
+                "penyelesaian_persen": 100
+            },
+            {
+                "id_divisi": 20,
+                "nama_divisi": "PRODUCTION",
+                "total": 1,
+                "selesai": 1,
+                "terlambat": 0,
+                "penyelesaian_persen": 100
+            },
+            {
+                "id_divisi": 22,
+                "nama_divisi": "PRODUCTION SUPPORT",
+                "total": 6,
+                "selesai": 6,
+                "terlambat": 0,
+                "penyelesaian_persen": 100
+            }
+        ]
+    }
+}

@@ -1,0 +1,125 @@
+name: KPI-Unreal Quality
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+
+permissions:
+  contents: read
+
+# Branch fitur sudah tercakup lewat pull_request; tanpa ini setiap PR dari repo
+# yang sama menjalankan tiap job dua kali.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    name: Backend quality
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          extensions: mbstring, dom, curl, libxml, zip, bcmath, intl, gd
+          coverage: none
+          tools: composer:v2
+
+      - name: Validate Composer manifest
+        run: composer validate --no-check-publish
+
+      - name: Install PHP dependencies
+        run: composer install --no-interaction --prefer-dist --no-progress
+        env:
+          DATABASE_URL: ""
+
+      # APP_KEY dibangkitkan SEGAR tiap jalan, bukan ditulis di repo. Tanpa ini
+      # setiap uji yang menyentuh enkripsi berhenti dengan MissingAppKeyException
+      # — dan itu berhenti di tengah, bukan gagal satu penegasan, sehingga sisa
+      # kelasnya ikut tak terjalankan.
+      #
+      # Runner tidak punya .env sama sekali; `key:generate --show` hanya
+      # MENCETAK kunci tanpa menyentuh berkas, jadi tak ada yang perlu disalin.
+      #
+      # `--no-ansi` WAJIB: tanpa itu keluarannya dibungkus kode warna dan
+      # APP_KEY terisi kunci yang tak sah. Gejalanya berpindah dari
+      # MissingAppKeyException menjadi RuntimeException — terlihat seperti
+      # masalah baru, padahal perbaikannya sendiri yang cacat.
+      - name: Siapkan APP_KEY untuk uji
+        run: echo "APP_KEY=$(php artisan key:generate --show --no-ansi)" >> "$GITHUB_ENV"
+
+      # Hanya suite Unit: Feature dan Integration butuh basis data, yang tidak
+      # tersedia di runner.
+      - name: Run PHPUnit unit suite
+        run: env -u DATABASE_URL php artisan test --testsuite=Unit
+
+      - name: Check PHP formatting
+        continue-on-error: true
+        run: ./vendor/bin/pint --test
+
+      - name: Composer security audit
+        continue-on-error: true
+        run: composer audit --no-interaction
+
+  frontend:
+    name: Frontend quality
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Run Vitest
+        run: npm run test:unit
+
+      - name: Build frontend
+        run: npm run build
+        env:
+          NODE_OPTIONS: "--max-old-space-size=4096"
+
+      - name: npm security audit
+        continue-on-error: true
+        run: npm audit --omit=dev
+
+  browser-tooling:
+    name: Browser and accessibility tooling
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      # Tidak menjalankan aplikasi/UAT di sini: runner tidak memiliki .env.uat
+      # atau credential database terisolasi. Job ini memverifikasi gate dan
+      # discovery sehingga perubahan test/tooling tidak rusak di PR.
+      - name: Verify browser quality gate
+        run: npm run test:e2e:gate
+
+      - name: Discover browser and accessibility tests
+        run: |
+          npm run test:e2e:smoke -- --list
+          npm run test:e2e:a11y -- --list

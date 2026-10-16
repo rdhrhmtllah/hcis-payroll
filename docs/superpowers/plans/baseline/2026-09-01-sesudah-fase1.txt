@@ -1,0 +1,202 @@
+
+   PASS  Tests\Feature\LMS\SOP\SopApqcTest
+  ✓ tabel apqc dan pemetaannya ada                                                                               1.81s  
+  ✓ kolom apqc dokumen nullable                                                                                  0.38s  
+  ✓ tiga belas kategori ter seed                                                                                 0.45s  
+  ✓ opsi disaring oleh tipe item                                                                                 0.75s  
+  ✓ mencabut seluruh tipe membuat apqc berhenti ditawarkan                                                       1.10s  
+  ✓ dokumen menyimpan apqc yang sah                                                                              2.83s  
+  ✓ pasangan apqc dan tipe yang tak sah ditolak                                                                  1.58s  
+  ✓ apqc nonaktif ditolak                                                                                        1.89s  
+  ✓ apqc yang masih dipakai tak bisa dinonaktifkan                                                               4.29s  
+  ✓ nomor proses tak boleh kembar                                                                                0.37s  
+  ✓ jalur backfill tetap boleh tanpa apqc                                                                        1.86s  
+
+  Tests:    11 passed (38 assertions)
+  Duration: 17.46s
+
+
+   PASS  Tests\Feature\LMS\SOP\SopBatalVersiTerbitTest
+  ✓ membatalkan versi terbit melepas nomornya                                                                   15.91s  
+  ✓ versi pengganti kembali berlaku                                                                             15.58s  
+  ✓ pengganti kembali dengan tahap dan tanggalnya                                                               15.05s  
+  ✓ tanpa pengganti dokumen tak punya versi berlaku                                                              9.87s  
+  ✓ versi yang sudah beredar menolak dibatalkan                                                                  9.96s  
+  ✓ pemasangan pada paket draft bukan peredaran                                                                 16.97s  
+  ✓ pemasangan pada paket terbit menghalangi                                                                     9.39s  
+  ✓ tanpa pengganti pointer item ikut dilepas                                                                   12.63s  
+  ✓ dengan pengganti pointer item mengikuti                                                                     16.97s  
+  ✓ menolak versi yang bukan terbit                                                                              3.16s  
+  ✓ menolak pengganti milik dokumen lain                                                                        11.36s  
+  ✓ kandidat pengganti diurut terbaru dulu                                                                       7.63s  
+  ✓ master membuka jalur terbit ke batal dengan syaratnya                                                        0.52s  
+
+  Tests:    13 passed (28 assertions)
+  Duration: 145.15s
+
+
+   WARN  Tests\Feature\LMS\SOP\SopBlokPengesahBuilderTest
+  - byitem membawa seluruh blok penanda tangan → Blok itu tak menempel pada item mana pun.                       1.45s  
+  - peran ikut terbawa bukan diratakan → Blok itu tak menempel pada item mana pun.                               0.89s  
+  - versi baru menyimpan blok penanda tangan → Butuh item ber-dokumen di paket draft dan satu konten PDF.        0.76s  
+  - versi tanpa baris blok tetap menampilkan kolom cerminnya → Semua versi berpengesah sudah punya baris blok.   0.51s  
+
+  Tests:    4 skipped (0 assertions)
+  Duration: 3.77s
+
+
+   WARN  Tests\Feature\LMS\SOP\SopBuilderCopyItemToPaketTest
+  ✓ copy creates a new item and version in the target draft package                                             10.38s  
+  ✓ copy rejects a published target package                                                                      3.19s  
+  ✓ copy rejects a section that belongs to a different package                                                   3.48s  
+  ✓ copy rejects same source and target package                                                                  2.49s  
+  - kuis item copy receives a version row → Tak ada item KUIS ber-versi aktif di data dev.                       1.54s  
+  - draft overlay token never copies an unrelated live item → Tak ada PK draft-item yang beririsan dgn item liv… 1.61s  
+  - absensi items cannot be copied → Tak ada item ABSENSI di data dev.                                           1.42s  
+
+  Tests:    3 skipped, 4 passed (20 assertions)
+  Duration: 24.25s
+
+[2026-09-01 07:57:47] testing.WARNING: REQ_DIAG {"Trace_Id":"","Kode_Karyawan":"A4","Path":"api/v1/sop/admin/builder/paket/lOQLBjAvAbwwkzDaVn3J/item/store","Method":"POST","Http_Status":201,"Total_Ms":3202,"Conn_Acquire_Ms":122,"Db_Query_Count":18,"Db_Query_Ms":3048,"Slowest_Query_Ms":269,"Slowest_Query_Sql":"select top 1 [Id_SOP_Dokumen], [Judul], [Nomor_SOP_Resmi], [Tipe] from [N_SOP_Dokumen] where [Id_SOP_Dokumen] = ? and [Flag_Aktif] = ?","Created_At":"2026-09-01 07:57:47"} 
+
+   WARN  Tests\Feature\LMS\SOP\SopBuilderItemDokumenTest
+  ✓ item ber versi tanpa dokumen ditolak dengan pesan yang bisa dikerjakan                                       3.85s  
+  ✓ item baru menumpang versi dokumennya                                                                         5.77s  
+  ✓ kedua cabang menuntut dokumen bukan judul                                                                    0.31s  
+  ✓ dokumen baru dari builder ditolak dan tak menulis apa pun                                                    4.13s  
+  ✓ muatan dokumen baru ditolak walau dokumen sudah dipilih                                                      4.43s  
+  ✓ dokumen tanpa versi terbit tak bisa ditautkan                                                                3.75s  
+  - item lama bertaut dokumen kosong tetap bisa disunting → Tak ada item lama yang bertaut dokumen tanpa versi.  0.41s  
+  ✓ pointer tak pernah menunjuk versi belum terbit                                                               1.50s  
+
+  Tests:    1 skipped, 7 passed (28 assertions)
+  Duration: 24.29s
+
+
+   WARN  Tests\Feature\LMS\SOP\SopBuilderRiwayatTest
+  ✓ menyebut jumlah keseluruhan bukan cuma yang tampil                                                           1.92s  
+  ✓ offset melanjutkan bukan mengulang                                                                           1.72s  
+  ✓ saringan aksi menyaring sungguhan                                                                            2.35s  
+  ✓ baris bertingkat item menyebut itemnya                                                                       5.03s  
+  - daftar versi menyebut pembuat dan pengubahnya → Tak ada versi ber-Created_By.                                0.42s  
+
+  Tests:    1 skipped, 4 passed (10 assertions)
+  Duration: 11.58s
+
+
+   PASS  Tests\Feature\LMS\SOP\SopBuilderSaringanFiksturTest
+  ✓ fikstur benar benar tersemai                                                                                 4.53s  
+  ✓ status berdaftar menggabung bukan mengambil yang pertama                                                     6.55s  
+  ✓ status counts menghitung seluruh status meski satu sedang disaring                                           2.50s  
+  ✓ ember estimasi membagi habis tanpa tumpang tindih                                                            7.04s  
+  ✓ batas ember estimasi inklusif di kedua ujungnya                                                              5.03s  
+  ✓ ember terbit memisahkan yang baru dari yang lama dan yang belum                                              6.47s  
+  ✓ ember terbit dan rentang tanggal saling mempersempit                                                         3.52s  
+  ✓ saringan distribusi berdaftar                                                                                3.44s  
+  ✓ grup counts menyebar sesuai sumbu yang diminta                                                               2.40s  
+  ✓ grup counts sumbu status tak menyusut saat status disaring                                                   2.65s  
+  ✓ grup counts sumbu lain tetap menyempit saat status disaring                                                  3.04s  
+  ✓ urutan estimasi menaruh yang tanpa estimasi di bawah pada kedua arah                                         7.04s  
+  ✓ urutan nama tetap bekerja di samping urutan estimasi                                                         2.41s  
+  ✓ saringan absensi hanya memuat yang menuntut kehadiran                                                        3.19s  
+
+  Tests:    14 passed (41 assertions)
+  Duration: 59.93s
+
+
+   FAIL  Tests\Feature\LMS\SOP\SopBuilderSaringanPaketTest
+  ✓ saringan berdaftar melebar bukan mengambil yang pertama                                                      4.63s  
+  ✓ saringan status berdaftar sepadan dengan badge chip                                                          2.19s  
+  ✓ status counts mengabaikan saringan status sendiri                                                            1.09s  
+  ✓ ember estimasi membagi habis populasinya                                                                     4.04s  
+  ✓ ember estimasi tanpa mencakup null dan nol                                                                   0.99s  
+  ✓ ember terbit belum adalah tanggal publish yang kosong                                                        1.44s  
+  ✓ ember terbit berbatas waktu lebih sempit daripada seluruhnya                                                 3.52s  
+  ✓ grup counts mengabaikan saringan sumbunya sendiri                                                            3.33s  
+  ✓ grup counts tetap menghormati saringan sumbu lain                                                            0.90s  
+  ✓ grup counts menjumlah ke total daftar pada setiap sumbu                                                      2.41s  
+  ✓ sumbu kategori sudah tak dikenal                                                                             0.03s  
+  ⨯ sumbu tak dikenal ditolak bukan dijawab rail kosong                                                          0.17s  
+  - urutan estimasi terpendek tidak membuka dengan yang tanpa estimasi → Butuh paket berestimasi dan paket tanp… 0.76s  
+  ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\LMS\SOP\SopBuilderSaringanPaketTest > sumbu tak dikenal ditolak bukan dijawab rail kosong      
+  Failed asserting that true is false.
+
+  at tests\Feature\LMS\SOP\SopBuilderSaringanPaketTest.php:263
+    259▕ 
+    260▕     public function test_sumbu_tak_dikenal_ditolak_bukan_dijawab_rail_kosong(): void
+    261▕     {
+    262▕         $this->assertTrue($this->svc()->sumbuGrupDikenal('prioritas'));
+  ➜ 263▕         $this->assertFalse($this->svc()->sumbuGrupDikenal('departemen'));
+    264▕         $this->assertSame([], $this->svc()->grupCounts($this->f(), 'departemen'));
+    265▕     }
+    266▕ 
+    267▕     /**
+
+  1   tests\Feature\LMS\SOP\SopBuilderSaringanPaketTest.php:263
+
+
+  Tests:    1 failed, 1 skipped, 11 passed (25 assertions)
+  Duration: 25.64s
+
+[2026-09-01 07:59:55] testing.WARNING: REQ_DIAG {"Trace_Id":"","Kode_Karyawan":"H45","Path":"api/v1/sop/admin/dokumen/versi/lxdozEyM8jYykGZnwV6q/terbitkan","Method":"POST","Http_Status":422,"Total_Ms":6326,"Conn_Acquire_Ms":150,"Db_Query_Count":21,"Db_Query_Ms":6301,"Slowest_Query_Ms":639,"Slowest_Query_Sql":"select top 1 * from [N_SOP_Master_Tahap_Versi] where [Kode_Tahap] = ?","Created_At":"2026-09-01 07:59:55"} 
+
+   PASS  Tests\Feature\LMS\SOP\SopBuilderVersiBacaSajaTest
+  ✓ rute tulis versi builder dicabut                                                                             0.88s  
+  ✓ permintaan terbit versi dari builder tak sampai ke mana pun                                                  1.95s  
+  ✓ versi tanpa pengesah tetap ditolak di master                                                                11.62s  
+
+  Tests:    3 passed (11 assertions)
+  Duration: 14.58s
+
+
+   PASS  Tests\Feature\LMS\SOP\SopBuilderVersiSumbuDokumenTest
+  ✓ panel versi overlay menemukan versi lewat sumbu dokumen                                                     10.56s  
+  ✓ ringkas hanya menyerahkan versi berlaku                                                                      7.80s  
+  ✓ ringkas melewati obsolete yang bernomor lebih tinggi                                                         7.51s  
+  ✓ nomor dokumen basi di overlay bukan perubahan paket                                                         12.85s  
+  ✓ publish tak menulis balik identitas basi                                                                    19.10s  
+
+  Tests:    5 passed (14 assertions)
+  Duration: 57.97s
+
+[2026-09-01 08:01:04] testing.WARNING: REQ_DIAG {"Trace_Id":"","Kode_Karyawan":"H45","Path":"api/v1/sop/admin/dokumen/versi/lxdozEyM8jeykGZnwV6q/detail","Method":"GET","Http_Status":200,"Total_Ms":3911,"Conn_Acquire_Ms":98,"Db_Query_Count":26,"Db_Query_Ms":3856,"Slowest_Query_Ms":439,"Slowest_Query_Sql":"select top 1 * from [N_LMS_Master_Konten_Berkas] where [Id_Master_Konten] = ?","Created_At":"2026-09-01 08:01:04"} 
+[2026-09-01 08:01:09] testing.WARNING: REQ_DIAG {"Trace_Id":"","Kode_Karyawan":"H45","Path":"api/v1/sop/admin/dokumen/versi/lxdozEyM8jeykGZnwV6q/detail","Method":"GET","Http_Status":200,"Total_Ms":3530,"Conn_Acquire_Ms":52,"Db_Query_Count":23,"Db_Query_Ms":3519,"Slowest_Query_Ms":242,"Slowest_Query_Sql":"select top 1 * from [N_LMS_Master_Konten_Berkas] where [Id_Master_Konten] = ?","Created_At":"2026-09-01 08:01:09"} 
+[2026-09-01 08:01:13] testing.WARNING: REQ_DIAG {"Trace_Id":"","Kode_Karyawan":"H45","Path":"api/v1/sop/admin/dokumen/versi/p3O8byKkgeo0M67GzVj0/detail","Method":"GET","Http_Status":200,"Total_Ms":3290,"Conn_Acquire_Ms":66,"Db_Query_Count":24,"Db_Query_Ms":3278,"Slowest_Query_Ms":205,"Slowest_Query_Sql":"select count(*) as aggregate from [N_SOP_Item_Versi_Review] where [Id_SOP_Item_Versi] = ? and [Flag_Aktif] = ?","Created_At":"2026-09-01 08:01:13"} 
+[2026-09-01 08:01:18] testing.WARNING: REQ_DIAG {"Trace_Id":"","Kode_Karyawan":"H45","Path":"api/v1/sop/admin/dokumen/versi/lxdozEyM8jeykGZnwV6q/detail","Method":"GET","Http_Status":200,"Total_Ms":3717,"Conn_Acquire_Ms":75,"Db_Query_Count":23,"Db_Query_Ms":3705,"Slowest_Query_Ms":450,"Slowest_Query_Sql":"select [Id_SOP_Item_Versi_Pengesah], [Peran], [Nama], [Jabatan], [Kode_Karyawan], [Urutan], [Jenis] from [N_SOP_Item_Versi_Pengesah] where [Id_SOP_Item_Versi] = ? and [Flag_Aktif] = ? order by [Urutan] asc","Created_At":"2026-09-01 08:01:18"} 
+[2026-09-01 08:01:22] testing.WARNING: REQ_DIAG {"Trace_Id":"","Kode_Karyawan":"H45","Path":"api/v1/sop/admin/dokumen/versi/lxdozEyM8jeykGZnwV6q/detail","Method":"GET","Http_Status":200,"Total_Ms":3017,"Conn_Acquire_Ms":60,"Db_Query_Count":23,"Db_Query_Ms":3006,"Slowest_Query_Ms":196,"Slowest_Query_Sql":"select [Nilai], [Kode_Setting] from [N_SOP_Setting]","Created_At":"2026-09-01 08:01:22"} 
+
+   PASS  Tests\Feature\LMS\SOP\SopDetailVersiPayloadTest
+  ✓ detail versi menjawab 200 dan menamai ketiga masternya                                                       5.37s  
+  ✓ detail versi membawa alur langkah dan daftar review                                                          4.48s  
+  ✓ review yang tercatat ikut terkirim                                                                           4.57s  
+  ✓ is versi aktif mengikuti penunjuk dokumen                                                                    4.66s  
+  ✓ pembuat versi dikirim sebagai nama bukan id                                                                  3.72s  
+
+  Tests:    5 passed (14 assertions)
+  Duration: 22.94s
+
+[2026-09-01 08:01:27] testing.WARNING: REQ_DIAG {"Trace_Id":"","Kode_Karyawan":"H45","Path":"api/v1/sop/admin/apqc/store","Method":"POST","Http_Status":500,"Total_Ms":238,"Conn_Acquire_Ms":92,"Db_Query_Count":1,"Db_Query_Ms":92,"Slowest_Query_Ms":92,"Slowest_Query_Sql":"SET LOCK_TIMEOUT 10000","Created_At":"2026-09-01 08:01:27"} 
+
+   PASS  Tests\Feature\LMS\SOP\SopDisiplinTransaksiTest
+  ✓ error di tengah mutasi tidak meninggalkan transaksi menggantung                                              5.89s  
+
+  Tests:    1 passed (3 assertions)
+  Duration: 6.04s
+
+
+   WARN  Tests\Feature\LMS\SOP\SopDokumenBackfillTest
+  - dry run tidak menulis apa pun → Tak ada item ber-versi ber-dokumen untuk dijadikan backlog.                  0.87s  
+  - setiap item berversi dapat tepat satu dokumen → Tak ada item ber-versi di data dev.                          0.40s  
+  - setiap baris versi ikut dokumen itemnya → Tak ada item ber-versi di data dev.                                0.38s  
+  - menyembuhkan baris versi yang lahir tanpa dokumen → Tak ada baris versi ber-dokumen di data dev.             0.42s  
+  - pointer versi aktif dokumen menyalin pointer item → Tak ada item ber-versi aktif di data dev.                0.44s  
+  - identitas dokumen diambil dari itemnya → Tak ada item ber-versi ber-dokumen untuk dijadikan backlog.         0.38s  
+  - dokumen selalu punya judul → Tak ada item ber-versi ber-dokumen untuk dijadikan backlog.                     0.38s  
+  - tipe tanpa versi tidak diberi dokumen → Tak ada item ber-versi di data dev.                                  0.40s  
+  - idempoten dijalankan dua kali tidak menggandakan → Tak ada item ber-versi ber-dokumen untuk dijadikan backl… 0.41s  
+  - paket bukan angka ditolak dan tidak menulis → Tak ada item ber-versi ber-dokumen untuk dijadikan backlog.    0.54s  
+
+  Tests:    10 skipped (0 assertions)
+  Duration: 4.79s
+

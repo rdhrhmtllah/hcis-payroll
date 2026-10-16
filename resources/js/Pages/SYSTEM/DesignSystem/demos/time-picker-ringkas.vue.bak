@@ -1,0 +1,83 @@
+<template>
+    <!-- Section: Anatomy -->
+    <div v-if="section === 'anatomy'" class="ds-time-demo">
+        <div class="ds-card p-4">
+            <h6 class="fw-bold mb-3">Pemilih Jam & Waktu Native (HcisTimePicker)</h6>
+            <div class="max-w-xs">
+                <HcisTimePicker v-model="selectedTime" placeholder="Pilih Jam Masuk..." />
+            </div>
+
+            <div class="ds-event-log mt-3">
+                <HcisIcon name="clock-fill" size="xs" class="text-indigo-600 me-2" />
+                <span>Jam Terpilih: <strong>{{ selectedTime || 'Belum dipilih' }}</strong></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section: Variants -->
+    <div v-else-if="section === 'variants'" class="ds-stack-demo">
+        <div class="ds-card p-3">
+            <h6 class="fw-bold mb-2">Mode Dengan Detik (useSeconds = true)</h6>
+            <div class="max-w-xs">
+                <HcisTimePicker v-model="selectedTimeWithSeconds" :use-seconds="true" placeholder="HH:mm:ss" />
+            </div>
+        </div>
+
+        <div class="ds-card p-3">
+            <h6 class="fw-bold mb-2">Tanpa Preset Cepat (showPresets = false)</h6>
+            <div class="max-w-xs">
+                <HcisTimePicker v-model="selectedTime" :show-presets="false" />
+            </div>
+        </div>
+    </div>
+
+    <!-- Section: States -->
+    <div v-else-if="section === 'states'" class="ds-stack-demo">
+        <div class="ds-card p-3">
+            <h6 class="fw-bold mb-2">State Disabled & Readonly</h6>
+            <div class="d-flex gap-3 flex-wrap">
+                <div class="max-w-xs">
+                    <HcisTimePicker v-model="selectedTime" :disabled="true" />
+                </div>
+                <div class="max-w-xs">
+                    <HcisTimePicker v-model="selectedTime" :readonly="true" />
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+import { HcisTimePicker, HcisIcon } from '../../../components/ui';
+
+defineProps({ section: { type: String, required: true } });
+
+const selectedTime = ref('08:30');
+const selectedTimeWithSeconds = ref('08:30:00');
+</script>
+
+<style scoped>
+.ds-time-demo,
+.ds-stack-demo {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 100%;
+}
+
+.ds-card {
+    background: var(--hcis-surface);
+    border: 1px solid var(--hcis-border-subtle);
+    border-radius: var(--hcis-radius-xl, 14px);
+}
+
+.ds-event-log {
+    padding: 0.625rem 0.875rem;
+    border-radius: var(--hcis-radius-md);
+    background: var(--hcis-surface-soft);
+    border: 1px solid var(--hcis-border-subtle);
+    font-size: 0.8rem;
+    color: var(--hcis-text-strong);
+}
+</style>

@@ -1,0 +1,1791 @@
+openapi: 3.1.0
+
+# Dokumen ini memuat SELURUH endpoint pihak ketiga HCIS dan sengaja TIDAK tahu
+# siapa boleh mengakses apa. Penyaringan per aplikasi dikerjakan saat diminta,
+# memakai registry N_HRIS_Api_Akses_Endpoint x N_HRIS_Api_Endpoint — relasi yang
+# sama persis dengan yang dipakai HrisApiGuard untuk mengizinkan atau menolak.
+#
+# Kunci `paths` WAJIB memakai POLA rute lengkap dengan prefix /api dan kurung
+# kurawal (".../tahun/{tahun}"), persis seperti nilai Url_Route di registry.
+# Kalau tidak cocok, endpoint akan hilang dari dokumen tanpa peringatan —
+# ditutup oleh penjaga sinkron di ApiDocsTest.
+#
+# `servers` sengaja tidak ditulis di sini: diisi saat penyajian dari host yang
+# sedang dibuka, supaya dokumen yang sama benar di dev, staging, dan production.
+
+info:
+  title: HCIS — Third-Party Integration API
+  version: '1.1.0'
+  description: |
+    Portal integrasi resmi **HCIS (Human Capital Information System)** untuk sistem dan aplikasi pihak ketiga.
+    Daftar di bawah **hanya menampilkan endpoint yang telah diotorisasi untuk kunci publik (`Api_Public`) Anda**. Endpoint milik aplikasi mitra lain terisolasi dan tidak akan terlihat.
+
+    ---
+
+    ## 📌 Riwayat Perubahan Kontrak
+
+    ### v1.1.0 — Registrasi Tamu B2B wajib menyebut penanggung jawab
+
+    > **⚠️ PERUBAHAN WAJIB.** Permintaan tanpa field baru ini akan ditolak `422`.
+
+    `POST /api/v1/hcis/visitor/tamu-b2b` kini **mewajibkan `penanggung_jawab`** — nama orang yang bertanggung jawab atas kunjungan tersebut.
+
+    **Mengapa:** kunjungan yang masuk lewat API tidak punya karyawan pendaftar di HCIS. Sebelumnya sistem memakai PIC aplikasi Anda sebagai penggantinya, sehingga seluruh kunjungan mitra tercatat atas nama satu orang yang tidak pernah mendaftarkannya — dan petugas gerbang tidak punya siapa pun yang tepat untuk dihubungi.
+
+    **Jangan tertukar dengan `pic_tujuan`:**
+
+    | Field | Menjawab | Contoh |
+    |---|---|---|
+    | `penanggung_jawab` | **SIAPA** yang bertanggung jawab. Dihubungi petugas gerbang. **Wajib.** | `Budi Santoso` |
+    | `pic_tujuan` | **KE MANA** tamu menuju — departemen, ruang, atau area. Opsional. | `Ruang Server Lantai 2` |
+
+    Cukup **nama**; kode karyawan tidak diperlukan dan memang tidak Anda miliki.
+
+    ### Akan datang — empat field menjadi wajib
+
+    Empat field di `POST /api/v1/hcis/visitor/tamu-b2b` saat ini masih opsional selama masa transisi, dan **akan menjadi wajib** pada rilis berikutnya. Kami sarankan Anda mengirimkannya **mulai sekarang** agar cukup sekali mengubah kode:
+
+    `estimasi_masuk` · `estimasi_keluar` · `jenis_kendaraan` · `no_plat_kendaraan`
+
+    Selama keempatnya belum wajib, permintaan tanpa `estimasi_masuk` masih diterima asalkan mengirim `tanggal_kunjungan`; kunjungannya lalu dianggap berlangsung seharian penuh pada tanggal itu — ketelitian yang jauh lebih longgar daripada yang dibutuhkan palang.
+
+    ---
+
+    ## 🔐 Autentikasi & Pengamanan Permintaan (HMAC-SHA512)
+
+    Setiap permintaan integrasi ke HCIS dijaga ketat oleh middleware `HrisApiGuard`. Setiap pemanggilan HTTP wajib menyertakan **5 Header Keamanan** dan **Tanda Tangan Kriptografi HMAC-SHA512** atas string kanonikal 7 baris.
+
+    ### 1. Header Wajib Permintaan
+
+    | Header HTTP | Tipe Data | Keterangan & Aturan Validasi |
+    |---|---|---|
+    | `X-HC-Public` | String | Kunci publik aplikasi Anda yang terdaftar di HCIS (contoh: `WEBCAREERS_PROD_...`). |
+    | `X-HC-Timestamp` | String (ISO-8601) | Waktu saat permintaan dibuat dalam format ISO-8601 UTC (contoh: `2026-09-12T07:30:00.000Z`). Jam pemanggil **tidak boleh berselisih lebih dari 60 detik** dari jam server HCIS. **DILARANG** mengirim angka epoch Unix (`1789...`). |
+    | `X-HC-Nonce` | String | Nilai acak sekali pakai (*single-use*) minimal 16 karakter hex/alphanumeric unik per panggilan. Nonce yang berulang akan ditolak dengan `401 Unauthorized` untuk mencegah serangan replay. |
+    | `X-HC-Body-Hash` | String (Hex) | Nilai `sha256(raw_body)` dalam lowercase hex. Untuk request tanpa body (misalnya `GET` atau `POST` kosong), gunakan hash dari string kosong: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`. |
+    | `X-HC-Signature` | String (Hex) | Tanda tangan digital HMAC-SHA512 lowercase hex yang dihitung dari String Kanonikal 7 Baris menggunakan `Api_Secret` aplikasi Anda sebagai secret key. |
+
+    ### 2. Format String Kanonikal (Payload Tanda Tangan)
+
+    String kanonikal dibentuk dengan menggabungkan 7 baris parameter berikut yang dipisahkan oleh karakter baris baru (`\n`):
+
+    ```text
+    METHOD
+    PATH
+    QUERY
+    TIMESTAMP
+    NONCE
+    BODY_HASH
+    PUBLIC_KEY
+    ```
+
+    #### Rincian Komponen Kanonikal:
+    - **`METHOD`**: Huruf kapital metode HTTP (`GET`, `POST`, `PUT`, `DELETE`, `PATCH`).
+    - **`PATH`**: Jalur URI yang **benar-benar dipanggil**, diawali garis miring `/` dan tanpa query string (contoh: `/api/v1/hcis/kalender-operasional/tahun/2026` — **bukan** pola rute `{tahun}`).
+    - **`QUERY`**: Query string mentah tanpa tanda tanya `?` di awal (contoh: `dari=2026-01-01&sampai=2026-12-31`). Kosongkan (string kosong) jika tidak ada query parameter.
+    - **`TIMESTAMP`**: Nilai string yang sama persis dengan header `X-HC-Timestamp`.
+    - **`NONCE`**: Nilai string yang sama persis dengan header `X-HC-Nonce`.
+    - **`BODY_HASH`**: Nilai string yang sama persis dengan header `X-HC-Body-Hash`.
+    - **`PUBLIC_KEY`**: Nilai string yang sama persis dengan header `X-HC-Public`.
+
+    ---
+
+    ## 📦 Standar Format Respons API
+
+    Seluruh endpoint integrasi HCIS menggunakan pembungkus JSON standar:
+
+    ### Respons Sukses (`HTTP 200` / `HTTP 201`)
+    ```json
+    {
+      "sukses": true,
+      "message": "Deskripsi hasil operasi",
+      "result": { ... }
+    }
+    ```
+
+    ### Respons Galat (`HTTP 400`, `401`, `403`, `404`, `422`, `429`, `500`, `503`)
+    ```json
+    {
+      "sukses": false,
+      "message": "Pesan penjelasan galat secara rinci",
+      "result": null
+    }
+    ```
+
+    ---
+
+    ## 🛡️ Praktik Terbaik & Kebijakan Lingkungan
+
+    - **Protokol HTTPS Wajib**: Di lingkungan staging dan production, semua komunikasi wajib melalui protokol terenkripsi HTTPS/TLS.
+    - **Kerahasiaan Api_Secret**: `Api_Secret` hanya boleh disimpan di server backend Anda (environment variables/secret vault). Jangan pernah menyematkannya di aplikasi mobile frontend atau client-side JavaScript.
+    - **Idempotensi**: Pada endpoint `POST` pembuatan data (seperti pengajuan permit tamu), sertakan header `Idempotency-Key` (UUID) untuk mencegah duplikasi data akibat timeout atau kegagalan jaringan.
+
+servers: []
+
+security:
+  - HcPublic: []
+    HcSignature: []
+    HcTimestamp: []
+    HcNonce: []
+    HcBodyHash: []
+
+tags:
+  - name: Permit Tamu
+    description: >
+      Layanan penerbitan izin akses gerbang tamu (Permit COKLAT) untuk aplikasi mitra B2B.
+      Digunakan oleh aplikasi eksternal yang telah mencatat data tamu sendiri dan hanya memerlukan izin akses masuk area perusahaan.
+      Pengajuan permit diproses melalui alur persetujuan verifikator HCIS sebelum aktif di pos gerbang.
+  - name: Tamu B2B
+    description: >
+      Layanan registrasi kunjungan tamu B2B oleh aplikasi mitra.
+      Berbeda dari Permit Tamu yang hanya menerbitkan izin gerbang, layanan ini mencatat kunjungan tamu sesungguhnya di HCIS:
+      masuk antrean approval tamu, terlihat di meja verifikator, dan Permit COKLAT-nya diajukan otomatis
+      lalu menunggu persetujuan verifikator seperti permit kendaraan lainnya.
+  - name: Kartu Permit
+    description: >
+      Pengecekan keaslian dan status kartu permit kendaraan dari kode QR-nya, untuk layanan cek kartu publik.
+      Jawaban sengaja minimal (status, kategori, plat tersamar, masa berlaku) — setara dengan yang boleh dilihat
+      siapa pun yang memindai kartu.
+  - name: Kalender Operasional
+    description: >
+      Layanan penyediaan kalender hari operasional dan hari libur resmi Head Office HCIS.
+      Digunakan oleh sistem mitra (seperti Web Careers dan portal rekrutmen) untuk menghitung SLA dan durasi proses dalam hari kerja efektif.
+  - name: SOP
+    description: >
+      Callback integrasi hasil ujian/kuis Standar Operasional Prosedur (SOP) dari platform pembelajaran HC Learn ke sistem HCIS.
+  - name: Performance Appraisal
+    description: Callback hasil penilaian 360 dari HC Learn — nilai per butir soal, bukan satu angka.
+
+paths:
+
+  /api/v1/hcis/visitor/permit-tamu:
+    post:
+      tags: [Permit Tamu]
+      summary: Ajukan permit tamu B2B (Permit COKLAT)
+      description: |
+        Membuat pengajuan izin akses gerbang perusahaan (Permit COKLAT) untuk tamu milik aplikasi mitra.
+        Tamu tidak perlu didaftarkan terlebih dahulu di database HCIS, karena data tamu dikelola oleh sistem mitra.
+
+        **Alur & Karakteristik Permit:**
+        - **Alur Persetujuan**: Permit **tidak langsung aktif**. Setelah diajukan (`status: PENDING`), pengajuan masuk ke antrean verifikator HCIS. Mitra memantau statusnya (*polling*) via `GET /permit-tamu/{no_transaksi}`.
+        - **Masa Berlaku**: Masa berlaku permit COKLAT (1 hari kalender) ditetapkan oleh Verifikator saat menyetujui pengajuan.
+        - **Idempotensi Aman**: Header `Idempotency-Key` opsional. Jika tidak dikirim, HCIS otomatis menggunakan `referensi_mitra` sebagai kunci keunikan.
+        - **Pertanggungjawaban & PIC**: PIC penanggung jawab izin otomatis terikat pada akun aplikasi mitra (`Kode_Karyawan_PIC`).
+        - **Kendaraan & Pejalan Kaki**: Informasi kendaraan dan plat nomor bersifat opsional.
+
+        **Daftar Parameter & Payload Request:**
+
+        - `nama_tamu` *(Body JSON, String, max 150)*: **Wajib**. Nama lengkap tamu. Contoh: `Rudi Hermawan`
+        - `instansi` *(Body JSON, String, max 150)*: **Wajib**. Nama perusahaan/vendor asal. Contoh: `PT Mitra Solusi Sejahtera`
+        - `keperluan` *(Body JSON, String, max 250)*: **Wajib**. Uraian pekerjaan/tujuan. Contoh: `Pengiriman server & instalasi rak data center`
+        - `jenis_kendaraan` *(Body JSON, String, max 50)*: Opsional. Contoh: `Mobil`
+        - `no_plat_kendaraan` *(Body JSON, String, max 50)*: Opsional. Plat nomor utuh (otomatis dipecah di backend). Contoh: `BG 1234 MT`
+        - `plat_prefix` *(Body JSON, String, max 5)*: Opsional fallback. Contoh: `BG`
+        - `plat_angka` *(Body JSON, String, max 10)*: Opsional fallback. Contoh: `1234`
+        - `plat_suffix` *(Body JSON, String, max 10)*: Opsional fallback. Contoh: `MT`
+        - `no_identitas` *(Body JSON, String, max 100)*: Opsional. Contoh: `3201123456780001`
+        - `jenis_identitas` *(Body JSON, String, max 20)*: Opsional. Contoh: `KTP`
+        - `referensi_mitra` *(Body JSON, String, max 100)*: Opsional. ID referensi tamu internal mitra. Contoh: `MITRA-VIS-9812`
+      operationId: permitTamuAjukan
+      requestBody:
+        required: true
+        description: Data permohonan izin akses tamu.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PermitTamuRequest'
+      responses:
+        '201':
+          description: Pengajuan permit berhasil diterima dan sedang menunggu persetujuan verifikator.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PermitTamuDiterima'
+              example:
+                sukses: true
+                message: Pengajuan permit diterima
+                result:
+                  no_transaksi: PMT0926-0042
+                  status: PENDING
+                  referensi_mitra: MITRA-VIS-9812
+        '200':
+          description: >
+            Kiriman ulang idempoten terdeteksi (termasuk dua kiriman berkunci sama yang tiba
+            bersamaan). Permit yang sama dikembalikan tanpa membuat data baru, dengan status
+            permit SAAT INI — bisa sudah APPROVED, REJECTED, dst. Untuk rincian lain pakai
+            `GET /permit-tamu/{no_transaksi}`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PermitTamuReplay'
+              example:
+                sukses: true
+                message: Pengajuan permit sudah pernah diterima
+                result:
+                  no_transaksi: PMT0926-0042
+                  status: PENDING
+                  idempotent_replay: true
+        '400':
+          $ref: '#/components/responses/Galat400'
+        '401':
+          $ref: '#/components/responses/Galat401'
+        '403':
+          $ref: '#/components/responses/Galat403'
+        '422':
+          description: >
+            Payload data tidak lengkap (nama_tamu, instansi, atau keperluan kosong) atau PIC aplikasi belum terkonfigurasi.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Galat'
+              example:
+                sukses: false
+                message: Field nama_tamu wajib diisi.
+                result: null
+        '429':
+          description: Batas kuota permit aktif aplikasi mitra telah tercapai.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Galat'
+              example:
+                sukses: false
+                message: Batas permit aktif aplikasi ini sudah tercapai (50). Jatah kembali setelah permit ditolak, dibatalkan, atau kedaluwarsa.
+                result: null
+        '503':
+          $ref: '#/components/responses/Galat503'
+
+  /api/v1/hcis/visitor/permit-tamu/{no_transaksi}:
+    get:
+      tags: [Permit Tamu]
+      summary: Cek status permit (semua jenis)
+      description: |
+        Mengambil status persetujuan terkini sebuah nomor permit. Sejak 14 Sep 2026 endpoint ini
+        melayani **semua jenis permit**, bukan hanya permit tamu milik aplikasi Anda:
+
+        - permit kendaraan **karyawan** (diajukan lewat layar HCIS),
+        - permit **mitra** yang Anda ajukan lewat `POST /permit-tamu`,
+        - permit COKLAT yang lahir dari registrasi **tamu B2B** (`POST /tamu-b2b`).
+
+        Field `sumber` pada respons menyebutkan jenisnya: `KARYAWAN`, `API`, atau `TAMU`.
+
+        Mitra disarankan melakukan pemanggilan berkala (*polling*) hingga status berubah dari `PENDING`.
+
+        ### 🔄 Status Siklus Hidup Permit:
+        - `PENDING`: Pengajuan baru, menunggu peninjauan dan persetujuan verifikator HCIS.
+        - `APPROVED`: Pengajuan telah disetujui. Izin akses gerbang otomatis aktif pada `tanggal_berlaku`.
+        - `REJECTED`: Pengajuan ditolak oleh verifikator. Alasan penolakan tercantum pada field `alasan`.
+        - `REVOKED`: Izin permit dicabut sebelum/saat masa berlaku oleh verifikator atau melalui endpoint pembatalan.
+        - `EXPIRED`: Masa berlaku permit telah berakhir (melewati `tanggal_berlaku`).
+
+        ### 🔒 Batas Data yang Dibuka:
+        Endpoint ini hanya memulangkan **keadaan** permitnya — nomor, status, tanggal berlaku, durasi,
+        sumber, dan referensi mitra. Ia TIDAK memulangkan identitas pemegang atau pemohonnya: tidak ada
+        nama, NIK, departemen, maupun plat nomor. Nomor yang tidak terdaftar dibalas `HTTP 404 Not Found`.
+
+        **Pembatalan tetap terbatas.** `POST /permit-tamu/{no_transaksi}/batal` hanya melayani permit yang
+        diajukan aplikasi Anda sendiri; permit milik pihak lain dibalas `404`, persis seperti nomor yang
+        memang tidak ada.
+      operationId: permitTamuStatus
+      parameters:
+        - name: no_transaksi
+          in: path
+          required: true
+          description: Nomor transaksi permit yang didapatkan saat pengajuan (contoh `PMT0926-0042`).
+          schema:
+            type: string
+            example: PMT0926-0042
+      responses:
+        '200':
+          description: Status dan rincian permit berhasil diambil.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PermitTamuStatus'
+              example:
+                sukses: true
+                message: Status permit
+                result:
+                  no_transaksi: PMT0926-0042
+                  status: APPROVED
+                  alasan: null
+                  tanggal_berlaku: '2026-09-15'
+                  durasi: 1 Hari
+                  sumber: API
+                  referensi_mitra: MITRA-VIS-9812
+                  idempotent_replay: null
+        '401':
+          $ref: '#/components/responses/Galat401'
+        '403':
+          $ref: '#/components/responses/Galat403'
+        '404':
+          $ref: '#/components/responses/Galat404'
+
+  /api/v1/hcis/visitor/permit-tamu/{no_transaksi}/batal:
+    post:
+      tags: [Permit Tamu]
+      summary: Batalkan permit tamu
+      description: |
+        Membatalkan pengajuan permit tamu dari sisi mitra:
+        - **Saat berstatus `PENDING`**: Menutup dan menghentikan alur persetujuan di meja verifikator. Status permit sesudahnya terbaca `REJECTED`.
+        - **Saat berstatus `APPROVED`**: Mencabut izin aktif di sistem proyeksi gerbang (`REVOKED`), sehingga akses tamu langsung dihentikan.
+
+        Gunakan endpoint ini segera apabila tamu mitra dipastikan batal berkunjung, agar antrean verifikator tidak menggantung dan kuota permit aktif aplikasi Anda segera kembali.
+      operationId: permitTamuBatal
+      parameters:
+        - name: no_transaksi
+          in: path
+          required: true
+          description: Nomor transaksi permit yang hendak dibatalkan.
+          schema:
+            type: string
+            example: PMT0926-0042
+      responses:
+        '200':
+          description: Permit berhasil dibatalkan dan kuota permit aktif dibebaskan.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PermitTamuBatalResponse'
+              example:
+                sukses: true
+                message: Permit dibatalkan
+                result:
+                  no_transaksi: PMT0926-0042
+        '401':
+          $ref: '#/components/responses/Galat401'
+        '403':
+          $ref: '#/components/responses/Galat403'
+        '404':
+          $ref: '#/components/responses/Galat404'
+
+  /api/v1/hcis/visitor/tamu-b2b:
+    post:
+      tags: [Tamu B2B]
+      summary: Registrasi tamu B2B oleh aplikasi mitra
+      description: |
+        Mendaftarkan kunjungan tamu B2B ke HCIS atas nama aplikasi mitra Anda.
+
+        **Kapan memakai ini, bukan `/permit-tamu`:** pakai endpoint ini bila Anda ingin
+        kunjungannya tercatat di HCIS (masuk antrean verifikator, terlihat di monitoring
+        tamu, dan Permit COKLAT diajukan otomatis setelah disetujui). Pakai `/permit-tamu`
+        bila Anda hanya membutuhkan izin gerbang tanpa baris kunjungan.
+
+        **Alur & karakteristik:**
+        - **Menunggu persetujuan**: registrasi masuk dengan `status: PENDING` dan diproses
+          verifikator HCIS. Pantau lewat `GET /tamu-b2b/{no_transaksi}`.
+        - **Arti `status`**: ia menjawab **boleh tidak tamunya masuk**, bukan sekadar
+          apakah kunjungannya tercatat. Karena itu ia GABUNGAN keadaan kunjungan dan
+          keadaan Permit COKLAT-nya. Kunjungan yang tercatat disetujui tetapi izinnya
+          masih menunggu verifikator dibalas `PENDING`. Rinciannya tetap tersedia pada
+          `status_kunjungan` dan `permit_coklat.status`.
+        - **Estimasi Masuk & Keluar**: kirim `estimasi_masuk` dan `estimasi_keluar`
+          (tanggal-jam). Keduanya menjadi jendela awal Permit COKLAT, dan kunjungan yang
+          lebih dari 24 jam tercatat sebagai kunjungan MITRA berhari-hari. Pengajuan lama
+          yang hanya mengirim `tanggal_kunjungan` masih diterima selama masa transisi
+          (dianggap berlangsung seharian) dengan daftar `peringatan` pada balasannya;
+          setelah masa transisi, estimasi, `jenis_kendaraan`, dan `no_plat_kendaraan`
+          WAJIB — tamu B2B harus berkendaraan — dan permintaan tanpa itu ditolak `422`.
+        - **Permit COKLAT diajukan otomatis**: setelah kunjungannya disetujui final, Permit
+          COKLAT selama rentang estimasi kunjungan DIAJUKAN sendiri — Anda tidak
+          perlu memanggil endpoint lain. Nomornya dipulangkan sebagai `no_transaksi_permit`
+          pada balasan ini. Izinnya sendiri masih menunggu persetujuan verifikator; pantau
+          `permit_coklat.status` pada endpoint status kunjungan atau
+          `GET /permit-tamu/{no_transaksi_permit}`, dan anggap tamu boleh masuk hanya ketika
+          `status` bernilai `APPROVED`.
+        - **Idempotensi aman**: header `Idempotency-Key` opsional. Bila tidak dikirim, HCIS
+          memakai `referensi_mitra` sebagai kunci keunikan. Kiriman ulang dengan kunci yang
+          sama dibalas `HTTP 200` beserta nomor yang sudah ada dan `idempotent_replay: true`.
+        - **PIC wajib terdaftar**: aplikasi mitra harus menunjuk `Kode_Karyawan_PIC` sebagai
+          penanggung jawab kunjungan. Tanpa itu permintaan ditolak `422`.
+        - **Rombongan**: kirim `daftar_anggota` bila tamu datang lebih dari satu orang. Isi
+          daftar HANYA dengan orang yang menyertainya — nama pada `nama_tamu` tidak perlu
+          diulang di sana dan tidak akan kami sisipkan sendiri. Tamu yang datang sendirian
+          cukup mengosongkan `daftar_anggota` (atau tidak mengirimnya sama sekali); jumlah
+          tamunya tetap terhitung satu.
+      operationId: tamuB2BAjukan
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: false
+          description: >
+            Kunci keunikan registrasi (UUID v4 atau string unik hingga 100 karakter).
+            Opsional; bila tidak dikirim HCIS memakai referensi_mitra dari payload.
+          schema:
+            type: string
+            maxLength: 100
+            example: '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
+      requestBody:
+        required: true
+        description: Data kunjungan tamu B2B.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TamuB2BRequest'
+      responses:
+        '201':
+          description: Registrasi diterima dan menunggu persetujuan verifikator.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TamuB2BStatus'
+              example:
+                sukses: true
+                message: Registrasi tamu diterima
+                result:
+                  no_transaksi: VSR0926-0031
+                  status: PENDING
+                  no_transaksi_permit: PMT0926-0014
+                  referensi_mitra: MITRA-VIS-9812
+        '200':
+          description: Kiriman ulang idempoten terdeteksi; registrasi yang sama dikembalikan.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TamuB2BStatus'
+              example:
+                sukses: true
+                message: Registrasi tamu sudah pernah diterima
+                result:
+                  no_transaksi: VSR0926-0031
+                  status: PENDING
+                  no_transaksi_permit: PMT0926-0014
+                  referensi_mitra: MITRA-VIS-9812
+                  idempotent_replay: true
+        '401':
+          $ref: '#/components/responses/Galat401'
+        '403':
+          $ref: '#/components/responses/Galat403'
+        '422':
+          description: >
+            Payload tidak lengkap, tanggal_kunjungan bukan YYYY-MM-DD, atau aplikasi mitra
+            belum menunjuk Kode_Karyawan_PIC.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Galat'
+              example:
+                sukses: false
+                message: Aplikasi ini belum menunjuk Kode_Karyawan_PIC. Registrasi tamu B2B membutuhkan PIC karyawan yang bertanggung jawab atas kunjungan.
+                result: null
+
+  /api/v1/hcis/visitor/tamu-b2b/{no_transaksi}:
+    get:
+      tags: [Tamu B2B]
+      summary: Status registrasi tamu B2B
+      description: |
+        Keadaan terkini registrasi tamu Anda beserta Permit COKLAT-nya.
+
+        **Baca `status` saja sudah cukup.** Ia menjawab satu pertanyaan yang benar-benar
+        Anda butuhkan — boleh tidak tamunya masuk — dan karena itu merupakan GABUNGAN
+        keadaan kunjungan dan keadaan izin gerbangnya. Tamu boleh diberangkatkan hanya
+        ketika nilainya `APPROVED`.
+
+        Rinciannya tersedia bila Anda memerlukannya: `status_kunjungan` untuk keadaan
+        kunjungannya sendiri, `permit_coklat.status` untuk keadaan izinnya. Registrasi
+        tamu bisa saja tercatat `APPROVED` sementara izinnya masih `PENDING`; dalam
+        keadaan itu `status` bernilai `PENDING`, karena palang memang akan menahannya.
+
+        Panggil berkala sampai `status` bukan lagi `PENDING`.
+
+        **Cakupan:** endpoint ini melayani nomor kunjungan mana pun di HCIS — termasuk yang
+        didaftarkan langsung dari layar HCIS, bukan lewat API. Satu kunjungan sering
+        dikerjakan dua pintu, dan menyaringnya per aplikasi membuat separuh kasus itu
+        dibalas "tidak ditemukan" untuk nomor yang jelas-jelas ada. Gunakan `sumber` untuk
+        mengetahui asal pendaftarannya. Nomor yang memang tidak ada tetap dibalas `404`.
+      operationId: tamuB2BStatus
+      parameters:
+        - name: no_transaksi
+          in: path
+          required: true
+          description: Nomor yang dikembalikan saat registrasi.
+          schema: { type: string }
+          example: VSR0926-0031
+      responses:
+        '200':
+          description: Status registrasi tamu.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TamuB2BStatus'
+              example:
+                sukses: true
+                message: Status registrasi tamu
+                result:
+                  no_transaksi: VSR0926-0031
+                  status: PENDING
+                  status_kunjungan: APPROVED
+                  alasan: null
+                  nama_tamu: Rudi Hermawan
+                  tanggal_kunjungan: '2026-09-20'
+                  referensi_mitra: MITRA-VIS-9812
+                  sumber: API
+                  permit_coklat:
+                    no_transaksi: PMT0926-0014
+                    status: PENDING
+                    durasi: 1 Hari
+                    berlaku_dari: '2026-09-20'
+                    berlaku_sampai: '2026-09-20'
+        '401':
+          $ref: '#/components/responses/Galat401'
+        '403':
+          $ref: '#/components/responses/Galat403'
+        '404':
+          $ref: '#/components/responses/Galat404'
+
+  /api/v1/hcis/visitor/kartu-permit/{kode}:
+    get:
+      tags: [Kartu Permit]
+      summary: Cek status kartu permit dari kode QR
+      description: |
+        Mengembalikan keadaan **terkini** kartu permit kendaraan dari kode pada QR-nya (32 karakter heksadesimal,
+        segmen terakhir URL pada QR kartu). Keadaan dibaca langsung dari HCIS: kartu yang sudah dicabut atau
+        kedaluwarsa terbaca tidak berlaku walau cetakannya masih utuh.
+
+        Permintaan GET **tanpa body**: `X-HC-Body-Hash` = SHA-256 dari string kosong.
+
+        ### Status
+        - `AKTIF` — kartu sah (`sah: true`).
+        - `DICABUT` — akses sudah dicabut.
+        - `KEDALUWARSA` — masa berlaku habis.
+        - `DITOLAK` / `BELUM_DISETUJUI` — permitnya tidak pernah berlaku.
+        - `TIDAK_DIKENALI` — kode tidak dikenal; kartu patut dicurigai palsu.
+
+        Batas laju dihitung per aplikasi (bawaan 600 panggilan/menit); lebih dari itu dijawab `429`.
+      operationId: kartuPermitCek
+      parameters:
+        - name: kode
+          in: path
+          required: true
+          description: Kode kartu dari QR (32 karakter heksadesimal).
+          schema:
+            type: string
+            pattern: '^[0-9A-Fa-f]{32}$'
+            example: 9f3a1c2e4b5d6f708192a3b4c5d6e7f8
+      responses:
+        '200':
+          description: Keadaan kartu (juga untuk kartu yang tidak berlaku atau tidak dikenal).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KartuPermitStatus'
+              example:
+                sukses: true
+                message: Status kartu permit
+                result:
+                  sah: true
+                  status: AKTIF
+                  judul: KARTU SAH
+                  sebab: null
+                  kategori: HIJAU
+                  plat: BG 12•• XY
+                  berlaku_sejak: 01 Sep 2026
+                  berlaku_sampai: 30 Sep 2026
+                  dicek: 28 Sep 2026 14:07
+        '401':
+          $ref: '#/components/responses/Galat401'
+        '403':
+          $ref: '#/components/responses/Galat403'
+        '404':
+          description: Bentuk kode bukan 32 karakter heksadesimal.
+        '429':
+          description: Batas laju aplikasi terlampaui; coba lagi setelah jeda.
+
+  /api/v1/hcis/kalender-operasional/tahun/{tahun}:
+    get:
+      tags: [Kalender Operasional]
+      summary: Kalender operasional tahunan Head Office
+      description: |
+        Menyajikan seluruh tanggal tidak operasional (libur nasional, cuti bersama resmi, dan libur operasional perusahaan) serta susunan hari kerja mingguan sepanjang satu tahun kalender penuh.
+
+        Endpoint ini setara dengan memanggil endpoint rentang dengan parameter `dari={tahun}-01-01` dan `sampai={tahun}-12-31`.
+      operationId: kalenderOperasionalTahun
+      parameters:
+        - name: tahun
+          in: path
+          required: true
+          description: Empat digit angka tahun masehi (rentang valid 2020 s/d 2100).
+          schema:
+            type: integer
+            minimum: 2020
+            maximum: 2100
+          example: 2026
+        - $ref: '#/components/parameters/Unit'
+      responses:
+        '200':
+          description: Data kalender operasional tahunan berhasil dibentuk.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KalenderTahun'
+              example:
+                sukses: true
+                message: Kalender operasional 2026
+                result:
+                  unit: HEAD_OFFICE
+                  tahun: 2026
+                  hari_kerja_mingguan: [1, 2, 3, 4, 5, 6]
+                  digenerate_at: '2026-09-12T07:30:00+07:00'
+                  tanggal_tidak_operasional:
+                    - tanggal: '2026-01-01'
+                      jenis: LIBUR_NASIONAL
+                      nama: Tahun Baru 2026 Masehi
+                    - tanggal: '2026-03-31'
+                      jenis: LIBUR_NASIONAL
+                      nama: Hari Raya Idul Fitri 1447 Hijriah
+                    - tanggal: '2026-04-01'
+                      jenis: CUTI_BERSAMA
+                      nama: Cuti Bersama Idul Fitri
+                      status: TERJADWAL
+                    - tanggal: '2026-12-25'
+                      jenis: LIBUR_NASIONAL
+                      nama: Hari Raya Natal
+        '400':
+          $ref: '#/components/responses/Galat400'
+        '401':
+          $ref: '#/components/responses/Galat401'
+        '403':
+          $ref: '#/components/responses/Galat403'
+
+  /api/v1/hcis/kalender-operasional:
+    get:
+      tags: [Kalender Operasional]
+      summary: Kalender operasional per rentang tanggal
+      description: |
+        Menyajikan daftar tanggal unit tidak beroperasi pada rentang tanggal spesifik.
+        Kedua batas tanggal (`dari` dan `sampai`) bersifat **inklusif** (kedua hari dihitung). Rentang tanggal maksimal adalah **400 hari**.
+      operationId: kalenderOperasionalRentang
+      parameters:
+        - name: dari
+          in: query
+          required: true
+          description: Tanggal awal rentang pencarian dalam format `YYYY-MM-DD` (inklusif).
+          schema:
+            type: string
+            format: date
+          example: '2026-09-01'
+        - name: sampai
+          in: query
+          required: true
+          description: Tanggal akhir rentang pencarian dalam format `YYYY-MM-DD` (inklusif). Maksimal 400 hari dari parameter `dari`.
+          schema:
+            type: string
+            format: date
+          example: '2026-12-31'
+        - $ref: '#/components/parameters/Unit'
+      responses:
+        '200':
+          description: Data kalender operasional rentang tanggal berhasil dibentuk.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KalenderRentang'
+              example:
+                sukses: true
+                message: Kalender operasional 2026-09-01 s/d 2026-12-31
+                result:
+                  unit: HEAD_OFFICE
+                  dari: '2026-09-01'
+                  sampai: '2026-12-31'
+                  hari_kerja_mingguan: [1, 2, 3, 4, 5, 6]
+                  digenerate_at: '2026-09-12T07:30:00+07:00'
+                  tanggal_tidak_operasional:
+                    - tanggal: '2026-12-25'
+                      jenis: LIBUR_NASIONAL
+                      nama: Hari Raya Natal
+        '400':
+          $ref: '#/components/responses/Galat400'
+        '401':
+          $ref: '#/components/responses/Galat401'
+        '403':
+          $ref: '#/components/responses/Galat403'
+
+  /api/v1/hris/third-party/sop/exam/complete:
+    post:
+      tags: [SOP]
+      summary: Callback penyelesaian kuis SOP (HC Learn)
+      description: |
+        Endpoint callback yang dipanggil oleh platform pembelajaran **HC Learn** setelah karyawan menyelesaikan ujian/kuis SOP.
+        Hasil nilai kuis akan dicatat ke dalam rekam jejak versi materi SOP dan jika nilai mencapai standar kelulusan, penugasan SOP ditandai selesai.
+
+        > **Catatan Kontrak**: Respons callback modul SOP menggunakan format `{ "success": true, "message": "...", "status": "..." }`.
+      operationId: sopKuisCallback
+      requestBody:
+        required: true
+        description: Data nilai dan identifikasi sesi kuis karyawan dari HC Learn.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SopKuisCallback'
+      responses:
+        '200':
+          description: Hasil kuis berhasil diproses dan status kelulusan diperbarui.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SopCallbackResponse'
+              example:
+                success: true
+                message: Data ujian SOP berhasil diproses
+                status: LULUS
+        '401':
+          $ref: '#/components/responses/Galat401'
+        '403':
+          $ref: '#/components/responses/Galat403'
+        '422':
+          description: Payload data tidak lolos validasi atau token ujian tidak cocok dengan karyawan terkait.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Galat'
+              example:
+                sukses: false
+                message: Token ujian tidak cocok dengan penugasan karyawan terkait.
+                result: null
+
+  /api/v1/pa/third-party/penilaian/complete:
+    post:
+      tags: [Performance Appraisal]
+      summary: Callback hasil penilaian 360
+      description: |
+        Dipanggil HC Learn ketika seorang penilai menyelesaikan dan mengirim satu
+        formulir penilaian. Kirim **sekali saja per token**, saat penilai menekan
+        kirim.
+
+        **Alamatnya sengaja terpisah dari callback Training/SOP.** Satu alamat untuk
+        tiga modul memaksa HCIS menebak asal kiriman dari tokennya — tiga kueri ke
+        tiga tabel pada setiap callback, plus satu cabang untuk token yang cocok di
+        lebih dari satu modul. Mekanismenya sendiri tidak berubah sedikit pun:
+        tanda tangan, header, dan cara menghitungnya sama persis dengan callback
+        yang sudah berjalan, jadi di sisi Anda ini URL berbeda dengan kode yang sama.
+
+        **Tidak ada `Score` di sini.** Penilaian 360 tidak pernah berupa satu angka
+        akhir: nilainya dihitung per kompetensi dari beberapa butir soal, dan satu
+        angka akhir tidak bisa diurai kembali menjadi kompetensi. Karena itu
+        `Detail[]` wajib dan tidak boleh kosong — ia satu-satunya sumber nilai.
+        `Total_Nilai` hanya pembanding.
+
+        **HTTP 200 belum berarti selesai.** Periksa `tak_terpetakan` dan
+        `butir_hilang` pada responsnya. Selama salah satunya berisi,
+        `kontrak_lengkap` bernilai `false`, penugasan tidak ditandai selesai, dan
+        nilai peserta tidak akan pernah terhitung — tanpa satu pun galat muncul.
+      operationId: paPenilaianCallback
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaPenilaianCallback'
+      responses:
+        '200':
+          description: |
+            Kiriman diterima dan dipetakan. Kiriman ulang yang isinya persis sama
+            juga dijawab 200 dengan `baru: false`; itu bukan galat dan tidak
+            membuat baris kedua. Pada kiriman ulang itu bidang pemetaan memang
+            tidak ada — pemetaannya tidak dijalankan lagi karena hasilnya akan
+            sama persis.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PaPenilaianCallbackHasil' }
+        '401': { $ref: '#/components/responses/Galat401' }
+        '403':
+          description: |
+            Endpoint tidak diizinkan untuk aplikasi Anda, ATAU `Kode_Karyawan`
+            tidak cocok dengan penilai pemilik token, ATAU `Id_Integrasi` tidak
+            cocok dengan tokennya.
+        '404':
+          description: '`Id_Ujian_Token` tidak dikenali di Performance Appraisal.'
+        '422':
+          description: |
+            Bentuk kirimannya tidak sah, dan pesannya selalu menyebut butir yang
+            bermasalah. Penyebabnya: `Detail` kosong atau tidak ada; ada butir
+            tanpa `Kode_Soal`; satu `Kode_Soal` muncul dua kali dalam satu kiriman;
+            `Skor` terisi tetapi `Skor_Maksimal` kosong atau nol; `Skor` melebihi
+            `Skor_Maksimal`; `Id_Ujian_Nilai_Akhir` yang sama pernah dipakai untuk
+            isi yang berbeda; atau penugasannya sudah dibatalkan.
+
+            Semuanya soal bentuk kiriman, bukan jaringan — mencoba ulang tanpa
+            memperbaiki isinya akan ditolak dengan pesan yang sama.
+
+components:
+
+  securitySchemes:
+    HcPublic:
+      type: apiKey
+      in: header
+      name: X-HC-Public
+      description: Kunci publik identifikasi aplikasi mitra (contoh `WEBCAREERS_...` atau `MITRA_...`).
+    HcSignature:
+      type: apiKey
+      in: header
+      name: X-HC-Signature
+      description: Tanda tangan HMAC-SHA512 lowercase hex atas string kanonikal 7 baris yang di-sign menggunakan Api_Secret.
+    HcTimestamp:
+      type: apiKey
+      in: header
+      name: X-HC-Timestamp
+      description: |
+        Timestamp ISO-8601 UTC string (contoh `2026-09-12T07:30:00.000Z`).
+        Toleransi selisih jam maksimal ±60 detik dari jam server HCIS.
+        **JANGAN kirim epoch Unix**.
+    HcNonce:
+      type: apiKey
+      in: header
+      name: X-HC-Nonce
+      description: Nilai acak unik sekali pakai per pemanggilan HTTP untuk proteksi replay attack.
+    HcBodyHash:
+      type: apiKey
+      in: header
+      name: X-HC-Body-Hash
+      description: Nilai SHA-256 lowercase hex dari raw payload body (atau hash string kosong untuk GET).
+
+  parameters:
+    Unit:
+      name: unit
+      in: query
+      required: false
+      description: Kode unit operasional perusahaan. Saat ini mendukung unit `HEAD_OFFICE`.
+      schema:
+        type: string
+        enum: [HEAD_OFFICE]
+        default: HEAD_OFFICE
+      example: HEAD_OFFICE
+
+  schemas:
+
+    TamuB2BRequest:
+      type: object
+      required:
+        - nama_tamu
+        - instansi
+        - keperluan
+        - penanggung_jawab
+      example:
+        nama_tamu: Rudi Hermawan
+        instansi: PT Mitra Solusi Sejahtera
+        keperluan: Pengiriman perangkat server & instalasi rak data center
+        estimasi_masuk: '2026-09-20T08:00:00'
+        estimasi_keluar: '2026-09-20T16:00:00'
+        pic_tujuan: Ruang Server Lantai 2
+        penanggung_jawab: Budi Santoso
+        no_hp: '6281234567890'
+        no_identitas: '3201123456780001'
+        jenis_identitas: KTP
+        jenis_kendaraan: Mobil
+        no_plat_kendaraan: BG 1234 MT
+        keterangan: Tamu membawa perangkat, perlu akses loading dock.
+        referensi_mitra: MITRA-VIS-9812
+        daftar_anggota:
+          - nama: Andi Pratama
+            jenis_identitas: KTP
+            no_identitas: '3201123456780002'
+      properties:
+        nama_tamu:
+          type: string
+          maxLength: 150
+          description: Nama lengkap tamu utama yang berkunjung.
+          example: Rudi Hermawan
+        instansi:
+          type: string
+          maxLength: 150
+          description: Nama perusahaan, instansi, atau organisasi asal tamu.
+          example: PT Mitra Solusi Sejahtera
+        keperluan:
+          type: string
+          maxLength: 250
+          description: Keperluan kunjungan atau uraian pekerjaan di lokasi.
+          example: Pengiriman perangkat server & instalasi rak data center
+        estimasi_masuk:
+          type: string
+          format: date-time
+          nullable: true
+          description: >
+            Perkiraan tamu masuk. Wajib berpasangan dengan `estimasi_keluar`, dan wajib
+            sepenuhnya setelah masa transisi. Tanggalnya menjadi tanggal kunjungan.
+          example: '2026-09-20T08:00:00'
+        estimasi_keluar:
+          type: string
+          format: date-time
+          nullable: true
+          description: >
+            Perkiraan tamu keluar; harus setelah `estimasi_masuk`, paling lama 30 hari
+            sesudahnya. Rentang lebih dari 24 jam tercatat sebagai kunjungan MITRA.
+          example: '2026-09-20T16:00:00'
+        tanggal_kunjungan:
+          type: string
+          format: date
+          nullable: true
+          deprecated: true
+          description: >
+            Bentuk lama (YYYY-MM-DD), hanya diterima selama masa transisi bila estimasi tidak
+            dikirim: kunjungan dianggap berlangsung seharian pada tanggal ini.
+          example: '2026-09-20'
+        pic_tujuan:
+          type: string
+          maxLength: 100
+          nullable: true
+          description: >
+            KE MANA tamu ini menuju - nama departemen, ruang, atau area. Berbeda dari
+            penanggung_jawab, yang menyebut SIAPA yang bertanggung jawab atas kunjungannya.
+            Bila kosong, tujuan jatuh ke nama aplikasi mitra Anda.
+        penanggung_jawab:
+          type: string
+          maxLength: 150
+          description: >
+            WAJIB. Nama orang yang bertanggung jawab atas kunjungan ini - orang inilah yang
+            dihubungi petugas gerbang bila ada pertanyaan tentang tamunya. Kunjungan lewat
+            API tidak punya karyawan pendaftar di HCIS, sehingga tanpa nama ini tamu Anda
+            sampai di gerbang tanpa seorang pun yang bisa dihubungi. Cukup nama; kode
+            karyawan tidak diperlukan dan memang tidak Anda miliki.
+          example: Budi Santoso / IT Infrastructure
+        no_hp:
+          type: string
+          maxLength: 20
+          nullable: true
+          description: Nomor kontak tamu yang dapat dihubungi selama kunjungan.
+          example: '6281234567890'
+        no_identitas:
+          type: string
+          maxLength: 100
+          nullable: true
+          description: Nomor dokumen identitas resmi (NIK KTP, No SIM, atau No Paspor).
+          example: '3201123456780001'
+        jenis_identitas:
+          type: string
+          maxLength: 20
+          nullable: true
+          description: Jenis dokumen identitas resmi yang digunakan.
+          example: KTP
+        jenis_kendaraan:
+          type: string
+          maxLength: 50
+          nullable: true
+          description: >
+            Jenis kendaraan yang dibawa. Tamu B2B wajib berkendaraan; selama masa transisi
+            nilai kosong masih diterima dengan `peringatan`.
+          example: Mobil
+        no_plat_kendaraan:
+          type: string
+          maxLength: 50
+          nullable: true
+          description: >
+            Plat nomor kendaraan utuh, otomatis dipecah di backend ke prefix, angka, dan
+            suffix. Wajib setelah masa transisi.
+          example: BG 1234 MT
+        keterangan:
+          type: string
+          maxLength: 500
+          nullable: true
+          description: Catatan tambahan yang membantu penerimaan tamu.
+          example: Tamu membawa perangkat, perlu akses loading dock.
+        referensi_mitra:
+          type: string
+          maxLength: 100
+          nullable: true
+          description: Nomor tiket / ID referensi tamu internal di sistem Anda. Dipakai sebagai kunci idempoten otomatis bila header Idempotency-Key tidak dikirim.
+          example: MITRA-VIS-9812
+        daftar_anggota:
+          type: array
+          nullable: true
+          description: >
+            Orang-orang yang MENYERTAI tamu utama. Nama pada `nama_tamu` tidak perlu diulang
+            di sini dan tidak akan disisipkan sendiri oleh HCIS, sehingga isi daftar ini
+            persis seperti yang Anda kirim. Tamu yang datang sendirian cukup mengosongkannya
+            atau tidak mengirimnya; jumlah tamunya tetap terhitung satu.
+          items:
+            type: object
+            required: [nama]
+            properties:
+              nama: { type: string, maxLength: 150, example: Andi Pratama }
+              jenis_identitas: { type: string, maxLength: 20, nullable: true, example: KTP }
+              no_identitas: { type: string, maxLength: 100, nullable: true, example: '3201123456780002' }
+
+    TamuB2BStatus:
+      type: object
+      required: [sukses, message, result]
+      properties:
+        sukses:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: Status registrasi tamu
+        result:
+          type: object
+          required:
+            - no_transaksi
+            - status
+          properties:
+            no_transaksi:
+              type: string
+              description: Nomor registrasi KUNJUNGAN di HCIS. Simpan nilai ini untuk memantau statusnya.
+              example: VSR0926-0031
+            no_transaksi_permit:
+              type: string
+              nullable: true
+              description: >
+                Nomor transaksi izin gerbangnya, terpisah dari nomor kunjungan. Dipakai mitra
+                untuk memantau persetujuan permit — lewat `permit_coklat.status` pada endpoint
+                status kunjungan, atau lewat `GET /permit-tamu/{no_transaksi_permit}`.
+                NULL berarti permitnya belum diajukan: kunjungannya sendiri masih menunggu
+                approval, atau tamunya bukan tipe berpermit.
+              example: PMT0926-0014
+            status:
+              type: string
+              enum: [PENDING, APPROVED, REJECTED, REVOKED, EXPIRED]
+              description: >
+                Boleh tidaknya tamu masuk — GABUNGAN keadaan kunjungan dan keadaan izin
+                gerbangnya, bukan keadaan kunjungannya saja. APPROVED berarti kunjungan
+                disetujui DAN izin gerbangnya sudah terbit; hanya pada nilai inilah tamu
+                boleh diberangkatkan. PENDING salah satunya masih menunggu verifikator.
+                REJECTED ditolak, REVOKED dicabut setelah sempat berlaku, EXPIRED izinnya
+                habis masa berlakunya.
+              example: PENDING
+            status_kunjungan:
+              type: string
+              enum: [PENDING, APPROVED, REJECTED, REVOKED, EXPIRED]
+              description: >
+                Keadaan KUNJUNGAN-nya saja, tanpa memperhitungkan izin gerbang. Berguna
+                untuk membedakan "kunjungannya ditolak" dari "izinnya belum terbit";
+                untuk memutuskan memberangkatkan tamu, pakai `status`. EXPIRED berarti
+                jendela kunjungannya sudah berakhir (tamu sudah pulang, tidak datang, atau
+                keluar tanpa tercatat) — kunjungan baru perlu didaftarkan ulang.
+              example: APPROVED
+            sumber:
+              type: string
+              enum: [API, HCIS]
+              description: >
+                Asal pendaftarannya. API bila didaftarkan aplikasi mitra lewat
+                `POST /tamu-b2b`, HCIS bila dientri langsung dari layar HCIS. Endpoint ini
+                melayani keduanya, sehingga balasan `200` tidak dengan sendirinya berarti
+                kunjungan itu didaftarkan oleh aplikasi Anda.
+              example: API
+            alasan:
+              type: string
+              nullable: true
+              description: Terisi bila kunjungan ditolak atau dicabut.
+            nama_tamu:
+              type: string
+              nullable: true
+              example: Rudi Hermawan
+            tanggal_kunjungan:
+              type: string
+              format: date
+              nullable: true
+              example: '2026-09-20'
+            referensi_mitra:
+              type: string
+              nullable: true
+              example: MITRA-VIS-9812
+            permit_coklat:
+              type: object
+              nullable: true
+              description: >
+                Izin gerbang milik kunjungan ini. Diajukan otomatis setelah kunjungannya
+                disetujui, lalu MENUNGGU persetujuan verifikator seperti permit kendaraan
+                lainnya. NULL berarti belum diajukan — tamu REGULAR, atau kunjungannya
+                sendiri belum disetujui.
+              properties:
+                no_transaksi:
+                  type: string
+                  description: Nomor transaksi permitnya sendiri, berbeda dari nomor kunjungan.
+                  example: PMT0926-0014
+                status:
+                  type: string
+                  enum: [PENDING, APPROVED, REJECTED, REVOKED, EXPIRED]
+                  description: >
+                    PENDING menunggu verifikator — tamu BELUM boleh masuk; APPROVED izin
+                    berlaku; REJECTED izinnya ditolak meski kunjungannya disetujui; REVOKED
+                    dicabut; EXPIRED masa berlakunya habis atau tamunya sudah tercatat keluar.
+                  example: PENDING
+                durasi: { type: string, example: 1 Hari }
+                berlaku_dari: { type: string, format: date, example: '2026-09-20' }
+                berlaku_sampai: { type: string, format: date, example: '2026-09-20' }
+            idempotent_replay:
+              type: boolean
+              nullable: true
+              description: Hanya muncul pada kiriman ulang; menandakan tidak ada registrasi baru yang dibuat.
+            peringatan:
+              type: array
+              nullable: true
+              items: { type: string }
+              description: >
+                Hanya pada pengajuan baru selama masa transisi: field yang nanti WAJIB tetapi
+                belum Anda kirim. Pengajuannya tetap diterima; lengkapi sebelum masa transisi
+                berakhir, karena sesudahnya permintaan serupa ditolak `422`.
+              example: ['no_plat_kendaraan akan wajib untuk tamu B2B.']
+
+    PermitTamuRequest:
+      type: object
+      required:
+        - nama_tamu
+        - instansi
+        - keperluan
+      example:
+        nama_tamu: Rudi Hermawan
+        instansi: PT Mitra Solusi Sejahtera
+        no_identitas: '3201123456780001'
+        jenis_identitas: KTP
+        jenis_kendaraan: Mobil
+        no_plat_kendaraan: BG 1234 MT
+        keperluan: Pengiriman perangkat server & instalasi rak data center
+        referensi_mitra: MITRA-VIS-9812
+      properties:
+        nama_tamu:
+          type: string
+          maxLength: 150
+          description: Nama lengkap tamu yang akan berkunjung ke area perusahaan.
+          example: Rudi Hermawan
+        instansi:
+          type: string
+          maxLength: 150
+          description: Nama perusahaan, instansi, atau organisasi asal tamu.
+          example: PT Mitra Solusi Sejahtera
+        no_identitas:
+          type: string
+          maxLength: 100
+          nullable: true
+          description: Nomor dokumen identitas resmi (NIK KTP, No SIM, atau No Paspor).
+          example: '3201123456780001'
+        jenis_identitas:
+          type: string
+          maxLength: 20
+          nullable: true
+          description: Jenis dokumen identitas resmi yang digunakan.
+          example: KTP
+        jenis_kendaraan:
+          type: string
+          maxLength: 50
+          nullable: true
+          description: >
+            Jenis kendaraan yang digunakan masuk area gerbang (contoh: Mobil, Motor, Truk).
+            Kosongkan (null) apabila tamu datang sebagai pejalan kaki; permit tetap dapat diterbitkan.
+          example: Mobil
+        no_plat_kendaraan:
+          type: string
+          maxLength: 50
+          nullable: true
+          description: Plat nomor kendaraan utuh. Otomatis dipecah di backend ke prefix, angka, dan suffix.
+          example: BG 1234 MT
+        plat_prefix:
+          type: string
+          maxLength: 5
+          nullable: true
+          description: Huruf depan/kode wilayah plat nomor kendaraan.
+          example: BG
+        plat_angka:
+          type: string
+          maxLength: 10
+          nullable: true
+          description: Angka plat nomor kendaraan.
+          example: '1234'
+        plat_suffix:
+          type: string
+          maxLength: 10
+          nullable: true
+          description: Huruf belakang/seri plat nomor kendaraan.
+          example: MT
+        keperluan:
+          type: string
+          maxLength: 250
+          description: Keperluan kunjungan atau deskripsi pekerjaan yang akan dilakukan di lokasi.
+          example: Pengiriman perangkat server & instalasi rak data center
+        referensi_mitra:
+          type: string
+          maxLength: 100
+          nullable: true
+          description: Nomor tiket / ID referensi tamu internal di sistem aplikasi mitra untuk rekonsiliasi data. Dipakai sebagai kunci idempoten otomatis jika header Idempotency-Key tidak dikirim.
+          example: MITRA-VIS-9812
+
+    PermitTamuStatus:
+      type: object
+      required: [sukses, message, result]
+      properties:
+        sukses:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: Status permit
+        result:
+          type: object
+          required:
+            - no_transaksi
+            - status
+            - tanggal_berlaku
+            - durasi
+          properties:
+            no_transaksi:
+              type: string
+              description: Nomor registrasi transaksi permit resmi dari HCIS.
+              example: PMT0926-0042
+            status:
+              type: string
+              enum: [PENDING, APPROVED, REJECTED, REVOKED, EXPIRED]
+              description: >
+                Status permit saat ini:
+                - `PENDING`: Menunggu peninjauan verifikator.
+                - `APPROVED`: Disetujui dan aktif berlaku di pos gerbang pada tanggal_berlaku.
+                - `REJECTED`: Ditolak oleh verifikator.
+                - `REVOKED`: Dicabut oleh verifikator atau dibatalkan oleh mitra.
+                - `EXPIRED`: Tanggal berlaku permit sudah lewat.
+              example: APPROVED
+            alasan:
+              type: string
+              nullable: true
+              description: >
+                Catatan penjelasan alasan penolakan atau pencabutan permit (terisi bila REJECTED / REVOKED),
+                termasuk penutupan otomatis oleh sistem. Selalu `null` untuk permit bersumber `KARYAWAN`:
+                catatan internal verifikator atas permit karyawan tidak dibuka ke mitra.
+              example: null
+            tanggal_berlaku:
+              type: string
+              format: date
+              description: Tanggal permit berlaku selama satu hari kalender.
+              example: '2026-09-15'
+            durasi:
+              type: string
+              description: >
+                Durasi izin aksesnya. Selalu `1 Hari` untuk permit mitra dan permit tamu;
+                permit kendaraan karyawan memakai durasi masternya (mis. `1 Bulan`, `3 Bulan`).
+              example: 1 Hari
+            sumber:
+              type: string
+              enum: [KARYAWAN, API, TAMU]
+              description: >
+                Jenis permitnya. KARYAWAN = permit kendaraan karyawan dari layar HCIS;
+                API = permit yang diajukan mitra lewat POST /permit-tamu;
+                TAMU = permit COKLAT yang lahir dari registrasi tamu B2B.
+                Hanya muncul pada respons status, bukan pada respons pengajuan.
+              example: API
+            referensi_mitra:
+              type: string
+              nullable: true
+              description: ID referensi tamu dari sistem mitra. Selalu null pada permit karyawan.
+              example: MITRA-VIS-9812
+            idempotent_replay:
+              type: boolean
+              nullable: true
+              description: Bernilai true jika pengajuan merupakan kiriman ulang idempoten dengan Idempotency-Key yang sama.
+              example: null
+
+    PermitTamuBatalResponse:
+      type: object
+      required: [sukses, message, result]
+      properties:
+        sukses:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: Permit dibatalkan
+        result:
+          type: object
+          required: [no_transaksi]
+          properties:
+            no_transaksi:
+              type: string
+              example: PMT0926-0042
+
+    KartuPermitStatus:
+      type: object
+      required: [sukses, message, result]
+      properties:
+        sukses:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: Status kartu permit
+        result:
+          type: object
+          required: [sah, status, judul, sebab, kategori, plat, berlaku_sejak, berlaku_sampai, dicek]
+          properties:
+            sah:
+              type: boolean
+            status:
+              type: string
+              enum: [AKTIF, DICABUT, KEDALUWARSA, DITOLAK, BELUM_DISETUJUI, TIDAK_DIKENALI]
+            judul:
+              type: string
+              example: KARTU SAH
+            sebab:
+              type: string
+              nullable: true
+            kategori:
+              type: string
+              nullable: true
+              example: HIJAU
+            plat:
+              type: string
+              nullable: true
+              description: Plat tersamar (dua digit terakhir diganti •).
+              example: BG 12•• XY
+            berlaku_sejak:
+              type: string
+              nullable: true
+              example: 01 Sep 2026
+            berlaku_sampai:
+              type: string
+              nullable: true
+              example: 30 Sep 2026
+            dicek:
+              type: string
+              example: 28 Sep 2026 14:07
+
+    PermitTamuDiterima:
+      type: object
+      required: [sukses, message, result]
+      properties:
+        sukses:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: Pengajuan permit diterima
+        result:
+          type: object
+          required: [no_transaksi, status]
+          properties:
+            no_transaksi:
+              type: string
+              example: PMT0926-0042
+            status:
+              type: string
+              enum: [PENDING]
+            referensi_mitra:
+              type: string
+              nullable: true
+              example: MITRA-VIS-9812
+
+    PermitTamuReplay:
+      type: object
+      required: [sukses, message, result]
+      properties:
+        sukses:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: Pengajuan permit sudah pernah diterima
+        result:
+          type: object
+          required: [no_transaksi, status, idempotent_replay]
+          properties:
+            no_transaksi:
+              type: string
+              example: PMT0926-0042
+            status:
+              type: string
+              enum: [PENDING, APPROVED, REJECTED, REVOKED, EXPIRED]
+            idempotent_replay:
+              type: boolean
+              enum: [true]
+
+    TanggalTidakOperasional:
+      type: object
+      required: [tanggal, jenis, nama]
+      properties:
+        tanggal:
+          type: string
+          format: date
+          description: Tanggal libur / tidak beroperasi dalam format YYYY-MM-DD.
+          example: '2026-04-01'
+        jenis:
+          type: string
+          enum: [LIBUR_NASIONAL, CUTI_BERSAMA, LIBUR_PERUSAHAAN]
+          description: Kategori jenis hari libur resmi.
+          example: CUTI_BERSAMA
+        nama:
+          type: string
+          description: Nama resmi hari libur nasional atau cuti bersama.
+          example: Cuti Bersama Idul Fitri 1447 H
+        status:
+          type: string
+          enum: [TERJADWAL, BERJALAN, SELESAI]
+          nullable: true
+          description: >
+            Hanya ada pada jenis `CUTI_BERSAMA`. Menjelaskan status keterlaksanaan hari libur terhadap tanggal saat ini.
+          example: TERJADWAL
+
+    KalenderDasar:
+      type: object
+      required: [unit, hari_kerja_mingguan, digenerate_at, tanggal_tidak_operasional]
+      properties:
+        unit:
+          type: string
+          description: Kode unit operasional.
+          example: HEAD_OFFICE
+        hari_kerja_mingguan:
+          type: array
+          description: Daftar hari kerja mingguan (1 = Senin s/d 6 = Sabtu, 0 = Minggu).
+          items:
+            type: integer
+            minimum: 0
+            maximum: 6
+          example: [1, 2, 3, 4, 5, 6]
+        digenerate_at:
+          type: string
+          format: date-time
+          description: Timestamp pembentukan data kalender operasional oleh server HCIS.
+          example: '2026-09-12T07:30:00+07:00'
+        tanggal_tidak_operasional:
+          type: array
+          description: Daftar tanggal tidak operasional yang diurutkan secara kronologis menaik.
+          items:
+            $ref: '#/components/schemas/TanggalTidakOperasional'
+
+    KalenderTahun:
+      type: object
+      required: [sukses, message, result]
+      properties:
+        sukses:
+          type: boolean
+          const: true
+          example: true
+        message:
+          type: string
+          example: Kalender operasional 2026
+        result:
+          allOf:
+            - $ref: '#/components/schemas/KalenderDasar'
+            - type: object
+              required: [tahun]
+              properties:
+                tahun:
+                  type: integer
+                  description: Tahun kalender yang diminta.
+                  example: 2026
+
+    KalenderRentang:
+      type: object
+      required: [sukses, message, result]
+      properties:
+        sukses:
+          type: boolean
+          const: true
+          example: true
+        message:
+          type: string
+          example: Kalender operasional 2026-09-01 s/d 2026-12-31
+        result:
+          allOf:
+            - $ref: '#/components/schemas/KalenderDasar'
+            - type: object
+              required: [dari, sampai]
+              properties:
+                dari:
+                  type: string
+                  format: date
+                  description: Tanggal awal rentang kalender (YYYY-MM-DD).
+                  example: '2026-09-01'
+                sampai:
+                  type: string
+                  format: date
+                  description: Tanggal akhir rentang kalender (YYYY-MM-DD).
+                  example: '2026-12-31'
+
+    SopKuisCallback:
+      type: object
+      required:
+        - Kode_Karyawan
+        - Id_Penjadwalan_Integrasi
+        - Id_Ujian_Token
+        - Score
+      properties:
+        Kode_Karyawan:
+          type: string
+          description: Kode karyawan peserta kuis SOP di HCIS.
+          example: KRY-08912
+        Id_Penjadwalan_Integrasi:
+          type: integer
+          description: ID sesi integrasi penjadwalan kuis.
+          example: 4412
+        Id_Ujian_Token:
+          type: string
+          description: Token sesi ujian kuis dari platform HC Learn.
+          example: 'tok_exam_89a7f32bc01e'
+        Score:
+          type: number
+          minimum: 0
+          maximum: 100
+          description: Nilai angka hasil kuis (rentang 0 s/d 100).
+          example: 87.5
+
+    SopCallbackResponse:
+      type: object
+      required: [success, message, status]
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: Data ujian SOP berhasil diproses
+        status:
+          type: string
+          enum: [LULUS, TIDAK_LULUS]
+          description: Status kelulusan karyawan berdasarkan ambang batas kelulusan SOP.
+          example: LULUS
+
+    Galat:
+      type: object
+      required: [sukses, message, result]
+      properties:
+        sukses:
+          type: boolean
+          const: false
+          example: false
+        message:
+          type: string
+          description: Pesan penjelasan penyebab galat.
+          example: Terjadi kesalahan validasi data.
+        result:
+          type: 'null'
+          example: null
+
+    PaPenilaianCallback:
+      type: object
+      required: [Kode_Karyawan, Id_Integrasi, Id_Ujian_Token, Detail]
+      properties:
+        Kode_Karyawan:
+          type: string
+          description: |
+            PENILAI yang mengisi formulir — bukan orang yang dinilai. Identitas
+            yang dinilai tidak diperlukan: tokennya sudah mewakili satu penugasan.
+          example: DEMO-001
+        Id_Integrasi:
+          type: integer
+          description: |
+            Dikembalikan apa adanya dari penjadwalan. Namanya sengaja sama dengan
+            yang HCIS kirim, supaya tidak ada penggantian nama di tengah jalan.
+            `Id_Penjadwalan_Integrasi` juga diterima demi klien callback yang sudah
+            ada — jangan kirim keduanya dengan nilai berbeda.
+          example: 9001
+        Id_Penjadwalan_Integrasi:
+          type: integer
+          description: Alias lama dari `Id_Integrasi`. Pakai salah satu, bukan keduanya.
+        Id_Ujian_Token:
+          type: string
+          description: Satu-satunya kunci sambung ke penugasan.
+          example: tok-aaa
+        Id_Ujian_Nilai_Akhir:
+          type: string
+          description: |
+            Penanda hasil milik HC Learn. Tidak wajib, tetapi sangat diharapkan:
+            dengan ini kiriman ulang bisa dikenali sebagai hasil yang sama. Satu
+            penanda tidak boleh mewakili dua isi berbeda — bila itu terjadi,
+            kiriman kedua ditolak 422.
+          example: NILAI-2027-000123
+        Api_Version:
+          type: string
+          description: Versi bentuk kiriman Anda. Disimpan apa adanya untuk penelusuran.
+          example: pa-v1
+        Total_Nilai:
+          type: number
+          description: |
+            PEMBANDING SAJA, tidak pernah menjadi sumber nilai. Berguna untuk
+            mendeteksi selisih antara hitungan Anda dan hitungan HCIS.
+          example: 82.5
+        Detail:
+          type: array
+          minItems: 1
+          description: |
+            Wajib dan tidak boleh kosong. Kirim SELURUH butir paket dalam satu
+            kiriman — bukan sebagian, dan bukan dicicil beberapa kali.
+          items: { $ref: '#/components/schemas/PaButirPenilaian' }
+
+    PaButirPenilaian:
+      type: object
+      required: [Kode_Soal]
+      properties:
+        Kode_Soal:
+          type: string
+          description: |
+            Harus PERSIS SAMA dengan kode butir pada susunan paket soal — itulah
+            satu-satunya jembatan butir ke kompetensi. Butir yang kodenya tidak
+            dikenali TIDAK dibuang: ia tersimpan tanpa kompetensi dan dilaporkan
+            balik lewat `tak_terpetakan`, karena membuangnya diam-diam membuat
+            nilai terhitung dari sebagian butir saja dan angkanya tetap tampak
+            wajar. Tidak boleh muncul dua kali dalam satu kiriman.
+          example: PA-STAFF-2027-Q01
+        Jenis_Soal:
+          type: string
+          description: Misalnya SKALA atau ESAI. Disimpan untuk penelusuran.
+          example: SKALA
+        Skor:
+          type: number
+          nullable: true
+          description: |
+            Skor mentah butir itu menurut skala Anda — JANGAN dinormalkan ke 100;
+            HCIS yang menormalkannya. Boleh kosong untuk butir yang memang tidak
+            berskor, misalnya esai.
+          example: 4
+        Skor_Maksimal:
+          type: number
+          nullable: true
+          description: |
+            WAJIB ADA DAN HARUS > 0 setiap kali `Skor` terisi, dan `Skor` tidak
+            boleh melebihinya. Tanpa pasangannya sebuah skor tidak punya skala:
+            angka 4 bisa berarti sangat baik pada skala 5 atau nyaris gagal pada
+            skala 10, dan tidak ada cara menebaknya.
+          example: 5
+        Bobot_Penilaian:
+          type: number
+          nullable: true
+          description: Bobot butir menurut Anda, bila ada. Disimpan sebagai pembanding.
+        Jawaban_Teks:
+          type: string
+          nullable: true
+          description: |
+            Jawaban esai atau komentar penilai. Ditampilkan kepada atasan dan HC
+            saat verifikasi — inilah yang membuat angka bisa dijelaskan.
+
+    PaPenilaianCallbackHasil:
+      type: object
+      properties:
+        success: { type: boolean, example: true }
+        status: { type: integer, example: 200 }
+        message: { type: string, example: Hasil penilaian diterima dan dipetakan. }
+        result:
+          type: object
+          properties:
+            payload_id: { type: integer, example: 5521 }
+            assignment_id: { type: integer, example: 9001 }
+            baru:
+              type: boolean
+              description: '`false` bila kiriman dengan isi yang persis sama sudah pernah diterima.'
+              example: true
+            perhitungan_diantrekan:
+              type: boolean
+              description: Apakah kiriman ini melengkapi penugasan dan memicu perhitungan.
+              example: false
+            butir:
+              type: integer
+              description: Berapa butir tersimpan dari kiriman ini. Absen pada kiriman ulang.
+              example: 3
+            berskor:
+              type: integer
+              description: Berapa di antaranya berskor. Absen pada kiriman ulang.
+              example: 2
+            tak_terpetakan:
+              type: array
+              items: { type: string }
+              description: |
+                `Kode_Soal` yang tidak ada di paket HCIS. Isi yang tidak kosong
+                berarti kode butir Anda dan HCIS berbeda. Absen pada kiriman ulang.
+            butir_hilang:
+              type: array
+              items: { type: string }
+              description: |
+                Butir paket yang tidak Anda kirim. Isi yang tidak kosong berarti
+                kiriman belum utuh. Absen pada kiriman ulang.
+            kontrak_lengkap:
+              type: boolean
+              description: |
+                `true` hanya bila seluruh butir paket hadir. HANYA nilai `true`
+                yang membuat penugasan ditandai selesai dan nilai peserta mulai
+                dihitung. Absen pada kiriman ulang.
+              example: true
+
+  responses:
+
+    Galat400:
+      description: |
+        Permintaan tidak sah (*Bad Request*). Format parameter salah atau melanggar batasan sistem:
+
+        | Penyebab Galat | Contoh Pesan `message` |
+        |---|---|
+        | Parameter `dari` kosong | `Parameter 'dari' wajib diisi (format YYYY-MM-DD).` |
+        | Parameter `sampai` kosong | `Parameter 'sampai' wajib diisi (format YYYY-MM-DD).` |
+        | Format tanggal salah | `Parameter '{nama}' harus berformat YYYY-MM-DD.` |
+        | Tanggal sampai < dari | `Parameter 'sampai' tidak boleh lebih awal dari 'dari'.` |
+        | Rentang > 400 hari | `Rentang tanggal maksimal 400 hari.` |
+        | Unit tidak dikenal | `Unit '{nilai}' tidak dikenal.` |
+        | Tahun di luar batas (2020-2100) | `Parameter 'tahun' harus 4 digit antara 2020 dan 2100.` |
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Galat'
+          example:
+            sukses: false
+            message: Parameter 'sampai' tidak boleh lebih awal dari 'dari'.
+            result: null
+
+    Galat401:
+      description: |
+        Autentikasi gagal (*Unauthorized*). Terjadi karena header keamanan tidak lengkap, timestamp kedaluwarsa, nonce telah digunakan, kunci publik tidak valid, atau tanda tangan HMAC tidak cocok.
+
+        #### ⚠️ Penyebab Kegagalan 401 Paling Umum:
+        1. **Format Timestamp Salah**: `X-HC-Timestamp` dikirim sebagai angka epoch Unix (`1789...`). Harus dalam string ISO-8601 UTC (`2026-09-12T07:30:00.000Z`).
+        2. **Perbedaan Path yang Ditandatangani**: String kanonikal baris `PATH` harus menggunakan jalur URL yang **benar-benar dipanggil** (misalnya `/api/v1/hcis/visitor/permit-tamu/PMT0926-0042`), bukan pola template rute `{no_transaksi}`.
+        3. **Perbedaan Body Hash**: String body yang di-hash SHA-256 pada header `X-HC-Body-Hash` berbeda byte dari raw payload yang dikirimkan.
+        4. **Nonce Duplikat**: Mengirimkan nilai `X-HC-Nonce` yang sudah pernah digunakan sebelumnya.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Galat'
+          example:
+            sukses: false
+            message: Signature mismatch. Pastikan format canonical string dan Api_Secret sesuai.
+            result: null
+
+    Galat403:
+      description: |
+        Akses ditolak (*Forbidden*). Kunci publik aplikasi dikenali, tetapi endpoint ini tidak terdaftar dalam whitelist hak akses aplikasi Anda di registry HCIS.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Galat'
+          example:
+            sukses: false
+            message: Aplikasi Anda tidak memiliki izin untuk mengakses endpoint ini.
+            result: null
+
+    Galat404:
+      description: |
+        Data tidak ditemukan (*Not Found*). Nomor transaksi tidak ada di sistem, atau data tersebut milik aplikasi mitra lain (isolasi penyewa).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Galat'
+          example:
+            sukses: false
+            message: Permit tidak ditemukan.
+            result: null
+
+    Galat422:
+      description: |
+        Data permohonan tidak dapat diproses (*Unprocessable Entity*). Payload gagal melewati validasi aturan bisnis atau field wajib tidak terisi.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Galat'
+          example:
+            sukses: false
+            message: Tanggal berlaku harus berformat YYYY-MM-DD.
+            result: null
+
+    Galat429:
+      description: |
+        Batas kuota terlampaui (*Too Many Requests*). Jumlah permit aktif aplikasi Anda telah mencapai ambang batas maksimal.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Galat'
+          example:
+            sukses: false
+            message: Batas permit aktif aplikasi ini sudah tercapai (50). Jatah kembali setelah permit ditolak, dibatalkan, atau kedaluwarsa.
+            result: null
+
+    Galat503:
+      description: |
+        Layanan tidak tersedia (*Service Unavailable*). Master data atau dependensi modul sedang dalam pemeliharaan.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Galat'
+          example:
+            sukses: false
+            message: Master kategori permit COKLAT tidak tersedia.
+            result: null

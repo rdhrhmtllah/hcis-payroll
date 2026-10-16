@@ -1,0 +1,14 @@
+{
+    "success": true,
+    "status": 200,
+    "message": "Berhasil",
+    "result": {
+        "participant_id": 122029,
+        "nama": "Diva Mona Lisa",
+        "status_lama": "DIIKUTKAN",
+        "status_baru": "DIKECUALIKAN",
+        "berubah": true,
+        "penugasan_dibatalkan": 0,
+        "pesan": "Status peserta diperbarui."
+    }
+}

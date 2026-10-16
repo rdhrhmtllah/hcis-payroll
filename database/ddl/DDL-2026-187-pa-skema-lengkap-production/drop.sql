@@ -1,0 +1,76 @@
+/* Change ID: DDL-2026-187-pa-skema-lengkap-production — drop.sql
+   BANTUAN MANUAL saja. Tidak pernah dijalankan agent. Menghapus seluruh tabel PA beserta datanya.
+*/
+
+IF OBJECT_ID('N_PA_Result_Rater_Category', 'U') IS NOT NULL DROP TABLE N_PA_Result_Rater_Category;
+IF OBJECT_ID('N_PA_Result_Note', 'U') IS NOT NULL DROP TABLE N_PA_Result_Note;
+IF OBJECT_ID('N_PA_Result_History', 'U') IS NOT NULL DROP TABLE N_PA_Result_History;
+IF OBJECT_ID('N_PA_Result_Competency', 'U') IS NOT NULL DROP TABLE N_PA_Result_Competency;
+IF OBJECT_ID('N_PA_Question_Binding_Master_Detail', 'U') IS NOT NULL DROP TABLE N_PA_Question_Binding_Master_Detail;
+IF OBJECT_ID('N_PA_Question_Binding_Master', 'U') IS NOT NULL DROP TABLE N_PA_Question_Binding_Master;
+IF OBJECT_ID('N_PA_Participant_Requirement_Override', 'U') IS NOT NULL DROP TABLE N_PA_Participant_Requirement_Override;
+IF OBJECT_ID('N_PA_Participant_Rater_Override', 'U') IS NOT NULL DROP TABLE N_PA_Participant_Rater_Override;
+IF OBJECT_ID('N_PA_Participant_Pillar_Override', 'U') IS NOT NULL DROP TABLE N_PA_Participant_Pillar_Override;
+IF OBJECT_ID('N_PA_Level_Exclusion', 'U') IS NOT NULL DROP TABLE N_PA_Level_Exclusion;
+IF OBJECT_ID('N_PA_Kalibrasi_Penilai_Jawaban', 'U') IS NOT NULL DROP TABLE N_PA_Kalibrasi_Penilai_Jawaban;
+IF OBJECT_ID('N_PA_Kalibrasi_Penilai_Detail', 'U') IS NOT NULL DROP TABLE N_PA_Kalibrasi_Penilai_Detail;
+IF OBJECT_ID('N_PA_Kalibrasi_Penilai', 'U') IS NOT NULL DROP TABLE N_PA_Kalibrasi_Penilai;
+IF OBJECT_ID('N_PA_Cycle_Setup_Step', 'U') IS NOT NULL DROP TABLE N_PA_Cycle_Setup_Step;
+IF OBJECT_ID('N_PA_Cycle_Score_Range_Snapshot', 'U') IS NOT NULL DROP TABLE N_PA_Cycle_Score_Range_Snapshot;
+IF OBJECT_ID('N_PA_Score_Range', 'U') IS NOT NULL DROP TABLE N_PA_Score_Range;
+IF OBJECT_ID('N_PA_Score_Usage', 'U') IS NOT NULL DROP TABLE N_PA_Score_Usage;
+IF OBJECT_ID('N_PA_Score_Type', 'U') IS NOT NULL DROP TABLE N_PA_Score_Type;
+IF OBJECT_ID('N_PA_Cycle_Rater_Policy_Detail_Snapshot', 'U') IS NOT NULL DROP TABLE N_PA_Cycle_Rater_Policy_Detail_Snapshot;
+IF OBJECT_ID('N_PA_Rater_Policy_Detail', 'U') IS NOT NULL DROP TABLE N_PA_Rater_Policy_Detail;
+IF OBJECT_ID('N_PA_Cycle_Question_Package_Item', 'U') IS NOT NULL DROP TABLE N_PA_Cycle_Question_Package_Item;
+IF OBJECT_ID('N_PA_Result_Note_Type', 'U') IS NOT NULL DROP TABLE N_PA_Result_Note_Type;
+IF OBJECT_ID('N_PA_Cycle_Pre_Exclusion', 'U') IS NOT NULL DROP TABLE N_PA_Cycle_Pre_Exclusion;
+IF OBJECT_ID('N_PA_Cycle_Pillar_Weight_Snapshot', 'U') IS NOT NULL DROP TABLE N_PA_Cycle_Pillar_Weight_Snapshot;
+IF OBJECT_ID('N_PA_Pillar_Weight', 'U') IS NOT NULL DROP TABLE N_PA_Pillar_Weight;
+IF OBJECT_ID('N_PA_Cycle_Curve_Group_Level', 'U') IS NOT NULL DROP TABLE N_PA_Cycle_Curve_Group_Level;
+IF OBJECT_ID('N_PA_Cycle_Curve_Band', 'U') IS NOT NULL DROP TABLE N_PA_Cycle_Curve_Band;
+IF OBJECT_ID('N_PA_Cycle_Competency_Snapshot', 'U') IS NOT NULL DROP TABLE N_PA_Cycle_Competency_Snapshot;
+IF OBJECT_ID('N_PA_Cycle_Competency_Requirement_Snapshot', 'U') IS NOT NULL DROP TABLE N_PA_Cycle_Competency_Requirement_Snapshot;
+IF OBJECT_ID('N_PA_Cycle_Competency_Level_Snapshot', 'U') IS NOT NULL DROP TABLE N_PA_Cycle_Competency_Level_Snapshot;
+IF OBJECT_ID('N_PA_Curve_Group_Level', 'U') IS NOT NULL DROP TABLE N_PA_Curve_Group_Level;
+IF OBJECT_ID('N_PA_Competency_Requirement', 'U') IS NOT NULL DROP TABLE N_PA_Competency_Requirement;
+IF OBJECT_ID('N_PA_Competency_Level_Requirement', 'U') IS NOT NULL DROP TABLE N_PA_Competency_Level_Requirement;
+IF OBJECT_ID('N_PA_Competency_Proficiency', 'U') IS NOT NULL DROP TABLE N_PA_Competency_Proficiency;
+IF OBJECT_ID('N_PA_Calibration_History', 'U') IS NOT NULL DROP TABLE N_PA_Calibration_History;
+IF OBJECT_ID('N_PA_Balancing_Kualitatif', 'U') IS NOT NULL DROP TABLE N_PA_Balancing_Kualitatif;
+IF OBJECT_ID('N_PA_Balancing_Kompetensi', 'U') IS NOT NULL DROP TABLE N_PA_Balancing_Kompetensi;
+IF OBJECT_ID('N_PA_Balancing_Peserta', 'U') IS NOT NULL DROP TABLE N_PA_Balancing_Peserta;
+IF OBJECT_ID('N_PA_Result', 'U') IS NOT NULL DROP TABLE N_PA_Result;
+IF OBJECT_ID('N_PA_Result_Status', 'U') IS NOT NULL DROP TABLE N_PA_Result_Status;
+IF OBJECT_ID('N_PA_Hav_Quadrant', 'U') IS NOT NULL DROP TABLE N_PA_Hav_Quadrant;
+IF OBJECT_ID('N_PA_Cycle_Curve', 'U') IS NOT NULL DROP TABLE N_PA_Cycle_Curve;
+IF OBJECT_ID('N_PA_Cycle_Curve_Group', 'U') IS NOT NULL DROP TABLE N_PA_Cycle_Curve_Group;
+IF OBJECT_ID('N_PA_Curve_Group', 'U') IS NOT NULL DROP TABLE N_PA_Curve_Group;
+IF OBJECT_ID('N_PA_Balancing_Jejak_Hitung', 'U') IS NOT NULL DROP TABLE N_PA_Balancing_Jejak_Hitung;
+IF OBJECT_ID('N_PA_Balancing_Forum', 'U') IS NOT NULL DROP TABLE N_PA_Balancing_Forum;
+IF OBJECT_ID('N_PA_Balancing_Sesi', 'U') IS NOT NULL DROP TABLE N_PA_Balancing_Sesi;
+IF OBJECT_ID('N_PA_Assignment_Score_Esai', 'U') IS NOT NULL DROP TABLE N_PA_Assignment_Score_Esai;
+IF OBJECT_ID('N_PA_Assignment_Score', 'U') IS NOT NULL DROP TABLE N_PA_Assignment_Score;
+IF OBJECT_ID('N_PA_Competency', 'U') IS NOT NULL DROP TABLE N_PA_Competency;
+IF OBJECT_ID('N_PA_Competency_Type', 'U') IS NOT NULL DROP TABLE N_PA_Competency_Type;
+IF OBJECT_ID('N_PA_Assignment_Payload', 'U') IS NOT NULL DROP TABLE N_PA_Assignment_Payload;
+IF OBJECT_ID('N_PA_Assignment_Integration', 'U') IS NOT NULL DROP TABLE N_PA_Assignment_Integration;
+IF OBJECT_ID('N_PA_Cycle_Question_Package', 'U') IS NOT NULL DROP TABLE N_PA_Cycle_Question_Package;
+IF OBJECT_ID('N_PA_Assignment', 'U') IS NOT NULL DROP TABLE N_PA_Assignment;
+IF OBJECT_ID('N_PA_Assignment_Source', 'U') IS NOT NULL DROP TABLE N_PA_Assignment_Source;
+IF OBJECT_ID('N_PA_Assignment_Status', 'U') IS NOT NULL DROP TABLE N_PA_Assignment_Status;
+IF OBJECT_ID('N_PA_Participant', 'U') IS NOT NULL DROP TABLE N_PA_Participant;
+IF OBJECT_ID('N_PA_Participant_Status', 'U') IS NOT NULL DROP TABLE N_PA_Participant_Status;
+IF OBJECT_ID('N_PA_Cycle_Rater_Policy_Snapshot', 'U') IS NOT NULL DROP TABLE N_PA_Cycle_Rater_Policy_Snapshot;
+IF OBJECT_ID('N_PA_Rater_Policy', 'U') IS NOT NULL DROP TABLE N_PA_Rater_Policy;
+IF OBJECT_ID('N_PA_Rater_Policy_Status', 'U') IS NOT NULL DROP TABLE N_PA_Rater_Policy_Status;
+IF OBJECT_ID('N_PA_Karyawan_Level_PA', 'U') IS NOT NULL DROP TABLE N_PA_Karyawan_Level_PA;
+IF OBJECT_ID('N_PA_Level', 'U') IS NOT NULL DROP TABLE N_PA_Level;
+IF OBJECT_ID('N_PA_Cycle', 'U') IS NOT NULL DROP TABLE N_PA_Cycle;
+IF OBJECT_ID('N_PA_Cycle_Status', 'U') IS NOT NULL DROP TABLE N_PA_Cycle_Status;
+IF OBJECT_ID('N_PA_Rater_Category', 'U') IS NOT NULL DROP TABLE N_PA_Rater_Category;
+IF OBJECT_ID('N_HRIS_Organization_Relationship', 'U') IS NOT NULL DROP TABLE N_HRIS_Organization_Relationship;
+IF OBJECT_ID('N_HRIS_Organization_Relationship_Type', 'U') IS NOT NULL DROP TABLE N_HRIS_Organization_Relationship_Type;
+GO
+DELETE FROM N_SYSTEM_Database_Change WHERE Kode_Change = 'DDL-2026-187';
+GO

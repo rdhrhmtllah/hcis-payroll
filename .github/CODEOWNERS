@@ -1,0 +1,32 @@
+# Pemilik berkas. Baris paling bawah yang cocok yang menang.
+#
+# Yang didaftarkan di sini bukan "kode penting", melainkan kode yang MENJAGA kode
+# lain. Agent yang kehilangan konteks paling berbahaya justru saat ia merapikan
+# workflow yang menghalanginya — dan perapian itu terlihat seperti pekerjaan yang
+# benar sampai penjaganya sudah tidak ada.
+#
+# Berlaku hanya bila ruleset branch mewajibkan review dari code owner.
+
+# Default: tidak ada pemilik wajib. Alur biasa cukup dijaga required check.
+
+# --- Penjaga dan alur rilis -------------------------------------------------
+/.github/                       @rdhrhmtllah
+/.githooks/                     @rdhrhmtllah
+/.github/gerbang-rilis.json     @rdhrhmtllah
+
+# --- Perubahan basis data ---------------------------------------------------
+# Dijalankan manual di produksi lewat SQL Tracker; tidak ada yang bisa
+# membatalkannya selain menulis perubahan baru.
+/database/ddl/                  @rdhrhmtllah
+/database/dml/                  @rdhrhmtllah
+
+# --- Titik sambung aplikasi -------------------------------------------------
+# Di sinilah fitur menempel ke sistem: provider, modul export, dan pendaftaran
+# rute. Satu baris di sini bisa menyalakan seluruh subsistem.
+/config/                        @rdhrhmtllah
+/routes/                        @rdhrhmtllah
+/bootstrap/                     @rdhrhmtllah
+/composer.json                  @rdhrhmtllah
+/composer.lock                  @rdhrhmtllah
+/package.json                   @rdhrhmtllah
+/Dockerfile                     @rdhrhmtllah

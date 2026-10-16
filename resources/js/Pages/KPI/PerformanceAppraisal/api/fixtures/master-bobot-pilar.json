@@ -1,0 +1,110 @@
+{
+    "success": true,
+    "status": 200,
+    "message": "Berhasil",
+    "result": {
+        "master": "bobot-pilar",
+        "nama": "Bobot Pilar",
+        "lingkup": "master",
+        "dapat_ditambah": true,
+        "dapat_dinonaktifkan": false,
+        "baris": [
+            {
+                "Id_PA_Pillar_Weight": "9",
+                "ID_Level": "1",
+                "Bobot_KPI": "85.00",
+                "Bobot_Kompetensi": "15.00",
+                "Catatan": "SEMENTARA. Deck hanya memberi empat pita dan salah satu namanya tidak ada di HRIS_Level; pemetaan sebenarnya diatur lewat halaman master."
+            },
+            {
+                "Id_PA_Pillar_Weight": "10",
+                "ID_Level": "2",
+                "Bobot_KPI": "80.00",
+                "Bobot_Kompetensi": "20.00",
+                "Catatan": "SEMENTARA. Deck hanya memberi empat pita dan salah satu namanya tidak ada di HRIS_Level; pemetaan sebenarnya diatur lewat halaman master."
+            },
+            {
+                "Id_PA_Pillar_Weight": "11",
+                "ID_Level": "3",
+                "Bobot_KPI": "80.00",
+                "Bobot_Kompetensi": "20.00",
+                "Catatan": "SEMENTARA. Deck hanya memberi empat pita dan salah satu namanya tidak ada di HRIS_Level; pemetaan sebenarnya diatur lewat halaman master."
+            },
+            {
+                "Id_PA_Pillar_Weight": "12",
+                "ID_Level": "4",
+                "Bobot_KPI": "75.00",
+                "Bobot_Kompetensi": "25.00",
+                "Catatan": "SEMENTARA. Deck hanya memberi empat pita dan salah satu namanya tidak ada di HRIS_Level; pemetaan sebenarnya diatur lewat halaman master."
+            },
+            {
+                "Id_PA_Pillar_Weight": "13",
+                "ID_Level": "5",
+                "Bobot_KPI": "75.00",
+                "Bobot_Kompetensi": "25.00",
+                "Catatan": "SEMENTARA. Deck hanya memberi empat pita dan salah satu namanya tidak ada di HRIS_Level; pemetaan sebenarnya diatur lewat halaman master."
+            },
+            {
+                "Id_PA_Pillar_Weight": "14",
+                "ID_Level": "6",
+                "Bobot_KPI": "70.00",
+                "Bobot_Kompetensi": "30.00",
+                "Catatan": "SEMENTARA. Deck hanya memberi empat pita dan salah satu namanya tidak ada di HRIS_Level; pemetaan sebenarnya diatur lewat halaman master."
+            },
+            {
+                "Id_PA_Pillar_Weight": "15",
+                "ID_Level": "7",
+                "Bobot_KPI": "70.00",
+                "Bobot_Kompetensi": "30.00",
+                "Catatan": "SEMENTARA. Deck hanya memberi empat pita dan salah satu namanya tidak ada di HRIS_Level; pemetaan sebenarnya diatur lewat halaman master."
+            },
+            {
+                "Id_PA_Pillar_Weight": "16",
+                "ID_Level": "8",
+                "Bobot_KPI": "65.00",
+                "Bobot_Kompetensi": "35.00",
+                "Catatan": "SEMENTARA. Deck hanya memberi empat pita dan salah satu namanya tidak ada di HRIS_Level; pemetaan sebenarnya diatur lewat halaman master."
+            },
+            {
+                "Id_PA_Pillar_Weight": "17",
+                "ID_Level": "9",
+                "Bobot_KPI": "55.00",
+                "Bobot_Kompetensi": "45.00",
+                "Catatan": "SEMENTARA. Deck hanya memberi empat pita dan salah satu namanya tidak ada di HRIS_Level; pemetaan sebenarnya diatur lewat halaman master."
+            },
+            {
+                "Id_PA_Pillar_Weight": "18",
+                "ID_Level": "10",
+                "Bobot_KPI": "55.00",
+                "Bobot_Kompetensi": "45.00",
+                "Catatan": "SEMENTARA. Deck hanya memberi empat pita dan salah satu namanya tidak ada di HRIS_Level; pemetaan sebenarnya diatur lewat halaman master."
+            },
+            {
+                "Id_PA_Pillar_Weight": "19",
+                "ID_Level": "11",
+                "Bobot_KPI": "55.00",
+                "Bobot_Kompetensi": "45.00",
+                "Catatan": "SEMENTARA. Deck hanya memberi empat pita dan salah satu namanya tidak ada di HRIS_Level; pemetaan sebenarnya diatur lewat halaman master."
+            },
+            {
+                "Id_PA_Pillar_Weight": "20",
+                "ID_Level": "12",
+                "Bobot_KPI": "50.00",
+                "Bobot_Kompetensi": "50.00",
+                "Catatan": "SEMENTARA. Deck hanya memberi empat pita dan salah satu namanya tidak ada di HRIS_Level; pemetaan sebenarnya diatur lewat halaman master."
+            },
+            {
+                "Id_PA_Pillar_Weight": "21",
+                "ID_Level": "13",
+                "Bobot_KPI": "50.00",
+                "Bobot_Kompetensi": "50.00",
+                "Catatan": "SEMENTARA. Deck hanya memberi empat pita dan salah satu namanya tidak ada di HRIS_Level; pemetaan sebenarnya diatur lewat halaman master."
+            }
+        ],
+        "halaman": 1,
+        "per_halaman": 25,
+        "total": 13,
+        "total_halaman": 1,
+        "dipangkas": false
+    }
+}

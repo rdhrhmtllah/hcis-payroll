@@ -1,0 +1,2217 @@
+/*
+ * Jembatan token Element Plus.
+ *
+ * BERLINGKUP — seluruh isi berkas ini bersarang di bawah :is(.ds-preview, [data-hcis-el]),
+ * sehingga TIDAK ADA satu pun halaman aplikasi yang berubah rupa.
+ * Mengaktifkannya secara global (memindahkan blok ini ke :root dan
+ * mengimpornya di app.js) adalah keputusan tersendiri yang memerlukan
+ * persetujuan pemilik repo. Lihat spec §5.
+ *
+ * Element Plus memakai variabel CSS-nya sendiri (--el-*), jadi kita cukup
+ * memetakannya ke token kita. Menimpa selektor .el-* satu per satu dilarang:
+ * ia rapuh terhadap pembaruan versi dan cepat divergen antar halaman.
+ */
+:root,
+body,
+:is(.ds-preview, [data-hcis-el]) {
+    --el-color-primary: var(--hcis-brand-600, var(--hcis-brand-600));
+    --el-color-primary-light-3: var(--hcis-brand-400, var(--hcis-brand-400));
+    --el-color-primary-light-5: var(--hcis-brand-300, var(--hcis-brand-300));
+    --el-color-primary-light-7: var(--hcis-brand-200, var(--hcis-brand-200));
+    --el-color-primary-light-8: var(--hcis-brand-100, var(--hcis-brand-100));
+    --el-color-primary-light-9: var(--hcis-brand-50, var(--hcis-brand-50));
+    --el-color-primary-dark-2: var(--hcis-brand-700, var(--hcis-brand-700));
+
+    --el-color-success: var(--hcis-success-500, var(--hcis-success-500));
+    --el-color-warning: var(--hcis-warning-500, var(--hcis-warning-500));
+    --el-color-danger: var(--hcis-danger-500, var(--hcis-danger-500));
+    --el-color-error: var(--hcis-danger-500, var(--hcis-danger-500));
+    --el-color-info: var(--hcis-info-500, var(--hcis-blue-500));
+
+    --el-text-color-primary: var(--hcis-text-strong, var(--hcis-slate-900));
+    --el-text-color-regular: var(--hcis-text, var(--hcis-slate-700));
+    --el-text-color-secondary: var(--hcis-text-muted, var(--hcis-slate-500));
+    --el-text-color-placeholder: var(--hcis-text-subtle, var(--hcis-slate-400));
+    --el-text-color-disabled: var(--hcis-text-subtle, var(--hcis-slate-400));
+
+    --el-border-color: var(--hcis-border-medium, #cbd5e1);
+    --el-border-color-light: var(--hcis-border-medium, #cbd5e1);
+    --el-border-color-lighter: var(--hcis-border-subtle, #e2e8f0);
+    --el-border-color-hover: var(--hcis-brand-400, #818cf8);
+    --el-border-radius-base: var(--hcis-radius-md, 8px);
+    --el-border-radius-small: var(--hcis-radius-sm, 6px);
+    --el-border-radius-round: 9999px;
+
+    --el-bg-color: var(--hcis-surface, var(--hcis-white));
+    --el-bg-color-page: var(--hcis-surface-soft, var(--hcis-slate-50));
+    --el-bg-color-overlay: var(--hcis-surface, var(--hcis-white));
+    --el-fill-color-light: var(--hcis-surface-soft, var(--hcis-slate-50));
+    --el-fill-color-blank: var(--hcis-surface, var(--hcis-white));
+    --el-mask-color: rgb(var(--hcis-slate-900-rgb) / 0.45);
+
+    --el-font-family: var(--hcis-font-body);
+    --el-font-size-base: var(--hcis-font-size-sm);
+    --el-font-size-small: var(--hcis-font-size-xs);
+
+    --el-component-size: 2.25rem;
+    --el-component-size-small: 2rem;
+
+    --el-box-shadow-light: var(--hcis-shadow-sm);
+    --el-box-shadow: var(--hcis-shadow-md);
+    --el-box-shadow-lighter: var(--hcis-shadow-sm);
+    --el-transition-duration: var(--hcis-duration-fast);
+    --el-transition-duration-fast: var(--hcis-duration-fast);
+
+    /* ---- Input: dipakai select, date-picker, time-picker, autocomplete, input-number ---- */
+    --el-input-height: 2.25rem;
+    --el-input-inner-height: 2rem;
+    --el-input-border-radius: var(--hcis-radius-lg, 10px);
+    --el-input-bg-color: var(--hcis-surface, #ffffff);
+    --el-input-text-color: var(--hcis-text, #1e293b);
+    --el-input-border-color: var(--hcis-border-medium, #cbd5e1);
+    --el-input-hover-border-color: var(--hcis-brand-400, #818cf8);
+    --el-input-focus-border-color: var(--hcis-brand-600, #4f46e5);
+    --el-input-placeholder-color: var(--hcis-text-subtle, #94a3b8);
+    --el-input-icon-color: var(--hcis-text-subtle, #94a3b8);
+    --el-input-clear-hover-color: var(--hcis-text-muted, #64748b);
+
+    /* ---- Dialog ---- */
+    --el-dialog-bg-color: var(--hcis-surface);
+    --el-dialog-border-radius: var(--hcis-radius-lg);
+    --el-dialog-box-shadow: var(--hcis-shadow-lg);
+    --el-dialog-padding-primary: var(--hcis-space-6);
+    --el-dialog-title-font-size: var(--hcis-font-size-lg);
+    --el-dialog-content-font-size: var(--hcis-font-size-sm);
+    --el-dialog-font-line-height: var(--hcis-line-normal);
+
+    /* ---- Drawer ---- */
+    --el-drawer-bg-color: var(--hcis-surface);
+    --el-drawer-padding-primary: var(--hcis-space-6);
+
+    /* ---- Message (notifikasi sekilas) ---- */
+    --el-message-bg-color: var(--hcis-surface);
+    --el-message-border-color: var(--hcis-border);
+    --el-message-padding: var(--hcis-space-3) var(--hcis-space-4);
+    --el-message-close-icon-color: var(--hcis-text-subtle);
+    --el-message-close-hover-color: var(--hcis-text-muted);
+
+    /* ---- Collapse ---- */
+    --el-collapse-border-color: var(--hcis-border);
+    --el-collapse-header-bg-color: transparent;
+    --el-collapse-header-text-color: var(--hcis-text-strong);
+    --el-collapse-header-font-size: var(--hcis-font-size-sm);
+    --el-collapse-header-height: 3rem;
+    --el-collapse-content-bg-color: transparent;
+    --el-collapse-content-text-color: var(--hcis-text);
+    --el-collapse-content-font-size: var(--hcis-font-size-sm);
+
+    /* ---- Date picker ---- */
+    --el-datepicker-bg-color: var(--hcis-surface);
+    --el-datepicker-border-color: var(--hcis-border);
+    --el-datepicker-inner-border-color: var(--hcis-border);
+    --el-datepicker-text-color: var(--hcis-text);
+    --el-datepicker-header-text-color: var(--hcis-text-strong);
+    --el-datepicker-icon-color: var(--hcis-text-muted);
+    --el-datepicker-off-text-color: var(--hcis-text-subtle);
+    --el-datepicker-hover-text-color: var(--hcis-brand-600);
+    --el-datepicker-active-color: var(--hcis-brand-600);
+    --el-datepicker-inrange-bg-color: var(--hcis-brand-50);
+    --el-datepicker-inrange-hover-bg-color: var(--hcis-brand-100);
+
+    /* ---- Checkbox: dipakai el-select multiple dan el-table ---- */
+    --el-checkbox-border-radius: var(--hcis-radius-sm);
+    --el-checkbox-bg-color: var(--hcis-surface);
+    --el-checkbox-text-color: var(--hcis-text);
+    --el-checkbox-font-size: var(--hcis-font-size-sm);
+    --el-checkbox-checked-bg-color: var(--hcis-brand-600);
+    --el-checkbox-checked-text-color: var(--hcis-text);
+    --el-checkbox-checked-input-border-color: var(--hcis-brand-600);
+    --el-checkbox-input-border-color-hover: var(--hcis-brand-300);
+
+    /* ---- Card (dipensiunkan, tetap dipetakan agar demo perbandingannya jujur) ---- */
+    --el-card-bg-color: var(--hcis-surface);
+    --el-card-border-color: var(--hcis-border);
+    --el-card-border-radius: var(--hcis-radius-lg);
+    --el-card-padding: var(--hcis-space-5) var(--hcis-space-6);
+}
+
+/*
+ * Yang tidak bisa dijangkau variabel.
+ *
+ * Element menetapkan bobot huruf judul dan label pada selektornya langsung, bukan
+ * lewat custom property, dan nilainya (500) tidak sama dengan skala kita.
+ * Tanpa aturan di bawah, judul dialog Element akan terlihat berbeda bobot dari
+ * judul kartu kita yang berdampingan dengannya.
+ *
+ * Daftar ini sengaja dijaga sependek mungkin — setiap tambahan di sini adalah
+ * utang terhadap pembaruan versi Element.
+ */
+:is(.ds-preview, [data-hcis-el]) .el-dialog__title,
+:is(.ds-preview, [data-hcis-el]) .el-drawer__title { font-weight: var(--hcis-weight-bold); letter-spacing: -0.01em; }
+:is(.ds-preview, [data-hcis-el]) .el-collapse-item__header { font-weight: var(--hcis-weight-bold); }
+:is(.ds-preview, [data-hcis-el]) .el-pagination { font-weight: var(--hcis-weight-medium); }
+:is(.ds-preview, [data-hcis-el]) .el-pagination button,
+:is(.ds-preview, [data-hcis-el]) .el-pager li { border-radius: var(--hcis-radius-sm); font-weight: var(--hcis-weight-medium); }
+
+/*
+ * Menyamakan kontrol Element dengan .hcis-field__control.
+ *
+ * Dua hal memaksa aturan ini ditulis, dan keduanya tidak bisa dijangkau variabel:
+ *
+ * 1. TINGGI. .el-input__wrapper menghormati --el-input-height, tetapi
+ *    .el-select__wrapper memaku `min-height: 32px` langsung di aturannya.
+ *    Akibatnya select selalu lebih pendek dari HcisField (42px) dan dari
+ *    date-picker di sebelahnya, meski variabelnya sudah dipetakan.
+ *
+ * 2. CINCIN FOKUS. Element menggambar batas sebagai box-shadow inset 1px dan
+ *    berhenti di situ. HcisField memakai batas 1px + halo 3px di luar kotak.
+ *    Karena keduanya memakai properti yang sama (box-shadow), halo hanya bisa
+ *    ditambahkan dengan menulis ulang seluruh nilainya.
+ */
+.el-select__wrapper,
+.el-input__wrapper,
+:is(.ds-preview, [data-hcis-el]) .el-select__wrapper,
+:is(.ds-preview, [data-hcis-el]) .el-input__wrapper {
+    min-height: 2.25rem;
+    padding: 0 var(--hcis-space-3);
+    border-radius: var(--hcis-radius-md, 8px);
+    background-color: var(--hcis-surface, var(--hcis-white));
+    box-shadow: 0 0 0 1px var(--hcis-border-strong, var(--hcis-slate-400)) inset, 0 1px 2px 0 rgb(var(--hcis-slate-900-rgb) / 0.05), inset 0 1px 1.5px 0 rgb(var(--hcis-slate-900-rgb) / 0.04);
+    transition: background-color var(--hcis-duration-fast) ease,
+        border-color var(--hcis-duration-fast) ease,
+        box-shadow var(--hcis-duration-fast) ease;
+}
+
+.el-select__wrapper:hover,
+.el-select__wrapper.is-hovering,
+.el-input__wrapper:hover,
+:is(.ds-preview, [data-hcis-el]) .el-select__wrapper:hover,
+:is(.ds-preview, [data-hcis-el]) .el-select__wrapper.is-hovering,
+:is(.ds-preview, [data-hcis-el]) .el-input__wrapper:hover {
+    box-shadow: 0 0 0 1px var(--hcis-brand-400, var(--hcis-brand-400)) inset, 0 1px 3px 0 rgb(var(--hcis-brand-600-rgb) / 0.08);
+}
+
+.el-select__wrapper.is-focused,
+.el-select__wrapper.is-focus,
+.el-input__wrapper.is-focus,
+:is(.ds-preview, [data-hcis-el]) .el-select__wrapper.is-focused,
+:is(.ds-preview, [data-hcis-el]) .el-select__wrapper.is-focus,
+:is(.ds-preview, [data-hcis-el]) .el-input__wrapper.is-focus,
+:is(.ds-preview, [data-hcis-el]) .el-textarea__inner:focus {
+    box-shadow:
+        0 0 0 1px var(--hcis-ring, var(--hcis-brand-600)) inset,
+        0 0 0 3px var(--hcis-focus-ring, rgb(var(--hcis-brand-600-rgb) / 0.2));
+    outline: none;
+}
+
+.el-select__wrapper.is-disabled,
+.el-input.is-disabled .el-input__wrapper,
+:is(.ds-preview, [data-hcis-el]) .el-select__wrapper.is-disabled,
+:is(.ds-preview, [data-hcis-el]) .el-input.is-disabled .el-input__wrapper {
+    background-color: var(--hcis-surface-soft, var(--hcis-slate-50));
+    box-shadow: 0 0 0 1px var(--hcis-border-subtle, var(--hcis-slate-200)) inset;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+:is(.ds-preview, [data-hcis-el]) .el-textarea__inner {
+    padding: var(--hcis-space-2) var(--hcis-space-3);
+    line-height: var(--hcis-line-normal);
+}
+
+/*
+ * Transisi pada permukaan yang tidak diberi transisi oleh Element.
+ *
+ * Element memberi transisi pada kotak input, tetapi TIDAK pada isi lapisan
+ * mengambang dan kontrol kecil di dalamnya: nomor halaman, sel kalender,
+ * pilihan dropdown, angka jam, tombol tutup. Akibatnya kotaknya beranimasi
+ * halus, lalu begitu dropdown atau kalendernya terbuka semuanya mengedip.
+ *
+ * Semua properti di bawah hanya menggambar ulang — tidak ada yang memicu
+ * perhitungan tata letak, sesuai aturan gerak di registry.
+ */
+/*
+ * ElMessage: memberi animasi masuk yang tidak disediakan Element.
+ *
+ * Element hanya mendefinisikan .el-message-fade-leave-to — TIDAK ADA
+ * -enter-from. Akibatnya pesan tidak beranimasi masuk sama sekali; ia langsung
+ * muncul jadi, dan hanya menutupnya yang beranimasi.
+ *
+ * Durasinya juga tidak sinkron di aturan asli: opacity mengikuti
+ * --el-transition-duration sementara transform dan top dipaku 0.4s. Pesan sudah
+ * pekat penuh saat geserannya masih berjalan, dan gerak itu terbaca patah.
+ * Ketiganya disamakan di sini.
+ *
+ * `top` ikut dianimasikan meski ia properti tata letak — itu cara Element
+ * menyusun ulang pesan yang menumpuk, dan menggantinya berarti menulis ulang
+ * seluruh mekanisme penumpukannya. Ini pengecualian yang disadari, bukan kelalaian.
+ */
+.el-message,
+:is(.ds-preview.el-message, [data-hcis-el] .el-message) {
+    transition:
+        opacity var(--hcis-duration-fast) var(--hcis-ease),
+        transform var(--hcis-duration-fast) var(--hcis-ease),
+        top var(--hcis-duration-fast) var(--hcis-ease);
+}
+
+.el-message-fade-enter-from,
+.el-message-fade-leave-to,
+:is(.ds-preview.el-message-fade-enter-from, [data-hcis-el] .el-message-fade-enter-from),
+:is(.ds-preview.el-message-fade-leave-to, [data-hcis-el] .el-message-fade-leave-to) {
+    opacity: 0;
+    transform: translateY(-100%);
+}
+
+/*
+ * Reduced motion untuk komponen Element, mengikuti aturan yang sama seperti
+ * komponen kita: kepekatan dipertahankan, perpindahan posisi dibuang.
+ * Sapuan global di design-system.css mematikan keduanya, jadi fade-nya
+ * dikembalikan di sini dan transform-nya dinolkan.
+ */
+[data-hcis-motion='reduced'] :is(.ds-preview.el-message, [data-hcis-el] .el-message),
+[data-hcis-motion='reduced'] :is(.ds-preview, [data-hcis-el]) .el-select-dropdown__item,
+[data-hcis-motion='reduced'] :is(.ds-preview, [data-hcis-el]) .el-pagination button,
+[data-hcis-motion='reduced'] :is(.ds-preview, [data-hcis-el]) .el-pager li,
+[data-hcis-motion='reduced'] :is(.ds-preview, [data-hcis-el]) .el-date-table td .el-date-table-cell,
+[data-hcis-motion='reduced'] :is(.ds-preview, [data-hcis-el]) .el-input__wrapper,
+[data-hcis-motion='reduced'] :is(.ds-preview, [data-hcis-el]) .el-select__wrapper,
+[data-hcis-motion='reduced'] :is(.ds-preview, [data-hcis-el]) .el-textarea__inner,
+[data-hcis-motion='reduced'] .el-zoom-in-top-enter-active,
+[data-hcis-motion='reduced'] .el-zoom-in-top-leave-active,
+[data-hcis-motion='reduced'] .el-zoom-in-bottom-enter-active,
+[data-hcis-motion='reduced'] .el-zoom-in-bottom-leave-active { transition-duration: var(--hcis-duration-fast) !important; }
+
+[data-hcis-motion='reduced'] :is(.ds-preview.el-message-fade-enter-from, [data-hcis-el] .el-message-fade-enter-from),
+[data-hcis-motion='reduced'] :is(.ds-preview.el-message-fade-leave-to, [data-hcis-el] .el-message-fade-leave-to) { transform: none !important; }
+
+:is(.ds-preview, [data-hcis-el]) .el-pagination button,
+:is(.ds-preview, [data-hcis-el]) .el-pager li,
+:is(.ds-preview, [data-hcis-el]) .el-select-dropdown__item,
+:is(.ds-preview, [data-hcis-el]) .el-date-table td .el-date-table-cell,
+:is(.ds-preview, [data-hcis-el]) .el-month-table td div,
+:is(.ds-preview, [data-hcis-el]) .el-year-table td div,
+:is(.ds-preview, [data-hcis-el]) .el-time-spinner__item,
+:is(.ds-preview, [data-hcis-el]) .el-upload-dragger,
+:is(.ds-preview, [data-hcis-el]) .el-dialog__headerbtn,
+:is(.ds-preview, [data-hcis-el]) .el-drawer__close-btn,
+:is(.ds-preview, [data-hcis-el]) .el-message__closeBtn,
+:is(.ds-preview, [data-hcis-el]) .el-input__clear {
+    transition:
+        background-color var(--hcis-duration-fast) ease,
+        border-color var(--hcis-duration-fast) ease,
+        color var(--hcis-duration-fast) ease,
+        opacity var(--hcis-duration-fast) ease;
+}
+
+/*
+ * Lapisan mengambang (dropdown, popper, dialog) dipasang Element di <body>,
+ * di luar .ds-preview. Karena itu ia perlu penanda tersendiri: komponen yang
+ * memakainya wajib menambahkan popper-class="ds-preview".
+ */
+/*
+ * Semua lapisan mengambang disamakan dengan bahasa kartu kita.
+ */
+.el-popper.el-select-dropdown,
+.el-popper.el-select__popper,
+.el-select__popper,
+.el-select-dropdown,
+:is(.ds-preview.el-popper, [data-hcis-el] .el-popper),
+:is(.ds-preview.el-select-dropdown, [data-hcis-el] .el-select-dropdown),
+:is(.ds-preview.el-picker__popper, [data-hcis-el] .el-picker__popper),
+:is(.ds-preview.el-dropdown__popper, [data-hcis-el] .el-dropdown__popper),
+:is(.ds-preview.el-autocomplete-suggestion, [data-hcis-el] .el-autocomplete-suggestion) {
+    border: 1px solid var(--hcis-border-subtle, rgb(var(--hcis-slate-300-rgb) / 0.8)) !important;
+    border-radius: var(--hcis-radius-md, 10px) !important;
+    box-shadow: 0 12px 32px -4px rgb(var(--hcis-slate-900-rgb) / 0.12), 0 4px 12px -2px rgb(var(--hcis-slate-900-rgb) / 0.06) !important;
+    background: rgb(var(--hcis-white-rgb) / 0.98) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    font-family: var(--hcis-font-body) !important;
+    /*
+     * TINGGINYA TIDAK DIPAKU DI SINI — sengaja, dan ini bukan kelalaian.
+     *
+     * `zIndex: 3000` di app.js adalah nilai AWAL sebuah PENCACAH, bukan nilai
+     * tetap. Element menaikkannya satu per satu untuk tiap lapisan baru: laci
+     * wizard mendapat 3002, dropdown yang dibuka DI DALAMNYA mendapat 3008 —
+     * ditulis inline, dan urutan itulah yang membuat dropdown selalu berada di
+     * atas wadahnya.
+     *
+     * Memaku angka mati di sini dengan !important mengalahkan nilai inline itu
+     * dan mengembalikan semua dropdown ke 3000 — di bawah laci 3002. Akibatnya
+     * terukur pada 10 Sep 2026: seluruh saringan el-select di dalam laci
+     * "Jadwalkan Dokumen" (tipe, departemen, divisi, lokasi, level) terbuka
+     * tetapi tersembunyi di belakang lacinya, tanpa satu pun galat. Yang kena
+     * bukan satu halaman, melainkan SETIAP el-select di dalam el-drawer atau
+     * el-dialog mana pun.
+     *
+     * Membiarkan pencacah Element bekerja tetap aman bagi lapisan kita:
+     * pencacahnya mulai dari 3000, sedangkan dialog HCIS berdiri di
+     * --hcis-z-modal (2010). Jadi tak ada yang turun; hanya yang di dalam laci
+     * naik ke tempat yang semestinya.
+     */
+}
+
+/* Caret Arrow Spring Animation */
+.el-select__caret,
+:is(.ds-preview, [data-hcis-el]) .el-select__caret {
+    transition: transform 240ms var(--hcis-ease-spring) !important;
+}
+
+/* Overriding Element Plus Zoom-in Squish with Ultra-Smooth Fade Slide */
+.el-zoom-in-top-enter-active {
+    transition: opacity 160ms ease, transform 180ms var(--hcis-ease) !important;
+    transform-origin: center top !important;
+    will-change: opacity, transform !important;
+}
+
+.el-zoom-in-top-leave-active,
+.el-zoom-in-bottom-leave-active {
+    transition: opacity 140ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+    pointer-events: none !important;
+    will-change: opacity !important;
+}
+
+.el-zoom-in-top-leave-to,
+.el-zoom-in-bottom-leave-to {
+    opacity: 0 !important;
+}
+
+/* Optimization Firefox khusus: hilangkan backdrop-filter saat transisi di Firefox agar WebRender GPU tidak kedip */
+@supports (-moz-appearance: none) {
+    .el-picker__popper,
+    .el-picker-panel,
+    .el-select-dropdown,
+    .el-popper {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background-color: var(--hcis-white) !important;
+    }
+}
+
+/* Tooltip gelap: satu-satunya popup yang sengaja berlatar pekat. */
+:is(.ds-preview.el-popper.is-dark, [data-hcis-el] .el-popper.is-dark) {
+    border-color: var(--hcis-slate-700);
+    background: var(--hcis-slate-800);
+    color: var(--hcis-surface);
+    font-size: var(--hcis-font-size-xs);
+    line-height: var(--hcis-line-normal);
+    padding: var(--hcis-space-2) var(--hcis-space-3);
+}
+:is(.ds-preview.el-popper.is-dark, [data-hcis-el] .el-popper.is-dark) .el-popper__arrow::before {
+    background: var(--hcis-slate-800);
+    border-color: var(--hcis-slate-700);
+}
+:is(.ds-preview.el-popper:not(.is-dark), [data-hcis-el] .el-popper:not(.is-dark)) .el-popper__arrow::before {
+    background: var(--hcis-surface);
+    border-color: var(--hcis-border);
+}
+
+/* Butir dropdown: tinggi, jarak, magnetik hover, dan sorotan disamakan dengan bahasa HCIS. */
+.el-select-dropdown__item,
+:is(.ds-preview, [data-hcis-el]) .el-select-dropdown__item {
+    height: auto;
+    min-height: 2.25rem;
+    display: flex;
+    align-items: center;
+    padding: 0 var(--hcis-space-3);
+    border-radius: var(--hcis-radius-sm);
+    margin: 2px var(--hcis-space-1);
+    color: var(--hcis-text);
+    font-size: var(--hcis-font-size-sm);
+    transition: background-color 160ms ease, color 160ms ease, transform 160ms cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+.el-select-dropdown__item[style*="display: none"],
+.el-select-dropdown__item[style*="display:none"],
+.el-select-dropdown__item.is-hidden {
+    display: none !important;
+}
+
+.el-select-dropdown__item.is-hovering,
+:is(.ds-preview, [data-hcis-el]) .el-select-dropdown__item.is-hovering {
+    background: var(--hcis-surface-soft, var(--hcis-slate-50)) !important;
+    color: var(--hcis-brand-700, var(--hcis-brand-700)) !important;
+    transform: translateX(4px) !important;
+}
+
+.el-select-dropdown__item.is-selected,
+:is(.ds-preview, [data-hcis-el]) .el-select-dropdown__item.is-selected {
+    background: var(--hcis-brand-50, var(--hcis-brand-50)) !important;
+    color: var(--hcis-brand-700, var(--hcis-brand-700)) !important;
+    font-weight: 700 !important;
+}
+:is(.ds-preview, [data-hcis-el]) .el-select-dropdown__list { padding: var(--hcis-space-1) 0; }
+
+/* Sub-judul grup opsi (el-option-group) */
+:is(.ds-preview, [data-hcis-el]) .el-select-group__title {
+    padding: var(--hcis-space-2) var(--hcis-space-3);
+    color: var(--hcis-text-subtle);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+:is(.ds-preview, [data-hcis-el]) .el-select-group__wrap:not(:last-child) {
+    border-bottom: 1px dashed var(--hcis-border);
+    padding-bottom: var(--hcis-space-1);
+    margin-bottom: var(--hcis-space-1);
+}
+
+/* Lencana tag pada el-select multiple & max-collapse-tags (+N) */
+:is(.ds-preview, [data-hcis-el]) .el-select__tags .el-tag,
+:is(.ds-preview, [data-hcis-el]) .el-select__selection .el-tag,
+.el-select .el-select__tags .el-tag,
+.el-select .el-select__selection .el-tag,
+.el-select .el-tag {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: var(--hcis-space-1, 4px) !important;
+    height: 1.5rem !important;
+    padding: 0 0.6rem !important;
+    background: linear-gradient(135deg, rgb(var(--hcis-brand-50-rgb) / 0.95) 0%, rgb(var(--hcis-brand-100-rgb) / 0.95) 100%) !important;
+    color: var(--hcis-brand-700, var(--hcis-brand-700)) !important;
+    border: 1px solid rgb(var(--hcis-brand-200-rgb) / 0.9) !important;
+    border-radius: 9999px !important;
+    font-size: 0.725rem !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    letter-spacing: 0.01em !important;
+    box-shadow: 0 1px 2px rgb(var(--hcis-brand-600-rgb) / 0.06) !important;
+    transition-property: var(--hcis-transition-props) !important;
+    transition-duration: 160ms !important;
+    transition-timing-function: cubic-bezier(0.2, 0.9, 0.2, 1) !important;
+}
+
+:is(.ds-preview, [data-hcis-el]) .el-select__tags .el-tag:hover,
+:is(.ds-preview, [data-hcis-el]) .el-select__selection .el-tag:hover,
+.el-select .el-select__tags .el-tag:hover,
+.el-select .el-select__selection .el-tag:hover,
+.el-select .el-tag:hover {
+    background: linear-gradient(135deg, var(--hcis-brand-100) 0%, var(--hcis-brand-200) 100%) !important;
+    border-color: var(--hcis-brand-400, var(--hcis-brand-400)) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 2px 5px rgb(var(--hcis-brand-600-rgb) / 0.15) !important;
+}
+
+/* Tombol hapus ikon X pada tag */
+:is(.ds-preview, [data-hcis-el]) .el-select__tags .el-tag .el-tag__close,
+:is(.ds-preview, [data-hcis-el]) .el-select__selection .el-tag .el-tag__close,
+.el-select .el-select__tags .el-tag .el-tag__close,
+.el-select .el-select__selection .el-tag .el-tag__close,
+.el-select .el-tag .el-tag__close {
+    width: 14px !important;
+    height: 14px !important;
+    border-radius: 50% !important;
+    margin-left: 2px !important;
+    color: var(--hcis-brand-600, var(--hcis-brand-600)) !important;
+    transition: background-color 150ms ease, color 150ms ease, transform 150ms ease !important;
+}
+
+:is(.ds-preview, [data-hcis-el]) .el-select__tags .el-tag .el-tag__close:hover,
+:is(.ds-preview, [data-hcis-el]) .el-select__selection .el-tag .el-tag__close:hover,
+.el-select .el-select__tags .el-tag .el-tag__close:hover,
+.el-select .el-select__selection .el-tag .el-tag__close:hover,
+.el-select .el-tag .el-tag__close:hover {
+    background-color: var(--hcis-brand-500, var(--hcis-brand-500)) !important;
+    color: var(--hcis-white) !important;
+    transform: scale(1.1) !important;
+}
+
+/* Lencana Ringkasan (+N) saat max-collapse-tags aktif */
+:is(.ds-preview, [data-hcis-el]) .el-select__tags .el-tag--info,
+:is(.ds-preview, [data-hcis-el]) .el-select__selection .el-tag--info,
+.el-select .el-select__tags .el-tag--info,
+.el-select .el-select__selection .el-tag--info,
+.el-select .el-tag--info {
+    background: linear-gradient(135deg, var(--hcis-slate-100) 0%, var(--hcis-slate-200) 100%) !important;
+    color: var(--hcis-text, var(--hcis-slate-800)) !important;
+    border: 1px solid var(--hcis-border, var(--hcis-slate-300)) !important;
+    border-radius: 9999px !important;
+    font-weight: 800 !important;
+}
+
+:is(.ds-preview, [data-hcis-el]) .el-select__tags .el-tag--info:hover,
+:is(.ds-preview, [data-hcis-el]) .el-select__selection .el-tag--info:hover,
+.el-select .el-select__tags .el-tag--info:hover,
+.el-select .el-select__selection .el-tag--info:hover,
+.el-select .el-tag--info:hover {
+    background: linear-gradient(135deg, var(--hcis-slate-200) 0%, var(--hcis-slate-300) 100%) !important;
+    color: var(--hcis-brand-700, var(--hcis-brand-700)) !important;
+    border-color: var(--hcis-brand-300, var(--hcis-brand-300)) !important;
+}
+
+/* ==========================================
+ * EL-DATE-PICKER & DATERANGE PICKER UPGRADE
+ * ========================================== */
+
+/* Outer container reset for single datepicker */
+.el-date-editor {
+    display: inline-flex !important;
+    vertical-align: middle !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Range Editor Input Wrapper (type="daterange") */
+.el-range-editor.el-input__wrapper,
+:is(.ds-preview, [data-hcis-el]) .el-range-editor.el-input__wrapper {
+    min-height: 2.25rem !important;
+    height: auto !important;
+    padding: 0 var(--hcis-space-3) !important;
+    border-radius: var(--hcis-radius-md, 8px) !important;
+    background-color: var(--hcis-surface, var(--hcis-white)) !important;
+    box-shadow: 0 0 0 1px var(--hcis-border, var(--hcis-slate-300)) inset !important;
+    font-family: var(--hcis-font-body) !important;
+    font-size: var(--hcis-font-size-sm, 0.875rem) !important;
+    color: var(--hcis-text, var(--hcis-slate-900)) !important;
+    transition: background-color var(--hcis-duration-fast) ease,
+        border-color var(--hcis-duration-fast) ease,
+        box-shadow var(--hcis-duration-fast) ease !important;
+}
+
+.el-range-editor.el-input__wrapper:hover,
+:is(.ds-preview, [data-hcis-el]) .el-range-editor.el-input__wrapper:hover {
+    box-shadow: 0 0 0 1px var(--hcis-brand-400, var(--hcis-brand-400)) inset !important;
+}
+
+.el-range-editor.is-active,
+.el-range-editor.is-active:hover,
+:is(.ds-preview, [data-hcis-el]) .el-range-editor.is-active {
+    box-shadow:
+        0 0 0 1px var(--hcis-ring, var(--hcis-brand-600)) inset,
+        0 0 0 3px var(--hcis-focus-ring, rgb(var(--hcis-brand-600-rgb) / 0.2)) !important;
+    outline: none !important;
+}
+
+.el-range-editor .el-range-input {
+    height: 2rem !important;
+    font-family: var(--hcis-font-body) !important;
+    font-size: var(--hcis-font-size-sm, 0.875rem) !important;
+    color: var(--hcis-text, var(--hcis-slate-900)) !important;
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.el-range-editor .el-range-separator {
+    color: var(--hcis-text-muted, var(--hcis-slate-500)) !important;
+    font-size: 0.8rem !important;
+    font-weight: 600 !important;
+    padding: 0 6px !important;
+    line-height: 2.25rem !important;
+}
+
+/* Panel kalender & Popup Window - Luxury Acrylic Crystal Elevation */
+.el-picker-panel:not(.el-time-panel),
+.el-date-range-picker,
+.el-date-picker,
+:is(.ds-preview, [data-hcis-el]) .el-picker-panel:not(.el-time-panel) {
+    border: 1px solid rgba(226, 232, 240, 0.95) !important;
+    border-radius: 16px !important;
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.9) inset,
+        0 16px 44px -6px rgba(15, 23, 42, 0.12),
+        0 32px 72px -12px rgba(15, 23, 42, 0.08) !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.95) 100%) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    font-family: var(--hcis-font-body) !important;
+    min-height: 290px !important;
+    box-sizing: border-box !important;
+}
+
+/* Base Popper container reset (popper wrapper is transparent and wraps panel cleanly) */
+.el-picker__popper,
+.el-popper.el-picker__popper,
+.el-picker__popper.hcis-time-picker-popper,
+.hcis-time-picker-popper,
+:is(.ds-preview, [data-hcis-el]) .el-picker__popper {
+    min-height: 0 !important;
+    height: auto !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* Panah Indikator Popper */
+.el-picker__popper .el-popper__arrow::before {
+    background: var(--hcis-white) !important;
+    border-color: var(--hcis-border-subtle, rgb(var(--hcis-slate-300-rgb) / 0.8)) !important;
+}
+
+/* Header (Navigasi Bulan & Tahun) */
+.el-date-picker__header-label,
+.el-date-range-picker__header div {
+    font-weight: 800 !important;
+    color: var(--hcis-text-strong, var(--hcis-slate-900)) !important;
+    transition: color 150ms ease !important;
+}
+
+.el-date-picker__header-label:hover,
+.el-date-range-picker__header div:hover {
+    color: var(--hcis-brand-600, var(--hcis-brand-600)) !important;
+}
+
+.el-date-picker__icon-btn {
+    color: var(--hcis-text-muted, var(--hcis-slate-500)) !important;
+    transition: color 150ms ease !important;
+}
+
+.el-date-picker__icon-btn:hover {
+    color: var(--hcis-brand-600, var(--hcis-brand-600)) !important;
+}
+
+/* Day Table & Cells - Kunci min-height agar pergantian bulan (5 minggu vs 6 minggu) tidak membuat popper kedip / loncat */
+.el-date-table {
+    min-height: 224px !important;
+}
+
+.el-date-table th {
+    color: var(--hcis-text-subtle, var(--hcis-slate-400)) !important;
+    font-size: 0.725rem !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.04em !important;
+}
+
+.el-date-table td .el-date-table-cell__text {
+    transition: background-color 120ms ease, color 120ms ease !important;
+}
+
+/* Status Hari (Hari Ini, Hover, Terpilih) */
+
+/* Hari Ini (saat BELUM dipilih / BELUM masuk start-date / end-date) */
+.el-date-table td.today:not(.current):not(.start-date):not(.end-date) .el-date-table-cell__text {
+    color: var(--hcis-brand-600, var(--hcis-brand-600)) !important;
+    font-weight: 900 !important;
+    box-shadow: inset 0 0 0 2px var(--hcis-brand-500, var(--hcis-brand-500)) !important;
+    border-radius: 50% !important;
+}
+
+/* Hover tanggal biasa (saat BELUM dipilih) */
+.el-date-table td.available:not(.current):not(.start-date):not(.end-date):hover .el-date-table-cell__text {
+    background-color: var(--hcis-brand-100, var(--hcis-brand-100)) !important;
+    color: var(--hcis-brand-800, var(--hcis-brand-800)) !important;
+    font-weight: 700 !important;
+    border-radius: 50% !important;
+}
+
+/* Highlight Rentang Tanggal Tengah (In-Range) */
+.el-date-table td.in-range .el-date-table-cell {
+    background-color: var(--hcis-brand-50, var(--hcis-brand-50)) !important;
+}
+
+.el-date-table td.in-range .el-date-table-cell__text {
+    color: var(--hcis-brand-800, var(--hcis-brand-800)) !important;
+    font-weight: 700 !important;
+}
+
+/* Tanggal Terpilih Ujung (Start-Date, End-Date, Current) - TEKS PUTIH KONTRAS HIGH-VISIBILITY */
+.el-date-table td.current .el-date-table-cell__text,
+.el-date-table td.start-date .el-date-table-cell__text,
+.el-date-table td.end-date .el-date-table-cell__text,
+.el-date-table td.today.current .el-date-table-cell__text,
+.el-date-table td.today.start-date .el-date-table-cell__text,
+.el-date-table td.today.end-date .el-date-table-cell__text {
+    background: var(--hcis-brand-600, var(--hcis-brand-600)) !important;
+    color: var(--hcis-white) !important;
+    font-weight: 900 !important;
+    border-radius: 50% !important;
+    box-shadow: 0 4px 12px rgb(var(--hcis-brand-600-rgb) / 0.45) !important;
+}
+
+.el-date-table td.current .el-date-table-cell__text *,
+.el-date-table td.start-date .el-date-table-cell__text *,
+.el-date-table td.end-date .el-date-table-cell__text * {
+    color: var(--hcis-white) !important;
+}
+
+.el-date-table td.start-date .el-date-table-cell {
+    border-top-left-radius: 9999px !important;
+    border-bottom-left-radius: 9999px !important;
+}
+
+.el-date-table td.end-date .el-date-table-cell {
+    border-top-right-radius: 9999px !important;
+    border-bottom-right-radius: 9999px !important;
+}
+
+/* Grid Bulan & Tahun (Pill Rounded) */
+.el-month-table td .cell,
+.el-year-table td .cell {
+    border-radius: 9999px !important;
+    font-weight: 600 !important;
+    transition-property: var(--hcis-transition-props) !important;
+    transition-duration: 160ms !important;
+    transition-timing-function: cubic-bezier(0.2, 0.9, 0.2, 1) !important;
+    padding: 4px 12px !important;
+}
+
+.el-month-table td.current .cell,
+.el-year-table td.current .cell {
+    background: linear-gradient(135deg, var(--hcis-brand-600, var(--hcis-brand-600)) 0%, var(--hcis-brand-700, var(--hcis-brand-700)) 100%) !important;
+    color: var(--hcis-white) !important;
+    font-weight: 800 !important;
+    box-shadow: 0 3px 8px rgb(var(--hcis-brand-600-rgb) / 0.3) !important;
+}
+
+.el-month-table td:hover .cell,
+.el-year-table td:hover .cell {
+    background-color: var(--hcis-brand-50, var(--hcis-brand-50)) !important;
+    color: var(--hcis-brand-700, var(--hcis-brand-700)) !important;
+}
+
+/* Footer Aksi Kalender */
+.el-picker-panel__footer {
+    border-top: 1px solid var(--hcis-border-subtle, var(--hcis-slate-100)) !important;
+    padding: 8px 12px !important;
+    background: rgb(var(--hcis-slate-50-rgb) / 0.7) !important;
+}
+:is(.ds-preview, [data-hcis-el]) .el-picker-panel__body,
+:is(.ds-preview, [data-hcis-el]) .el-picker-panel__footer { border-color: var(--hcis-border); }
+
+/* ==========================================
+ * EL-CALENDAR COMPONENT UPGRADE
+ * ========================================== */
+.el-calendar,
+:is(.ds-preview, [data-hcis-el]) .el-calendar {
+    --el-calendar-border: none;
+    --el-calendar-header-border-bottom: 1px solid var(--hcis-border-subtle, #e2e8f0);
+    --el-calendar-selected-bg-color: transparent;
+    --el-calendar-cell-width: auto;
+    background: transparent !important;
+    padding: 0 !important;
+    font-family: var(--hcis-font-body) !important;
+}
+
+.el-calendar__header,
+:is(.ds-preview, [data-hcis-el]) .el-calendar__header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 12px 16px !important;
+    border-bottom: 1px solid var(--hcis-border-subtle, #e2e8f0) !important;
+    margin-bottom: 4px !important;
+    gap: 8px !important;
+}
+
+.el-calendar__title,
+:is(.ds-preview, [data-hcis-el]) .el-calendar__title {
+    font-weight: 700 !important;
+    font-size: 0.95rem !important;
+    color: var(--hcis-text-strong, #0f172a) !important;
+    letter-spacing: -0.01em !important;
+}
+
+.el-calendar__button-group .el-button-group,
+:is(.ds-preview, [data-hcis-el]) .el-calendar__button-group .el-button-group {
+    display: inline-flex !important;
+    gap: 4px !important;
+}
+
+.el-calendar__button-group .el-button,
+:is(.ds-preview, [data-hcis-el]) .el-calendar__button-group .el-button {
+    height: 30px !important;
+    padding: 0 10px !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    border-radius: var(--hcis-radius-sm, 6px) !important;
+    border: 1px solid var(--hcis-border-subtle, #cbd5e1) !important;
+    background: var(--hcis-surface, #ffffff) !important;
+    color: var(--hcis-text, #334155) !important;
+    transition-property: var(--hcis-transition-props) !important;
+    transition-duration: var(--hcis-duration-fast) !important;
+    transition-timing-function: ease !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+}
+
+.el-calendar__button-group .el-button:hover,
+:is(.ds-preview, [data-hcis-el]) .el-calendar__button-group .el-button:hover {
+    background: var(--hcis-brand-50, #eef2ff) !important;
+    border-color: var(--hcis-brand-300, #a5b4fc) !important;
+    color: var(--hcis-brand-700, #4338ca) !important;
+}
+
+.el-calendar__body,
+:is(.ds-preview, [data-hcis-el]) .el-calendar__body {
+    padding: 6px 12px 12px 12px !important;
+}
+
+.el-calendar-table,
+:is(.ds-preview, [data-hcis-el]) .el-calendar-table {
+    width: 100% !important;
+    table-layout: fixed !important;
+    border-collapse: separate !important;
+    border-spacing: 0 2px !important;
+}
+
+.el-calendar-table thead th,
+:is(.ds-preview, [data-hcis-el]) .el-calendar-table thead th {
+    padding: 6px 0 8px 0 !important;
+    font-size: 0.725rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    color: var(--hcis-text-subtle, #94a3b8) !important;
+    border: none !important;
+    text-align: center !important;
+}
+
+.el-calendar-table tr:first-child td,
+.el-calendar-table tr td:first-child,
+.el-calendar-table td,
+:is(.ds-preview, [data-hcis-el]) .el-calendar-table td {
+    border: none !important;
+    padding: 0 !important;
+    background: transparent !important;
+    text-align: center !important;
+}
+
+.el-calendar-table td.is-selected,
+:is(.ds-preview, [data-hcis-el]) .el-calendar-table td.is-selected {
+    background-color: transparent !important;
+}
+
+.el-calendar-table .el-calendar-day,
+:is(.ds-preview, [data-hcis-el]) .el-calendar-table .el-calendar-day {
+    height: 42px !important;
+    min-height: 42px !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    transition-property: var(--hcis-transition-props) !important;
+    transition-duration: 160ms !important;
+    transition-timing-function: ease !important;
+    border-radius: 0 !important;
+}
+
+.el-calendar-table .el-calendar-day:hover,
+:is(.ds-preview, [data-hcis-el]) .el-calendar-table .el-calendar-day:hover {
+    background-color: transparent !important;
+}
+
+.el-calendar-table td.prev,
+.el-calendar-table td.next,
+:is(.ds-preview, [data-hcis-el]) .el-calendar-table td.prev,
+:is(.ds-preview, [data-hcis-el]) .el-calendar-table td.next {
+    opacity: 0.3 !important;
+    pointer-events: none !important;
+}
+
+/* ==========================================
+ * EL-TIME-PICKER & TIME-SELECT UPGRADE
+ * ========================================== */
+.el-date-editor--time,
+.el-time-picker,
+:is(.ds-preview, [data-hcis-el]) .el-date-editor--time,
+:is(.ds-preview, [data-hcis-el]) .el-time-picker {
+    --el-input-height: 44px;
+    --el-input-border-color: var(--hcis-border-subtle, #cbd5e1);
+    --el-input-focus-border-color: var(--hcis-brand-500, #6366f1);
+    --el-input-border-radius: var(--hcis-radius-md, 10px);
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.el-date-editor--time .el-input__wrapper,
+.el-time-picker .el-input__wrapper,
+:is(.ds-preview, [data-hcis-el]) .el-date-editor--time .el-input__wrapper {
+    height: 44px !important;
+    border-radius: 10px !important;
+    padding: 0 14px !important;
+    box-shadow: 0 0 0 1px var(--hcis-border-subtle, #cbd5e1) inset !important;
+    background-color: var(--hcis-surface, #ffffff) !important;
+    transition-property: var(--hcis-transition-props) !important;
+    transition-duration: 160ms !important;
+    transition-timing-function: cubic-bezier(0.2, 0.9, 0.2, 1) !important;
+}
+
+.el-date-editor--time .el-input__wrapper:hover,
+:is(.ds-preview, [data-hcis-el]) .el-date-editor--time .el-input__wrapper:hover {
+    box-shadow: 0 0 0 1px var(--hcis-brand-400, #818cf8) inset !important;
+}
+
+.el-date-editor--time .el-input__wrapper.is-focus,
+:is(.ds-preview, [data-hcis-el]) .el-date-editor--time .el-input__wrapper.is-focus {
+    box-shadow: 0 0 0 2px var(--hcis-brand-500, #6366f1) inset, 0 0 0 4px rgba(99, 102, 241, 0.15) !important;
+}
+
+.el-date-editor--time .el-input__prefix-inner i,
+.el-date-editor--time .el-input__prefix-inner svg,
+.el-date-editor--time .el-input__prefix-inner {
+    color: var(--hcis-brand-500, #6366f1) !important;
+    font-size: 1.1rem !important;
+}
+
+.el-date-editor--time .el-input__inner {
+    font-size: 0.925rem !important;
+    font-weight: 600 !important;
+    color: var(--hcis-text-strong, #0f172a) !important;
+    height: 42px !important;
+    line-height: 42px !important;
+}
+
+/* Time Picker Popper & Panel Popup */
+.el-picker__popper.hcis-time-picker-popper,
+.hcis-time-picker-popper,
+:is(.ds-preview, [data-hcis-el]) .hcis-time-picker-popper {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+.el-time-panel,
+.hcis-time-picker-popper .el-time-panel,
+.el-picker__popper.hcis-time-picker-popper .el-time-panel,
+:is(.ds-preview, [data-hcis-el]) .el-time-panel {
+    width: 180px !important;
+    border-radius: 14px !important;
+    box-shadow: 0 16px 36px -6px rgba(15, 23, 42, 0.16), 0 0 0 1px rgba(226, 232, 240, 0.9) !important;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+}
+
+.el-time-panel__content {
+    position: relative !important;
+    text-align: center !important;
+    padding: 0 !important;
+    height: 192px !important;
+    overflow: hidden !important;
+}
+
+/* Center Highlight Selection Band / Indicator Lines - Calibrated top alignment (192px container / 2 - 16px = 80px) */
+.el-time-panel__content::before,
+.el-time-panel__content::after,
+.hcis-time-picker-popper .el-time-panel__content::before,
+.hcis-time-picker-popper .el-time-panel__content::after {
+    content: "" !important;
+    position: absolute !important;
+    top: 80px !important;
+    margin: 0 !important;
+    height: 32px !important;
+    left: 0 !important;
+    right: 0 !important;
+    border-top: 1.5px solid var(--hcis-brand-400, #818cf8) !important;
+    border-bottom: 1.5px solid var(--hcis-brand-400, #818cf8) !important;
+    background-color: rgba(99, 102, 241, 0.08) !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+    box-sizing: border-box !important;
+}
+
+.el-time-spinner {
+    width: 100% !important;
+    white-space: nowrap !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+.el-time-spinner__wrapper {
+    width: 50% !important;
+    display: inline-block !important;
+    vertical-align: top !important;
+    max-height: 192px !important;
+    height: 192px !important;
+    box-sizing: border-box !important;
+}
+
+.el-time-spinner__list {
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style: none !important;
+    text-align: center !important;
+}
+
+.el-time-spinner__item,
+.hcis-time-picker-popper .el-time-spinner__item {
+    height: 32px !important;
+    line-height: 32px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    font-size: 0.925rem !important;
+    font-weight: 500 !important;
+    color: var(--hcis-text, #334155) !important;
+    background: transparent !important;
+    transition-property: var(--hcis-transition-props), font-size, font-weight !important;
+    transition-duration: 120ms !important;
+    transition-timing-function: ease !important;
+    user-select: none !important;
+    cursor: pointer !important;
+    box-sizing: border-box !important;
+}
+
+.el-time-spinner__item:hover:not(.is-disabled):not(.is-active),
+.hcis-time-picker-popper .el-time-spinner__item:hover:not(.is-disabled):not(.is-active) {
+    color: var(--hcis-brand-600, #4f46e5) !important;
+    background: rgba(99, 102, 241, 0.08) !important;
+}
+
+.el-time-spinner__item.is-active:not(.is-disabled),
+.hcis-time-picker-popper .el-time-spinner__item.is-active:not(.is-disabled) {
+    color: var(--hcis-brand-600, #4f46e5) !important;
+    font-weight: 700 !important;
+    font-size: 0.925rem !important;
+    background: transparent !important;
+}
+
+.el-time-spinner__item.is-disabled,
+.hcis-time-picker-popper .el-time-spinner__item.is-disabled {
+    color: var(--hcis-text-subtle, #cbd5e1) !important;
+    cursor: not-allowed !important;
+    background: transparent !important;
+}
+
+.el-time-panel__footer {
+    height: 40px !important;
+    line-height: 40px !important;
+    border-top: 1px solid var(--hcis-border-subtle, #e2e8f0) !important;
+    padding: 0 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 8px !important;
+    background: var(--hcis-surface-soft, #f8fafc) !important;
+}
+
+.el-time-panel__btn {
+    height: 28px !important;
+    line-height: 26px !important;
+    font-size: 0.775rem !important;
+    font-weight: 600 !important;
+    padding: 0 12px !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition-property: var(--hcis-transition-props) !important;
+    transition-duration: 140ms !important;
+    transition-timing-function: ease !important;
+    box-sizing: border-box !important;
+}
+
+.el-time-panel__btn.cancel {
+    color: var(--hcis-text, #475569) !important;
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+}
+
+.el-time-panel__btn.cancel:hover {
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+    border-color: #94a3b8 !important;
+}
+
+.el-time-panel__btn.confirm {
+    color: #ffffff !important;
+    background: var(--hcis-brand-600, #4f46e5) !important;
+    border: 1px solid var(--hcis-brand-600, #4f46e5) !important;
+    box-shadow: 0 1px 2px rgba(79, 70, 229, 0.2) !important;
+}
+
+.el-time-panel__btn.confirm:hover {
+    background: var(--hcis-brand-700, #4338ca) !important;
+    border-color: var(--hcis-brand-700, #4338ca) !important;
+}
+
+/* ==========================================
+ * RESPONSIVITAS MOBILE UNTUK POPUP & DATERANGE
+ * ========================================== */
+@media (max-width: 640px) {
+    /* 1. Container popper mengambang fit di layar seluler LANGSUNG saat pertama kali terbuka */
+    .el-picker__popper,
+    :is(.ds-preview.el-picker__popper, [data-hcis-el] .el-picker__popper) {
+        width: calc(100vw - 20px) !important;
+        max-width: calc(100vw - 20px) !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+        /* Tingginya dibiarkan pada pencacah Element — alasannya sama persis
+           dengan popper select di atas: memaku angka mati mengalahkan nilai
+           inline yang justru menjaga urutan, dan pemilih tanggal di dalam laci
+           ikut tenggelam di belakang lacinya. */
+    }
+
+    /* 2. Window DateRangePicker & Picker Panel fit 100% lebar popper */
+    .el-picker-panel,
+    .el-date-range-picker,
+    :is(.ds-preview, [data-hcis-el]) .el-picker-panel,
+    :is(.ds-preview, [data-hcis-el]) .el-date-range-picker {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+    }
+
+    /* 3. Penumpukan vertikal dua kalender (is-left & is-right) masing-masing 100% lebar */
+    .el-date-range-picker .el-picker-panel__body,
+    :is(.ds-preview, [data-hcis-el]) .el-date-range-picker .el-picker-panel__body {
+        width: 100% !important;
+        min-width: 0 !important;
+        display: block !important;
+    }
+
+    .el-date-range-picker__content {
+        width: 100% !important;
+        max-width: 100% !important;
+        float: none !important;
+        display: block !important;
+        padding: 8px 12px !important;
+        box-sizing: border-box !important;
+    }
+
+    .el-date-range-picker__content.is-left {
+        border-right: none !important;
+        border-bottom: 1px dashed var(--hcis-border-subtle, var(--hcis-slate-200)) !important;
+        margin-bottom: 4px !important;
+        padding-bottom: 12px !important;
+    }
+
+    .el-date-range-picker__content.is-right {
+        padding-top: 4px !important;
+    }
+
+    .el-date-range-picker .el-date-table {
+        width: 100% !important;
+        table-layout: fixed !important;
+    }
+
+    /* 4. Input Rentang Tanggal di layar mobile */
+    .el-range-editor.el-input__wrapper {
+        padding: 0 var(--hcis-space-2) !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .el-range-editor .el-range-input {
+        font-size: 0.775rem !important;
+        min-width: 0 !important;
+        flex: 1 !important;
+    }
+
+    .el-range-editor .el-range-separator {
+        padding: 0 2px !important;
+        font-size: 0.725rem !important;
+        flex: none !important;
+    }
+}
+
+/* Notifikasi Element Plus (ElMessage): diselaraskan 100% dengan HCIS Design System */
+.el-message,
+:is(.ds-preview.el-message, [data-hcis-el] .el-message) {
+    min-width: 20rem !important;
+    max-width: 32rem !important;
+    padding: var(--hcis-space-4, 1rem) !important;
+    border-radius: var(--hcis-radius-xl, 14px) !important;
+    font-family: var(--hcis-font-body) !important;
+    font-size: var(--hcis-font-size-sm, 0.875rem) !important;
+    line-height: var(--hcis-line-normal) !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: var(--hcis-space-3, 0.75rem) !important;
+    box-shadow: var(--hcis-shadow-card, 0 12px 32px -4px rgb(var(--hcis-slate-900-rgb) / 0.06), 0 4px 12px -2px rgb(var(--hcis-slate-900-rgb) / 0.03)) !important;
+    background: var(--hcis-surface, var(--hcis-white)) !important;
+    border: 1px solid var(--hcis-border, var(--hcis-slate-200)) !important;
+    box-sizing: border-box !important;
+    transition: opacity var(--hcis-duration-fast) ease,
+                transform var(--hcis-duration-fast) ease,
+                top var(--hcis-duration-fast) ease !important;
+}
+
+/* Memperbaiki penumpukan & tabrakan teks dengan tombol tutup di ElMessage */
+.el-message .el-message__content,
+:is(.ds-preview.el-message, [data-hcis-el] .el-message) .el-message__content {
+    flex: 1 !important;
+    min-width: 0 !important;
+    padding-right: var(--hcis-space-2) !important;
+    font-family: var(--hcis-font-body) !important;
+    font-size: var(--hcis-font-size-sm, 0.875rem) !important;
+    font-weight: var(--hcis-weight-medium, 500) !important;
+    color: var(--hcis-text, var(--hcis-slate-800)) !important;
+    line-height: var(--hcis-line-normal, 1.5) !important;
+    word-break: break-word !important;
+}
+
+.el-message .el-message__icon,
+:is(.ds-preview.el-message, [data-hcis-el] .el-message) .el-message__icon {
+    font-size: 1.25rem !important;
+    margin-right: 0 !important;
+    margin-top: 1px !important;
+    flex-shrink: 0 !important;
+}
+
+.el-message .el-message__closeBtn,
+:is(.ds-preview.el-message, [data-hcis-el] .el-message) .el-message__closeBtn {
+    position: relative !important;
+    right: auto !important;
+    top: auto !important;
+    transform: none !important;
+    margin-left: auto !important;
+    flex-shrink: 0 !important;
+    font-size: 1.1rem !important;
+    width: 24px !important;
+    height: 24px !important;
+    border-radius: var(--hcis-radius-md, 8px) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: var(--hcis-text-muted, var(--hcis-slate-500)) !important;
+    transition-property: var(--hcis-transition-props) !important;
+    transition-duration: var(--hcis-duration-fast) !important;
+    transition-timing-function: ease !important;
+}
+
+.el-message .el-message__closeBtn:hover,
+:is(.ds-preview.el-message, [data-hcis-el] .el-message) .el-message__closeBtn:hover {
+    background-color: var(--hcis-surface-soft, var(--hcis-slate-50)) !important;
+    color: var(--hcis-text-strong, var(--hcis-slate-900)) !important;
+}
+
+/* Sentimen Warna Varian ElMessage (Harmonized with HcisAlert) */
+.el-message--success {
+    border-color: var(--hcis-success-200) !important;
+    background: linear-gradient(135deg, var(--hcis-white) 0%, var(--hcis-success-50, var(--hcis-success-50)) 100%) !important;
+}
+.el-message--success .el-message__icon { color: var(--hcis-success-500, var(--hcis-success-500)) !important; }
+
+.el-message--warning {
+    border-color: var(--hcis-warning-200) !important;
+    background: linear-gradient(135deg, var(--hcis-white) 0%, var(--hcis-warning-50, var(--hcis-warning-50)) 100%) !important;
+}
+.el-message--warning .el-message__icon { color: var(--hcis-warning-500, var(--hcis-warning-500)) !important; }
+
+.el-message--error {
+    border-color: var(--hcis-danger-200) !important;
+    background: linear-gradient(135deg, var(--hcis-white) 0%, var(--hcis-danger-50, var(--hcis-danger-50)) 100%) !important;
+}
+.el-message--error .el-message__icon { color: var(--hcis-danger-500, var(--hcis-danger-500)) !important; }
+
+.el-message--info {
+    border-color: var(--hcis-brand-200, var(--hcis-brand-200)) !important;
+    background: linear-gradient(135deg, var(--hcis-white) 0%, var(--hcis-brand-50, var(--hcis-brand-50)) 100%) !important;
+}
+.el-message--info .el-message__icon { color: var(--hcis-brand-600, var(--hcis-brand-600)) !important; }
+
+/* ==========================================
+ * EL-DIALOG & MODAL POPUP UPGRADE
+ * ========================================== */
+
+/* Backdrop Overlay (Fade In & Fade Out Murni) */
+.el-overlay {
+    background-color: rgb(var(--hcis-slate-900-rgb) / 0.55) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+}
+
+/* ==========================================
+ * HCIS-DIALOG OWNED MODAL TRANSITIONS (GLOBAL)
+ * ========================================== */
+.hcis-dialog-fade-enter-active {
+    transition: opacity 220ms var(--hcis-ease) !important;
+}
+
+.hcis-dialog-fade-leave-active {
+    transition: opacity 160ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.hcis-dialog-fade-enter-from,
+.hcis-dialog-fade-leave-to {
+    opacity: 0 !important;
+}
+
+.hcis-dialog-fade-enter-active .hcis-dialog {
+    animation: hcis-dialog-scale-in 220ms var(--hcis-ease) !important;
+}
+
+.hcis-dialog-fade-leave-active .hcis-dialog {
+    animation: hcis-dialog-scale-out 160ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+@keyframes hcis-dialog-scale-in {
+    0% {
+        opacity: 0;
+        transform: scale(0.94) translateY(12px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes hcis-dialog-scale-out {
+    0% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.96) translateY(6px);
+    }
+}
+
+/* Offcanvas Bottom Drawer Keyframes & Rules */
+.hcis-dialog-fade-enter-active .hcis-dialog--placement-bottom {
+    animation: hcis-dialog-slide-up 260ms var(--hcis-ease) !important;
+}
+
+.hcis-dialog-fade-leave-active .hcis-dialog--placement-bottom {
+    animation: hcis-dialog-slide-down 200ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Mobile Slide-Up Bottom Sheet Keyframes */
+@media (max-width: 640px) {
+    .hcis-dialog-fade-enter-active .hcis-dialog {
+        animation: hcis-dialog-slide-up 260ms var(--hcis-ease) !important;
+    }
+
+    .hcis-dialog-fade-leave-active .hcis-dialog {
+        animation: hcis-dialog-slide-down 200ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+}
+
+@keyframes hcis-dialog-slide-up {
+    0% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes hcis-dialog-slide-down {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+/* Modal Window Container */
+.el-dialog,
+.el-dialog:is(.ds-preview, [data-hcis-el]),
+.el-overlay .el-dialog {
+    --el-dialog-padding-primary: 16px !important;
+    border-radius: var(--hcis-radius-xl, 16px) !important;
+    background: var(--hcis-white, #ffffff) !important;
+    border: 1px solid rgb(var(--hcis-slate-200-rgb, 203 213 225) / 0.9) !important;
+    box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.04),
+        0 10px 25px -5px rgba(15, 23, 42, 0.1),
+        0 30px 70px -15px rgba(15, 23, 42, 0.28),
+        0 50px 100px -20px rgba(15, 23, 42, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    will-change: opacity, transform !important;
+}
+
+.el-overlay {
+    background-color: rgba(15, 23, 42, 0.68) !important;
+    backdrop-filter: blur(16px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+}
+
+/* Header Modal */
+.el-dialog__header,
+.el-dialog:is(.ds-preview, [data-hcis-el]) .el-dialog__header,
+.el-overlay .el-dialog__header {
+    margin: 0 !important;
+    padding: 0.9375rem 1.375rem !important;
+    border-bottom: 1px solid var(--hcis-border-subtle, #f1f5f9) !important;
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
+}
+
+.el-dialog__title,
+.el-dialog:is(.ds-preview, [data-hcis-el]) .el-dialog__title,
+.el-overlay .el-dialog__title {
+    font-family: var(--hcis-font-heading, inherit) !important;
+    font-size: 1.025rem !important;
+    font-weight: 700 !important;
+    color: var(--hcis-text-strong, #0f172a) !important;
+    letter-spacing: -0.018em !important;
+    line-height: 1.3 !important;
+}
+
+/* Tombol Tutup Header (X) */
+.el-dialog__headerbtn,
+.el-dialog:is(.ds-preview, [data-hcis-el]) .el-dialog__headerbtn,
+.el-overlay .el-dialog__headerbtn {
+    width: 1.875rem !important;
+    height: 1.875rem !important;
+    top: 13px !important;
+    right: 16px !important;
+    border-radius: var(--hcis-radius-md, 8px) !important;
+    border: 1px solid transparent !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: var(--hcis-text-muted, #94a3b8) !important;
+    transition-property: var(--hcis-transition-props) !important;
+    transition-duration: 180ms !important;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.el-dialog__headerbtn:hover,
+.el-dialog:is(.ds-preview, [data-hcis-el]) .el-dialog__headerbtn:hover,
+.el-overlay .el-dialog__headerbtn:hover {
+    background-color: var(--hcis-surface-soft, #f1f5f9) !important;
+    border-color: var(--hcis-border-subtle, #e2e8f0) !important;
+    color: var(--hcis-text-strong, #0f172a) !important;
+    transform: scale(1.08) rotate(90deg) !important;
+}
+
+.el-dialog__headerbtn .el-dialog__close {
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+}
+
+/* Body Modal */
+.el-dialog__body,
+.el-dialog:is(.ds-preview, [data-hcis-el]) .el-dialog__body,
+.el-overlay .el-dialog__body {
+    padding: 1.25rem 1.375rem !important;
+    color: var(--hcis-text, #334155) !important;
+    font-size: var(--hcis-font-size-sm, 0.875rem) !important;
+    line-height: 1.55 !important;
+    max-height: calc(85vh - 120px) !important;
+    overflow-y: auto !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: rgb(var(--hcis-slate-300-rgb, 203 213 225) / 0.8) transparent !important;
+}
+
+/* Footer Modal */
+.el-dialog__footer,
+.el-dialog:is(.ds-preview, [data-hcis-el]) .el-dialog__footer,
+.el-overlay .el-dialog__footer {
+    margin: 0 !important;
+    padding: 0.9375rem 1.375rem !important;
+    border-top: 1px solid var(--hcis-border-subtle, #f1f5f9) !important;
+    background: var(--hcis-surface-soft, #f8fafc) !important;
+}
+
+/* Responsivitas Mobile Dialog */
+@media (max-width: 640px) {
+    .el-dialog,
+    .el-dialog:is(.ds-preview, [data-hcis-el]),
+    .el-overlay .el-dialog {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        min-width: 100vw !important;
+        margin: 0 !important;
+        margin-top: auto !important;
+        border-radius: 24px 24px 0 0 !important;
+        border: none !important;
+        border-top: 1px solid var(--hcis-border-medium, #cbd5e1) !important;
+        box-shadow: 0 -12px 36px -4px rgba(15, 23, 42, 0.28), 0 0 0 1px rgba(255, 255, 255, 0.8) inset !important;
+    }
+}
+
+/* Bridged el-drawer Styling to 100% match HcisDialog design language */
+html body .el-drawer__header,
+html body :is(.ds-preview, [data-hcis-el]) .el-drawer__header,
+html body .custom-drawer .el-drawer__header,
+html body .wz-drawer .el-drawer__header,
+html body .itp-drawer .el-drawer__header {
+    margin-right: 0 !important;
+    margin-bottom: 0 !important;
+    padding: 12px 18px !important;
+    border-bottom: 1px solid var(--hcis-border-subtle, var(--hcis-slate-100)) !important;
+    position: relative !important;
+    background: var(--hcis-surface, var(--hcis-white)) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+}
+
+html body .el-drawer__title,
+html body :is(.ds-preview, [data-hcis-el]) .el-drawer__title,
+html body .custom-drawer .el-drawer__title,
+html body .wz-drawer .el-drawer__title,
+html body .itp-drawer .el-drawer__title {
+    font-family: var(--hcis-font-heading, inherit) !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    color: var(--hcis-text-strong, var(--hcis-slate-900)) !important;
+    line-height: 1.25 !important;
+    letter-spacing: -0.01em !important;
+}
+
+html body .el-drawer__body,
+html body :is(.ds-preview, [data-hcis-el]) .el-drawer__body,
+html body .custom-drawer .el-drawer__body,
+html body .wz-drawer .el-drawer__body,
+html body .itp-drawer .el-drawer__body {
+    padding: var(--hcis-space-4, 16px) var(--hcis-space-5, 20px) !important;
+    background-color: var(--hcis-surface, var(--hcis-white)) !important;
+    color: var(--hcis-text, var(--hcis-slate-700)) !important;
+    font-size: var(--hcis-font-size-sm, 0.875rem) !important;
+    line-height: 1.5 !important;
+    overflow-y: auto !important;
+}
+
+html body .el-drawer__footer,
+html body :is(.ds-preview, [data-hcis-el]) .el-drawer__footer,
+html body .custom-drawer .el-drawer__footer,
+html body .wz-drawer .el-drawer__footer,
+html body .itp-drawer .el-drawer__footer {
+    margin: 0 !important;
+    padding: 12px 18px !important;
+    border-top: 1px solid var(--hcis-border-subtle, var(--hcis-slate-100)) !important;
+    background-color: var(--hcis-surface-soft, var(--hcis-slate-50)) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 8px !important;
+}
+
+/* High-contrast pure CSS backdrop overlay (Zero-lag, ultra-smooth GPU opacity fade) */
+html body .el-overlay {
+    background-color: rgb(var(--hcis-slate-900-rgb) / 0.58) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    will-change: opacity;
+    transform: translateZ(0);
+}
+
+/* Transisi fade overlay backdrop saat drawer buka & tutup dibuat sangat mulus */
+html body :is(.ds-preview.el-drawer-fade-enter-active, [data-hcis-el] .el-drawer-fade-enter-active),
+html body .el-drawer-fade-enter-active {
+    transition: opacity 260ms var(--hcis-ease) !important;
+}
+
+html body :is(.ds-preview.el-drawer-fade-leave-active, [data-hcis-el] .el-drawer-fade-leave-active),
+html body .el-drawer-fade-leave-active {
+    transition: opacity 200ms cubic-bezier(0.4, 0, 1, 1) !important;
+}
+
+html body :is(.ds-preview.el-drawer-fade-enter-from, [data-hcis-el] .el-drawer-fade-enter-from),
+html body :is(.ds-preview.el-drawer-fade-leave-to, [data-hcis-el] .el-drawer-fade-leave-to),
+html body .el-drawer-fade-enter-from,
+html body .el-drawer-fade-leave-to {
+    opacity: 0 !important;
+}
+
+/* Keyframes animasi laci murni 100% SLIDE tanpa FADE dari Ujung Layar */
+@keyframes rtl-drawer-in {
+    0% { transform: translate3d(100vw, 0, 0); }
+    100% { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes rtl-drawer-out {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(100vw, 0, 0); }
+}
+
+@keyframes ltr-drawer-in {
+    0% { transform: translate3d(-100vw, 0, 0); }
+    100% { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes ltr-drawer-out {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-100vw, 0, 0); }
+}
+
+@keyframes btt-drawer-in {
+    0% { transform: translate3d(0, 100vh, 0); }
+    100% { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes btt-drawer-out {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(0, 100vh, 0); }
+}
+
+@keyframes ttb-drawer-in {
+    0% { transform: translate3d(0, -100vh, 0); }
+    100% { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes ttb-drawer-out {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(0, -100vh, 0); }
+}
+
+/* Panel laci SELALU 100% SOLID OPAQUE seragam dengan HcisDialog */
+html body :is(.ds-preview, [data-hcis-el]) .el-drawer,
+html body .el-drawer,
+html body .custom-drawer,
+html body .wz-drawer,
+html body .itp-drawer,
+html body .el-drawer-fade-enter-from .el-drawer,
+html body .el-drawer-fade-leave-to .el-drawer,
+html body .el-drawer-fade-enter-active .el-drawer,
+html body .el-drawer-fade-leave-active .el-drawer {
+    opacity: 1 !important;
+    background-color: var(--hcis-surface, var(--hcis-white)) !important;
+    box-shadow: 0 25px 50px -12px rgb(var(--hcis-slate-900-rgb) / 0.3), 0 0 0 1px var(--hcis-border-subtle, rgb(var(--hcis-slate-300-rgb) / 0.8)) !important;
+    overflow: hidden !important;
+    will-change: transform !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+}
+
+/* RTL (Right to Left): Masuk dari kanan ke kiri, Keluar kembali ke kanan */
+html body .el-drawer-fade-enter-active .el-drawer.rtl,
+html body :is(.ds-preview.el-drawer-fade-enter-active, [data-hcis-el] .el-drawer-fade-enter-active) .el-drawer.rtl {
+    animation: rtl-drawer-in 260ms var(--hcis-ease) forwards !important;
+}
+html body .el-drawer-fade-leave-active .el-drawer.rtl,
+html body :is(.ds-preview.el-drawer-fade-leave-active, [data-hcis-el] .el-drawer-fade-leave-active) .el-drawer.rtl {
+    animation: rtl-drawer-out 200ms cubic-bezier(0.4, 0, 1, 1) forwards !important;
+}
+
+/* LTR (Left to Right): Masuk dari kiri ke kanan, Keluar kembali ke kiri */
+html body .el-drawer-fade-enter-active .el-drawer.ltr,
+html body :is(.ds-preview.el-drawer-fade-enter-active, [data-hcis-el] .el-drawer-fade-enter-active) .el-drawer.ltr {
+    animation: ltr-drawer-in 260ms var(--hcis-ease) forwards !important;
+}
+html body .el-drawer-fade-leave-active .el-drawer.ltr,
+html body :is(.ds-preview.el-drawer-fade-leave-active, [data-hcis-el] .el-drawer-fade-leave-active) .el-drawer.ltr {
+    animation: ltr-drawer-out 200ms cubic-bezier(0.4, 0, 1, 1) forwards !important;
+}
+
+/* BTT (Bottom to Top): Masuk dari bawah ke atas, Keluar kembali ke bawah */
+html body .el-drawer-fade-enter-active .el-drawer.btt,
+html body :is(.ds-preview.el-drawer-fade-enter-active, [data-hcis-el] .el-drawer-fade-enter-active) .el-drawer.btt {
+    animation: btt-drawer-in 260ms var(--hcis-ease) forwards !important;
+}
+html body .el-drawer-fade-leave-active .el-drawer.btt,
+html body :is(.ds-preview.el-drawer-fade-leave-active, [data-hcis-el] .el-drawer-fade-leave-active) .el-drawer.btt {
+    animation: btt-drawer-out 200ms cubic-bezier(0.4, 0, 1, 1) forwards !important;
+}
+
+/* TTB (Top to Bottom): Masuk dari atas ke bawah, Keluar kembali ke atas */
+html body .el-drawer-fade-enter-active .el-drawer.ttb,
+html body :is(.ds-preview.el-drawer-fade-enter-active, [data-hcis-el] .el-drawer-fade-enter-active) .el-drawer.ttb {
+    animation: ttb-drawer-in 260ms var(--hcis-ease) forwards !important;
+}
+html body .el-drawer-fade-leave-active .el-drawer.ttb,
+html body :is(.ds-preview.el-drawer-fade-leave-active, [data-hcis-el] .el-drawer-fade-leave-active) .el-drawer.ttb {
+    animation: ttb-drawer-out 200ms cubic-bezier(0.4, 0, 1, 1) forwards !important;
+}
+
+/* Sheet Corner Radii (Desktop side drawers are sleek & flush 0px radius) */
+html body .el-drawer.rtl,
+html body :is(.ds-preview, [data-hcis-el]) .el-drawer.rtl,
+html body .custom-drawer.rtl,
+html body .wz-drawer.rtl,
+html body .itp-drawer.rtl,
+html body .el-drawer.ltr,
+html body :is(.ds-preview, [data-hcis-el]) .el-drawer.ltr,
+html body .custom-drawer.ltr,
+html body .wz-drawer.ltr,
+html body .itp-drawer.ltr {
+    border-radius: 0 !important;
+}
+
+html body .el-drawer.btt,
+html body :is(.ds-preview, [data-hcis-el]) .el-drawer.btt,
+html body .custom-drawer.btt,
+html body .wz-drawer.btt,
+html body .itp-drawer.btt {
+    border-top-left-radius: 24px !important;
+    border-top-right-radius: 24px !important;
+}
+
+/* Grab handle pill untuk BTT (Bottom Sheet) persis HcisDialog mobile */
+html body .el-drawer.btt::before,
+html body .custom-drawer.btt::before,
+html body .wz-drawer.btt::before,
+html body .itp-drawer.btt::before {
+    content: '';
+    display: block;
+    width: 42px;
+    height: 5px;
+    border-radius: 999px;
+    background: var(--hcis-border-subtle, var(--hcis-slate-300));
+    margin: 10px auto 2px;
+    opacity: 0.9;
+}
+
+/* Close Button Identik HcisDialog.vue */
+html body .el-drawer__close-btn,
+html body :is(.ds-preview, [data-hcis-el]) .el-drawer__close-btn,
+html body .custom-drawer .el-drawer__close-btn,
+html body .wz-drawer .el-drawer__close-btn,
+html body .itp-drawer .el-drawer__close-btn {
+    width: 1.75rem !important;
+    height: 1.75rem !important;
+    border-radius: 50% !important;
+    border: none !important;
+    background: transparent !important;
+    color: var(--hcis-text-muted, var(--hcis-slate-500)) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition-property: var(--hcis-transition-props) !important;
+    transition-duration: 180ms !important;
+    transition-timing-function: cubic-bezier(0.2, 0.9, 0.2, 1) !important;
+    flex-shrink: 0 !important;
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+}
+
+html body .el-drawer__close-btn:hover,
+html body :is(.ds-preview, [data-hcis-el]) .el-drawer__close-btn:hover,
+html body .custom-drawer .el-drawer__close-btn:hover,
+html body .wz-drawer .el-drawer__close-btn:hover,
+html body .itp-drawer .el-drawer__close-btn:hover {
+    background-color: var(--hcis-surface-soft, var(--hcis-slate-100)) !important;
+    color: var(--hcis-text-strong, var(--hcis-slate-900)) !important;
+    transform: scale(1.1) rotate(90deg) !important;
+}
+
+/* Dialog Modal: High-end Apple & Linear Spring Elevation Animation */
+.el-dialog,
+.el-dialog:is(.ds-preview, [data-hcis-el]),
+.el-overlay .el-dialog {
+    border-radius: var(--hcis-radius-xl) !important;
+    background: var(--hcis-surface) !important;
+    box-shadow: 0 24px 60px -12px rgb(var(--hcis-slate-900-rgb) / 0.28), 0 0 0 1px var(--hcis-border) !important;
+    overflow: hidden !important;
+    transition: transform 300ms var(--hcis-ease), opacity 300ms var(--hcis-ease) !important;
+    animation: none !important;
+    will-change: transform, opacity !important;
+}
+
+/* State saat dialog mulai MASUK (Slide Up dari bawah) */
+.dialog-fade-enter-from .el-dialog,
+.el-dialog-fade-enter-from .el-dialog,
+.dialog-fade-enter-from.el-overlay-dialog .el-dialog {
+    transform: translate3d(0, 32px, 0) scale(0.97) !important;
+    opacity: 0 !important;
+}
+
+/* State saat dialog KELUAR (Slide Down ke bawah) */
+.dialog-fade-leave-to .el-dialog,
+.el-dialog-fade-leave-to .el-dialog,
+.dialog-fade-leave-to.el-overlay-dialog .el-dialog {
+    transform: translate3d(0, 24px, 0) scale(0.97) !important;
+    opacity: 0 !important;
+}
+
+/* Switcher & Toggle Override (Bridged globally to HCIS design system) */
+html body .el-switch,
+html body :is(.ds-preview, [data-hcis-el]) .el-switch,
+html body .el-switch__core,
+html body .el-switch__action {
+    font-family: var(--hcis-font-body) !important;
+    vertical-align: middle !important;
+    --el-transition-duration: 280ms !important;
+    --el-switch-on-color: var(--hcis-brand-600, var(--hcis-brand-600)) !important;
+}
+
+html body .el-switch .el-switch__core,
+html body .el-switch__core,
+html body :is(.ds-preview, [data-hcis-el]) .el-switch .el-switch__core {
+    border-radius: var(--hcis-radius-pill) !important;
+    border: 1px solid var(--hcis-border-strong, var(--hcis-slate-450)) !important;
+    box-shadow: inset 0 1.5px 3px rgb(var(--hcis-slate-900-rgb) / 0.16), 0 1px 2px rgb(var(--hcis-slate-900-rgb) / 0.04) !important;
+    transition-property: var(--hcis-transition-props) !important;
+    transition-duration: 200ms !important;
+    transition-timing-function: ease !important;
+    transition-duration: 200ms !important;
+}
+
+html body .el-switch:hover:not(.is-disabled) .el-switch__core,
+html body :is(.ds-preview, [data-hcis-el]) .el-switch:hover:not(.is-disabled) .el-switch__core {
+    border-color: var(--hcis-brand-400, var(--hcis-brand-400)) !important;
+    transform: scale(1.02) !important;
+    filter: brightness(1.03) !important;
+}
+
+html body .el-switch:active:not(.is-disabled) .el-switch__core,
+html body :is(.ds-preview, [data-hcis-el]) .el-switch:active:not(.is-disabled) .el-switch__core {
+    transform: scale(0.97) !important;
+    box-shadow: inset 0 2px 4px rgb(var(--hcis-slate-900-rgb) / 0.2) !important;
+}
+
+html body .el-switch.is-checked .el-switch__core,
+html body :is(.ds-preview, [data-hcis-el]) .el-switch.is-checked .el-switch__core {
+    background-color: var(--hcis-brand-600, var(--hcis-brand-600)) !important;
+    border-color: var(--hcis-brand-600, var(--hcis-brand-600)) !important;
+    box-shadow: inset 0 1px 1.5px rgb(var(--hcis-white-rgb) / 0.3),
+                0 3px 10px -1px rgb(var(--hcis-brand-600-rgb) / 0.38) !important;
+}
+
+html body .el-switch .el-switch__action,
+html body .el-switch .el-switch__thumb,
+html body .el-switch__core .el-switch__action,
+html body :is(.ds-preview, [data-hcis-el]) .el-switch .el-switch__action,
+html body :is(.ds-preview, [data-hcis-el]) .el-switch .el-switch__thumb {
+    border-radius: var(--hcis-radius-pill, 999px) !important;
+    background: linear-gradient(180deg, var(--hcis-white) 0%, var(--hcis-slate-50) 100%) !important;
+    box-shadow: 0 3px 8px -1px rgb(var(--hcis-slate-900-rgb) / 0.22),
+                0 1px 3px rgb(var(--hcis-slate-900-rgb) / 0.12),
+                inset 0 1px 0 var(--hcis-white),
+                inset 0 -1px 0 rgb(var(--hcis-black-rgb) / 0.05) !important;
+    /* Knop switch digerakkan Element Plus lewat `left`
+       (.is-checked .el-switch__core .el-switch__action { left: calc(100% - 17px) }),
+       dan berkas itu ada di node_modules — tak terlihat oleh analisis di repo ini.
+       Tanpa menyebut `left`, knopnya MELOMPAT, bukan menggeser. */
+    transition-property: var(--hcis-transition-props), left !important;
+    transition-duration: 280ms !important;
+    transition-timing-function: var(--hcis-ease-spring) !important;
+    transition-duration: 280ms !important;
+    transition-timing-function: var(--hcis-ease-spring) !important;
+}
+
+html body .el-switch:active:not(.is-disabled) .el-switch__action,
+html body .el-switch:active:not(.is-disabled) .el-switch__thumb,
+html body :is(.ds-preview, [data-hcis-el]) .el-switch:active:not(.is-disabled) .el-switch__action {
+    width: 1.38rem !important;
+}
+
+html body .el-switch__core:focus-visible,
+html body :is(.ds-preview, [data-hcis-el]) .el-switch__core:focus-visible {
+    outline: none !important;
+    box-shadow: 0 0 0 3px var(--hcis-focus-ring, rgb(var(--hcis-brand-500-rgb) / 0.5)),
+                0 4px 12px rgb(var(--hcis-brand-500-rgb) / 0.25) !important;
+}
+
+html body .el-switch__label,
+html body :is(.ds-preview, [data-hcis-el]) .el-switch__label {
+    color: var(--hcis-text-muted) !important;
+    font-size: var(--hcis-font-size-sm) !important;
+    font-weight: var(--hcis-weight-medium) !important;
+    transition: color 200ms ease, font-weight 200ms ease !important;
+}
+
+html body .el-switch__label.is-active,
+html body :is(.ds-preview, [data-hcis-el]) .el-switch__label.is-active {
+    color: var(--hcis-text-strong) !important;
+    font-weight: var(--hcis-weight-bold) !important;
+}
+
+/* Tag Pill Override */
+:is(.ds-preview, [data-hcis-el]) .el-tag {
+    border-radius: var(--hcis-radius-pill);
+    font-weight: 700;
+    font-size: var(--hcis-font-size-xs);
+    padding: 0 var(--hcis-space-3);
+    border: 1px solid transparent;
+}
+:is(.ds-preview, [data-hcis-el]) .el-tag--primary { background: var(--hcis-brand-50); border-color: var(--hcis-brand-200); color: var(--hcis-brand-700); }
+:is(.ds-preview, [data-hcis-el]) .el-tag--success { background: var(--hcis-success-50); border-color: var(--hcis-success-200); color: var(--hcis-success-700); }
+:is(.ds-preview, [data-hcis-el]) .el-tag--warning { background: var(--hcis-warning-50); border-color: var(--hcis-warning-200); color: var(--hcis-warning-700); }
+:is(.ds-preview, [data-hcis-el]) .el-tag--danger { background: var(--hcis-danger-50); border-color: var(--hcis-danger-200); color: var(--hcis-danger-700); }
+:is(.ds-preview, [data-hcis-el]) .el-tag--info { background: var(--hcis-slate-50); border-color: var(--hcis-border); color: var(--hcis-text-muted); }
+
+/* Collapse & Accordion Premium Styling & Ultra-Smooth Transitions */
+.el-collapse,
+.el-collapse:is(.ds-preview, [data-hcis-el]),
+:is(.ds-preview, [data-hcis-el]) .el-collapse {
+    border: 1px solid var(--hcis-border) !important;
+    border-radius: var(--hcis-radius-xl) !important;
+    background: var(--hcis-surface) !important;
+    box-shadow: 0 4px 12px -2px rgb(var(--hcis-slate-900-rgb) / 0.05), 0 1px 3px rgb(var(--hcis-slate-900-rgb) / 0.03) !important;
+    overflow: hidden !important;
+}
+
+.el-collapse-item__header,
+.el-collapse:is(.ds-preview, [data-hcis-el]) .el-collapse-item__header,
+:is(.ds-preview, [data-hcis-el]) .el-collapse-item__header {
+    padding: 0 var(--hcis-space-5) !important;
+    height: 3.25rem !important;
+    line-height: 3.25rem !important;
+    background: var(--hcis-surface) !important;
+    color: var(--hcis-text-strong) !important;
+    font-size: var(--hcis-font-size-sm) !important;
+    font-weight: 700 !important;
+    border-bottom: 1px solid var(--hcis-border) !important;
+    transition: background-color var(--hcis-duration-fast) ease, color var(--hcis-duration-fast) ease !important;
+}
+
+.el-collapse-item__header:hover,
+:is(.ds-preview, [data-hcis-el]) .el-collapse-item__header:hover {
+    background: var(--hcis-surface-soft) !important;
+    color: var(--hcis-brand-700) !important;
+}
+
+.el-collapse-item__header.is-active,
+:is(.ds-preview, [data-hcis-el]) .el-collapse-item__header.is-active {
+    background: var(--hcis-surface-soft) !important;
+    color: var(--hcis-brand-700) !important;
+    font-weight: 700 !important;
+}
+
+.el-collapse-item__arrow,
+:is(.ds-preview, [data-hcis-el]) .el-collapse-item__arrow {
+    font-size: 0.95rem !important;
+    color: var(--hcis-text-muted) !important;
+    transition: transform 340ms var(--hcis-ease-spring), color 240ms ease !important;
+}
+
+.el-collapse-item__header.is-active .el-collapse-item__arrow,
+:is(.ds-preview, [data-hcis-el]) .el-collapse-item__header.is-active .el-collapse-item__arrow {
+    color: var(--hcis-brand-600) !important;
+    transform: rotate(90deg) !important;
+}
+
+/* Element Plus Transition Component Overrides (Targeting .collapse-transition and .el-collapse-transition) */
+.collapse-transition,
+.el-collapse-transition,
+.el-collapse-transition-enter-active,
+.el-collapse-transition-leave-active,
+.el-collapse-item:not(.hcis-collapse-item) .el-collapse-item__wrap,
+:is(.ds-preview, [data-hcis-el]) .el-collapse-item:not(.hcis-collapse-item) .el-collapse-item__wrap {
+    background: var(--hcis-surface) !important;
+    border-bottom: 1px solid var(--hcis-border) !important;
+    overflow: hidden !important;
+    transition: height 360ms var(--hcis-ease),
+                padding-top 360ms var(--hcis-ease),
+                padding-bottom 360ms var(--hcis-ease),
+                margin-top 360ms var(--hcis-ease),
+                margin-bottom 360ms var(--hcis-ease) !important;
+}
+
+/* HcisCollapseItem Native Grid Accordion Animation Rules */
+html body .hcis-collapse-item__wrap {
+    display: grid !important;
+    grid-template-rows: 0fr !important;
+    transition: grid-template-rows 280ms var(--hcis-ease),
+                opacity 220ms var(--hcis-ease),
+                visibility 280ms ease !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    border-bottom: none !important;
+}
+
+html body .hcis-collapse-item--active .hcis-collapse-item__wrap {
+    grid-template-rows: 1fr !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.el-collapse-item:last-child .el-collapse-item__header.is-active {
+    border-bottom: 1px solid var(--hcis-border) !important;
+}
+
+.el-collapse-item:last-child,
+.el-collapse-item:last-child .el-collapse-item__wrap {
+    border-bottom: none !important;
+}
+
+/* Animasi keyframes meluncur & memudar saat isi accordion buka */
+@keyframes collapse-content-in {
+    0% {
+        transform: translate3d(0, -12px, 0);
+        opacity: 0;
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+}
+
+/* Animasi keyframes menarik & memudar saat isi accordion tutup */
+@keyframes collapse-content-out {
+    0% {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate3d(0, -8px, 0);
+        opacity: 0;
+    }
+}
+
+.el-collapse-item:not(.hcis-collapse-item) .el-collapse-item__content {
+    padding: var(--hcis-space-4) var(--hcis-space-5) !important;
+    color: var(--hcis-text) !important;
+    font-size: var(--hcis-font-size-sm) !important;
+    line-height: var(--hcis-line-relaxed) !important;
+    animation: collapse-content-out 280ms var(--hcis-ease) forwards;
+}
+
+.el-collapse-item:not(.hcis-collapse-item).is-active .el-collapse-item__content {
+    animation: collapse-content-in 380ms var(--hcis-ease) forwards;
+}
+
+/*
+ * Animasi popup ala Radix (dipakai shadcn).
+ *
+ * Element memakai el-zoom-in-* dengan skala 0.45 dan kurva pantul — geraknya
+ * melonjak, bukan mendarat. Radix memakai pola yang jauh lebih tenang:
+ * fade + zoom dari 95% + geser 4px dari sisi kemunculannya, ~150ms.
+ */
+:is(.ds-preview.el-zoom-in-top-enter-active, [data-hcis-el] .el-zoom-in-top-enter-active),
+:is(.ds-preview.el-zoom-in-top-leave-active, [data-hcis-el] .el-zoom-in-top-leave-active),
+:is(.ds-preview.el-zoom-in-bottom-enter-active, [data-hcis-el] .el-zoom-in-bottom-enter-active),
+:is(.ds-preview.el-zoom-in-bottom-leave-active, [data-hcis-el] .el-zoom-in-bottom-leave-active),
+:is(.ds-preview.el-zoom-in-center-enter-active, [data-hcis-el] .el-zoom-in-center-enter-active),
+:is(.ds-preview.el-zoom-in-center-leave-active, [data-hcis-el] .el-zoom-in-center-leave-active) {
+    transition:
+        opacity var(--hcis-duration-fast) var(--hcis-ease),
+        transform var(--hcis-duration-fast) var(--hcis-ease) !important;
+    animation: none !important;
+}
+
+:is(.ds-preview.el-zoom-in-top-enter-active, [data-hcis-el] .el-zoom-in-top-enter-active),
+:is(.ds-preview.el-zoom-in-top-leave-active, [data-hcis-el] .el-zoom-in-top-leave-active) { transform-origin: center top; }
+:is(.ds-preview.el-zoom-in-bottom-enter-active, [data-hcis-el] .el-zoom-in-bottom-enter-active),
+:is(.ds-preview.el-zoom-in-bottom-leave-active, [data-hcis-el] .el-zoom-in-bottom-leave-active) { transform-origin: center bottom; }
+
+:is(.ds-preview.el-zoom-in-top-enter-from, [data-hcis-el] .el-zoom-in-top-enter-from),
+:is(.ds-preview.el-zoom-in-top-leave-to, [data-hcis-el] .el-zoom-in-top-leave-to) { opacity: 0; transform: scale(0.95) translateY(-8px); }
+
+:is(.ds-preview.el-zoom-in-bottom-enter-from, [data-hcis-el] .el-zoom-in-bottom-enter-from),
+:is(.ds-preview.el-zoom-in-bottom-leave-to, [data-hcis-el] .el-zoom-in-bottom-leave-to) { opacity: 0; transform: scale(0.95) translateY(8px); }
+
+:is(.ds-preview.el-zoom-in-center-enter-from, [data-hcis-el] .el-zoom-in-center-enter-from),
+:is(.ds-preview.el-zoom-in-center-leave-to, [data-hcis-el] .el-zoom-in-center-leave-to) { opacity: 0; transform: scale(0.95); }
+
+/* Kepekatan dipertahankan, pertumbuhan dan geseran dibuang. */
+[data-hcis-motion='reduced'] :is(.ds-preview.el-zoom-in-top-enter-active, [data-hcis-el] .el-zoom-in-top-enter-active),
+[data-hcis-motion='reduced'] :is(.ds-preview.el-zoom-in-top-leave-active, [data-hcis-el] .el-zoom-in-top-leave-active),
+[data-hcis-motion='reduced'] :is(.ds-preview.el-zoom-in-bottom-enter-active, [data-hcis-el] .el-zoom-in-bottom-enter-active),
+[data-hcis-motion='reduced'] :is(.ds-preview.el-zoom-in-bottom-leave-active, [data-hcis-el] .el-zoom-in-bottom-leave-active),
+[data-hcis-motion='reduced'] :is(.ds-preview.el-zoom-in-center-enter-active, [data-hcis-el] .el-zoom-in-center-enter-active),
+[data-hcis-motion='reduced'] :is(.ds-preview.el-zoom-in-center-leave-active, [data-hcis-el] .el-zoom-in-center-leave-active),
+[data-hcis-motion='reduced'] :is(.ds-preview, [data-hcis-el]) .el-dialog,
+[data-hcis-motion='reduced'] :is(.ds-preview, [data-hcis-el]) .el-drawer { transition-duration: var(--hcis-duration-fast) !important; }
+
+[data-hcis-motion='reduced'] :is(.ds-preview.el-zoom-in-top-enter-from, [data-hcis-el] .el-zoom-in-top-enter-from),
+[data-hcis-motion='reduced'] :is(.ds-preview.el-zoom-in-top-leave-to, [data-hcis-el] .el-zoom-in-top-leave-to),
+[data-hcis-motion='reduced'] :is(.ds-preview.el-zoom-in-bottom-enter-from, [data-hcis-el] .el-zoom-in-bottom-enter-from),
+[data-hcis-motion='reduced'] :is(.ds-preview.el-zoom-in-bottom-leave-to, [data-hcis-el] .el-zoom-in-bottom-leave-to),
+[data-hcis-motion='reduced'] :is(.ds-preview.el-zoom-in-center-enter-from, [data-hcis-el] .el-zoom-in-center-enter-from),
+[data-hcis-motion='reduced'] :is(.ds-preview.el-zoom-in-center-leave-to, [data-hcis-el] .el-zoom-in-center-leave-to),
+[data-hcis-motion='reduced'] :is(.ds-preview, [data-hcis-el]) .el-drawer { transform: none !important; }
+
+/* Bridged el-input-number Overrides */
+html body .el-input-number {
+    border-radius: var(--hcis-radius-md, 8px) !important;
+    box-shadow: 0 1px 2px rgb(var(--hcis-slate-900-rgb) / 0.04) !important;
+    font-family: var(--hcis-font-body, inherit) !important;
+}
+
+html body .el-input-number .el-input__wrapper {
+    background-color: var(--hcis-surface, var(--hcis-white)) !important;
+    border-radius: var(--hcis-radius-md, 8px) !important;
+    border: 1px solid var(--hcis-border-subtle, var(--hcis-slate-300)) !important;
+    box-shadow: none !important;
+    transition-property: var(--hcis-transition-props) !important;
+    transition-duration: 180ms !important;
+    transition-timing-function: var(--hcis-ease) !important;
+}
+
+html body .el-input-number .el-input__wrapper:hover {
+    border-color: var(--hcis-brand-400, var(--hcis-brand-400)) !important;
+    background-color: var(--hcis-surface-soft, var(--hcis-slate-50)) !important;
+}
+
+html body .el-input-number .el-input__wrapper.is-focus {
+    border-color: var(--hcis-brand-500, var(--hcis-brand-500)) !important;
+    box-shadow: 0 0 0 3px rgb(var(--hcis-brand-500-rgb) / 0.18) !important;
+    background-color: var(--hcis-surface, var(--hcis-white)) !important;
+}
+
+html body .el-input-number__decrease,
+html body .el-input-number__increase {
+    background: transparent !important;
+    color: var(--hcis-text-strong, var(--hcis-slate-700)) !important;
+    border-color: var(--hcis-border-subtle, var(--hcis-slate-200)) !important;
+    transition-property: var(--hcis-transition-props) !important;
+    transition-duration: 120ms !important;
+    transition-timing-function: var(--hcis-ease) !important;
+}
+
+html body .el-input-number__decrease:hover:not(.is-disabled),
+html body .el-input-number__increase:hover:not(.is-disabled) {
+    background-color: var(--hcis-brand-50, var(--hcis-brand-50)) !important;
+    color: var(--hcis-brand-600, var(--hcis-brand-600)) !important;
+}
+
+html body .el-input-number .el-input__inner {
+    color: var(--hcis-text-strong, var(--hcis-slate-900)) !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+}
+
+/* Bridged el-autocomplete Overrides */
+html body .el-autocomplete {
+    width: 100% !important;
+    font-family: var(--hcis-font-body, inherit) !important;
+}
+
+html body .el-autocomplete .el-input__wrapper {
+    background-color: var(--hcis-surface, var(--hcis-white)) !important;
+    border-radius: var(--hcis-radius-md, 8px) !important;
+    border: 1px solid var(--hcis-border-subtle, var(--hcis-slate-300)) !important;
+    box-shadow: 0 1px 2px rgb(var(--hcis-slate-900-rgb) / 0.04) !important;
+    transition-property: var(--hcis-transition-props) !important;
+    transition-duration: 180ms !important;
+    transition-timing-function: var(--hcis-ease) !important;
+}
+
+html body .el-autocomplete .el-input__wrapper:hover {
+    border-color: var(--hcis-brand-400, var(--hcis-brand-400)) !important;
+    background-color: var(--hcis-surface-soft, var(--hcis-slate-50)) !important;
+}
+
+html body .el-autocomplete .el-input__wrapper.is-focus {
+    border-color: var(--hcis-brand-500, var(--hcis-brand-500)) !important;
+    box-shadow: 0 0 0 3px rgb(var(--hcis-brand-500-rgb) / 0.18) !important;
+    background-color: var(--hcis-surface, var(--hcis-white)) !important;
+}
+
+html body .el-autocomplete-suggestion,
+html body .el-popper.el-autocomplete-suggestion {
+    background-color: var(--hcis-surface, var(--hcis-white)) !important;
+    border-radius: 12px !important;
+    border: 1px solid var(--hcis-border-subtle, rgb(var(--hcis-slate-300-rgb) / 0.8)) !important;
+    box-shadow: 0 20px 40px -10px rgb(var(--hcis-slate-900-rgb) / 0.22) !important;
+    padding: 6px !important;
+    overflow: hidden !important;
+}
+
+html body .el-autocomplete-suggestion li {
+    padding: 0.5rem 0.75rem !important;
+    border-radius: 8px !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    color: var(--hcis-text, var(--hcis-slate-700)) !important;
+    transition-property: var(--hcis-transition-props) !important;
+    transition-duration: 120ms !important;
+    transition-timing-function: var(--hcis-ease) !important;
+}
+
+html body .el-autocomplete-suggestion li:hover,
+html body .el-autocomplete-suggestion li.highlighted {
+    background-color: var(--hcis-brand-50, var(--hcis-brand-50)) !important;
+    color: var(--hcis-brand-700, var(--hcis-brand-700)) !important;
+}
+
+html body .el-autocomplete-suggestion li.selected {
+    background-color: var(--hcis-brand-600, var(--hcis-brand-600)) !important;
+    color: var(--hcis-white) !important;
+    font-weight: 700 !important;
+}
+

@@ -1,0 +1,12 @@
+{
+    "success": true,
+    "status": 200,
+    "message": "Berhasil",
+    "result": {
+        "cycle_id": 657,
+        "status_lama": "LOCKED",
+        "status": "OPEN",
+        "dibuka_ulang": false,
+        "tenggat_diturunkan": 3582
+    }
+}

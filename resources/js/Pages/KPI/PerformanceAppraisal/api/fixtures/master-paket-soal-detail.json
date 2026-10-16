@@ -1,0 +1,151 @@
+{
+    "success": true,
+    "status": 200,
+    "message": "Berhasil",
+    "result": {
+        "master": "paket-soal",
+        "nama": "Paket Soal",
+        "baris": {
+            "Id_PA_Cycle_Question_Package": "33",
+            "PA_Cycle_Id": "571",
+            "ID_Level": "2",
+            "Kode_Paket_Sumber": "DEMO-L2",
+            "Nama_Paket_Sumber": "Paket Contoh Level 2",
+            "Sumber_Kontrak": "DEMO",
+            "Catatan": "Dibuat pa:demo-cycle; bukan paket HC Learn sungguhan.",
+            "Flag_Aktif": "Y"
+        },
+        "butir": [
+            {
+                "Id_PA_Cycle_Question_Package_Item": "128",
+                "PA_Cycle_Question_Package_Id": "33",
+                "Id_Jenis_Soal": "K01",
+                "Nama_Soal_Sumber": "Kompetensi K01",
+                "Jenis_Soal": "skala",
+                "PA_Competency_Id": "1",
+                "PA_Result_Note_Type_Id": null,
+                "Bobot_Penilaian": null,
+                "Skor_Maksimal": "5.00",
+                "Urutan_Tampil": "1",
+                "Flag_Aktif": "Y"
+            },
+            {
+                "Id_PA_Cycle_Question_Package_Item": "129",
+                "PA_Cycle_Question_Package_Id": "33",
+                "Id_Jenis_Soal": "K02",
+                "Nama_Soal_Sumber": "Kompetensi K02",
+                "Jenis_Soal": "skala",
+                "PA_Competency_Id": "12",
+                "PA_Result_Note_Type_Id": null,
+                "Bobot_Penilaian": null,
+                "Skor_Maksimal": "5.00",
+                "Urutan_Tampil": "2",
+                "Flag_Aktif": "Y"
+            },
+            {
+                "Id_PA_Cycle_Question_Package_Item": "130",
+                "PA_Cycle_Question_Package_Id": "33",
+                "Id_Jenis_Soal": "K03",
+                "Nama_Soal_Sumber": "Kompetensi K03",
+                "Jenis_Soal": "skala",
+                "PA_Competency_Id": "18",
+                "PA_Result_Note_Type_Id": null,
+                "Bobot_Penilaian": null,
+                "Skor_Maksimal": "5.00",
+                "Urutan_Tampil": "3",
+                "Flag_Aktif": "Y"
+            },
+            {
+                "Id_PA_Cycle_Question_Package_Item": "131",
+                "PA_Cycle_Question_Package_Id": "33",
+                "Id_Jenis_Soal": "K04",
+                "Nama_Soal_Sumber": "Kompetensi K04",
+                "Jenis_Soal": "skala",
+                "PA_Competency_Id": "2",
+                "PA_Result_Note_Type_Id": null,
+                "Bobot_Penilaian": null,
+                "Skor_Maksimal": "5.00",
+                "Urutan_Tampil": "4",
+                "Flag_Aktif": "Y"
+            },
+            {
+                "Id_PA_Cycle_Question_Package_Item": "132",
+                "PA_Cycle_Question_Package_Id": "33",
+                "Id_Jenis_Soal": "K05",
+                "Nama_Soal_Sumber": "Kompetensi K05",
+                "Jenis_Soal": "skala",
+                "PA_Competency_Id": "13",
+                "PA_Result_Note_Type_Id": null,
+                "Bobot_Penilaian": null,
+                "Skor_Maksimal": "5.00",
+                "Urutan_Tampil": "5",
+                "Flag_Aktif": "Y"
+            },
+            {
+                "Id_PA_Cycle_Question_Package_Item": "133",
+                "PA_Cycle_Question_Package_Id": "33",
+                "Id_Jenis_Soal": "K06",
+                "Nama_Soal_Sumber": "Kompetensi K06",
+                "Jenis_Soal": "skala",
+                "PA_Competency_Id": "19",
+                "PA_Result_Note_Type_Id": null,
+                "Bobot_Penilaian": null,
+                "Skor_Maksimal": "5.00",
+                "Urutan_Tampil": "6",
+                "Flag_Aktif": "Y"
+            },
+            {
+                "Id_PA_Cycle_Question_Package_Item": "134",
+                "PA_Cycle_Question_Package_Id": "33",
+                "Id_Jenis_Soal": "K07",
+                "Nama_Soal_Sumber": "Kompetensi K07",
+                "Jenis_Soal": "skala",
+                "PA_Competency_Id": "3",
+                "PA_Result_Note_Type_Id": null,
+                "Bobot_Penilaian": null,
+                "Skor_Maksimal": "5.00",
+                "Urutan_Tampil": "7",
+                "Flag_Aktif": "Y"
+            },
+            {
+                "Id_PA_Cycle_Question_Package_Item": "135",
+                "PA_Cycle_Question_Package_Id": "33",
+                "Id_Jenis_Soal": "K08",
+                "Nama_Soal_Sumber": "Kompetensi K08",
+                "Jenis_Soal": "skala",
+                "PA_Competency_Id": "14",
+                "PA_Result_Note_Type_Id": null,
+                "Bobot_Penilaian": null,
+                "Skor_Maksimal": "5.00",
+                "Urutan_Tampil": "8",
+                "Flag_Aktif": "Y"
+            },
+            {
+                "Id_PA_Cycle_Question_Package_Item": "136",
+                "PA_Cycle_Question_Package_Id": "33",
+                "Id_Jenis_Soal": "QL01",
+                "Nama_Soal_Sumber": "Pertanyaan uraian QL01",
+                "Jenis_Soal": "teks",
+                "PA_Competency_Id": null,
+                "PA_Result_Note_Type_Id": "1",
+                "Bobot_Penilaian": null,
+                "Skor_Maksimal": null,
+                "Urutan_Tampil": "9",
+                "Flag_Aktif": "Y"
+            },
+            {
+                "Id_PA_Cycle_Question_Package_Item": "137",
+                "PA_Cycle_Question_Package_Id": "33",
+                "Id_Jenis_Soal": "QL02",
+                "Nama_Soal_Sumber": "Pertanyaan uraian QL02",
+                "Jenis_Soal": "teks",
+                "PA_Competency_Id": null,
+                "PA_Result_Note_Type_Id": "2",
+                "Bobot_Penilaian": null,
+                "Skor_Maksimal": null,
+                "Urutan_Tampil": "10",
+                "Flag_Aktif": "Y"
+            }
+        ]
+    }
+}

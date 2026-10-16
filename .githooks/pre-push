@@ -1,0 +1,96 @@
+#!/bin/sh
+#
+# Menolak push ke branch beralur dari worktree yang tidak diberi izin untuknya.
+#
+# Ini RAMBU, bukan pagar. Hook bisa dilewati `--no-verify`, dan core.hooksPath
+# harus diset per-clone. Pagarnya tetap ruleset GitHub; gunanya hook ini adalah
+# menghentikan kesalahan beberapa detik setelah terjadi, bukan beberapa menit
+# kemudian di layar orang lain.
+#
+# Pemasangan, sekali per clone:
+#
+#     git config core.hooksPath .githooks
+#     git config extensions.worktreeConfig true
+#
+# Penandaan, di DALAM tiap worktree:
+#
+#     git config --worktree hcis.target "staging"           # fitur yang ditahan
+#     git config --worktree hcis.target "staging,master"    # fitur biasa
+#
+# `git config` biasa menulis ke .git/config yang DIBAGI seluruh worktree, jadi
+# tanpa `--worktree` satu penandaan akan mengubah semua worktree sekaligus —
+# dan salahnya tidak terlihat sampai push yang seharusnya ditolak justru lolos.
+
+BRANCH_BERALUR="staging master"
+
+izin=$(git config --get hcis.target 2>/dev/null)
+tanpa_penanda=0
+
+if [ -z "$izin" ]; then
+    # Belum diset berarti PALING KETAT, bukan paling longgar. Penanda yang lupa
+    # dipasang tidak boleh berubah jadi izin penuh.
+    izin=""
+    tanpa_penanda=1
+fi
+
+diatur() {
+    for b in $BRANCH_BERALUR; do
+        [ "$b" = "$1" ] && return 0
+    done
+    return 1
+}
+
+diizinkan() {
+    for b in $(echo "$izin" | tr ',' ' '); do
+        [ "$b" = "$1" ] && return 0
+    done
+    return 1
+}
+
+tolak() {
+    echo "" >&2
+    echo "PUSH DITOLAK oleh .githooks/pre-push" >&2
+    echo "" >&2
+    echo "  Branch tujuan : $1" >&2
+    echo "  Sebab         : $2" >&2
+    if [ "$tanpa_penanda" -eq 1 ]; then
+        echo "" >&2
+        echo "  Worktree ini belum diberi penanda, jadi diperlakukan paling ketat." >&2
+        echo "  Setel dengan (dijalankan DI DALAM worktree ini):" >&2
+        echo "" >&2
+        echo "      git config --worktree hcis.target \"staging\"" >&2
+    else
+        echo "  Izin worktree : $izin" >&2
+    fi
+    echo "" >&2
+    echo "  Alur yang berlaku: branch kerja di-merge ke staging untuk diuji, lalu" >&2
+    echo "  ke master kalau sudah terbukti. Staging tidak pernah di-merge keluar." >&2
+    echo "" >&2
+    exit 1
+}
+
+kosong="0000000000000000000000000000000000000000"
+
+while read -r _local_ref local_sha remote_ref remote_sha; do
+    branch=${remote_ref#refs/heads/}
+
+    diatur "$branch" || continue
+
+    if [ "$local_sha" = "$kosong" ]; then
+        tolak "$branch" "menghapus branch beralur tidak pernah diizinkan dari sini."
+    fi
+
+    diizinkan "$branch" \
+        || tolak "$branch" "worktree ini tidak diizinkan mendorong ke branch tersebut."
+
+    # Non-fast-forward pada master berarti riwayat yang sudah dibagikan ditulis
+    # ulang. Staging boleh: ia memang branch integrasi yang dibangun ulang, dan
+    # tak ada yang pernah bercabang darinya.
+    if [ "$branch" != "staging" ] && [ "$remote_sha" != "$kosong" ]; then
+        if ! git merge-base --is-ancestor "$remote_sha" "$local_sha" 2>/dev/null; then
+            tolak "$branch" "push ini menulis ulang riwayat (non-fast-forward)."
+        fi
+    fi
+done
+
+exit 0

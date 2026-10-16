@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Mobile Budget Card</title>
+        <style>
+            /* CSS Reset dan Font Dasar */
+            body {
+                /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                    Roboto, Helvetica, Arial, sans-serif; */
+                background-color: #f4f7fa; /* Latar belakang body agar card terlihat */
+                margin: 0;
+                padding: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            /* Struktur Card Utama - Desktop View (Default)
+          Secara default, kita buat card memiliki lebar maksimal dan terpusat.
+        */
+            .card-mobile-byfrans {
+                width: 100%;
+                max-width: 420px; /* Lebar maksimal di desktop */
+                margin: 0 auto;
+                border: none;
+                border-radius: 20px; /* Rounded corner di desktop */
+                overflow: hidden; /* Mencegah gradien keluar dari rounded corner */
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                background-color: #ffffff; /* Latar belakang putih untuk area widget */
+            }
+
+            /* 1. Header Ungu Sesuai Permintaan */
+            .budget-header {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: #ffffff;
+                padding: 24px;
+                /* Beri radius di bawah agar melengkung seperti di gambar */
+                border-bottom-left-radius: 30px;
+                border-bottom-right-radius: 30px;
+            }
+
+            .header-top {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+
+            .user-info {
+                display: flex;
+                align-items: center;
+            }
+
+            .profile-pic {
+                width: 44px;
+                height: 44px;
+                border-radius: 50%;
+                border: 2px solid rgba(255, 255, 255, 0.5);
+                margin-right: 12px;
+            }
+
+            .title-group h4 {
+                margin: 0;
+                font-weight: 600;
+                font-size: 1rem; /* 16px */
+            }
+
+            .title-group span {
+                font-size: 0.8rem; /* 12.8px */
+                opacity: 0.8;
+            }
+
+            .date-nav {
+                font-size: 0.85rem; /* 13.6px */
+                font-weight: 500;
+                opacity: 0.9;
+                cursor: pointer;
+            }
+
+            .header-balance {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-end; /* Ratakan ke bawah */
+            }
+
+            .balance-amount h1 {
+                margin: 0;
+                font-size: 2.5rem; /* 40px */
+                font-weight: 700;
+                line-height: 1;
+            }
+
+            .balance-amount span {
+                font-size: 0.8rem; /* 12.8px */
+                opacity: 0.8;
+                margin-top: 4px;
+                display: block;
+            }
+
+            .user-group {
+                display: flex;
+                align-items: center;
+            }
+
+            .user-icon {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                border: 2px solid #ffffff;
+                /* Efek tumpang tindih */
+                margin-left: -10px;
+                background-color: #eee;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: 600;
+                color: #764ba2;
+            }
+
+            .user-icon:first-child {
+                margin-left: 0;
+            }
+
+            .user-icon.add-user {
+                background-color: rgba(255, 255, 255, 0.2);
+                color: white;
+                border-color: rgba(255, 255, 255, 0.5);
+                font-size: 1.2rem;
+                cursor: pointer;
+            }
+
+            /* 2. Kontainer Widget Sesuai Permintaan (Employee, On Target, Under Target) */
+            .widgets-container {
+                /* Trik agar tumpang tindih dengan header ungu */
+                margin-top: -30px;
+                position: relative; /* Agar di atas header */
+                z-index: 10;
+
+                /* Layout untuk 3 widget */
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
+                padding: 0 20px 20px 20px; /* Padding bawah */
+            }
+
+            .widget-card {
+                background: #ffffff;
+                border-radius: 16px;
+                padding: 16px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+                border: 1px solid #eee;
+            }
+
+            .widget-card h5 {
+                margin: 0 0 8px 0;
+                font-size: 0.9rem; /* 14.4px */
+                color: #555;
+                font-weight: 500;
+            }
+
+            .widget-card .value {
+                font-size: 1.5rem; /* 24px */
+                font-weight: 700;
+                color: #333;
+            }
+
+            .widget-card .detail {
+                font-size: 0.75rem; /* 12px */
+                color: #888;
+                margin-top: 4px;
+            }
+
+            /* Media Query untuk Mobile Sesuai Permintaan
+          @media (max-width: 575.98px) 
+        */
+            @media (max-width: 575.98px) {
+                body {
+                    padding: 0; /* Hapus padding body di mobile */
+                    background-color: #ffffff; /* Samakan dgn card */
+                }
+
+                /* Ini adalah instruksi Anda: "full untuk diatas warna itu"
+              Kita buat card-nya full-width dan hilangkan radius atasnya.
+            */
+                .card-mobile-byfrans {
+                    width: 100%;
+                    max-width: 100%;
+                    border-radius: 0; /* Hilangkan radius di mobile */
+                    box-shadow: none;
+                }
+
+                .budget-header {
+                    /* Hilangkan radius atas, tapi pertahankan radius bawah */
+                    border-radius: 0 0 30px 30px;
+                }
+
+                /* Di mobile, kita ubah layout grid menjadi horizontal scroll 
+              agar mirip dengan desain di gambar (kartu "Saving" dan "Debts" 
+              yang terlihat menyamping).
+            */
+                .widgets-container {
+                    display: flex;
+                    overflow-x: auto;
+                    /* Hapus scrollbar visual */
+                    scrollbar-width: none; /* Firefox */
+                    -ms-overflow-style: none; /* IE 10+ */
+                    padding: 0 20px 20px 20px; /* Beri padding agar tidak menempel di tepi */
+                }
+
+                .widgets-container::-webkit-scrollbar {
+                    display: none; /* Safari dan Chrome */
+                }
+
+                .widget-card {
+                    /* Beri lebar minimum agar kartu tidak gepeng 
+                  dan bisa di-scroll ke samping 
+                */
+                    flex: 0 0 140px; /* 0 flex-grow, 0 flex-shrink, 140px flex-basis */
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="card card-mobile-byfrans">
+            <div class="budget-header">
+                <div class="header-top">
+                    <div class="user-info">
+                        <img
+                            src="https://i.pravatar.cc/44?img=32"
+                            alt="Profile"
+                            class="profile-pic"
+                        />
+                        <div class="title-group">
+                            <h4>My Budget</h4>
+                            <span>Current budget</span>
+                        </div>
+                    </div>
+                    <div class="date-nav">
+                        <span>&lt; Aug 2023 &gt;</span>
+                    </div>
+                </div>
+
+                <div class="header-balance">
+                    <div class="balance-amount">
+                        <h1>$450</h1>
+                        <span>Funds available to budget</span>
+                    </div>
+                    <div class="user-group">
+                        <img
+                            src="https://i.pravatar.cc/32?img=11"
+                            alt="User 1"
+                            class="user-icon"
+                        />
+                        <img
+                            src="https://i.pravatar.cc/32?img=12"
+                            alt="User 2"
+                            class="user-icon"
+                        />
+                        <span class="user-icon add-user">+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="widgets-container">
+                <div class="widget-card">
+                    <h5>Employee</h5>
+                    <div class="value">150</div>
+                    <div class="detail">+5 from last month</div>
+                </div>
+                <div class="widget-card">
+                    <h5>On Target</h5>
+                    <div class="value">120</div>
+                    <div class="detail">80% of total</div>
+                </div>
+                <div class="widget-card">
+                    <h5>Under Target</h5>
+                    <div class="value">30</div>
+                    <div class="detail" style="color: #e53935">
+                        -10% vs goal
+                    </div>
+                </div>
+                <div class="widget-card">
+                    <h5>Over Target</h5>
+                    <div class="value">10</div>
+                    <div class="detail" style="color: #43a047">+5% vs goal</div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

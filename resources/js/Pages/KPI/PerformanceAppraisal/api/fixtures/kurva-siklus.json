@@ -1,0 +1,106 @@
+{
+    "success": true,
+    "status": 200,
+    "message": "Berhasil",
+    "result": {
+        "metode": "KURVA",
+        "terkunci": true,
+        "boleh_kunci": false,
+        "boleh_kunci_dengan_alasan": false,
+        "alasan_kunci": "Kurva siklus ini sudah dikunci.",
+        "kunci": {
+            "pada": "2026-09-18 10:15:00",
+            "oleh": 634
+        },
+        "grup": [
+            {
+                "id": 12,
+                "kode": "STAF",
+                "nama": "Staff & Senior Staff",
+                "level": [
+                    {
+                        "id": 2,
+                        "nama": "STAFF"
+                    },
+                    {
+                        "id": 3,
+                        "nama": "SENIOR STAFF"
+                    }
+                ],
+                "n": 47,
+                "rata": 71.5116,
+                "sd": 17.179,
+                "pita": [
+                    {
+                        "kode": "A",
+                        "nama": "Istimewa",
+                        "batas_z": 2,
+                        "nilai_dari": 106.0,
+                        "nilai_sampai": 999.99,
+                        "urutan": 1
+                    },
+                    {
+                        "kode": "B_PLUS",
+                        "nama": "Sangat Baik",
+                        "batas_z": 1,
+                        "nilai_dari": 88.69,
+                        "nilai_sampai": 106.0,
+                        "urutan": 2
+                    },
+                    {
+                        "kode": "B",
+                        "nama": "Baik",
+                        "batas_z": 0,
+                        "nilai_dari": 71.5116,
+                        "nilai_sampai": 88.69,
+                        "urutan": 3
+                    },
+                    {
+                        "kode": "C_PLUS",
+                        "nama": "Cukup",
+                        "batas_z": -1,
+                        "nilai_dari": 54.3327,
+                        "nilai_sampai": 71.5116,
+                        "urutan": 4
+                    },
+                    {
+                        "kode": "C",
+                        "nama": "Kurang",
+                        "batas_z": -2,
+                        "nilai_dari": 37.1537,
+                        "nilai_sampai": 54.3327,
+                        "urutan": 5
+                    },
+                    {
+                        "kode": "D",
+                        "nama": "Sangat Kurang",
+                        "batas_z": null,
+                        "nilai_dari": 0,
+                        "nilai_sampai": 37.1537,
+                        "urutan": 6
+                    }
+                ],
+                "sebaran": {
+                    "A": 1,
+                    "B_PLUS": 7,
+                    "B": 12,
+                    "C_PLUS": 24,
+                    "C": 3,
+                    "D": 0
+                },
+                "peringatan": [
+                    "Grup STAF hanya 5 orang (di bawah 30); kurvanya kurang bermakna."
+                ]
+            }
+        ],
+        "peringatan": [
+            "2 hasil masih TERTAHAN dan tidak ikut membentuk kurva."
+        ],
+        "hasil_sesudah_kunci": 0,
+        "sudah_terbit": 0,
+        "sudah_dirilis": 0,
+        "tertahan": 2,
+        "belum_dihitung": 0,
+        "level_tanpa_grup": []
+    }
+}

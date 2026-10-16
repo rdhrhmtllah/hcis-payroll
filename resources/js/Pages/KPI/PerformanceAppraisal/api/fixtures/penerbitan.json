@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "status": 200,
+  "message": "Berhasil",
+  "result": {
+    "terbit": 2,
+    "dihitung": 0,
+    "tertahan": 6,
+    "belum_dihitung": 851,
+    "total": 859
+  }
+}

@@ -1,0 +1,11 @@
+{
+    "success": true,
+    "status": 200,
+    "message": "Berhasil",
+    "result": {
+        "cycle_id": 1393,
+        "periode_berubah": [],
+        "perlu_siapkan_ulang": false,
+        "tenggat_diperbarui": 0
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "success": true,
+    "status": 200,
+    "message": "Berhasil",
+    "result": {
+        "result_id": 902,
+        "kode_grade_sistem": "B",
+        "kode_grade_final": "B_PLUS",
+        "kuadran_id": 2,
+        "kode_kuadran": "FUTURE_STAR_A"
+    }
+}

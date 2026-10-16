@@ -1,0 +1,39 @@
+{
+    "success": true,
+    "status": 200,
+    "message": "Berhasil",
+    "result": {
+        "master": "aturan-penilai",
+        "nama": "Aturan Penilai",
+        "baris": {
+            "Id_PA_Rater_Policy": "14",
+            "Kode_Policy": "PA-RTR-PRAMUKARYA",
+            "Nama_Policy": "Aturan Penilai — Non Clerk / Pramukarya",
+            "Deskripsi": null,
+            "ID_Level": "1",
+            "Versi": "1",
+            "Status_Policy": "ACTIVE",
+            "Berlaku_Dari": "2026-01-01",
+            "Berlaku_Sampai": null,
+            "Catatan_Versi": "Disalin dari deck PIC slide 4. Min/maks penilai belum dari deck.",
+            "Flag_Aktif": "Y",
+            "Activated_At": "2026-08-31 15:18:35"
+        },
+        "detail": [
+            {
+                "Id_PA_Rater_Policy_Detail": "2",
+                "PA_Rater_Category_Id": "1",
+                "Kode_Kategori": "ATASAN",
+                "Nama_Kategori": "Atasan",
+                "Organization_Relationship_Type_Id": "9",
+                "Bobot_Persen": "100.00",
+                "Min_Rater": "1",
+                "Maks_Rater": "2",
+                "Min_Rater_Selesai": "1",
+                "Flag_Izinkan_Manual": "Y",
+                "Urutan_Tampil": "2",
+                "Catatan_Aturan": "Bobot dari deck PIC slide 4; batas jumlah penilai belum dari deck."
+            }
+        ]
+    }
+}

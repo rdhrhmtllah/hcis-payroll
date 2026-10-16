@@ -1,0 +1,6 @@
+{
+  "success": true,
+  "status": 200,
+  "message": "Berhasil",
+  "result": { "dibuat": 3, "kategori_dihitung_ulang": [1, 2] }
+}

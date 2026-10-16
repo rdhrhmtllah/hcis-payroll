@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "status": 200,
+  "message": "Berhasil",
+  "result": {
+    "participant_id": 44309,
+    "result_id": 902,
+    "status": "TERBIT"
+  }
+}

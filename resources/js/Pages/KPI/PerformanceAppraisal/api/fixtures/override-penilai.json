@@ -1,0 +1,14 @@
+{
+  "success": true,
+  "status": 200,
+  "message": "Berhasil",
+  "result": {
+    "participant_id": 59653,
+    "tersimpan": 2,
+    "dicabut": 0,
+    "bobot_efektif": {
+      "SELF": 25,
+      "ATASAN": 75
+    }
+  }
+}

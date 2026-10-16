@@ -1,0 +1,166 @@
+{
+    "diambil_pada": "2026-08-09T13:25:10+07:00",
+    "probe_kode": "A1",
+    "via_probe": [
+        "3",
+        "4",
+        "7",
+        "24"
+    ],
+    "kode_per_paket": {
+        "1": "A2",
+        "3": "A1",
+        "4": "A1",
+        "5": "A4",
+        "7": "A1",
+        "18": "A2",
+        "19": "A4",
+        "20": "A1",
+        "21": "A4",
+        "22": "A38",
+        "23": "A1",
+        "24": "A1"
+    },
+    "bundle_null": [],
+    "paket": {
+        "1": {
+            "nama": "SOP Uji Coba Builder",
+            "sidik": "24aa4e25ef7000ddbd3baa87cca158d8d6b9a46405b943e11d8a13dacbdce68f"
+        },
+        "3": {
+            "nama": "Test",
+            "sidik": "039861e52502f69e8774829273a3d09ff08b94eb4a58feb5772c0f4df9d49e96"
+        },
+        "4": {
+            "nama": "asdadsds",
+            "sidik": "0eb7f3b0edc878b137e9b5d8a0e58d0770c99a8d40d8680b2ae048189e3031cf"
+        },
+        "5": {
+            "nama": "SOP Perjalanan Dinas",
+            "sidik": "6b69150536913badeeb061f1e51fc5873766c08993bf5d7f497e0a74e2f9aab5"
+        },
+        "7": {
+            "nama": "SOP Perjalanan Dinas (Salinan)",
+            "sidik": "7f3f94b6a194c35d79f9fc6fb2797eac9a86eb7af253e1912200a746281f31e2"
+        },
+        "18": {
+            "nama": "[DEMO] Keselamatan Kerja & APD",
+            "sidik": "33449983a1225ce352f8b218901891ed9fdd2931af2f41126ec34250478df68f"
+        },
+        "19": {
+            "nama": "[DEMO] Penanganan Data Pribadi",
+            "sidik": "b26962f5fa91525b446a2f89a78f5863a5e74f94dbe369392b8d90dccee9c6c6"
+        },
+        "20": {
+            "nama": "[DEMO] Tata Tertib Karyawan",
+            "sidik": "2f4380d1769ef6ca2be61a9fb2a23e1f93b3ec814c903f3070b341a485bed254"
+        },
+        "21": {
+            "nama": "[DEMO] Pengendalian Mutu Produksi",
+            "sidik": "fdf499d9d9c3121e93e7b0d6a06d0d309875ec4ac5243420197ef60bb164c96e"
+        },
+        "22": {
+            "nama": "[DEMO] Prosedur Kas & Reimburse",
+            "sidik": "d57f201d2df3218160c83ed2eca3de3f9fe1014ff33c37259c78ead401bed56e"
+        },
+        "23": {
+            "nama": "SOP Meeting",
+            "sidik": "79e47dad781dfee80376bbc4eb16b2d8b5fd02c86ff566c090db424e2ab5b7a5"
+        },
+        "24": {
+            "nama": "SOP Meeting (Salinan)",
+            "sidik": "3f66a3b79ad60b20827dc00bc0ec9db52075d2027046aae25f558a4dbb60bb52"
+        }
+    },
+    "kontrol_dokumen": {
+        "ambang_hari": 30,
+        "total": 28,
+        "kadaluarsa": 1,
+        "akan_kadaluarsa": 0,
+        "review_lewat": 0,
+        "review_dekat": 0,
+        "tanpa_pengesahan": 27,
+        "tanpa_masa_berlaku": 27,
+        "render_gagal": 0
+    },
+    "kontrol_register": {
+        "jumlah": 28,
+        "total": 28,
+        "sidik": "daea2b2856dc026ac7e8d3cbc17b8c21b34f5d3b10425c830b31d38a59df78f1",
+        "urutan": [
+            "B9xaN24OPRJP6XGWrzVY",
+            "EWoR3LzlvwlkQYbrAyXV",
+            "7pmQxyDwvn2vG2OrWBEe",
+            "wrGRpqW7MplMmN5DdKbE",
+            "z9l6KD0gPN4vdeAwGoRZ",
+            "0W1JNLxrMarXvD5pRj6l",
+            "d9w52bq6P3D6MA7mlG4r",
+            "3Vm6DQKAPBGgM5z1obO2",
+            "7dRw4YqekxnjM3QBJZaG",
+            "NowW2rA6M1jnvXZbKG0x",
+            "aLwOr9XpPW1AvjJlKD5E",
+            "z9l6KD0gPNG4MdeAwGoR",
+            "1oXWLGlyk0bJM3B8OKnb",
+            "rwobm9JAMydoPylWVXe3",
+            "ElOQLBjAvAg7PzDaVn3J",
+            "edbZj8z5kE2aPL4DVwGm",
+            "l6Zb794nP9dykR1NyEw3",
+            "pbomQ09EvJGDkGXRagxD",
+            "B5dZJ9r1vm6Yk4zwKOoD",
+            "4xQ7gm5nPVxbvZ9l1ORD",
+            "DLjRZ1OdvOdyk74rVw5E",
+            "gpJEXV8BPdaDMArQbd2z",
+            "90polDKyPKyQv3eadnRA",
+            "G6gxJwBlPrKJMyVmXno2",
+            "zaKXmrl3PYndMdE61BGJ",
+            "ErA5RNL1PQ20M7K8B9wj",
+            "8lxdozEyM8D2MGZnwV6q",
+            "LXQR1pJrPbKxMmD7Z0Kb"
+        ]
+    },
+    "export_rinci": {
+        "jumlah": 916,
+        "tercakup": 916,
+        "kolom": [
+            "no",
+            "kode",
+            "nama",
+            "no_induk",
+            "lokasi",
+            "divisi",
+            "departemen",
+            "jabatan",
+            "paket",
+            "kode_paket",
+            "kategori",
+            "prioritas",
+            "status_paket",
+            "tgl_assign",
+            "tenggat",
+            "terlambat",
+            "tgl_selesai_paket",
+            "section",
+            "urutan",
+            "item",
+            "nomor_sop",
+            "tipe_item",
+            "wajib",
+            "versi_aktif",
+            "versi_dibaca",
+            "status_item",
+            "perlu_ulang",
+            "persen_item",
+            "halaman_terakhir",
+            "durasi",
+            "durasi_detik",
+            "waktu_buka",
+            "waktu_konfirmasi",
+            "skor_kuis",
+            "percobaan",
+            "lulus",
+            "ip",
+            "perangkat"
+        ],
+        "sidik": "d110db596c7fce7189d9768426be1d81820d53188482d641bb387283df04c3af"
+    }
+}
