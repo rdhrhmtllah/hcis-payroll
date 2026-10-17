@@ -15,17 +15,7 @@
         // user behind the boot overlay on every page load ("nyangkut").
         window.EVO_LOGOUT_TRANSITION_TTL_MS = 15000;
         window.evoLogoutTransitionFresh = function() {
-            try {
-                if (localStorage.getItem('evo_logout_transition_active') !== 'true') return false;
-                var ts = parseInt(localStorage.getItem('evo_logout_transition_ts') || '0', 10);
-                var fresh = ts > 0 && (Date.now() - ts) < window.EVO_LOGOUT_TRANSITION_TTL_MS;
-                if (!fresh) {
-                    localStorage.removeItem('evo_logout_transition_active');
-                    localStorage.removeItem('evo_logout_username');
-                    localStorage.removeItem('evo_logout_transition_ts');
-                }
-                return fresh;
-            } catch(e) { return false; }
+            return false;
         };
         (function() {
             try {

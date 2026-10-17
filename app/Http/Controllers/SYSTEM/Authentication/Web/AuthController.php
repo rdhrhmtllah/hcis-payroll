@@ -253,6 +253,10 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Inertia::location(route('login'));
+        if ($request->header('X-Inertia')) {
+            return Inertia::location(route('login'));
+        }
+
+        return redirect()->route('login');
     }
 }

@@ -29,16 +29,9 @@ const logoutUsername = ref('');
 const startEntranceAnimations = ref(true);
 
 try {
-    // Only honour a FRESH logout flag; a stale one (self-expired past TTL) is
-    // ignored & cleared by isLogoutTransitionFresh() so users never land on a
-    // login page stuck behind the entrance bridge.
-    if (typeof localStorage !== 'undefined' && isLogoutTransitionFresh()) {
-        showLogoutEntranceOverlay.value = true;
-        logoutUsername.value = localStorage.getItem('evo_logout_username') || '';
-        startEntranceAnimations.value = false;
-    }
+    cleanupLogoutTransition();
 } catch (e) {
-    console.warn('Error reading logout state:', e);
+    // ignore
 }
 
 /* ---------- Flash / error notice ---------- */

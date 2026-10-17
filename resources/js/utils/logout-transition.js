@@ -41,8 +41,8 @@ let logoutInjected = false;
 let logoutTimers = [];
 let escapeKeyHandler = null;
 
-/** Handoff to /logout (existing choreography end). */
-export const LOGOUT_HANDOFF_MS = 3200;
+/** Handoff to /logout (snappy & seamless transition). */
+export const LOGOUT_HANDOFF_MS = 250;
 /** Show the manual escape link inside the card. */
 export const LOGOUT_ESCAPE_HINT_MS = 5000;
 /** Handoff appears stuck -> force a hard browser navigation. */
@@ -900,17 +900,6 @@ export function runLogoutTransition(username, onComplete) {
     logoutInjected = true;
     clearLogoutTimers();
 
-    // Persist state for Login.vue anti-flash bridge. The timestamp lets every
-    // reader (blade boot script, Login.vue, AppShell) expire a stale flag so a
-    // user can never get permanently stuck behind the logout overlay.
-    try {
-        localStorage.setItem(LOGOUT_TRANSITION_FLAG_KEY, 'true');
-        localStorage.setItem(LOGOUT_TRANSITION_USER_KEY, username || '');
-        localStorage.setItem(LOGOUT_TRANSITION_TS_KEY, String(Date.now()));
-    } catch (e) {
-        console.warn('Failed to save logout state:', e);
-    }
-
     // 1. Inject styles
     injectLogoutStyles();
 
@@ -925,44 +914,17 @@ export function runLogoutTransition(username, onComplete) {
     //    (inactive) state before we toggle is-active
     overlay.getBoundingClientRect();
 
-    // 5. Triple rAF ensures:
-    //    - Frame 1: initial paint (overlay DOM exists, opacity:0)
-    //    - Frame 2: browser has composited the invisible overlay
-    //    - Frame 3: we add is-active → overlay fades in (0.45s) + backdrop blur begins
-    //    This prevents any flash-of-unstyled-overlay or abrupt visual jump.
+    // 5. Fade in overlay smoothly
     requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                overlay.classList.add('is-active');
-            });
-        });
+        overlay.classList.add('is-active');
     });
 
-    // 5.5 Staggered text updates to transition "Securing Session" -> "Session Secured"
-    trackTimeout(() => {
-        overlay.classList.add('text-transitioning');
-    }, 2400);
-
-    trackTimeout(() => {
-        const labelText = overlay.querySelector('.evo-logout-label-text');
-        const subtitle = overlay.querySelector('.evo-logout-subtitle');
-        if (labelText) {
-            labelText.textContent = 'Session Secured';
-        }
-        if (subtitle) {
-            subtitle.textContent = 'Returning to secure portal...';
-        }
-        overlay.classList.remove('text-transitioning');
-    }, 2650);
-
-    // 6. Fire callback after all animations complete (~3.2s total)
+    // 6. Fast, seamless handoff to /logout
     trackTimeout(() => {
         if (typeof onComplete === 'function') {
             try {
                 onComplete();
             } catch (e) {
-                // A throwing handoff must not leave the overlay stranded; the
-                // failsafes below still run.
                 console.warn('Logout handoff failed:', e);
             }
         }
