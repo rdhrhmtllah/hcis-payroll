@@ -506,6 +506,9 @@ function submit() {
             form.reset('password');
             resetTurnstile();
         },
+        onFinish: () => {
+            loginSubmitted = false;
+        },
     });
 }
 

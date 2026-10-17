@@ -324,7 +324,7 @@ class InertiaShellService
         $breadcrumbs = [
             [
                 'label' => 'HOME',
-                'url' => $home['url'] ?? '/homepage',
+                'url' => $home['url'] ?? '/dashboard',
                 'active' => (bool) ($home['isActive'] ?? false),
             ],
         ];
@@ -351,10 +351,10 @@ class InertiaShellService
             'activeModuleLabel' => $isHome
                 ? 'Dashboard'
                 : $activeModule['label'] ?? ($activeModule['code'] ?? 'Aplikasi'),
-            'activeModuleUrl' => $isHome ? $home['url'] ?? '/homepage' : $activeModule['landingUrl'] ?? null,
+            'activeModuleUrl' => $isHome ? $home['url'] ?? '/dashboard' : $activeModule['landingUrl'] ?? null,
             'activeSubMenu' => $activeItem['jenisPage'] ?? null,
             'activeSubMenuLabel' => $activeItem['title'] ?? null,
-            'currentPageTitle' => $activeItem['title'] ?? ($isHome ? 'Homepage' : $activeModule['label'] ?? 'Aplikasi'),
+            'currentPageTitle' => $activeItem['title'] ?? ($isHome ? 'Dashboard' : $activeModule['label'] ?? 'Aplikasi'),
             'breadcrumbs' => $breadcrumbs,
         ];
     }

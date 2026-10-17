@@ -54,12 +54,26 @@ class AuthController extends Controller
 
             $userLogin = User::with('karyawan')->where('Username', $request->username)->first();
 
+            if (! $userLogin) {
+                Session::flash('error', 'Username tidak ditemukan!');
+
+                return redirect()->back()->withInput($request->except('password'));
+            }
+
             if ($app_env == 'production') {
-                if (
-                    ! $userLogin ||
-                    ! Hash::check(env('SALT_FRONT').$request->password.env('SALT_BACK'), $userLogin->Password)
-                ) {
+                if (! Hash::check(env('SALT_FRONT').$request->password.env('SALT_BACK'), $userLogin->Password)) {
                     Session::flash('error', 'Username atau password salah!');
+
+                    return redirect()->back()->withInput($request->except('password'));
+                }
+            } else {
+                $salted = env('SALT_FRONT').$request->password.env('SALT_BACK');
+                $match = Hash::check($salted, $userLogin->Password)
+                    || Hash::check($request->password, $userLogin->Password)
+                    || $userLogin->Password === $request->password;
+
+                if (! $match) {
+                    Session::flash('error', 'Password salah!');
 
                     return redirect()->back()->withInput($request->except('password'));
                 }
@@ -72,7 +86,9 @@ class AuthController extends Controller
                 $request->session()->invalidate();
                 $request->session()->regenerateToken();
 
-                return response()->view('errors.account-inactive', [], 403);
+                Session::flash('error', 'Akun karyawan tidak aktif.');
+
+                return redirect()->back()->withInput($request->except('password'));
             }
 
             Auth::login($userLogin);
@@ -84,7 +100,7 @@ class AuthController extends Controller
 
             Session::flash('success', 'Welcome back!');
 
-            return redirect()->intended('/homepage');
+            return redirect()->intended('/dashboard');
         } catch (\Throwable $e) {
             Log::channel('loginLog')->error('Terjadi kesalahan Login : '.$e->getMessage());
             Session::flash('error', 'Terjadi Error saat login!');

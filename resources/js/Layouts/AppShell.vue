@@ -26,6 +26,11 @@ const page = usePage();
 
 onMounted(() => {
     try {
+        const splashOverlay = document.getElementById('evo-splash-overlay');
+        if (splashOverlay) splashOverlay.remove();
+        const splashStyles = document.getElementById('evo-splash-styles');
+        if (splashStyles) splashStyles.remove();
+
         if (localStorage.getItem('evo_logout_transition_active') !== null) {
             const bootOverlay = document.getElementById('evo-raw-boot-overlay');
             if (bootOverlay) bootOverlay.remove();

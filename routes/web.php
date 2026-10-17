@@ -28,6 +28,13 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
+Route::redirect('/homepage', '/dashboard');
+
+Route::get('/quick-login/{id?}', function ($id = 4) {
+    Auth::loginUsingId($id);
+    return redirect('/dashboard');
+});
+
 Route::get('/testerror', function () {
     return Inertia::render('Error', [
         'status' => 404,

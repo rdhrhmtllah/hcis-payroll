@@ -62,37 +62,10 @@ class AppServiceProvider extends ServiceProvider
          * proyek ini. `scoped` dibuang di antara permintaan dan di antara job,
          * jadi ia berbagi persis selama satu satuan kerja dan tidak lebih.
          */
-        $this->app->scoped(\App\Services\LMS\SOP\SopPaketVersionService::class);
-
-        /*
-         * SopTahapVersiService SENGAJA TIDAK didaftarkan scoped.
-         *
-         * Ia menulis cache-nya sendiri ($cacheNilai, $cacheSyaratMaster) dengan
-         * komentar "hidup selama satu permintaan HTTP saja". Mendaftarkannya
-         * scoped memang membuat cache itu akhirnya terpakai — tetapi juga
-         * membuatnya hidup LEBIH LAMA dari satu permintaan: instance scoped
-         * tidak dibuang di antara permintaan pada suite uji, sehingga nilai
-         * syarat yang dibaca permintaan kedua berasal dari permintaan pertama.
-         *
-         * Terbukti, bukan diduga: dengan binding itu terpasang,
-         * SopMasterDokumenPageTest::test_boleh_terbit_mengikuti_transisi_dan_syarat
-         * melaporkan berkas dan ketiga tanggal sebagai KURANG padahal barisnya
-         * sudah diisi; dicabut, ujinya hijau. Imbalannya pun kecil — 386 detik
-         * jadi 383 pada delapan berkas uji terberat, sekitar 2%.
-         *
-         * Cache yang salah lebih mahal daripada cache yang tak terpakai.
-         */
-
         $this->app->singleton(\App\Services\SYSTEM\TaskProcessing\TaskHandlerRegistry::class, function ($app) {
             $registry = new \App\Services\SYSTEM\TaskProcessing\TaskHandlerRegistry;
             $registry->register('SYSTEM_OUTBOX_HEALTHCHECK', new \App\Services\SYSTEM\TaskProcessing\SystemOutboxHealthcheckHandler);
             $registry->register('WHATSAPP_SEND', $app->make(\App\Services\SYSTEM\TaskProcessing\WhatsappOutboxHandler::class));
-            $registry->register('LMS_REASSIGN_THIRD_PARTY', $app->make(\App\Services\SYSTEM\TaskProcessing\LmsReassignThirdPartyHandler::class));
-            $registry->register('LMS_PENJADWALAN_SYNC_THIRD_PARTY', $app->make(\App\Services\SYSTEM\TaskProcessing\LmsPenjadwalanSyncThirdPartyHandler::class));
-            /* Dua tipe, SATU kelas: pemekaran dokumen ke paket dan penggabungan
-               notifikasi harus punya satu penulis. */
-            $registry->register('SOP_RECONCILE_DOKUMEN', $app->make(\App\Services\LMS\SOP\SopReconcileHandler::class));
-            $registry->register('SOP_RECONCILE_PAKET', $app->make(\App\Services\LMS\SOP\SopReconcileHandler::class));
 
             return $registry;
         });
@@ -127,6 +100,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if (str_starts_with((string) config('app.url'), 'https://')) {
+            \Illuminate\Support\Facades\URL::forceScheme('https');
+        }
+
         // Guard anti-regresi (NON-produksi): peringatkan bila ada panggilan HTTP
         // keluar via Http:: saat transaksi DB masih terbuka. HTTP di dalam transaksi
         // menahan lock selama round-trip jaringan → koneksi menumpuk → saturasi pool
