@@ -1,5 +1,5 @@
 import { config } from "@vue/test-utils";
-import { nomorVersi, labelVersi } from "./Pages/LMS/SOP/Shared/support/versi";
+import { nomorVersi, labelVersi } from "./utils/versi";
 
 /**
  * Cermin dari properti global yang didaftarkan app.js.
