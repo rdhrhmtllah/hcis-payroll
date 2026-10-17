@@ -433,7 +433,7 @@ function createSplashOverlay() {
 
     const textIntro = document.createElement('div');
     textIntro.className = 'splash-text-intro';
-    textIntro.textContent = 'WELCOME TO HCIS';
+    textIntro.textContent = 'WELCOME TO HCIS PAYROLL';
 
     const textAuth = document.createElement('div');
     textAuth.className = 'splash-text-auth';
@@ -585,7 +585,7 @@ const subsidiaries = [
 </script>
 
 <template>
-    <Head title="Login - HCIS EVO">
+    <Head title="Login - HCIS Payroll">
         <meta name="robots" content="noindex, nofollow" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -699,8 +699,8 @@ const subsidiaries = [
             <div class="mark-login">
                 <img src="/logo/EVOGROUP.png" alt="EVO Group" class="brand-logo" />
                 <div class="mark-login-text">
-                    <b>HCIS</b>
-                    <small>Sistem Terintegrasi</small>
+                    <b>HCIS Payroll</b>
+                    <small>Sistem Penggajian Terintegrasi</small>
                 </div>
             </div>
             <div class="top-right">
@@ -723,17 +723,15 @@ const subsidiaries = [
         <!-- MAIN -->
         <main class="stage-grid">
             <section class="statement" :class="startEntranceAnimations ? 'animate-fade-right' : 'entrance-hidden'">
-                <span class="eyebrow"><span class="dot"></span>Portal Karyawan</span>
+                <span class="eyebrow"><span class="dot"></span>Portal Penggajian</span>
                 <h1 class="display">
-                    Human Capital<br />
-                    <span>Information System.</span>
-                    <!-- <span class="stamp">Dikenal sebagai HCIS</span> -->
+                    Payroll &amp; Compensation<br />
+                    <span>Management System.</span>
                 </h1>
                 <p class="lede">
-                    Pusat layanan terintegrasi untuk seluruh kebutuhan kepegawaian Anda — mulai dari ESS, KPI, hingga
-                    LMS. Silakan masuk untuk melanjutkan.
+                    Pusat layanan pengelolaan penggajian, tunjangan, perhitungan pajak PPh 21, dan slip gaji terintegrasi. Silakan masuk untuk melanjutkan.
                 </p>
-                <p class="sub-mobile">Satu portal terintegrasi untuk ESS, KPI, &amp; LMS</p>
+                <p class="sub-mobile">Sistem Penggajian &amp; Kompensasi Terintegrasi</p>
             </section>
 
             <aside
