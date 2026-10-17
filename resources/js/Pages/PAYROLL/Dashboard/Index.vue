@@ -1,166 +1,238 @@
 <template>
-    <div class="hcis-page hcis-stack hcis-stack--lg dashboard-container">
-        <!-- 1. Header Halaman -->
+    <div class="ap-payroll-page">
+        <!-- ══ 1. HEADER HALAMAN UTAMA (HCIS HEADER) ══ -->
         <HcisHeader
+            variant="glass"
+            sentiment="brand"
+            size="md"
+            icon="cash-stack"
+            kicker="HCIS PAYROLL · SISTEM PENGGAJIAN"
             title="Dashboard Penggajian"
-            subtitle="Sistem Manajemen Kompensasi & Benefit Terintegrasi"
-            kicker="HCIS PAYROLL"
-            variant="surface"
-            sentiment="neutral"
+            subtitle="Ringkasan siklus payroll aktif, pemantauan pembayaran gaji, dan tata kelola kompensasi karyawan."
+            class="mb-3"
         >
+            <template #badge>
+                <HcisBadge
+                    label="Modul Payroll Aktif"
+                    variant="brand"
+                    appearance="subtle"
+                    size="sm"
+                    dot
+                />
+            </template>
             <template #actions>
-                <div class="header-action-group">
-                    <HcisButton variant="secondary" icon="bi-file-earmark-spreadsheet">
-                        Ekspor Laporan
-                    </HcisButton>
-                    <HcisButton variant="primary" icon="bi-plus-circle">
-                        Proses Payroll Baru
-                    </HcisButton>
+                <div class="d-flex align-items-center gap-2">
+                    <HcisButton
+                        variant="glass"
+                        size="sm"
+                        leading-icon="file-earmark-spreadsheet"
+                        label="Ekspor Laporan"
+                    />
+                    <HcisButton
+                        variant="primary"
+                        size="sm"
+                        leading-icon="plus-circle"
+                        label="Proses Payroll Baru"
+                    />
                 </div>
             </template>
         </HcisHeader>
 
-        <!-- 2. Banner Notifikasi -->
-        <HcisAlert variant="info" title="Selamat Datang di HCIS Payroll">
-            Struktur proyek baru telah disiapkan dengan standar HCIS Design System. Modul dan fitur payroll siap dikembangkan.
-        </HcisAlert>
-
-        <!-- 3. Ringkasan Statistik -->
-        <HcisStatGroup cols="4" gap="md" layout="compact" appearance="crystal">
+        <!-- ══ 2. BARIS METRIK RINGKAS (HCIS STAT CARDS) ══ -->
+        <div class="ap-stats-grid mb-3">
             <HcisStatCard
+                layout="compact"
+                appearance="crystal"
+                sentiment="brand"
+                icon="calendar3"
                 label="Periode Berjalan"
                 :value="stats.periode_aktif || 'Oktober 2026'"
                 caption="Bulan penggajian aktif"
-                icon="bi-calendar3"
-                layout="compact"
-                appearance="crystal"
             />
             <HcisStatCard
+                layout="compact"
+                appearance="crystal"
+                sentiment="teal"
+                icon="people-fill"
                 label="Total Karyawan"
                 :value="stats.total_karyawan || 0"
                 caption="Karyawan aktif masuk payroll"
-                icon="bi-people"
-                layout="compact"
-                appearance="crystal"
             />
             <HcisStatCard
+                layout="compact"
+                appearance="crystal"
+                sentiment="purple"
+                icon="cash-stack"
                 label="Total Pengeluaran"
                 :value="formatRupiah(stats.total_payroll_berjalan)"
                 caption="Gross payroll periode ini"
-                icon="bi-cash-stack"
-                layout="compact"
-                appearance="crystal"
             />
             <HcisStatCard
+                layout="compact"
+                appearance="crystal"
+                sentiment="warning"
+                icon="clock-history"
                 label="Status Siklus"
                 value="DRAFT"
                 caption="Menunggu kalkulasi final"
-                icon="bi-clock-history"
-                sentiment="warning"
-                layout="compact"
-                appearance="crystal"
             />
-        </HcisStatGroup>
+        </div>
 
-        <!-- 4. Grid Konten Utama -->
-        <div class="dashboard-content-grid">
-            <!-- Kolom Kiri: Riwayat / Batch Payroll -->
-            <div class="dashboard-main-col">
-                <HcisCard title="Batch Penggajian Terakhir" variant="default" :divider="true">
-                    <template #actions>
-                        <HcisButton size="sm" variant="ghost">Lihat Semua</HcisButton>
-                    </template>
-
-                    <div class="empty-state-wrap">
-                        <HcisEmptyState
-                            title="Belum Ada Data Penggajian"
-                            description="Mulai hitung payroll untuk periode aktif melalui tombol 'Proses Payroll Baru'."
-                            icon="bi-receipt"
-                        >
-                            <template #action>
-                                <HcisButton size="sm" variant="primary" icon="bi-plus-lg">
-                                    Mulai Batch Pertama
-                                </HcisButton>
-                            </template>
-                        </HcisEmptyState>
+        <!-- ══ 3. KARTU TATA KELOLA & PANDUAN SIKLUS (GOVERNANCE CARD) ══ -->
+        <div class="ap-governance-card mb-3">
+            <div class="d-flex justify-content-between align-items-start flex-wrap gap-3 p-3">
+                <div class="min-w-0">
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                        <span class="ap-kicker">Siklus Penggajian · {{ stats.periode_aktif || 'Oktober 2026' }}</span>
+                        <HcisBadge
+                            label="Status: DRAFT"
+                            variant="warning"
+                            appearance="subtle"
+                            size="xs"
+                        />
                     </div>
-                </HcisCard>
+                    <h5 class="fw-bold text-dark mb-1">Tahapan Operasional Payroll</h5>
+                    <p class="ap-kecil text-muted mb-0">
+                        Alur pemrosesan gaji bulanan terintegrasi mulai dari verifikasi absensi &amp; lembur, kalkulasi komponen pendapatan, pemotongan pajak PPh 21 TER, hingga penerbitan slip dan transfer bank.
+                    </p>
+                </div>
+
+                <div class="flex-shrink-0">
+                    <HcisButton
+                        variant="secondary"
+                        size="sm"
+                        leading-icon="palette"
+                        label="Katalog Design System"
+                        href="/design-system"
+                    />
+                </div>
             </div>
 
-            <!-- Kolom Kanan: Pintasan & Info -->
-            <div class="dashboard-side-col">
-                <!-- Aksi Cepat -->
-                <HcisCard title="Aksi Cepat" variant="default" :divider="true">
-                    <div class="action-card-list">
-                        <button type="button" class="action-item-btn">
-                            <div class="action-item-left">
-                                <div class="action-item-icon action-item-icon--indigo">
-                                    <i class="bi bi-sliders"></i>
-                                </div>
-                                <div>
-                                    <div class="action-item-title">Komponen Gaji</div>
-                                    <div class="action-item-desc">Atur tunjangan & potongan</div>
-                                </div>
-                            </div>
-                            <i class="bi bi-chevron-right text-slate-400"></i>
-                        </button>
-
-                        <button type="button" class="action-item-btn">
-                            <div class="action-item-left">
-                                <div class="action-item-icon action-item-icon--emerald">
-                                    <i class="bi bi-shield-check"></i>
-                                </div>
-                                <div>
-                                    <div class="action-item-title">Tarif PPh 21 (TER)</div>
-                                    <div class="action-item-desc">Konfigurasi rumus perpajakan</div>
-                                </div>
-                            </div>
-                            <i class="bi bi-chevron-right text-slate-400"></i>
-                        </button>
-
-                        <button type="button" class="action-item-btn">
-                            <div class="action-item-left">
-                                <div class="action-item-icon action-item-icon--amber">
-                                    <i class="bi bi-bank"></i>
-                                </div>
-                                <div>
-                                    <div class="action-item-title">Akun Bank Perusahaan</div>
-                                    <div class="action-item-desc">Disbursement & transfer gaji</div>
-                                </div>
-                            </div>
-                            <i class="bi bi-chevron-right text-slate-400"></i>
-                        </button>
+            <!-- Grid Langkah Operasional -->
+            <div class="ap-guide-grid">
+                <div class="ap-guide-item">
+                    <div class="ap-guide-icon ap-guide-icon--active">
+                        <HcisIcon name="sliders" size="sm" />
                     </div>
-                </HcisCard>
+                    <div class="min-w-0">
+                        <div class="fw-semibold text-dark ap-kecil">1. Komponen &amp; Tarif</div>
+                        <div class="text-muted ap-xs">Atur gaji pokok, tunjangan, &amp; PTKP</div>
+                    </div>
+                </div>
 
-                <!-- Design System Card -->
-                <HcisCard title="Katalog Design System" variant="default" :divider="true">
-                    <p class="ds-card-desc">
-                        Seluruh komponen antarmuka resmi HCIS siap digunakan untuk membangun fitur-fitur payroll baru.
-                    </p>
+                <div class="ap-guide-item">
+                    <div class="ap-guide-icon ap-guide-icon--pending">
+                        <HcisIcon name="calculator" size="sm" />
+                    </div>
+                    <div class="min-w-0">
+                        <div class="fw-semibold text-dark ap-kecil">2. Kalkulasi Batch</div>
+                        <div class="text-muted ap-xs">Hitung take-home pay &amp; BPJS</div>
+                    </div>
+                </div>
+
+                <div class="ap-guide-item">
+                    <div class="ap-guide-icon ap-guide-icon--pending">
+                        <HcisIcon name="shield-check" size="sm" />
+                    </div>
+                    <div class="min-w-0">
+                        <div class="fw-semibold text-dark ap-kecil">3. Validasi Pajak PPh 21</div>
+                        <div class="text-muted ap-xs">Penerapan tarif efektif bulanan</div>
+                    </div>
+                </div>
+
+                <div class="ap-guide-item">
+                    <div class="ap-guide-icon ap-guide-icon--pending">
+                        <HcisIcon name="bank" size="sm" />
+                    </div>
+                    <div class="min-w-0">
+                        <div class="fw-semibold text-dark ap-kecil">4. Disbursement &amp; Slip</div>
+                        <div class="text-muted ap-xs">Transfer bank &amp; rilis e-slip gaji</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ 4. DAFTAR BATCH PENGGAJIAN DENGAN FILTER & TABEL RESMI ══ -->
+        <div class="ap-content-card">
+            <div class="ap-card-header">
+                <div class="d-flex align-items-center gap-2">
+                    <span class="ap-kicker">Riwayat Pemrosesan</span>
+                    <h6 class="fw-bold text-dark mb-0">Daftar Batch Penggajian</h6>
+                </div>
+                <div class="d-flex align-items-center gap-2">
                     <HcisButton
-                        href="/design-system"
-                        variant="secondary"
-                        block
-                        icon="bi-palette"
-                    >
-                        Buka /design-system
-                    </HcisButton>
-                </HcisCard>
+                        variant="ghost"
+                        size="xs"
+                        label="Lihat Semua Riwayat"
+                    />
+                </div>
+            </div>
+
+            <div class="p-3">
+                <!-- HcisFilterBar Mandiri Sesuai Standar Seksi 5 -->
+                <HcisFilterBar
+                    :search="kataKunci"
+                    search-placeholder="Cari nomor batch atau periode…"
+                    :quick-chips="chipsStatus"
+                    :active-chip-value="statusAktif"
+                    variant="flat"
+                    size="sm"
+                    class="mb-3 ap-filterbar-box"
+                    @update:search="(v) => (kataKunci = v)"
+                    @chip-click="onChipClick"
+                />
+
+                <!-- Tabel Data Terstruktur (Pola Resmi Bagian 4 Standar HCIS) -->
+                <div class="ap-kemampuan-table-wrap">
+                    <table class="ap-kemampuan-table">
+                        <thead>
+                            <tr>
+                                <th>Nomor Batch</th>
+                                <th>Periode Gaji</th>
+                                <th>Tanggal Cut-off</th>
+                                <th class="text-center">Karyawan</th>
+                                <th class="text-end">Total Bruto</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-end">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="7" class="text-center py-5">
+                                    <HcisEmptyState
+                                        icon="receipt"
+                                        title="Belum Ada Batch Penggajian"
+                                        description="Siklus penggajian periode ini belum dijalankan. Mulai hitung payroll melalui tombol di bawah."
+                                    >
+                                        <template #action>
+                                            <HcisButton
+                                                size="sm"
+                                                variant="primary"
+                                                leading-icon="plus-lg"
+                                                label="Mulai Batch Pertama"
+                                            />
+                                        </template>
+                                    </HcisEmptyState>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import {
     HcisHeader,
-    HcisCard,
     HcisStatCard,
-    HcisStatGroup,
     HcisButton,
+    HcisBadge,
+    HcisIcon,
+    HcisFilterBar,
     HcisEmptyState,
-    HcisAlert,
 } from '@/components/ui';
 
 defineProps({
@@ -171,10 +243,25 @@ defineProps({
             total_karyawan: 0,
             total_payroll_berjalan: 0,
             status_periode: 'DRAFT',
-            periode_aktif: '',
+            periode_aktif: 'Oktober 2026',
         }),
     },
 });
+
+const kataKunci = ref('');
+const statusAktif = ref('semua');
+
+const chipsStatus = [
+    { label: 'Semua Status', value: 'semua' },
+    { label: 'Draft', value: 'draft' },
+    { label: 'Menunggu Approval', value: 'approval' },
+    { label: 'Diproses', value: 'proses' },
+    { label: 'Selesai', value: 'selesai' },
+];
+
+function onChipClick(chip) {
+    statusAktif.value = chip.value;
+}
 
 function formatRupiah(angka) {
     return new Intl.NumberFormat('id-ID', {
@@ -186,114 +273,150 @@ function formatRupiah(angka) {
 </script>
 
 <style scoped>
-.dashboard-container {
+.ap-payroll-page {
+    width: 100%;
     padding-bottom: 2rem;
 }
 
-.header-action-group {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-}
-
-.dashboard-content-grid {
+/* ══ 1. STATISTIK GRID (SESUAI TABEL TELADAN HCIS) ══ */
+.ap-stats-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 1.5rem;
-    align-items: start;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--hcis-space-3, 0.75rem);
 }
 
-@media (max-width: 992px) {
-    .dashboard-content-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-.dashboard-side-col {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.empty-state-wrap {
-    padding: 2.5rem 1rem;
-}
-
-.action-card-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-.action-item-btn {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding: 0.85rem 1rem;
-    border-radius: var(--hcis-radius-md, 8px);
-    border: 1px solid var(--hcis-border-subtle, #e2e8f0);
+/* ══ 2. GOVERNANCE BANNER CARD ══ */
+.ap-governance-card {
     background: #ffffff;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    text-align: left;
+    border: 1px solid rgb(var(--hcis-slate-300-rgb, 203 213 225) / 0.85);
+    border-radius: var(--hcis-radius-xl, 12px);
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+    overflow: hidden;
 }
 
-.action-item-btn:hover {
-    background: var(--hcis-surface-subtle, #f8fafc);
-    border-color: var(--hcis-border, #cbd5e1);
+.ap-guide-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.75rem;
+    padding: 0.75rem 1rem 1rem 1rem;
+    background: #f8fafc;
+    border-top: 1px solid rgb(var(--hcis-slate-300-rgb, 203 213 225) / 0.7);
 }
 
-.action-item-left {
+.ap-guide-item {
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    background: #ffffff;
+    padding: 0.65rem 0.85rem;
+    border-radius: var(--hcis-radius-md, 8px);
+    border: 1px solid rgb(var(--hcis-slate-300-rgb, 203 213 225) / 0.7);
 }
 
-.action-item-icon {
-    width: 38px;
-    height: 38px;
-    border-radius: var(--hcis-radius-md, 8px);
+.ap-guide-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.1rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--hcis-radius-md, 6px);
     flex-shrink: 0;
 }
 
-.action-item-icon--indigo {
-    background: rgb(var(--hcis-indigo-50-rgb, 238 242 255));
-    color: var(--hcis-brand-600, #4f46e5);
+.ap-guide-icon--active {
+    background: #f0fdf4;
+    color: #16a34a;
+    border: 1px solid #bbf7d0;
 }
 
-.action-item-icon--emerald {
-    background: #ecfdf5;
-    color: #059669;
+.ap-guide-icon--pending {
+    background: #f8fafc;
+    color: #64748b;
+    border: 1px solid #e2e8f0;
 }
 
-.action-item-icon--amber {
-    background: #fffbeb;
-    color: #d97706;
+/* ══ 3. CONTENT CARD & TABLE ══ */
+.ap-content-card {
+    background: #ffffff;
+    border: 1px solid rgb(var(--hcis-slate-300-rgb, 203 213 225) / 0.85);
+    border-radius: var(--hcis-radius-xl, 12px);
+    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04);
+    overflow: hidden;
 }
 
-.action-item-title {
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--hcis-text, #0f172a);
-    line-height: 1.25;
+.ap-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background: #f8fafc;
+    border-bottom: 1px solid rgb(var(--hcis-slate-300-rgb, 203 213 225) / 0.7);
 }
 
-.action-item-desc {
+.ap-filterbar-box {
+    background: #ffffff;
+    border-radius: var(--hcis-radius-lg, 10px);
+    border: 1px solid rgb(var(--hcis-slate-300-rgb, 203 213 225) / 0.85);
+}
+
+/* Pola Tabel Standar HCIS (Wajib Bagian 4) */
+.ap-kemampuan-table-wrap {
+    overflow-x: auto;
+    border-radius: var(--hcis-radius-md, 8px);
+    border: 1px solid var(--hcis-border-subtle, #e2e8f0);
+}
+
+.ap-kemampuan-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8125rem;
+}
+
+.ap-kemampuan-table th {
+    padding: 0.65rem 0.85rem;
+    background: var(--hcis-surface-subtle, #f8fafc);
+    color: var(--hcis-text-secondary, #64748b);
+    font-weight: 700;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid var(--hcis-border-subtle, #e2e8f0);
+}
+
+.ap-kemampuan-table td {
+    padding: 0.65rem 0.85rem;
+    border-bottom: 1px solid var(--hcis-border-subtle, #e2e8f0);
+    vertical-align: middle;
+}
+
+.ap-kemampuan-table tr:last-child td {
+    border-bottom: none;
+}
+
+.ap-kemampuan-table tr:hover td {
+    background-color: var(--hcis-surface-subtle, #f8fafc);
+}
+
+/* Tipografi & Spacing Helper */
+.ap-kicker {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--hcis-brand-600, #0284c7);
+}
+
+.ap-kecil {
     font-size: 0.75rem;
-    color: var(--hcis-text-secondary, #64748b);
-    margin-top: 2px;
+    line-height: 1.45;
 }
 
-.ds-card-desc {
-    font-size: 0.875rem;
-    color: var(--hcis-text-secondary, #64748b);
-    line-height: 1.5;
-    margin-bottom: 1rem;
+.ap-xs {
+    font-size: 0.6875rem;
+    line-height: 1.35;
+}
+
+.min-w-0 {
+    min-width: 0;
 }
 </style>
