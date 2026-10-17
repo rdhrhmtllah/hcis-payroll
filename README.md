@@ -1,8 +1,23 @@
-# HCIS Payroll Platform
+<p align="center">
+  <img src="public/logo/EVOGROUP.png" width="180" alt="EVO Group Logo" />
+</p>
 
-Aplikasi web penggajian (*Payroll Management System*) modern, terstandarisasi, dan terintegrasi, dibangun dengan stack **Laravel 10**, **Inertia.js v1**, **Vue 3 (Composition API)**, dan **Tailwind CSS**.
+<h1 align="center">HCIS Payroll Platform</h1>
 
-Aplikasi ini menggunakan fondasi arsitektur dan **HCIS Design System** resmi untuk menjamin konsistensi visual, aksesibilitas tinggi, dan kinerja antarmuka yang optimal.
+<p align="center">
+  <b>Sistem Manajemen Kompensasi, Penggajian &amp; Perpajakan Karyawan Terintegrasi</b><br>
+  Dibangun dengan arsitektur modern berbasis <b>Laravel 10</b>, <b>Inertia.js</b>, <b>Vue 3</b>, dan <b>HCIS Design System</b>.
+</p>
+
+<p align="center">
+  <a href="https://github.com/rdhrhmtllah/hcis-payroll"><img src="https://img.shields.io/badge/Status-Active%20Development-success?style=flat-square" alt="Status" /></a>
+  <a href="https://github.com/rdhrhmtllah/hcis-payroll"><img src="https://img.shields.io/badge/Stack-Laravel%2010%20%7C%20Inertia%20%7C%20Vue%203-indigo?style=flat-square" alt="Tech Stack" /></a>
+  <a href="https://github.com/rdhrhmtllah/hcis-payroll"><img src="https://img.shields.io/badge/Design%20System-HCIS%20Verified-blue?style=flat-square" alt="Design System" /></a>
+</p>
+
+---
+
+Aplikasi web penggajian (*Payroll Management System*) modern, terstandarisasi, dan terintegrasi. Menggunakan fondasi arsitektur dan **HCIS Design System** resmi untuk menjamin konsistensi visual, aksesibilitas tinggi, dan kinerja antarmuka yang optimal.
 
 ---
 
