@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
  * hanya mengenal ESS, KPI, LMS, VISITOR, dan SYSTEM.
  */
 
-Route::middleware(['auth'])->group(function () {
+Route::group([], function () {
     Route::get('/design-system', function () {
         return inertia('SYSTEM/DesignSystem/Index');
     })->name('design-system');

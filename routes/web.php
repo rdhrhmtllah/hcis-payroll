@@ -91,10 +91,10 @@ Route::middleware(['auth'])->group(function () {
 
     // Modul Utama: PAYROLL
     require __DIR__.'/PAYROLL/payroll.php';
-
-    // Modul Teknis: Design System Showcase
-    require __DIR__.'/SYSTEM/DesignSystem.php';
 });
+
+// Modul Teknis: Design System Showcase (Katalog Publik)
+require __DIR__.'/SYSTEM/DesignSystem.php';
 
 // Modul Pendukung SYSTEM (bila ada)
 if (file_exists(base_path('routes/SYSTEM/MasterData/Entitas.php'))) {

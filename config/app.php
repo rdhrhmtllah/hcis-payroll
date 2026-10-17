@@ -168,9 +168,6 @@ return [
             // App\Providers\BroadcastServiceProvider::class,
             App\Providers\EventServiceProvider::class,
             App\Providers\RouteServiceProvider::class,
-            App\Services\LMS\SOP\Export\SopReportServiceProvider::class,
-            App\Services\VISITOR\Workflow\Reporting\Export\VisitorReportServiceProvider::class,
-            App\Services\KPI\PerformanceAppraisal\Export\PaReportServiceProvider::class,
             Stackkit\LaravelGoogleCloudTasksQueue\CloudTasksServiceProvider::class,
         ])
         ->toArray(),

@@ -45,9 +45,6 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\NoCache::class,
             \App\Http\Middleware\CheckMaintenanceMode::class,
             \App\Http\Middleware\TrackUserActivity::class,
-            // Selama terkunci, aplikasinya adalah formulir. Dipasang PALING AKHIR
-            // supaya sesi, autentikasi, dan rute sudah terpasang saat ia menilai.
-            \App\Http\Middleware\ArahkanKeFormulirPengumpulanData::class,
             // \App\Http\Middleware\ValidateRequestOrigin::class,
         ],
 
