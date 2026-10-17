@@ -89,10 +89,10 @@ class InertiaShellService
     protected function buildBrand(): array
     {
         return [
-            'appName' => 'EVO Group Unified Platform',
-            'appShortName' => 'EVO',
+            'appName' => 'HCIS Payroll Platform',
+            'appShortName' => 'Payroll',
             'mainLogo' => asset('logo/EVOGROUP.png'),
-            'mainLogoAlt' => 'EVO Group',
+            'mainLogoAlt' => 'HCIS Payroll',
             'subsidiaries' => [
                 [
                     'id' => 'emi',
@@ -203,7 +203,7 @@ class InertiaShellService
     protected function buildNavigation(Request $request, ?User $user): array
     {
         $currentPath = $this->normalizeRequestPath($request);
-        $homeUrl = '/homepage';
+        $homeUrl = '/dashboard';
         $menuRows = $this->getMappedMenuRows($user);
 
         $modules = $menuRows

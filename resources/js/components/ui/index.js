@@ -71,3 +71,4 @@ export { default as HcisTooltip } from './HcisTooltip.vue';
 export { default as HcisTransfer } from './HcisTransfer.vue';
 export { default as HcisTreeSelect } from './HcisTreeSelect.vue';
 export { default as HcisUpload } from './HcisUpload.vue';
+export { default as HcisCommandPalette } from './HcisCommandPalette.vue';

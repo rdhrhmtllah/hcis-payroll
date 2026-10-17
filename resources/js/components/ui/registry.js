@@ -2350,6 +2350,36 @@ export const registry = [
             ],
         },
     },
+    {
+        slug: 'command-palette',
+        name: 'HcisCommandPalette',
+        kind: 'owned',
+        status: 'ready',
+        group: 'Navigasi',
+        usedIn: 0,
+        summary: 'Palet perintah global (Ctrl/Cmd+K) untuk pencarian cepat, pintasan navigasi menu, dan eksekusi tindakan.',
+        props: [
+            { name: 'show', type: 'Boolean', default: 'false', note: 'Status visibilitas palet dialog' },
+            { name: 'sources', type: 'Array', default: '() => []', note: 'Daftar penyedia data pencarian [{ jenis, label, cari }]' },
+            { name: 'placeholder', type: 'String', default: "'Cari atau ketik perintah…'", note: 'Teks placeholder input pencarian' },
+            { name: 'recentKey', type: 'String', default: "''", note: 'Kunci localStorage untuk riwayat pencarian' },
+            { name: 'debounce', type: 'Number', default: '0', note: 'Debounce pengetikan dalam milidetik (ms)' },
+        ],
+        events: [
+            { name: 'close', detail: 'Dipicu saat pengguna menutup palet' },
+            { name: 'jalankan', detail: 'Dipicu saat item perintah dipilih dan dieksekusi' },
+        ],
+        slots: [],
+        rules: {
+            do: [
+                'Gunakan untuk mempermudah navigasi pintas ke halaman dan aksi cepat di aplikasi.',
+                'Sediakan placeholder dan ikon yang representatif di tiap item perintah.',
+            ],
+            dont: [
+                'Jangan memuat data seluruh database ke dalam satu palet tanpa paginasi/filtering.',
+            ],
+        },
+    },
 ];
 
 export function getEntry(slug) {

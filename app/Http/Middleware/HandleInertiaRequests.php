@@ -96,60 +96,6 @@ class HandleInertiaRequests extends Middleware
             // Closure hanya dievaluasi saat response Inertia dirender (full visit / partial
             // yang meminta 'layout'), jadi poll & XHR JSON tak lagi menyeret build().
             'layout' => fn () => app(InertiaShellService::class)->build($request, $user),
-            // PERF: lazy, alasannya sama dengan 'auth' dan 'layout'. Closure hanya
-            // dievaluasi saat response Inertia dirender, jadi polling notifikasi
-            // dan XHR JSON tidak ikut menyeret pembacaan status ini.
-            //
-            // Urutan penjagaan sengaja dari yang termurah: sakelar kampanye
-            // (satu baris ber-cache) diperiksa SEBELUM tabel status disentuh,
-            // supaya kampanye yang mati benar-benar berbiaya nol per request.
-            'pengumpulanData' => function () use ($user) {
-                if (! $user) {
-                    return null;
-                }
-
-                $konfigurasi = app(\App\Services\ESS\Employee\DataCollection\KonfigurasiKampanye::class);
-
-                if (! $konfigurasi->aktif()) {
-                    return null;
-                }
-
-                $kode = (string) ($user->karyawan?->Kode_Karyawan ?? '');
-
-                if ($kode === '') {
-                    return null;
-                }
-
-                // Cakupan lokasi diperiksa SEBELUM tabel status disentuh, dengan
-                // alasan yang sama seperti sakelar: kampanye yang dibuka untuk
-                // sebagian lokasi tidak boleh membebani lokasi yang belum dibuka
-                // dengan satu pun pembacaan. Pemeriksaannya sendiri membaca satu
-                // baris konfigurasi ber-cache dan satu lokasi ber-cache 6 jam.
-                if (! app(\App\Services\ESS\Employee\DataCollection\CakupanKampanye::class)->mencakup($kode)) {
-                    return null;
-                }
-
-                $status = app(\App\Services\ESS\Employee\DataCollection\StatusPengumpulanService::class)->untuk($kode);
-
-                if ($status['is_dikecualikan'] || $status['status'] === 'SELESAI') {
-                    return null;
-                }
-
-                $layanan = app(\App\Services\ESS\Employee\DataCollection\StatusPengumpulanService::class);
-                $frekuensi = (string) config('pengumpulan_data.frekuensi_modal', 'SESI');
-
-                // Keputusan "tampil atau tidak" milik SERVER, penandanya ada di
-                // tabel status. Dulu ini dititipkan ke sessionStorage/localStorage
-                // — keadaan tak terlihat yang membuat penghapusan baris status
-                // tidak benar-benar mereset orangnya.
-                return [
-                    'status' => $status,
-                    'pengumuman' => $konfigurasi->pengumuman(),
-                    'frekuensi' => $frekuensi,
-                    'tampilkanModal' => $layanan->perluTampil($status, $frekuensi, session()->getId()),
-                    'tampilkanBar' => (bool) config('pengumpulan_data.tampilkan_bar_menetap', true),
-                ];
-            },
             'flash' => [
                 'error' => fn () => $request->session()->get('error'),
                 'status' => fn () => $request->session()->get('status'),

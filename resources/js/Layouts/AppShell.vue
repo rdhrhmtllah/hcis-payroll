@@ -6,22 +6,9 @@
             <AppTopbar :user="user" :brand="brand" :layout="layout" :navigation="navigation" />
 
             <main class="shell-content">
-                <BarPembaruanData v-if="pd.tampilkanBar.value" :status="pd.data.value.status"
-                    @isi="pd.bukaFormulir" />
-
                 <slot />
             </main>
         </div>
-
-        <ModalPembaruanData
-            v-if="pd.tampilkanModal.value"
-            :pengumuman="pd.data.value.pengumuman"
-            :status="pd.data.value.status"
-            :maks-penundaan="maksPenundaan"
-            @tampil="pd.catatTampil"
-            @tunda="pd.tunda"
-            @isi="pd.bukaFormulir"
-        />
     </div>
 </template>
 
@@ -32,28 +19,11 @@ import AppSidebar from '../components/Shell/AppSidebar.vue';
 import AppTopbar from '../components/Shell/AppTopbar.vue';
 import { useShellState } from '../composables/useShellState';
 import { useActivityHandshake } from '../composables/useActivityHandshake';
-import { usePengumpulanDataGate } from '@/composables/ESS/Employee/DataCollection/usePengumpulanDataGate.js';
-import ModalPembaruanData from '../Pages/ESS/Employee/DataCollection/components/ModalPembaruanData.vue';
-import BarPembaruanData from '../Pages/ESS/Employee/DataCollection/components/BarPembaruanData.vue';
 import { cleanupLogoutTransition } from '../utils/logout-transition.js';
 
 const shell = useShellState();
 const page = usePage();
 
-// Modal & bar pembaruan data. Dipasang di sini karena AppShell adalah SATU-
-// SATUNYA layout: apa pun halaman yang dibuka orang, gerbangnya ikut. Prop
-// 'pengumpulanData' bernilai null saat kampanye mati, orang dikecualikan, atau
-// datanya sudah terkirim — jadi keduanya tidak merender apa pun.
-const pd = usePengumpulanDataGate();
-const maksPenundaan = computed(() => (pd.data.value?.status?.sisa_tunda ?? 0) + (pd.data.value?.status?.jumlah_tunda ?? 0));
-
-// Pencatatan kemunculan TIDAK dipicu dari sini. Modal sendiri yang memancarkan
-// 'tampil' saat benar-benar terpasang di DOM — lihat ModalPembaruanData.vue.
-
-// Rescue "nyangkut" users. The logout bridge (boot overlay + entrance overlay)
-// only ever targets the Login page (layout: null). If this authenticated shell
-// mounts while the logout flag is still set, the flag is stale/stuck — tear the
-// boot overlay down and clear the flag so the user is freed on any page they reach.
 onMounted(() => {
     try {
         if (localStorage.getItem('evo_logout_transition_active') !== null) {
@@ -67,8 +37,6 @@ onMounted(() => {
     }
 });
 
-// Kirim fingerprint + screen + timezone sekali per tab session ke
-// /api/v1/activity/handshake. Best-effort, tidak menggagalkan apa pun.
 useActivityHandshake();
 
 const pageProps = computed(() => page?.props || {});

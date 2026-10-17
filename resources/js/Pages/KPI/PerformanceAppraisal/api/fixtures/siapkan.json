@@ -1,9 +1,0 @@
-{
-  "success": true,
-  "status": 200,
-  "message": "Berhasil",
-  "result": {
-    "salinan": { "policy": 13, "detail": 45, "pita": 12 },
-    "peserta": { "diikutkan": 902, "dikecualikan": 49, "tertunda": 7 }
-  }
-}

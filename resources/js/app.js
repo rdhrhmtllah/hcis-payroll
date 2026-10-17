@@ -23,7 +23,7 @@ import { createApp, h } from 'vue';
 // baru dipadamkan — dan kedipan itu justru gerak tambahan.
 mulaiModeGerak();
 import { createInertiaApp } from '@inertiajs/vue3';
-import { nomorVersi, labelVersi } from './Pages/LMS/SOP/Shared/support/versi';
+import { nomorVersi, labelVersi } from './utils/versi';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import FloatingVue from 'floating-vue';
 import { plugin, defaultConfig } from '@formkit/vue';
